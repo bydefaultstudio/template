@@ -233,7 +233,46 @@ These govern every decision — design system or otherwise.
 
 ---
 
-## 12. Claude Code — Workflow & Tools
+## 12. Project Onboarding (First Thing)
+
+When this template is used for a new project, the **very first task** is to fill in the project brief. Before writing any code, use the `AskUserQuestion` tool to gather project details and populate `PROJECT_BRIEF.md`.
+
+Ask questions in batches (max 4 per call) covering:
+
+**Batch 1 — Project basics:**
+- Project name (this will be used to update files across the template)
+- One-sentence project summary
+- Primary audience
+- Project type (marketing site, web app, landing page, etc.)
+
+**Batch 2 — Goals & scope:**
+- Primary goals (what does success look like?)
+- Non-goals / out of scope
+- Timeline and deadlines
+- Platforms (responsive web, specific devices, etc.)
+
+**Batch 3 — Design & technical:**
+- Brand details (existing brand or new? fonts, colours known?)
+- Content status (copy ready, images sourced, or TBD?)
+- Technical constraints (hosting, performance targets, accessibility level)
+- Known risks or open questions
+
+After gathering answers:
+
+1. Write answers into `PROJECT_BRIEF.md`, replacing all bracketed placeholders
+2. **Propagate the project name** across the template:
+   - `README.md` → replace `[Your Project Name]` in the heading
+   - `index.html` → update `<title>` and eyebrow text
+   - `templates/page-template.html` → replace `Site Name` in title, OG `og:site_name`, and `yoursite.com` placeholder URLs
+   - `docs/docs.config.js` → update `footerText` and `indexDescription`
+   - `PROJECT_BRIEF.md` → add project name at the top
+3. Update `brand-book/brand-book.css` with any known brand tokens (fonts, colours)
+
+This must happen before any other work begins.
+
+---
+
+## 13. Claude Code — Workflow & Tools
 
 This section defines how to use Claude Code's native capabilities when working in this project.
 
