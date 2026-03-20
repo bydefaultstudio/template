@@ -6,7 +6,7 @@ section: "Project"
 order: 1
 ---
 
-> Cursor: Treat this document as authoritative.
+> Claude: Treat this document as authoritative.
 
 This template provides a solid foundation for new projects. Follow these steps to customize it for your project.
 
@@ -14,44 +14,42 @@ This template provides a solid foundation for new projects. Follow these steps t
 
 ## Brand Colors
 
-Update brand colors in `src/css/design-system.css` under the "BRAND TOKENS" section.
+Update brand colors in `brand-book/brand-book.css`.
+
+The brand book defines raw brand tokens using the `--brand-` prefix. The design system reads these via `var(--brand-*, fallback)` — if no brand book is loaded, sensible defaults apply.
 
 **What to change:**
-- Brand token **names** - Rename tokens to match your brand (e.g., `--brand-primary`, `--off-white`, `--charcoal`)
-- Brand token **values** - Update color values to match your brand colors
-
-**Important:** You can rename brand tokens to anything that makes sense for your project. This personalizes the system and makes it more intuitive for your team.
+- `--brand-color-accent` — Your primary brand accent colour
+- `--brand-color-dark` — Your dark brand colour
+- `--brand-color-light` — Your light brand colour
 
 **Example:**
 ```css
-/* -- Brand colours -- */
-/* You can use the default names or rename them */
---brand-dark: #1a1a1a;      /* Replace with your brand color */
---brand-light: #f5f5f5;    /* Replace with your brand color */
---brand-accent: #0066cc;    /* Replace with your brand color */
-
-/* Or rename tokens to match your brand */
---brand-primary: #1a1a1a;
---off-white: #f5f5f5;
---charcoal: #0066cc;
+/* brand-book/brand-book.css */
+:root {
+  --brand-color-accent: #0066cc;
+  --brand-color-dark: #1a1a1a;
+  --brand-color-light: #f5f5f5;
+}
 ```
 
-**Note:** If you rename brand tokens, make sure to update any references to them in semantic color tokens (e.g., `--text-primary`, `--text-link`).
+**Note:** The design system maps these into semantic tokens automatically. You do not need to touch `design-system/design-system.css` for brand colours.
 
 ---
 
 ## Fonts
 
-Update font families in `src/css/design-system.css` under the "BRAND TOKENS" section.
+Update font families in `brand-book/brand-book.css`.
 
 **What to change:**
-- `--font-primary` - Your primary font family
-- `--font-secondary` - Your secondary font family (if used)
-- `--font-tertiary` - Your monospace font (if used)
+- `--brand-font-primary` — Your primary font family
+- `--brand-font-secondary` — Your secondary font family (if used)
+- `--brand-font-tertiary` — Your monospace font (if used)
 
 **Also update:**
-- Google Fonts link in `docs/generator/template.html` (if using Google Fonts)
-- Google Fonts link in `styleguide/index.html` (if using Google Fonts)
+- Google Fonts link in `docs/docs.config.js` (if using Google Fonts)
+- Google Fonts link in `design-system/index.html` (if using Google Fonts)
+- Google Fonts link in `brand-book/index.html` (if using Google Fonts)
 
 ---
 
@@ -90,8 +88,8 @@ The documentation is ready to use, but you may want to:
 
 ## Quick Checklist
 
-- [ ] Update brand colors in `src/css/design-system.css`
-- [ ] Update font families in `src/css/design-system.css`
+- [ ] Update brand colors in `brand-book/brand-book.css`
+- [ ] Update font families in `brand-book/brand-book.css`
 - [ ] Replace logo in `docs/site/assets/images/logo.svg`
 - [ ] Fill in `PROJECT_BRIEF.md`
 - [ ] Update Google Fonts links (if applicable)

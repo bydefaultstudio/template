@@ -10,11 +10,13 @@
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     
-    <!-- Design System (base styles) -->
-    <link rel="stylesheet" href="../../src/css/design-system.css">
+    <!-- Design System Framework (path set in docs/docs.config.js) -->
+    <link rel="stylesheet" href="../../design-system/design-system.css" id="design-system-css"
+          onerror="document.getElementById('ds-missing-banner').style.display='flex'">
+    <!-- Brand Book (path set in docs/docs.config.js) -->
+    <link rel="stylesheet" href="../../brand-book/brand-book.css">
     
-    <!-- Google Fonts: Inter & JetBrains Mono -->
-    <!-- TODO: Update Google Fonts link to match your project's fonts -->
+    <!-- Google Fonts (configured in docs/docs.config.js) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -26,18 +28,40 @@
     <link rel="stylesheet" href="assets/docs.css">
 </head>
 <body>
+
+    <!-- Design system missing banner (shown by JS if CSS variables fail to load) -->
+    <div id="ds-missing-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#fffbea;border-bottom:1px solid #f0c040;padding:12px 20px;font-family:sans-serif;font-size:14px;color:#7a5c00;align-items:center;gap:12px;">
+        <span>⚠️</span>
+        <span>Design system CSS not found. Check the path in <code style="background:#fef3c7;padding:2px 6px;border-radius:4px;">docs/docs.config.js</code> → <code style="background:#fef3c7;padding:2px 6px;border-radius:4px;">designSystemPath</code>, then re-run <code style="background:#fef3c7;padding:2px 6px;border-radius:4px;">npm run docgen</code>.</span>
+        <button onclick="document.getElementById('ds-missing-banner').style.display='none'" style="margin-left:auto;background:none;border:1px solid #f0c040;border-radius:4px;padding:4px 10px;cursor:pointer;color:#7a5c00;font-size:13px;">Dismiss</button>
+    </div>
+
     <div class="docs-container">
-        <!-- Sidebar Navigation (fixed on desktop, top nav on mobile) -->
+        <!-- Sidebar Navigation (sticky on desktop, top bar on mobile) -->
         <aside class="docs-sidebar">
             <nav class="docs-nav">
-                <a href="index.html">
-                    <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
-                </a>
-                
+                <div class="docs-sidebar-header">
+                    <a href="index.html" class="docs-logo-link">
+                        <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
+                        <img src="assets/images/logo-small.svg" alt="Logo" class="nav-logo-small">
+                    </a>
+                    <button class="docs-sidebar-toggle" aria-label="Collapse sidebar" type="button">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="docs-mobile-toggle" aria-label="Open navigation" type="button">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M3 5H17M3 10H17M3 15H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="docs-nav-content">
+                    
     <ul class="nav-list nav-home">
       <li><a href="index.html" class="nav-link ">Home</a></li>
     </ul>
-  <details class="nav-section" open>
+  <details class="nav-section">
       <summary class="nav-section-toggle">
         <span>Design System</span>
         <span class="nav-toggle-icon">
@@ -59,6 +83,10 @@
       
         <li><a href="button.html" class="nav-link ">Button</a></li>
       
+        <li><a href="callout.html" class="nav-link ">Callout</a></li>
+      
+        <li><a href="form.html" class="nav-link ">Form</a></li>
+      
       </ul>
     </details><details class="nav-section" open>
       <summary class="nav-section-toggle">
@@ -77,7 +105,7 @@
         <li><a href="layout.html" class="nav-link ">HTML Layout</a></li>
       
       </ul>
-    </details><details class="nav-section" open>
+    </details><details class="nav-section">
       <summary class="nav-section-toggle">
         <span>Content</span>
         <span class="nav-toggle-icon">
@@ -92,7 +120,7 @@
         <li><a href="markdown-style.html" class="nav-link ">Markdown</a></li>
       
       </ul>
-    </details><details class="nav-section" open>
+    </details><details class="nav-section">
       <summary class="nav-section-toggle">
         <span>Project</span>
         <span class="nav-toggle-icon">
@@ -108,8 +136,11 @@
       
         <li><a href="folder-structure.html" class="nav-link ">Folders</a></li>
       
+        <li><a href="upgrading-docs.html" class="nav-link ">Upgrading the Docs Engine</a></li>
+      
       </ul>
     </details>
+                </div>
             </nav>
         </aside>
 
@@ -129,10 +160,10 @@
                 <main class="docs-main">
                     <article class="markdown-body">
                         <blockquote>
-<p>Cursor: Treat this document as authoritative.</p>
+<p>Claude: Treat this document as authoritative.</p>
 </blockquote>
 <blockquote>
-<p>Cursor: Follow these rules when writing or modifying CSS.</p>
+<p>Claude: Follow these rules when writing or modifying CSS.</p>
 </blockquote>
 <h2 id="overview">Overview</h2>
 <p>This guide ensures:</p>
@@ -157,10 +188,10 @@
 <p><strong>Example - Typography Grouping:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-90ys2viaw" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-zm0slac5r" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-90ys2viaw" class="language-css">/* -- Headings -- */
+        <pre><code id="code-zm0slac5r" class="language-css">/* -- Headings -- */
 h1 {
   font-size: var(--font-3xl);
   line-height: var(--line-height-s);
@@ -178,10 +209,10 @@ h2 {
 <p><strong>Example - Component Grouping:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-3qucu1smi" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-w9qw0y7h8" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-3qucu1smi" class="language-css">/* -- Button -- */
+        <pre><code id="code-w9qw0y7h8" class="language-css">/* -- Button -- */
 .button, button {
   padding: var(--space-s) var(--space-m);
   background: var(--background-primary);
@@ -203,10 +234,10 @@ h2 {
 <p><strong>Example - Token Grouping:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-eyp3v8ee4" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-placeo9ru" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-eyp3v8ee4" class="language-css">:root {
+        <pre><code id="code-placeo9ru" class="language-css">:root {
   /* -- Unit tokens -- */
   --unit-s: 0.5rem;    /* 8px */
   --unit-m: 1rem;      /* 16px */
@@ -241,10 +272,10 @@ h2 {
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-35029adki" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-lve846y1a" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-35029adki" class="language-css">/* -- Card -- */
+        <pre><code id="code-lve846y1a" class="language-css">/* -- Card -- */
 .card {
   padding: var(--space-m);
   background: var(--background-primary);
@@ -273,10 +304,10 @@ h2 {
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-515wvyqh6" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-tw6taizqi" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-515wvyqh6" class="language-css">.button {
+        <pre><code id="code-tw6taizqi" class="language-css">.button {
   /* Layout */
   display: inline-flex;
   
@@ -303,10 +334,10 @@ h2 {
 <p><strong>Format</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-v9i05qyu0" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-otp7jok9y" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-v9i05qyu0" class="language-css">/* ------ Section Title ------ */
+        <pre><code id="code-otp7jok9y" class="language-css">/* ------ Section Title ------ */
 </code></pre>
       </div>
     
@@ -320,10 +351,10 @@ h2 {
 <p><strong>Example</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-2wiyddlpq" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-u65a6vlpf" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-2wiyddlpq" class="language-css">/* ------ BASE STYLES ------ */
+        <pre><code id="code-u65a6vlpf" class="language-css">/* ------ BASE STYLES ------ */
 
 body {
   /* ... */
@@ -337,10 +368,10 @@ body {
 <p><strong>Format</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-hka1k8usz" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-6qo6s0hj2" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-hka1k8usz" class="language-css">/* -- Subsection name -- */
+        <pre><code id="code-6qo6s0hj2" class="language-css">/* -- Subsection name -- */
 </code></pre>
       </div>
     
@@ -354,10 +385,10 @@ body {
 <p><strong>Example</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-fsa5w5jcm" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ho27ni2ib" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-fsa5w5jcm" class="language-css">/* -- Headings -- */
+        <pre><code id="code-ho27ni2ib" class="language-css">/* -- Headings -- */
 h1 {
   /* ... */
 }
@@ -373,10 +404,10 @@ h2 {
 <p><strong>Format</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-22tyziufv" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-3m5x4h9oh" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-22tyziufv" class="language-css">/* Short clarification */
+        <pre><code id="code-3m5x4h9oh" class="language-css">/* Short clarification */
 </code></pre>
       </div>
     
@@ -389,10 +420,10 @@ h2 {
 <p><strong>Example</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-gj5i5s0ul" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-z6agantn1" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-gj5i5s0ul" class="language-css">--unit-xs: 0.25rem; /* 4px */
+        <pre><code id="code-z6agantn1" class="language-css">--unit-xs: 0.25rem; /* 4px */
 </code></pre>
       </div>
     
@@ -416,10 +447,10 @@ h2 {
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-7yzgy460i" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-26w73u240" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-7yzgy460i" class="language-css">/* ------ RESPONSIVE ------ */
+        <pre><code id="code-26w73u240" class="language-css">/* ------ RESPONSIVE ------ */
 
 /* Mobile */
 @media (max-width: 768px) {
@@ -445,10 +476,10 @@ h2 {
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-i0bzui6yr" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-l4zmu6pi5" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-i0bzui6yr" class="language-css">/* ------ RESPONSIVE ------ */
+        <pre><code id="code-l4zmu6pi5" class="language-css">/* ------ RESPONSIVE ------ */
 
 /* Mobile */
 @media (max-width: 768px) {
@@ -604,6 +635,44 @@ h2 {
                 });
             }
             
+            function initSidebarToggle() {
+                var SIDEBAR_KEY = 'docs-sidebar-collapsed';
+                var MOBILE_NAV_KEY = 'docs-mobile-nav-open';
+                var container = document.querySelector('.docs-container');
+                var sidebarToggle = document.querySelector('.docs-sidebar-toggle');
+                var mobileToggle = document.querySelector('.docs-mobile-toggle');
+
+                if (!container) return;
+
+                // Restore desktop sidebar state
+                if (localStorage.getItem(SIDEBAR_KEY) === 'true') {
+                    container.classList.add('sidebar-collapsed');
+                    if (sidebarToggle) sidebarToggle.setAttribute('aria-label', 'Expand sidebar');
+                }
+
+                // Restore mobile nav state
+                if (localStorage.getItem(MOBILE_NAV_KEY) === 'true') {
+                    container.classList.add('mobile-nav-open');
+                    if (mobileToggle) mobileToggle.setAttribute('aria-label', 'Close navigation');
+                }
+
+                if (sidebarToggle) {
+                    sidebarToggle.addEventListener('click', function onSidebarToggle() {
+                        var isCollapsed = container.classList.toggle('sidebar-collapsed');
+                        localStorage.setItem(SIDEBAR_KEY, isCollapsed);
+                        sidebarToggle.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
+                    });
+                }
+
+                if (mobileToggle) {
+                    mobileToggle.addEventListener('click', function onMobileToggle() {
+                        var isOpen = container.classList.toggle('mobile-nav-open');
+                        localStorage.setItem(MOBILE_NAV_KEY, isOpen);
+                        mobileToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+                    });
+                }
+            }
+
             function initTOCActiveState() {
                 const tocLinks = document.querySelectorAll('.toc-link');
                 const headings = document.querySelectorAll('h1[id], h2[id]');
@@ -683,11 +752,12 @@ h2 {
             }
             
             function init() {
+                initSidebarToggle();
                 initHighlight();
                 initClipboard();
                 initTOCActiveState();
             }
-            
+
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', init);
             } else {

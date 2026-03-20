@@ -6,7 +6,7 @@ section: "Design System"
 order: 8
 ---
 
-> Cursor: Treat this document as authoritative.
+> Claude: Treat this document as authoritative.
 
 Buttons are interactive elements used to trigger actions.  
 They size to their content by default and should communicate **clear intent and hierarchy**.
@@ -117,6 +117,25 @@ Use this when you want to highlight a **primary action**.
   </div>
 </button>
 ```
+
+---
+
+## Disabled Button
+
+`:disabled` or `.is-disabled` reduces opacity and prevents interaction.
+
+### When to use
+
+* Actions that are temporarily unavailable
+* Form submissions when validation is incomplete
+* Controls that require a prerequisite action
+
+```html
+<button class="button" disabled>Disabled Action</button>
+<button class="button is-outline" disabled>Disabled Outline</button>
+```
+
+**Styling:** `opacity: 0.4`, `cursor: not-allowed`, `pointer-events: none`.
 
 ---
 

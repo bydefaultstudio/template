@@ -10,11 +10,13 @@
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     
-    <!-- Design System (base styles) -->
-    <link rel="stylesheet" href="../../src/css/design-system.css">
+    <!-- Design System Framework (path set in docs/docs.config.js) -->
+    <link rel="stylesheet" href="../../design-system/design-system.css" id="design-system-css"
+          onerror="document.getElementById('ds-missing-banner').style.display='flex'">
+    <!-- Brand Book (path set in docs/docs.config.js) -->
+    <link rel="stylesheet" href="../../brand-book/brand-book.css">
     
-    <!-- Google Fonts: Inter & JetBrains Mono -->
-    <!-- TODO: Update Google Fonts link to match your project's fonts -->
+    <!-- Google Fonts (configured in docs/docs.config.js) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -26,18 +28,40 @@
     <link rel="stylesheet" href="assets/docs.css">
 </head>
 <body>
+
+    <!-- Design system missing banner (shown by JS if CSS variables fail to load) -->
+    <div id="ds-missing-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#fffbea;border-bottom:1px solid #f0c040;padding:12px 20px;font-family:sans-serif;font-size:14px;color:#7a5c00;align-items:center;gap:12px;">
+        <span>⚠️</span>
+        <span>Design system CSS not found. Check the path in <code style="background:#fef3c7;padding:2px 6px;border-radius:4px;">docs/docs.config.js</code> → <code style="background:#fef3c7;padding:2px 6px;border-radius:4px;">designSystemPath</code>, then re-run <code style="background:#fef3c7;padding:2px 6px;border-radius:4px;">npm run docgen</code>.</span>
+        <button onclick="document.getElementById('ds-missing-banner').style.display='none'" style="margin-left:auto;background:none;border:1px solid #f0c040;border-radius:4px;padding:4px 10px;cursor:pointer;color:#7a5c00;font-size:13px;">Dismiss</button>
+    </div>
+
     <div class="docs-container">
-        <!-- Sidebar Navigation (fixed on desktop, top nav on mobile) -->
+        <!-- Sidebar Navigation (sticky on desktop, top bar on mobile) -->
         <aside class="docs-sidebar">
             <nav class="docs-nav">
-                <a href="index.html">
-                    <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
-                </a>
-                
+                <div class="docs-sidebar-header">
+                    <a href="index.html" class="docs-logo-link">
+                        <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
+                        <img src="assets/images/logo-small.svg" alt="Logo" class="nav-logo-small">
+                    </a>
+                    <button class="docs-sidebar-toggle" aria-label="Collapse sidebar" type="button">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="docs-mobile-toggle" aria-label="Open navigation" type="button">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M3 5H17M3 10H17M3 15H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="docs-nav-content">
+                    
     <ul class="nav-list nav-home">
       <li><a href="index.html" class="nav-link ">Home</a></li>
     </ul>
-  <details class="nav-section" open>
+  <details class="nav-section">
       <summary class="nav-section-toggle">
         <span>Design System</span>
         <span class="nav-toggle-icon">
@@ -59,8 +83,12 @@
       
         <li><a href="button.html" class="nav-link ">Button</a></li>
       
+        <li><a href="callout.html" class="nav-link ">Callout</a></li>
+      
+        <li><a href="form.html" class="nav-link ">Form</a></li>
+      
       </ul>
-    </details><details class="nav-section" open>
+    </details><details class="nav-section">
       <summary class="nav-section-toggle">
         <span>Code</span>
         <span class="nav-toggle-icon">
@@ -92,7 +120,7 @@
         <li><a href="markdown-style.html" class="nav-link ">Markdown</a></li>
       
       </ul>
-    </details><details class="nav-section" open>
+    </details><details class="nav-section">
       <summary class="nav-section-toggle">
         <span>Project</span>
         <span class="nav-toggle-icon">
@@ -108,8 +136,11 @@
       
         <li><a href="folder-structure.html" class="nav-link ">Folders</a></li>
       
+        <li><a href="upgrading-docs.html" class="nav-link ">Upgrading the Docs Engine</a></li>
+      
       </ul>
     </details>
+                </div>
             </nav>
         </aside>
 
@@ -134,10 +165,10 @@
 <p>Every page must include these essential meta tags:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-gbzas9e0x" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-rvpzwy8em" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-gbzas9e0x" class="language-html">&lt;meta charset=&quot;UTF-8&quot; /&gt;
+        <pre><code id="code-rvpzwy8em" class="language-html">&lt;meta charset=&quot;UTF-8&quot; /&gt;
 &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
 &lt;title&gt;Page Title - Site Name&lt;/title&gt;
 &lt;meta name=&quot;description&quot; content=&quot;A concise, compelling description of the page (150-160 characters).&quot; /&gt;
@@ -164,10 +195,10 @@
 <p><strong>Examples:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-df86jqjef" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-0tiup7t3b" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-df86jqjef" class="language-html">&lt;!-- Good --&gt;
+        <pre><code id="code-0tiup7t3b" class="language-html">&lt;!-- Good --&gt;
 &lt;title&gt;By Default - Brand Innovation Studio&lt;/title&gt;
 &lt;title&gt;About Us - By Default&lt;/title&gt;
 
@@ -190,10 +221,10 @@
 <p><strong>Examples:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-q8mwprjjy" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-9wiuufy47" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-q8mwprjjy" class="language-html">&lt;!-- Good --&gt;
+        <pre><code id="code-9wiuufy47" class="language-html">&lt;!-- Good --&gt;
 &lt;meta name=&quot;description&quot; content=&quot;Professional web design services for modern businesses. Custom solutions that drive results. Get started today.&quot; /&gt;
 
 &lt;!-- Too long (will be truncated) --&gt;
@@ -206,10 +237,10 @@
 <p>Prevents duplicate content issues by specifying the preferred version of a page.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-nluuif3kh" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-iqoy68ri6" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-nluuif3kh" class="language-html">&lt;link rel=&quot;canonical&quot; href=&quot;https://yoursite.com/page/&quot; /&gt;
+        <pre><code id="code-iqoy68ri6" class="language-html">&lt;link rel=&quot;canonical&quot; href=&quot;https://yoursite.com/page/&quot; /&gt;
 </code></pre>
       </div>
     
@@ -225,10 +256,10 @@
 <p>Controls how search engines index and follow links on a page.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-yexkys3d0" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-nkhu5clv6" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-yexkys3d0" class="language-html">&lt;!-- Default: allow indexing --&gt;
+        <pre><code id="code-nkhu5clv6" class="language-html">&lt;!-- Default: allow indexing --&gt;
 &lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot; /&gt;
 
 &lt;!-- Prevent indexing --&gt;
@@ -257,10 +288,10 @@
 <h3 id="required-open-graph-tags">Required Open Graph Tags</h3>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-9i5lcnhfg" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-pn5dicfw6" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-9i5lcnhfg" class="language-html">&lt;meta property=&quot;og:type&quot; content=&quot;website&quot; /&gt;
+        <pre><code id="code-pn5dicfw6" class="language-html">&lt;meta property=&quot;og:type&quot; content=&quot;website&quot; /&gt;
 &lt;meta property=&quot;og:url&quot; content=&quot;https://yoursite.com/page/&quot; /&gt;
 &lt;meta property=&quot;og:title&quot; content=&quot;Page Title - Site Name&quot; /&gt;
 &lt;meta property=&quot;og:description&quot; content=&quot;A concise, compelling description of the page.&quot; /&gt;
@@ -271,10 +302,10 @@
 <h3 id="recommended-additional-tags">Recommended Additional Tags</h3>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-byamjw9f9" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-y8flgjtzo" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-byamjw9f9" class="language-html">&lt;meta property=&quot;og:image:width&quot; content=&quot;1200&quot; /&gt;
+        <pre><code id="code-y8flgjtzo" class="language-html">&lt;meta property=&quot;og:image:width&quot; content=&quot;1200&quot; /&gt;
 &lt;meta property=&quot;og:image:height&quot; content=&quot;630&quot; /&gt;
 &lt;meta property=&quot;og:image:alt&quot; content=&quot;Descriptive alt text for the image&quot; /&gt;
 &lt;meta property=&quot;og:site_name&quot; content=&quot;Site Name&quot; /&gt;
@@ -303,10 +334,10 @@
 <h3 id="summary-large-image-card">Summary Large Image Card</h3>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-kkpwu2fx4" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-xeqk7hcy1" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-kkpwu2fx4" class="language-html">&lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot; /&gt;
+        <pre><code id="code-xeqk7hcy1" class="language-html">&lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot; /&gt;
 &lt;meta name=&quot;twitter:url&quot; content=&quot;https://yoursite.com/page/&quot; /&gt;
 &lt;meta name=&quot;twitter:title&quot; content=&quot;Page Title - Site Name&quot; /&gt;
 &lt;meta name=&quot;twitter:description&quot; content=&quot;A concise, compelling description of the page.&quot; /&gt;
@@ -318,10 +349,10 @@
 <h3 id="optional-x-tags">Optional X Tags</h3>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-vzvc5fh0i" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-2mbu3c1bc" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-vzvc5fh0i" class="language-html">&lt;meta name=&quot;twitter:site&quot; content=&quot;@yourhandle&quot; /&gt;
+        <pre><code id="code-2mbu3c1bc" class="language-html">&lt;meta name=&quot;twitter:site&quot; content=&quot;@yourhandle&quot; /&gt;
 &lt;meta name=&quot;twitter:creator&quot; content=&quot;@yourhandle&quot; /&gt;
 </code></pre>
       </div>
@@ -342,10 +373,10 @@
 <p>Sets the theme color for mobile browsers (address bar, etc.).</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-akse97h1a" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-fm7ux8epf" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-akse97h1a" class="language-html">&lt;meta name=&quot;theme-color&quot; content=&quot;#3485cd&quot; /&gt;
+        <pre><code id="code-fm7ux8epf" class="language-html">&lt;meta name=&quot;theme-color&quot; content=&quot;#3485cd&quot; /&gt;
 </code></pre>
       </div>
     
@@ -356,10 +387,10 @@
 <h3 id="basic-webpage-schema">Basic WebPage Schema</h3>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-786d125p4" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-1o40rcbxy" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-786d125p4" class="language-html">&lt;script type=&quot;application/ld+json&quot;&gt;
+        <pre><code id="code-1o40rcbxy" class="language-html">&lt;script type=&quot;application/ld+json&quot;&gt;
 {
   &quot;@context&quot;: &quot;https://schema.org&quot;,
   &quot;@type&quot;: &quot;WebPage&quot;,
@@ -375,10 +406,10 @@
 <h3 id="organization-schema">Organization Schema</h3>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-1ua76h1va" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ljt2f1vyu" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-1ua76h1va" class="language-html">&lt;script type=&quot;application/ld+json&quot;&gt;
+        <pre><code id="code-ljt2f1vyu" class="language-html">&lt;script type=&quot;application/ld+json&quot;&gt;
 {
   &quot;@context&quot;: &quot;https://schema.org&quot;,
   &quot;@type&quot;: &quot;Organization&quot;,
@@ -553,6 +584,44 @@
                 });
             }
             
+            function initSidebarToggle() {
+                var SIDEBAR_KEY = 'docs-sidebar-collapsed';
+                var MOBILE_NAV_KEY = 'docs-mobile-nav-open';
+                var container = document.querySelector('.docs-container');
+                var sidebarToggle = document.querySelector('.docs-sidebar-toggle');
+                var mobileToggle = document.querySelector('.docs-mobile-toggle');
+
+                if (!container) return;
+
+                // Restore desktop sidebar state
+                if (localStorage.getItem(SIDEBAR_KEY) === 'true') {
+                    container.classList.add('sidebar-collapsed');
+                    if (sidebarToggle) sidebarToggle.setAttribute('aria-label', 'Expand sidebar');
+                }
+
+                // Restore mobile nav state
+                if (localStorage.getItem(MOBILE_NAV_KEY) === 'true') {
+                    container.classList.add('mobile-nav-open');
+                    if (mobileToggle) mobileToggle.setAttribute('aria-label', 'Close navigation');
+                }
+
+                if (sidebarToggle) {
+                    sidebarToggle.addEventListener('click', function onSidebarToggle() {
+                        var isCollapsed = container.classList.toggle('sidebar-collapsed');
+                        localStorage.setItem(SIDEBAR_KEY, isCollapsed);
+                        sidebarToggle.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
+                    });
+                }
+
+                if (mobileToggle) {
+                    mobileToggle.addEventListener('click', function onMobileToggle() {
+                        var isOpen = container.classList.toggle('mobile-nav-open');
+                        localStorage.setItem(MOBILE_NAV_KEY, isOpen);
+                        mobileToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+                    });
+                }
+            }
+
             function initTOCActiveState() {
                 const tocLinks = document.querySelectorAll('.toc-link');
                 const headings = document.querySelectorAll('h1[id], h2[id]');
@@ -632,11 +701,12 @@
             }
             
             function init() {
+                initSidebarToggle();
                 initHighlight();
                 initClipboard();
                 initTOCActiveState();
             }
-            
+
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', init);
             } else {

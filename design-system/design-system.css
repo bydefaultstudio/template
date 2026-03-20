@@ -1,34 +1,33 @@
 /* ─────────────────────────────
-   DESIGN SYSTEM
+   DESIGN SYSTEM FRAMEWORK
    ───────────────────────────── */
 
 
 
-/* ------ 1. BRAND TOKENS (EDIT PER PROJECT) ------ */
+/* ------ 1. BRAND MAPPING ------ */
 
-/* 
- * CUSTOMIZE FOR YOUR PROJECT:
- * - Rename brand token names to match your brand (e.g., --brand-primary, --off-white, --charcoal)
- * - Replace font families with your brand fonts
- * - Update brand color values to match your brand guidelines
- * - Adjust font sizes if needed for your typography scale
- * 
- * Note: Renaming tokens personalizes the system. If you rename tokens, update any references
- * in semantic color tokens (--text-primary, --text-link, etc.).
+/*
+ * This section maps brand book tokens into the design system.
+ * The brand book (brand-book/brand-book.css) defines --brand-* tokens.
+ * The DS reads them here with fallback defaults.
+ *
+ * If no brand book is loaded, the defaults below are used.
+ * Load order does not matter — CSS custom property fallbacks handle it.
+ *
+ *   <link rel="stylesheet" href="design-system/design-system.css">
+ *   <link rel="stylesheet" href="brand-book/brand-book.css">
  */
 
 :root {
-  /* -- Fonts -- */
-  /* Replace with your project's font families */
-  --font-primary: "Inter", sans-serif;
-  --font-secondary: "Georgia", serif;
-  --font-tertiary: monospace;
+  /* -- Fonts (from brand book) -- */
+  --font-primary: var(--brand-font-primary, "Inter", sans-serif);
+  --font-secondary: var(--brand-font-secondary, "Georgia", serif);
+  --font-tertiary: var(--brand-font-tertiary, monospace);
 
-  /* -- Brand colours -- */
-  /* Replace with your project's brand colors */
-  --brand-dark: var(--neutral-800);
-  --brand-light: var(--neutral-50);
-  --brand-accent: #3485cd;
+  /* -- Brand colours (from brand book) -- */
+  --brand-dark: var(--brand-color-dark, #333333);
+  --brand-light: var(--brand-color-light, #f7f7f7);
+  --brand-accent: var(--brand-color-accent, #3485cd);
 
   /* -- Base font sizes -- */
   --font-2xs: 12px;
@@ -129,6 +128,34 @@
   --button-primary: var(--text-link);
   --button-text: var(--white);
   --button-faded: color-mix(in srgb, var(--button-primary), transparent 80%);
+
+  /* -- Status colours (from brand book or defaults) -- */
+  --status-info: var(--brand-color-info, var(--brand-accent));
+  --status-success: var(--brand-color-success, #1a7f37);
+  --status-warning: var(--brand-color-warning, #9a6700);
+  --status-danger: var(--brand-color-danger, #cf222e);
+  --status-accent: var(--brand-color-accent-alt, #8250df);
+
+  /* -- Callout semantic tokens -- */
+  --callout-info: var(--status-info);
+  --callout-info-bg: color-mix(in srgb, var(--status-info), transparent 90%);
+  --callout-success: var(--status-success);
+  --callout-success-bg: color-mix(in srgb, var(--status-success), transparent 90%);
+  --callout-warning: var(--status-warning);
+  --callout-warning-bg: color-mix(in srgb, var(--status-warning), transparent 90%);
+  --callout-danger: var(--status-danger);
+  --callout-danger-bg: color-mix(in srgb, var(--status-danger), transparent 90%);
+  --callout-accent: var(--status-accent);
+  --callout-accent-bg: color-mix(in srgb, var(--status-accent), transparent 90%);
+
+  /* -- Form semantic tokens -- */
+  --input-border: var(--border-secondary);
+  --input-background: var(--background-primary);
+  --input-text: var(--text-plain);
+  --input-placeholder: var(--text-faded);
+  --input-focus: var(--brand-accent);
+  --input-disabled-bg: var(--background-faded);
+  --input-disabled-text: var(--text-faded);
 
 }
 
@@ -814,6 +841,13 @@ button {
   padding: var(--space-m) var(--space-xl);
 }
 
+.button:disabled,
+.button.is-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .is-icon {
   padding: var(--space-l);
   border-radius: 50%;
@@ -877,7 +911,268 @@ button {
   background-color: var(--background-faded);
 }
 
-/* ------ 11. RESPONSIVE ------ */
+/* ------ 11. CALLOUTS & ALERTS ------ */
+
+/* -- Base callout -- */
+.callout {
+  padding: var(--space-m) var(--space-l);
+  margin-top: var(--space-l);
+  margin-bottom: var(--space-l);
+  border-left: var(--border-l) solid var(--border-secondary);
+  background-color: var(--background-faded);
+}
+
+.callout > *:first-child {
+  margin-top: 0;
+}
+
+.callout > *:last-child {
+  margin-bottom: 0;
+}
+
+/* -- Callout title -- */
+.callout-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  font-weight: var(--font-weight-semi-bold);
+  font-size: var(--font-s);
+  line-height: var(--line-height-s);
+  margin-bottom: var(--space-s);
+}
+
+/* -- Callout variants -- */
+.callout-note {
+  border-left-color: var(--callout-info);
+  background-color: var(--callout-info-bg);
+}
+
+.callout-note .callout-title {
+  color: var(--callout-info);
+}
+
+.callout-tip {
+  border-left-color: var(--callout-success);
+  background-color: var(--callout-success-bg);
+}
+
+.callout-tip .callout-title {
+  color: var(--callout-success);
+}
+
+.callout-warning {
+  border-left-color: var(--callout-warning);
+  background-color: var(--callout-warning-bg);
+}
+
+.callout-warning .callout-title {
+  color: var(--callout-warning);
+}
+
+.callout-caution {
+  border-left-color: var(--callout-danger);
+  background-color: var(--callout-danger-bg);
+}
+
+.callout-caution .callout-title {
+  color: var(--callout-danger);
+}
+
+.callout-important {
+  border-left-color: var(--callout-accent);
+  background-color: var(--callout-accent-bg);
+}
+
+.callout-important .callout-title {
+  color: var(--callout-accent);
+}
+
+/* ------ 12. FORM ELEMENTS ------ */
+
+/* -- Labels -- */
+label {
+  display: block;
+  font-size: var(--font-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+/* -- Text inputs & textarea -- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+input[type="url"],
+input[type="tel"],
+textarea,
+select {
+  font-family: var(--font-primary);
+  font-size: var(--font-s);
+  line-height: var(--line-height-l);
+  color: var(--input-text);
+  background-color: var(--input-background);
+  border: var(--border-s) solid var(--input-border);
+  padding: var(--space-s) var(--space-m);
+  width: 100%;
+  display: block;
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="url"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--input-focus), transparent 75%);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--input-placeholder);
+}
+
+/* -- Textarea -- */
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* -- Select -- */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-m) center;
+  padding-right: var(--space-2xl);
+  cursor: pointer;
+}
+
+/* -- Disabled states -- */
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: var(--input-disabled-bg);
+  color: var(--input-disabled-text);
+  cursor: not-allowed;
+}
+
+/* -- Fieldset & legend -- */
+fieldset {
+  border: var(--border-s) solid var(--border-secondary);
+  padding: var(--space-l);
+  margin: 0 0 var(--space-l) 0;
+}
+
+legend {
+  font-size: var(--font-s);
+  font-weight: var(--font-weight-semi-bold);
+  padding: 0 var(--space-s);
+  color: var(--text-primary);
+}
+
+/* -- Checkbox & radio -- */
+input[type="checkbox"],
+input[type="radio"] {
+  width: var(--space-l);
+  height: var(--space-l);
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--input-focus);
+}
+
+/* -- Inline label + checkbox/radio pattern -- */
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.form-check label {
+  display: inline;
+  margin-bottom: 0;
+  font-weight: var(--font-weight-regular);
+  cursor: pointer;
+}
+
+/* -- Form group (label + input pair) -- */
+.form-group {
+  margin-bottom: var(--space-l);
+}
+
+/* ------ 13. FUTURE COMPONENTS ------ */
+
+/*
+ * The following elements are candidates for future design system styling.
+ * They are currently unstyled globally (some exist in markdown.css only).
+ * When implementing, add semantic tokens to :root and follow the
+ * composable pattern used by borders, buttons, and callouts.
+ *
+ * -- Inline code & code blocks --
+ * - code (inline)
+ * - pre (code blocks)
+ * - Syntax highlighting tokens
+ *
+ * -- Keyboard shortcuts --
+ * - kbd element
+ *
+ * -- Highlighted text --
+ * - mark element
+ *
+ * -- Disclosure --
+ * - details / summary elements
+ * - Styled accordion pattern
+ *
+ * -- Media captions --
+ * - figure / figcaption elements
+ *
+ * -- Badges & pills --
+ * - Status labels, version tags, category indicators
+ * - Composable: .badge + .badge-info, .badge-success, etc.
+ * - Should reuse --status-* tokens
+ *
+ * -- Text selection --
+ * - ::selection pseudo-element
+ * - Brand-aligned highlight color
+ *
+ * -- Scrollbar styling --
+ * - Custom scrollbar for overflow containers
+ * - Subtle, consistent with design system colors
+ *
+ * -- Abbreviations --
+ * - abbr element
+ * - Dotted underline with tooltip-style title
+ *
+ * -- Breadcrumbs --
+ * - Navigation trail component
+ * - .breadcrumb + .breadcrumb-item pattern
+ *
+ * -- Tabs (CSS-only) --
+ * - Tab navigation pattern using radio inputs
+ * - .tabs + .tab-item pattern
+ *
+ * -- Progress indicators (CSS-only) --
+ * - progress element styling
+ * - .progress-bar component
+ * - Should reuse --status-* tokens
+ *
+ * -- Tooltips (CSS-only) --
+ * - data-tooltip attribute pattern
+ * - Pure CSS with ::before/::after
+ *
+ * -- Toast / notification --
+ * - Notification bar component
+ * - Should reuse callout/status tokens
+ */
+
+/* ------ 14. RESPONSIVE ------ */
 
 @media (max-width: 768px) {
   :root {

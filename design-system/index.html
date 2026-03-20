@@ -5,53 +5,17 @@
   <!-- Essential -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Design System Style Guide</title>
+  <title>Design System Styleguide</title>
   <meta name="description"
-    content="Interactive design system style guide showcasing typography, colors, components, and layout primitives." />
-
-  <!-- Canonical -->
-  <link rel="canonical" href="https://yoursite.com/styleguide/" />
+    content="Interactive design system styleguide showcasing typography, colors, components, and layout primitives." />
 
   <!-- Robots -->
   <meta name="robots" content="noindex, nofollow" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yoursite.com/styleguide/" />
-  <meta property="og:title" content="Design System Style Guide" />
-  <meta property="og:description"
-    content="Interactive design system style guide showcasing typography, colors, components, and layout primitives." />
-  <meta property="og:image" content="https://yoursite.com/assets/images/og-styleguide.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt"
-    content="Design System Style Guide preview showing color palette and typography examples" />
-  <meta property="og:site_name" content="Site Name" />
-  <meta property="og:locale" content="en_US" />
+  <!-- Design System Framework (no brand book — shows defaults) -->
+  <link rel="stylesheet" href="design-system.css" />
 
-  <!-- X (formerly Twitter) -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://yoursite.com/styleguide/" />
-  <meta name="twitter:title" content="Design System Style Guide" />
-  <meta name="twitter:description"
-    content="Interactive design system style guide showcasing typography, colors, components, and layout primitives." />
-  <meta name="twitter:image" content="https://yoursite.com/assets/images/og-styleguide.jpg" />
-  <meta name="twitter:image:alt"
-    content="Design System Style Guide preview showing color palette and typography examples" />
-
-  <!-- Theme Color -->
-  <meta name="theme-color" content="#3485cd" />
-
-  <!-- Favicons -->
-  <link rel="icon" href="../src/assets/icons/favicon.ico">
-  <link rel="icon" type="image/svg+xml" href="../src/assets/icons/favicon.svg">
-  <link rel="apple-touch-icon" href="../src/assets/icons/apple-touch-icon.png">
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="../src/css/design-system.css" />
-  
-  <!-- Google Fonts: Inter -->
-  <!-- TODO: Update Google Fonts link to match your project's fonts -->
+  <!-- Google Fonts: Inter (default font) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -61,25 +25,26 @@
 
   <div class="page-wrapper">
     <div class="page-content">
+
       <!-- Header -->
       <section class="top-medium bottom-medium border-bottom border-secondary">
         <div class="padding-global">
           <div class="container-medium">
-            <div class="block gap-m">
-              <h1>Design System Style Guide</h1>
-              <p><a href="../docs/site/index.html">View Documentation</a></p>
+            <div class="block gap-s">
+              <p class="eyebrow">Design System Framework</p>
+              <h1>Styleguide</h1>
+              <p class="text-size-small">This page shows all design system components rendered with <strong>default tokens</strong>. Load a brand book to see branded output.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Color -->
+      <!-- Colors -->
       <section class="top-medium bottom-medium border-bottom border-secondary">
         <div class="padding-global">
           <div class="container-medium">
             <div class="block gap-l">
               <h2 class="eyebrow">Colors</h2>
-
 
               <!-- Brand Colors -->
               <div class="block gap-m">
@@ -172,7 +137,6 @@
                 </div>
               </div>
 
-
               <div class="color-collection grid gap-m">
                 <!-- Text Colors -->
                 <div class="block gap-m">
@@ -235,11 +199,22 @@
                 </div>
               </div>
 
-
-
-
-
-
+              <!-- Status Colors -->
+              <div class="block gap-m">
+                <h3>Status Colors</h3>
+                <div class="grid token-col border border-secondary ">
+                  <div class="token-block"><span class="token-tag">status-info</span></div>
+                  <div class="color-block" style="background-color: var(--status-info);"></div>
+                  <div class="token-block"><span class="token-tag">status-success</span></div>
+                  <div class="color-block" style="background-color: var(--status-success);"></div>
+                  <div class="token-block"><span class="token-tag">status-warning</span></div>
+                  <div class="color-block" style="background-color: var(--status-warning);"></div>
+                  <div class="token-block"><span class="token-tag">status-danger</span></div>
+                  <div class="color-block" style="background-color: var(--status-danger);"></div>
+                  <div class="token-block"><span class="token-tag">status-accent</span></div>
+                  <div class="color-block" style="background-color: var(--status-accent);"></div>
+                </div>
+              </div>
 
             </div>
           </div>
@@ -250,8 +225,6 @@
       <section class="top-medium bottom-medium border-bottom border-secondary">
         <div class="padding-global">
           <div class="container-medium">
-
-
             <article class="type-demo">
               <h2 class="eyebrow">Typography</h2>
               <span class="token-tag">Heading 1</span>
@@ -266,8 +239,7 @@
               <p>
                 This paragraph demonstrates how body text will look across your layout. <strong>Bold text</strong>
                 adds emphasis, while <em>italics</em> offer a subtle highlight. You can also use
-                <del>strikethrough</del> to show
-                edits. This is an entire paragraph to test readability and text flow.
+                <del>strikethrough</del> to show edits. This is an entire paragraph to test readability and text flow.
               </p>
 
               <p>
@@ -279,22 +251,17 @@
                 Longer paragraphs help test how body text behaves over multiple lines and paragraphs in a real layout.
                 Use them to observe spacing, line height, and visual fatigue. <strong>Bold calls attention</strong>,
                 <em>italics guide the tone</em>, and clearly formatted links or buttons can suggest interactivity.
-                Clear, consistent
-                styling ensures your message is readable and engaging at any length.
+                Clear, consistent styling ensures your message is readable and engaging at any length.
               </p>
               <span class="token-tag">XSmall Text</span>
-
               <p class="text-size-xsmall">
                 Longer paragraphs help test how body text behaves over multiple lines and paragraphs in a real layout.
                 Use them to observe spacing, line height, and visual fatigue. <strong>Bold calls attention</strong>,
                 <em>italics guide the tone</em>, and clearly formatted links or buttons can suggest interactivity.
-                Clear, consistent
-                styling ensures your message is readable and engaging at any length.
+                Clear, consistent styling ensures your message is readable and engaging at any length.
               </p>
               <span class="token-tag">Eyebrow</span>
-              <p class="eyebrow">
-                Eyebrow Text
-              </p>
+              <p class="eyebrow">Eyebrow Text</p>
 
               <span class="token-tag">Blockquote</span>
               <blockquote>
@@ -317,13 +284,9 @@
                 <li>Keep everything neat and easy to follow.</li>
               </ol>
               <span class="token-tag">Link</span>
-              <p>
-                For further information, check out <a href="#">this
-                  link</a>, which will take you to another page.
-                </p>
+              <p>For further information, check out <a href="#">this link</a>, which will take you to another page.</p>
             </article>
-
-            </div>
+          </div>
         </div>
       </section>
 
@@ -332,8 +295,6 @@
         <div class="padding-global">
           <div class="container-medium">
             <div class="block gap-none">
-
-
               <div class="block gap-l button-demo">
                 <h2 class="eyebrow">Buttons</h2>
 
@@ -364,11 +325,16 @@
                         fill="currentColor" />
                     </svg>
                   </div>
-
                 </button>
 
                 <span class="token-tag">button is-small</span>
                 <button class="button is-small">Button</button>
+
+                <span class="token-tag">button:disabled</span>
+                <button class="button" disabled>Button</button>
+
+                <span class="token-tag">button is-outline:disabled</span>
+                <button class="button is-outline" disabled>Button</button>
 
                 <span class="token-tag">button-group</span>
                 <div class="button-group">
@@ -378,19 +344,147 @@
                   <button class="button is-outline is-faded">Button</button>
                 </div>
 
-                <span class="token-tag">button-group</span>
+                <span class="token-tag">button-group (small)</span>
                 <div class="button-group">
                   <button class="button is-small">Button</button>
                   <button class="button is-small is-faded">Button</button>
                   <button class="button is-outline is-small">Button</button>
                   <button class="button is-outline is-small is-faded">Button</button>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <!-- Form Elements -->
+      <section class="top-medium bottom-medium border-bottom border-secondary">
+        <div class="padding-global">
+          <div class="container-medium">
+            <div class="block gap-l">
+              <h2 class="eyebrow">Form Elements</h2>
+
+              <div class="block gap-s">
+                <span class="token-tag">label + input[type="text"]</span>
+                <div class="form-group">
+                  <label for="demo-text">Text input</label>
+                  <input type="text" id="demo-text" placeholder="Placeholder text">
+                </div>
               </div>
 
+              <div class="block gap-s">
+                <span class="token-tag">label + input[type="email"]</span>
+                <div class="form-group">
+                  <label for="demo-email">Email input</label>
+                  <input type="email" id="demo-email" placeholder="name@example.com">
+                </div>
+              </div>
 
+              <div class="block gap-s">
+                <span class="token-tag">label + textarea</span>
+                <div class="form-group">
+                  <label for="demo-textarea">Textarea</label>
+                  <textarea id="demo-textarea" placeholder="Enter longer text here..."></textarea>
+                </div>
+              </div>
 
+              <div class="block gap-s">
+                <span class="token-tag">label + select</span>
+                <div class="form-group">
+                  <label for="demo-select">Select</label>
+                  <select id="demo-select">
+                    <option value="" disabled selected>Choose an option</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+              </div>
 
+              <div class="block gap-s">
+                <span class="token-tag">input:disabled</span>
+                <div class="form-group">
+                  <label for="demo-disabled">Disabled input</label>
+                  <input type="text" id="demo-disabled" value="Cannot edit this" disabled>
+                </div>
+              </div>
+
+              <div class="block gap-s">
+                <span class="token-tag">.form-check (checkbox)</span>
+                <div class="form-check">
+                  <input type="checkbox" id="demo-check">
+                  <label for="demo-check">Checkbox label</label>
+                </div>
+              </div>
+
+              <div class="block gap-s">
+                <span class="token-tag">.form-check (radio)</span>
+                <div class="form-check">
+                  <input type="radio" name="demo-radio" id="demo-radio-1">
+                  <label for="demo-radio-1">Radio option 1</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" name="demo-radio" id="demo-radio-2">
+                  <label for="demo-radio-2">Radio option 2</label>
+                </div>
+              </div>
+
+              <div class="block gap-s">
+                <span class="token-tag">fieldset + legend</span>
+                <fieldset>
+                  <legend>Fieldset legend</legend>
+                  <div class="form-group">
+                    <label for="demo-fieldset-input">Input inside fieldset</label>
+                    <input type="text" id="demo-fieldset-input" placeholder="Grouped input">
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Callouts & Alerts -->
+      <section class="top-medium bottom-medium border-bottom border-secondary">
+        <div class="padding-global">
+          <div class="container-medium">
+            <div class="block gap-l">
+              <h2 class="eyebrow">Callouts & Alerts</h2>
+
+              <span class="token-tag">.callout</span>
+              <div class="callout">
+                <p>This is a base callout with no variant. Use it for general-purpose highlighted content.</p>
+              </div>
+
+              <span class="token-tag">.callout .callout-note</span>
+              <div class="callout callout-note">
+                <div class="callout-title">Note</div>
+                <p>Useful information that users should know, even when skimming content.</p>
+              </div>
+
+              <span class="token-tag">.callout .callout-tip</span>
+              <div class="callout callout-tip">
+                <div class="callout-title">Tip</div>
+                <p>Helpful advice for doing things better or more easily.</p>
+              </div>
+
+              <span class="token-tag">.callout .callout-warning</span>
+              <div class="callout callout-warning">
+                <div class="callout-title">Warning</div>
+                <p>Urgent information that needs immediate attention to avoid problems.</p>
+              </div>
+
+              <span class="token-tag">.callout .callout-caution</span>
+              <div class="callout callout-caution">
+                <div class="callout-title">Caution</div>
+                <p>Advises about risks or negative outcomes of certain actions.</p>
+              </div>
+
+              <span class="token-tag">.callout .callout-important</span>
+              <div class="callout callout-important">
+                <div class="callout-title">Important</div>
+                <p>Key information users need to know to achieve their goal.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -438,6 +532,11 @@
                 <p>Third item</p>
               </div>
 
+              <span class="token-tag">block row gap-xl</span>
+              <div class="block row gap-xl border border-secondary" style="padding: 1rem;">
+                <p>Left</p>
+                <p>Right</p>
+              </div>
 
             </div>
           </div>
@@ -457,7 +556,6 @@
                 <div class="bg-faded padding-m">Item 2</div>
                 <div class="bg-faded padding-m">Item 3</div>
                 <div class="bg-faded padding-m">Item 4</div>
-
               </div>
 
               <span class="token-tag">grid cols-3</span>
@@ -490,7 +588,6 @@
                 <div class="bg-faded padding-m">Item 4</div>
                 <div class="bg-faded padding-m">Item 5</div>
                 <div class="bg-faded padding-m">Item 6</div>
-
               </div>
 
               <span class="token-tag">grid cols-4 gap-s</span>
@@ -504,7 +601,32 @@
                 <div class="bg-faded padding-m">Item 7</div>
                 <div class="bg-faded padding-m">Item 8</div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <!-- Borders -->
+      <section class="top-medium bottom-medium border-bottom border-secondary">
+        <div class="padding-global">
+          <div class="container-medium">
+            <div class="block gap-l">
+              <h2 class="eyebrow">Borders</h2>
+
+              <span class="token-tag">.border .border-primary</span>
+              <div class="border border-primary padding-l">Primary border</div>
+
+              <span class="token-tag">.border .border-secondary</span>
+              <div class="border border-secondary padding-l">Secondary border</div>
+
+              <span class="token-tag">.border .border-faded</span>
+              <div class="border border-faded padding-l">Faded border</div>
+
+              <span class="token-tag">.border-top .border-m .border-dashed</span>
+              <div class="border-top border-m border-dashed padding-l">Dashed top, medium width</div>
+
+              <span class="token-tag">.border .border-l .border-dotted</span>
+              <div class="border border-l border-dotted padding-l">Dotted, large width</div>
             </div>
           </div>
         </div>
@@ -518,7 +640,6 @@
               <h2 class="eyebrow">Containers</h2>
             </div>
 
-
             <div class="container-small border border-dashed border-secondary padding-xl ">
               <span class="token-tag">container-small</span>
             </div>
@@ -528,7 +649,6 @@
             <div class="container-large border border-dashed border-secondary padding-xl ">
               <span class="token-tag">container-large</span>
             </div>
-
           </div>
         </div>
 
@@ -549,14 +669,12 @@
             <div class="max-width-full border border-dashed border-secondary padding-xl ">
               <span class="token-tag">max-width-full</span>
             </div>
-
           </div>
         </div>
-        
       </section>
 
       <!-- Section Spacing -->
-      <section class="top-medium bottom-medium border-bottom border-secondary">
+      <section class="top-medium bottom-medium">
         <div class="padding-global">
           <div class="container-medium">
             <div class="block gap-l">
@@ -566,6 +684,7 @@
                 Section spacing is controlled using combo classes on the <code>&lt;section&gt;</code> element.
                 These classes apply vertical padding using the section spacing variables.
               </p>
+
               <div class="block gap-none border border-dashed border-secondary">
                 <div class="block top-small bg-faded"></div>
                 <div class="block padding-xl">
@@ -575,16 +694,16 @@
 
               <div class="block gap-none border border-dashed border-secondary">
                 <div class="block top-medium bg-faded"></div>
-                <block class="block padding-xl">
+                <div class="block padding-xl">
                   <span class="token-tag">top-medium</span>
-                </block>
+                </div>
               </div>
 
               <div class="block gap-none border border-dashed border-secondary">
                 <div class="block top-large bg-faded"></div>
-                <block class="block padding-xl">
+                <div class="block padding-xl">
                   <span class="token-tag">top-large</span>
-                </block>
+                </div>
               </div>
 
               <div class="block gap-none border border-dashed border-secondary">
@@ -592,7 +711,6 @@
                   <span class="token-tag">bottom-small</span>
                 </div>
                 <div class="block bottom-small bg-faded"></div>
-
               </div>
 
               <div class="block gap-none border border-dashed border-secondary">
@@ -600,7 +718,6 @@
                   <span class="token-tag">bottom-medium</span>
                 </div>
                 <div class="block bottom-medium bg-faded"></div>
-
               </div>
 
               <div class="block gap-none border border-dashed border-secondary">
@@ -608,7 +725,6 @@
                   <span class="token-tag">bottom-large</span>
                 </div>
                 <div class="block bottom-large bg-faded"></div>
-
               </div>
 
             </div>

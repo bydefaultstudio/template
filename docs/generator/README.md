@@ -98,7 +98,7 @@ docs/
 
 ### Using Your Own Design System
 
-1. **Design System CSS**: The template links to `../../src/css/design-system.css` from generated pages
+1. **Design System CSS**: The template links to `../../design-system/design-system.css` from generated pages (configured in `docs/docs.config.js`)
 2. **Docs CSS**: Update `assets/docs.css` for docs-specific styles
 3. **Template**: Modify `template.html` to use your component classes
 4. **Add Assets**: Place images, fonts, etc. in `assets/` folder

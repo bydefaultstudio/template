@@ -6,7 +6,7 @@ section: "Design System"
 order: 5
 ---
 
-> Cursor: Treat this document as authoritative.
+> Claude: Treat this document as authoritative.
 
 Borders use a **composable architecture** that separates structural positioning from styling concerns. This approach keeps the system extensible without class explosion.
 

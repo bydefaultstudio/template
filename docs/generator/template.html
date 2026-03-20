@@ -10,14 +10,14 @@
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     
-    <!-- Design System (base styles) -->
-    <link rel="stylesheet" href="../../src/css/design-system.css">
+    <!-- Design System Framework (path set in docs/docs.config.js) -->
+    <link rel="stylesheet" href="{{DESIGN_SYSTEM_PATH}}" id="design-system-css"
+          onerror="document.getElementById('ds-missing-banner').style.display='flex'">
+    <!-- Brand Book (path set in docs/docs.config.js) -->
+    {{BRAND_CSS}}
     
-    <!-- Google Fonts: Inter & JetBrains Mono -->
-    <!-- TODO: Update Google Fonts link to match your project's fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts (configured in docs/docs.config.js) -->
+    {{GOOGLE_FONTS}}
        
     <!-- Markdown CSS -->
     <link rel="stylesheet" href="assets/markdown.css">
@@ -26,14 +26,37 @@
     <link rel="stylesheet" href="assets/docs.css">
 </head>
 <body>
+
+    <!-- Design system missing banner (shown by JS if CSS variables fail to load) -->
+    <div id="ds-missing-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#fffbea;border-bottom:1px solid #f0c040;padding:12px 20px;font-family:sans-serif;font-size:14px;color:#7a5c00;align-items:center;gap:12px;">
+        <span>⚠️</span>
+        <span>Design system CSS not found. Check the path in <code style="background:#fef3c7;padding:2px 6px;border-radius:4px;">docs/docs.config.js</code> → <code style="background:#fef3c7;padding:2px 6px;border-radius:4px;">designSystemPath</code>, then re-run <code style="background:#fef3c7;padding:2px 6px;border-radius:4px;">npm run docgen</code>.</span>
+        <button onclick="document.getElementById('ds-missing-banner').style.display='none'" style="margin-left:auto;background:none;border:1px solid #f0c040;border-radius:4px;padding:4px 10px;cursor:pointer;color:#7a5c00;font-size:13px;">Dismiss</button>
+    </div>
+
     <div class="docs-container">
-        <!-- Sidebar Navigation (fixed on desktop, top nav on mobile) -->
+        <!-- Sidebar Navigation (sticky on desktop, top bar on mobile) -->
         <aside class="docs-sidebar">
             <nav class="docs-nav">
-                <a href="{{INDEX_PATH}}">
-                    <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
-                </a>
-                {{NAVIGATION}}
+                <div class="docs-sidebar-header">
+                    <a href="{{INDEX_PATH}}" class="docs-logo-link">
+                        <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
+                        <img src="assets/images/logo-small.svg" alt="Logo" class="nav-logo-small">
+                    </a>
+                    <button class="docs-sidebar-toggle" aria-label="Collapse sidebar" type="button">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="docs-mobile-toggle" aria-label="Open navigation" type="button">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M3 5H17M3 10H17M3 15H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="docs-nav-content">
+                    {{NAVIGATION}}
+                </div>
             </nav>
         </aside>
 
@@ -57,7 +80,7 @@
             <!-- Footer -->
             <footer class="docs-footer">
                 <div class="docs-footer-inner padding-global">
-                    <p class="docs-footer-text">© 2025 By Default</p>
+                    <p class="docs-footer-text">{{FOOTER_TEXT}}</p>
                 </div>
             </footer>
         </div>
@@ -106,6 +129,44 @@
                 });
             }
             
+            function initSidebarToggle() {
+                var SIDEBAR_KEY = 'docs-sidebar-collapsed';
+                var MOBILE_NAV_KEY = 'docs-mobile-nav-open';
+                var container = document.querySelector('.docs-container');
+                var sidebarToggle = document.querySelector('.docs-sidebar-toggle');
+                var mobileToggle = document.querySelector('.docs-mobile-toggle');
+
+                if (!container) return;
+
+                // Restore desktop sidebar state
+                if (localStorage.getItem(SIDEBAR_KEY) === 'true') {
+                    container.classList.add('sidebar-collapsed');
+                    if (sidebarToggle) sidebarToggle.setAttribute('aria-label', 'Expand sidebar');
+                }
+
+                // Restore mobile nav state
+                if (localStorage.getItem(MOBILE_NAV_KEY) === 'true') {
+                    container.classList.add('mobile-nav-open');
+                    if (mobileToggle) mobileToggle.setAttribute('aria-label', 'Close navigation');
+                }
+
+                if (sidebarToggle) {
+                    sidebarToggle.addEventListener('click', function onSidebarToggle() {
+                        var isCollapsed = container.classList.toggle('sidebar-collapsed');
+                        localStorage.setItem(SIDEBAR_KEY, isCollapsed);
+                        sidebarToggle.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
+                    });
+                }
+
+                if (mobileToggle) {
+                    mobileToggle.addEventListener('click', function onMobileToggle() {
+                        var isOpen = container.classList.toggle('mobile-nav-open');
+                        localStorage.setItem(MOBILE_NAV_KEY, isOpen);
+                        mobileToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+                    });
+                }
+            }
+
             function initTOCActiveState() {
                 const tocLinks = document.querySelectorAll('.toc-link');
                 const headings = document.querySelectorAll('h1[id], h2[id]');
@@ -185,11 +246,12 @@
             }
             
             function init() {
+                initSidebarToggle();
                 initHighlight();
                 initClipboard();
                 initTOCActiveState();
             }
-            
+
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', init);
             } else {

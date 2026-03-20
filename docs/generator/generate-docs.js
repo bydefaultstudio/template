@@ -10,6 +10,29 @@ const OUTPUT_DIR = path.join(__dirname, '..', 'site');  // ../site/
 const TEMPLATE_FILE = path.join(__dirname, 'template.html');
 const ASSETS_SOURCE = path.join(__dirname, 'assets');
 
+// Load project config (docs/docs.config.js) with fallback defaults
+const configPath = path.join(DOCS_DIR, 'docs.config.js');
+const userConfig = fs.existsSync(configPath) ? require(configPath) : {};
+const PROJECT_CONFIG = {
+  designSystemPath: userConfig.designSystemPath || '../../design-system/design-system.css',
+  brandCssPath: userConfig.brandCssPath || null,
+  googleFontsUrl: userConfig.googleFontsUrl !== undefined ? userConfig.googleFontsUrl : null,
+  footerText: userConfig.footerText || '',
+  indexDescription: userConfig.indexDescription || 'Complete documentation for your project.',
+};
+
+// Build Brand CSS HTML snippet
+const BRAND_CSS_HTML = PROJECT_CONFIG.brandCssPath
+  ? `<link rel="stylesheet" href="${PROJECT_CONFIG.brandCssPath}">`
+  : '';
+
+// Build Google Fonts HTML snippet
+const GOOGLE_FONTS_HTML = PROJECT_CONFIG.googleFontsUrl
+  ? `<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="${PROJECT_CONFIG.googleFontsUrl}" rel="stylesheet">`
+  : '';
+
 /**
  * Parse frontmatter from markdown content
  */
@@ -185,8 +208,9 @@ function generateNavigation(filesBySection, currentPage = null) {
       return a.title.localeCompare(b.title);
     });
     
-    // All sections open by default (mobile CSS handles collapsing)
-    const openAttr = ' open';
+    // Only open the section that contains the active page
+    const isActiveSection = currentPage && files.some(f => f.filename === currentPage.filename);
+    const openAttr = isActiveSection ? ' open' : '';
     
     // Display "Pages" instead of section name
     const sectionLabel = section === 'overview' ? 'Pages' : section.charAt(0).toUpperCase() + section.slice(1);
@@ -266,19 +290,23 @@ function generateIndexPage(template, navigation, filesBySection) {
   const indexContent = `
     <div class="docs-hero">
       <h1 class="docs-hero-title">Documentation</h1>
-      <p class="docs-hero-description">Complete documentation for your project.</p>
+      <p class="docs-hero-description">${PROJECT_CONFIG.indexDescription}</p>
     </div>
     ${cards}
   `;
-  
+
   return template
     .replace('{{PAGE_TITLE}}', 'Documentation')
-    .replace('{{META_DESCRIPTION}}', 'Complete documentation')
+    .replace('{{META_DESCRIPTION}}', PROJECT_CONFIG.indexDescription)
     .replace('{{PAGE_HEADER}}', '') // Index page doesn't need a header
     .replace('{{PAGE_CONTENT}}', indexContent)
     .replace('{{NAVIGATION}}', navigation)
     .replace('{{TOC_SECTION}}', '')
-    .replace('{{INDEX_PATH}}', 'index.html');
+    .replace('{{INDEX_PATH}}', 'index.html')
+    .replace('{{DESIGN_SYSTEM_PATH}}', PROJECT_CONFIG.designSystemPath)
+    .replace('{{BRAND_CSS}}', BRAND_CSS_HTML)
+    .replace('{{GOOGLE_FONTS}}', GOOGLE_FONTS_HTML)
+    .replace('{{FOOTER_TEXT}}', PROJECT_CONFIG.footerText);
 }
 
 /**
@@ -311,7 +339,11 @@ function generatePage(file, template, navigation) {
       <span class="toc-header">On this page</span>
       <div class="toc-wrapper">${tableOfContents}</div>
     </aside>`)
-    .replace('{{INDEX_PATH}}', 'index.html');
+    .replace('{{INDEX_PATH}}', 'index.html')
+    .replace('{{DESIGN_SYSTEM_PATH}}', PROJECT_CONFIG.designSystemPath)
+    .replace('{{BRAND_CSS}}', BRAND_CSS_HTML)
+    .replace('{{GOOGLE_FONTS}}', GOOGLE_FONTS_HTML)
+    .replace('{{FOOTER_TEXT}}', PROJECT_CONFIG.footerText);
 }
 
 /**
@@ -406,8 +438,8 @@ async function generateDocs() {
   
   console.log(`📂 Found sections: ${Object.keys(filesBySection).join(', ')}`);
   
-  // Copy assets (removed - CSS now links directly to source)
-  // copyAssets();
+  // Copy engine assets (docs.css, markdown.css) to output directory
+  copyAssets();
   
   // Generate index.html
   const indexPage = { filename: 'index' };

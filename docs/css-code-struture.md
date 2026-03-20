@@ -6,9 +6,9 @@ section: "Code"
 order: 3
 ---
 
-> Cursor: Treat this document as authoritative.
+> Claude: Treat this document as authoritative.
 
-> Cursor: Follow these rules when writing or modifying CSS.
+> Claude: Follow these rules when writing or modifying CSS.
 
 ## Overview
 
