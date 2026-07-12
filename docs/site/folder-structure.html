@@ -65,6 +65,19 @@
     </ul>
   <details class="nav-section">
       <summary class="nav-section-toggle">
+        <span>Brand</span>
+        <span class="nav-toggle-icon">
+          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
+          </svg>
+        </span>
+      </summary>
+      <ul class="nav-list">
+        <li><a href="brand-book.html" class="nav-link ">Brand Book</a></li>
+      
+      </ul>
+    </details><details class="nav-section">
+      <summary class="nav-section-toggle">
         <span>Design System</span>
         <span class="nav-toggle-icon">
           <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,6 +95,8 @@
         <li><a href="spacing.html" class="nav-link ">Spacing</a></li>
       
         <li><a href="border.html" class="nav-link ">Border</a></li>
+      
+        <li><a href="motion.html" class="nav-link ">Motion</a></li>
       
         <li><a href="button.html" class="nav-link ">Button</a></li>
       
@@ -161,78 +176,78 @@
                 <!-- Main Content -->
                 <main class="docs-main">
                     <article class="markdown-body">
-                        <p>This document defines where files live and why.</p>
+                        <blockquote>
+<p>Claude: Treat this document as authoritative.</p>
+</blockquote>
+<p>This document defines where files live and why.</p>
 <p>Do not add new top-level folders without updating this file.</p>
-<h2 id="root-level">Root Level</h2>
+<h2 id="structure">Structure</h2>
+
+      <div class="code-block-wrapper">
+        <button class="copy-code-btn" data-clipboard-target="#code-p2f1wrefl" type="button" aria-label="Copy code">
+          <span class="copy-text">Copy</span>
+        </button>
+        <pre><code id="code-p2f1wrefl">index.html              → Starter page (replace with project homepage)
+CLAUDE.md               → Claude Code development rules (authoritative)
+README.md               → Project overview and getting started
+PROJECT_BRIEF.md        → Project brief and requirements
+PROJECT_PROGRESS.md     → Progress tracker for ongoing work
+assets/
+  css/
+    design-system.css   → Design system framework (never edited per project)
+    theme.css           → Brand overrides (primitives, fonts)
+    style.css           → Project-specific styles
+  js/
+    theme-toggle.js     → Dark-mode toggle
+  fonts/                → Self-hosted web fonts
+  icons/                → Favicons and app icons
+  images/               → General images and Open Graph images
+templates/              → Page and component boilerplate
+docs/                   → Documentation (markdown sources + generated site)
+</code></pre>
+      </div>
+    
+<h2 id="assetscss">assets/css/</h2>
+<p>The three-layer CSS contract. Load order matters — every page links them in this sequence:</p>
+<ol>
+<li><code>design-system.css</code> — the framework: tokens, base styles, layout primitives, utilities, components. Ships neutral working defaults and is never edited per project.</li>
+<li><code>theme.css</code> — your brand: overrides §1/§2 primitives (fonts, <code>--accent</code>, neutrals) and loads brand fonts via <code>@font-face</code> or <code>@import</code>. Semantics cascade through the primitives.</li>
+<li><code>style.css</code> — project-specific styles built on top of the system.</li>
+</ol>
+<h2 id="assetsjs">assets/js/</h2>
 <ul>
-<li><code>index.html</code> → Welcome page (replace with project homepage)</li>
-<li><code>README.md</code> → Project overview and getting started</li>
-<li><code>PROJECT_BRIEF.md</code> → Project brief and requirements</li>
-<li><code>PROJECT_PROGRESS.md</code> → Progress tracker for ongoing work</li>
-<li><code>CLAUDE.md</code> → Claude Code development rules (authoritative)</li>
-<li><code>design-system/</code> → Design system framework (shared across projects)</li>
-<li><code>brand-book/</code> → Brand identity tokens (customised per project)</li>
-<li><code>templates/</code> → Component and page templates</li>
-<li><code>docs/</code> → Documentation files and generator</li>
-<li><code>src/</code> → Source files</li>
+<li><code>theme-toggle.js</code> — dark-mode toggle: sets <code>data-theme</code> on <code>&lt;html&gt;</code>, persists to localStorage, defaults to the OS preference, and injects icons into <code>.dark-mode-toggle</code> buttons.</li>
 </ul>
-<h2 id="design-system">design-system/</h2>
-<p>The design system framework. Contains all utility classes, layout primitives, components, and default tokens.</p>
-<ul>
-<li><code>design-system.css</code> → Core design system stylesheet</li>
-<li><code>index.html</code> → Styleguide preview (renders with default tokens)</li>
-</ul>
-<h2 id="brand-book">brand-book/</h2>
-<p>Brand identity tokens. Customise this per project. The design system reads these tokens via <code>var(--brand-*, fallback)</code>.</p>
-<ul>
-<li><code>brand-book.css</code> → Brand tokens (fonts, colours)</li>
-<li><code>index.html</code> → Brand preview page (logo, palette, typography, icons)</li>
-</ul>
-<h2 id="src">src/</h2>
-<h3 id="srcassets">src/assets/</h3>
-<ul>
-<li><code>fonts/</code> → Web fonts</li>
-<li><code>icons/</code> → Favicons and app icons</li>
-<li><code>images/</code> → General image assets and Open Graph images</li>
-<li><code>video/</code> → Video assets</li>
-</ul>
-<h3 id="srccss">src/css/</h3>
-<ul>
-<li><code>style.css</code> → Project-specific styles (sits on top of the design system)</li>
-</ul>
-<h3 id="srcjs">src/js/</h3>
-<ul>
-<li>JavaScript modules and scripts</li>
-</ul>
-<h3 id="srcpages">src/pages/</h3>
-<ul>
-<li>HTML page files</li>
-</ul>
+<h2 id="assetsfonts">assets/fonts/</h2>
+<p>Self-hosted web font files, referenced by <code>@font-face</code> declarations in <code>theme.css</code>.</p>
+<h2 id="assetsicons">assets/icons/</h2>
+<p>Favicons and app icons (<code>favicon.svg</code>, <code>favicon.ico</code>, <code>apple-touch-icon.png</code>, …). Referenced directly in each page&#39;s <code>&lt;head&gt;</code>; treated as brand assets, not part of the design system.</p>
+<h2 id="assetsimages">assets/images/</h2>
+<p>General image assets and Open Graph images.</p>
 <h2 id="templates">templates/</h2>
+<p>Boilerplate for new files:</p>
 <ul>
-<li><code>component-template.js</code> → JavaScript component template</li>
+<li><code>page-template.html</code> → HTML page template (correct stylesheet order, SEO meta tags)</li>
 <li><code>component-template.css</code> → CSS component template</li>
-<li><code>page-template.html</code> → HTML page template</li>
+<li><code>component-template.js</code> → JavaScript component template</li>
 </ul>
 <h2 id="docs">docs/</h2>
 <ul>
-<li>Markdown documentation files</li>
-<li><code>docs.config.js</code> → Project-specific doc settings (fonts, footer, description) — stays when generator is upgraded</li>
+<li>Markdown documentation files (the sources — edit these)</li>
+<li><code>docs.config.js</code> → Project-specific doc settings (CSS paths, footer, description) — stays when the generator is upgraded</li>
 <li><code>generator/</code> → Documentation site engine (replaceable — drop in a new version to upgrade)<ul>
 <li><code>VERSION</code> → Current engine version</li>
 <li><code>assets/</code> → Engine CSS (<code>docs.css</code>, <code>markdown.css</code>) — copied to <code>site/assets/</code> on generation</li>
 </ul>
 </li>
-<li><code>site/</code> → Generated HTML documentation<ul>
-<li><code>assets/images/</code> → Project-specific logo and favicons — not overwritten by the generator</li>
+<li><code>site/</code> → Generated HTML documentation — <strong>never hand-edit</strong>; regenerate from the markdown sources<ul>
+<li><code>assets/images/</code> → The docs site&#39;s own logo and favicon copies — independent of <code>assets/images/</code> and not overwritten by the generator</li>
 </ul>
 </li>
 </ul>
+<p>The docs site links the project&#39;s real stylesheets (<code>../../assets/css/design-system.css</code>, then <code>theme.css</code>), so token and component pages render live values. The old <code>design-system/</code> and <code>brand-book/</code> folders are gone — the styleguide and brand reference now live in the docs site.</p>
 <h2 id="notes">Notes</h2>
 <p>Empty folders are tracked using <code>.gitkeep</code> to preserve structure in the template.</p>
-<h3 id="favicons">Favicons</h3>
-<p>Favicons live in <code>src/assets/icons/</code>.</p>
-<p>They are referenced directly in the HTML <code>&lt;head&gt;</code> and are treated as brand assets, not part of the design system.</p>
 
                     </article>
                 </main>
@@ -240,7 +255,7 @@
                 <!-- Table of Contents -->
                 <aside class="docs-toc">
       <span class="toc-header">On this page</span>
-      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#root-level" class="toc-link">Root Level</a></li><li class="toc-item toc-level-2"><a href="#design-system" class="toc-link">design-system/</a></li><li class="toc-item toc-level-2"><a href="#brand-book" class="toc-link">brand-book/</a></li><li class="toc-item toc-level-2"><a href="#src" class="toc-link">src/</a></li><li class="toc-item toc-level-2"><a href="#templates" class="toc-link">templates/</a></li><li class="toc-item toc-level-2"><a href="#docs" class="toc-link">docs/</a></li><li class="toc-item toc-level-2"><a href="#notes" class="toc-link">Notes</a></li></ul></nav></div>
+      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#structure" class="toc-link">Structure</a></li><li class="toc-item toc-level-2"><a href="#assetscss" class="toc-link">assets/css/</a></li><li class="toc-item toc-level-2"><a href="#assetsjs" class="toc-link">assets/js/</a></li><li class="toc-item toc-level-2"><a href="#assetsfonts" class="toc-link">assets/fonts/</a></li><li class="toc-item toc-level-2"><a href="#assetsicons" class="toc-link">assets/icons/</a></li><li class="toc-item toc-level-2"><a href="#assetsimages" class="toc-link">assets/images/</a></li><li class="toc-item toc-level-2"><a href="#templates" class="toc-link">templates/</a></li><li class="toc-item toc-level-2"><a href="#docs" class="toc-link">docs/</a></li><li class="toc-item toc-level-2"><a href="#notes" class="toc-link">Notes</a></li></ul></nav></div>
     </aside>
             </div>
             

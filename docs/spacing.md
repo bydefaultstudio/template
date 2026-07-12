@@ -127,3 +127,60 @@ Section spacing tokens control the **vertical rhythm between sections**. They sc
   padding-top: var(--section-s);
 }
 ```
+
+Sections consume these tokens through the `.top-*` and `.bottom-*` combo classes (`.top-small`, `.top-medium`, `.top-large`, `.top-xl` and their `bottom-` counterparts — see Layout). The shaded strips below visualise the padding each class applies:
+
+<div class="demo-preview">
+  <div class="block gap-m">
+    <div class="block gap-none border border-dashed border-secondary">
+      <div class="block top-small bg-faded"></div>
+      <div class="block padding-l"><code>top-small</code></div>
+    </div>
+    <div class="block gap-none border border-dashed border-secondary">
+      <div class="block top-medium bg-faded"></div>
+      <div class="block padding-l"><code>top-medium</code></div>
+    </div>
+    <div class="block gap-none border border-dashed border-secondary">
+      <div class="block padding-l"><code>bottom-large</code></div>
+      <div class="block bottom-large bg-faded"></div>
+    </div>
+  </div>
+</div>
+
+```html
+<section class="top-medium bottom-medium">
+  <div class="padding-global">
+    <div class="container-medium">
+      <!-- Section content -->
+    </div>
+  </div>
+</section>
+```
+
+---
+
+## Gaps
+
+Blocks space their children with `gap-*` modifiers (`gap-none`, `gap-xs` … `gap-3xl`), each resolving to the matching `--space-*` token. Use gaps for micro spacing inside a section — never margins. See Layout for the full block documentation.
+
+<div class="demo-preview is-joined">
+  <div class="block gap-xl">
+    <div class="block gap-s">
+      <div class="bg-faded padding-m">gap-s item</div>
+      <div class="bg-faded padding-m">gap-s item</div>
+      <div class="bg-faded padding-m">gap-s item</div>
+    </div>
+    <div class="block gap-xl">
+      <div class="bg-faded padding-m">gap-xl item</div>
+      <div class="bg-faded padding-m">gap-xl item</div>
+    </div>
+  </div>
+</div>
+
+```html
+<div class="block gap-s">
+  <div>Item</div>
+  <div>Item</div>
+  <div>Item</div>
+</div>
+```

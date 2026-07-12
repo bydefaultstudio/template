@@ -645,3 +645,23 @@ html {
     grid-template-columns: 1fr;
   }
 }
+
+/* -- Demo previews (live HTML demos inside docs markdown) -- */
+.demo-preview {
+  padding: var(--space-xl);
+  border: var(--border-s) solid var(--border-faded);
+  margin-bottom: 1rem;
+}
+
+.demo-preview.is-joined {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.demo-preview.is-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-xl);
+}

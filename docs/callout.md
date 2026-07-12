@@ -27,7 +27,7 @@ Callout variants are powered by status color tokens defined in `:root`. These ar
 
 | Token | Default | Purpose |
 |---|---|---|
-| `--status-info` | `var(--brand-accent)` | Informational, notes |
+| `--status-info` | `#0969da` | Informational, notes |
 | `--status-success` | `#1a7f37` | Tips, positive feedback |
 | `--status-warning` | `#9a6700` | Warnings, attention needed |
 | `--status-danger` | `#cf222e` | Caution, destructive actions |
@@ -35,13 +35,21 @@ Callout variants are powered by status color tokens defined in `:root`. These ar
 
 Each status color generates two semantic tokens:
 - `--callout-{type}` — the border/title color
-- `--callout-{type}-bg` — a 10% tint for the background
+- `--callout-{type}-bg` — a 10% tint for the background (via `color-mix`)
+
+Status colors are plain hex values. In dark mode (§2b of `design-system.css`, mirrored in the §2c system-preference fallback), each `--status-*` token is overridden with a lighter hex — the `--callout-*` tokens cascade from them automatically, so callouts need no dark-mode overrides of their own.
 
 ---
 
 ## Base Callout
 
 The `.callout` class provides the structural foundation:
+
+<div class="demo-preview is-joined">
+  <div class="callout">
+    <p>General-purpose highlighted content.</p>
+  </div>
+</div>
 
 ```html
 <div class="callout">
@@ -78,6 +86,13 @@ The title inherits the variant's accent color automatically.
 
 For useful information users should know, even when skimming.
 
+<div class="demo-preview is-joined">
+  <div class="callout callout-note">
+    <div class="callout-title">Note</div>
+    <p>Useful information that users should know.</p>
+  </div>
+</div>
+
 ```html
 <div class="callout callout-note">
   <div class="callout-title">Note</div>
@@ -88,6 +103,13 @@ For useful information users should know, even when skimming.
 ### Tip (`.callout-tip`)
 
 For helpful advice on doing things better or more easily.
+
+<div class="demo-preview is-joined">
+  <div class="callout callout-tip">
+    <div class="callout-title">Tip</div>
+    <p>Helpful advice for doing things better.</p>
+  </div>
+</div>
 
 ```html
 <div class="callout callout-tip">
@@ -100,6 +122,13 @@ For helpful advice on doing things better or more easily.
 
 For urgent information that needs immediate attention.
 
+<div class="demo-preview is-joined">
+  <div class="callout callout-warning">
+    <div class="callout-title">Warning</div>
+    <p>Urgent information to avoid problems.</p>
+  </div>
+</div>
+
 ```html
 <div class="callout callout-warning">
   <div class="callout-title">Warning</div>
@@ -111,6 +140,13 @@ For urgent information that needs immediate attention.
 
 For advising about risks or negative outcomes.
 
+<div class="demo-preview is-joined">
+  <div class="callout callout-caution">
+    <div class="callout-title">Caution</div>
+    <p>Risks or negative outcomes of certain actions.</p>
+  </div>
+</div>
+
 ```html
 <div class="callout callout-caution">
   <div class="callout-title">Caution</div>
@@ -121,6 +157,13 @@ For advising about risks or negative outcomes.
 ### Important (`.callout-important`)
 
 For key information users need to achieve their goal.
+
+<div class="demo-preview is-joined">
+  <div class="callout callout-important">
+    <div class="callout-title">Important</div>
+    <p>Key information users need to know.</p>
+  </div>
+</div>
 
 ```html
 <div class="callout callout-important">

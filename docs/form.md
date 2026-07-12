@@ -22,15 +22,22 @@ All form styling is controlled by semantic tokens in `:root`:
 | `--input-background` | `var(--background-primary)` | Input background |
 | `--input-text` | `var(--text-plain)` | Input text color |
 | `--input-placeholder` | `var(--text-faded)` | Placeholder text color |
-| `--input-focus` | `var(--brand-accent)` | Focus border and ring color |
+| `--input-focus` | `var(--accent)` | Focus border and ring color |
 | `--input-disabled-bg` | `var(--background-faded)` | Disabled background |
 | `--input-disabled-text` | `var(--text-faded)` | Disabled text color |
+
+`--input-focus` resolves through `--accent`, so overriding `--accent` in `theme.css` restyles focus rings automatically. Dark-mode values for every `--input-*` token are defined in §2b of `design-system.css` (`[data-theme="dark"]`) and mirrored in the §2c system-preference fallback — forms adapt to dark mode with no extra classes.
 
 ---
 
 ## Labels
 
 Labels are styled as block elements with medium weight:
+
+<div class="demo-preview is-joined">
+  <label for="name">Full name</label>
+  <input type="text" id="name" placeholder="Enter your name">
+</div>
 
 ```html
 <label for="name">Full name</label>
@@ -74,6 +81,11 @@ This is accessibility-safe and keyboard-visible.
 
 Textareas have a minimum height and allow vertical resizing:
 
+<div class="demo-preview is-joined">
+  <label for="message">Message</label>
+  <textarea id="message" placeholder="Enter your message..."></textarea>
+</div>
+
 ```html
 <label for="message">Message</label>
 <textarea id="message" placeholder="Enter your message..."></textarea>
@@ -86,6 +98,15 @@ Textareas have a minimum height and allow vertical resizing:
 ## Select
 
 Selects use a custom dropdown arrow via an inline SVG background:
+
+<div class="demo-preview is-joined">
+  <label for="country">Country</label>
+  <select id="country">
+    <option value="" disabled selected>Choose a country</option>
+    <option value="nz">New Zealand</option>
+    <option value="au">Australia</option>
+  </select>
+</div>
 
 ```html
 <label for="country">Country</label>
@@ -104,6 +125,10 @@ Selects use a custom dropdown arrow via an inline SVG background:
 
 Add the `disabled` attribute to any input, textarea, or select:
 
+<div class="demo-preview is-joined">
+  <input type="text" value="Cannot edit" disabled>
+</div>
+
 ```html
 <input type="text" value="Cannot edit" disabled>
 ```
@@ -116,10 +141,34 @@ Add the `disabled` attribute to any input, textarea, or select:
 
 Checkboxes and radios use the native browser rendering with `accent-color` for brand alignment:
 
+<div class="demo-preview is-joined">
+  <div class="form-check">
+    <input type="checkbox" id="terms">
+    <label for="terms">I agree to the terms</label>
+  </div>
+  <div class="form-check">
+    <input type="radio" name="plan" id="plan-monthly">
+    <label for="plan-monthly">Monthly</label>
+  </div>
+  <div class="form-check">
+    <input type="radio" name="plan" id="plan-yearly">
+    <label for="plan-yearly">Yearly</label>
+  </div>
+</div>
+
 ```html
 <div class="form-check">
   <input type="checkbox" id="terms">
   <label for="terms">I agree to the terms</label>
+</div>
+
+<div class="form-check">
+  <input type="radio" name="plan" id="plan-monthly">
+  <label for="plan-monthly">Monthly</label>
+</div>
+<div class="form-check">
+  <input type="radio" name="plan" id="plan-yearly">
+  <label for="plan-yearly">Yearly</label>
 </div>
 ```
 
@@ -133,10 +182,21 @@ Checkboxes and radios use the native browser rendering with `accent-color` for b
 
 Use `.form-group` to wrap a label + input pair with consistent bottom spacing:
 
+<div class="demo-preview is-joined">
+  <div class="form-group">
+    <label for="full-name">Name</label>
+    <input type="text" id="full-name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email">
+  </div>
+</div>
+
 ```html
 <div class="form-group">
-  <label for="name">Name</label>
-  <input type="text" id="name">
+  <label for="full-name">Name</label>
+  <input type="text" id="full-name">
 </div>
 <div class="form-group">
   <label for="email">Email</label>
@@ -160,6 +220,16 @@ Use `.form-check` for inline checkbox/radio + label pairs:
 ### Fieldset & Legend
 
 Use `<fieldset>` and `<legend>` to group related form controls:
+
+<div class="demo-preview is-joined">
+  <fieldset>
+    <legend>Contact details</legend>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone">
+    </div>
+  </fieldset>
+</div>
 
 ```html
 <fieldset>

@@ -72,3 +72,22 @@ These items were discussed but explicitly deferred. CSS/HTML only — no JavaScr
 - [ ] Brand dos/don'ts section
 
 ---
+
+## BrandOS Alignment Restructure (2026-07-12)
+
+Aligned the template with the evolved by-default design system ("BrandOS") — same structure and logic, brand-neutral look. Earlier `src/` and `--brand-*` references above are historical.
+
+### Architecture Decisions
+- **Inverted brand contract**: design-system.css ships neutral engine defaults on real token names; `assets/css/theme.css` overrides §1/§2 primitives (no more `var(--brand-*, fallback)` indirection). Neutral accent is generic blue `#0969da`.
+- **Assets at root**: `src/` removed; `assets/{css,js,fonts,icons,images}` at the repo root. Three-layer CSS: design-system.css → theme.css → style.css.
+- **Docs-hosted demos**: the standalone styleguide and brand-book pages were dissolved into the docs site (live HTML demos inside `docs/*.md`, "Brand" sidebar section with `brand-book.md`).
+- **Dark mode built in**: `[data-theme="dark"]` tokens + `prefers-color-scheme` no-JS mirror + `assets/js/theme-toggle.js` (pre-paint, localStorage `dark-mode`).
+- **CUBE button**: component-scoped tokens with `data-variant/size/color/icon-only/full-width` exceptions; `class="button"` required; bare `<button>` is reset-only.
+- **Motion + radius + alpha tokens** added (primitives only — no semantic motion layer).
+
+### Completed
+- [x] Move assets to root, remove src/, relocate CSS to assets/css/
+- [x] Rewrite design-system.css (§1 inversion, §2b/2c dark mode, §3 radius, §4 motion, §11 CUBE button)
+- [x] New theme.css all-commented starter + theme-toggle.js
+- [x] Brand section in docs sidebar; demo-preview styles; docs content rewritten with live demos
+- [x] CLAUDE.md / README / folder docs updated to the new contract

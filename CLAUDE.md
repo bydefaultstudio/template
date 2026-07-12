@@ -6,7 +6,7 @@ You are a Senior Front-End Developer working inside this project's **Design Syst
 - Write correct, best-practice, DRY, bug-free code — no TODOs or placeholders
 - Prefer readability; avoid unnecessary abstractions
 - Use semantic tokens over primitives; prefer existing utility classes over new CSS
-- Only write new CSS if the design system can't express the requirement — and if so, add it to `design-system/design-system.css` under the correct section
+- Only write new CSS if the design system can't express the requirement — and if so, add it to `assets/css/design-system.css` under the correct section
 - Accessibility required: keyboard navigation, `aria-label`, focus states, `<button>` for actions, `<a>` for links
 - If unsure, say so — never guess
 
@@ -25,9 +25,11 @@ Before generating or modifying code, treat the following files as authoritative:
 7. `docs/spacing.md` — spacing tokens and usage
 8. `docs/border.md` — border strategy and composable classes
 9. `docs/button.md` — button component usage
-10. `docs/seo-best-practices.md` — SEO meta tags and social sharing
-11. `docs/folder-structure.md` — file organization rules
-12. `docs/setup.md` — project setup and customization
+10. `docs/motion.md` — motion tokens and transitions
+11. `docs/brand-book.md` — brand identity preview and theming
+12. `docs/seo-best-practices.md` — SEO meta tags and social sharing
+13. `docs/folder-structure.md` — file organization rules
+14. `docs/setup.md` — project setup and customization
 
 If any instruction conflicts with these documents, **the documents take precedence**.
 
@@ -39,7 +41,7 @@ Use Explore sub-agents to read multiple docs files in parallel before starting w
 
 - Do not invent new patterns
 - Do not introduce new class naming conventions
-- Do not add inline styles (except for demo purposes in styleguide)
+- Do not add inline styles (except for demo purposes in docs demos)
 - Do not use spacer divs
 - Do not add margins inside blocks
 - Do not apply spacing directly to containers
@@ -72,15 +74,17 @@ See `docs/color.md`, `docs/typography.md`, `docs/spacing.md` for complete token 
 
 **Critical rules:**
 - Use semantic tokens, not primitives
-- Primitive tokens (e.g., `--brand-accent`, `--neutral-800`) must never be used directly
+- Primitive tokens (e.g., `--accent`, `--neutral-800`) must never be used directly
 - Semantic tokens (e.g., `--text-primary`, `--background-faded`) are always preferred
 
 ### CSS Structure
 See `docs/css-code-struture.md` for complete organization guidelines.
 
 **Critical rules:**
-- Design system CSS (`design-system/design-system.css`) is the single source of truth
-- Brand tokens live in `brand-book/brand-book.css` — the DS reads them via `var(--brand-*, fallback)`
+- Design system CSS (`assets/css/design-system.css`) is the single source of truth — it ships neutral engine defaults
+- Brand overrides live in `assets/css/theme.css` — it overrides §1/§2 primitive tokens directly (there is no `var(--brand-*)` indirection) and must load after design-system.css
+- Project-specific CSS goes in `assets/css/style.css` (third layer) only when the design system can't express it
+- Dark mode: `[data-theme="dark"]` tokens in §2b must stay a verbatim mirror of the `prefers-color-scheme` block in §2c — drift between them is a known failure mode
 - Follow the CSS commenting hierarchy (major sections, subsections, inline)
 - All tokens must be defined in `:root` before use
 - Never hardcode values that should use tokens
@@ -105,7 +109,7 @@ See `docs/border.md` for complete composable architecture.
 - Never create classes like `.border-top-m` or hardcode border values
 
 ### Components
-See `docs/button.md` for button usage and modifiers.
+See `docs/button.md` for button usage. Buttons require `class="button"` (bare `<button>` gets only a minimal reset) and vary via `data-*` attributes (`data-variant`, `data-size`, `data-color`, `data-icon-only`, `data-full-width`) plus `.is-*` state classes.
 
 ---
 
@@ -136,14 +140,15 @@ Every page must include:
 See `docs/folder-structure.md` for complete directory structure.
 
 **Key locations:**
-- `design-system/` — design system framework (CSS + styleguide)
-- `brand-book/` — brand identity tokens (CSS + brand preview)
-- `src/assets/images/` — general images and Open Graph images
-- `src/assets/icons/` — favicons
-- `src/js/` — JavaScript files
-- `src/pages/` — HTML pages
+- `assets/css/design-system.css` — design system framework (neutral engine)
+- `assets/css/theme.css` — brand token overrides
+- `assets/css/style.css` — project-specific styles
+- `assets/js/` — JavaScript files (incl. `theme-toggle.js`)
+- `assets/images/` — general images and Open Graph images
+- `assets/icons/` — favicons
+- `assets/fonts/` — self-hosted brand fonts
 - `templates/` — reusable templates
-- `docs/` — documentation
+- `docs/` — documentation (markdown sources; generated site in `docs/site/`)
 
 ---
 
@@ -168,17 +173,17 @@ cd docs/generator && npm run docgen
 
 ---
 
-## 7. Styleguide Rules
+## 7. Demo Rules
 
-The styleguide (`design-system/index.html`) is:
+Live demos are embedded in the docs pages themselves (raw HTML inside `docs/*.md`, wrapped in `.demo-preview` blocks, rendered in `docs/site/`). The Brand Book is a docs page too (`docs/brand-book.md`).
+
+Demos are:
 - A demonstrative reference only
 - For visualizing token usage and layout primitives
-- Not a production page
-- Should not be treated as a source of new rules or constraints
+- Not production markup
+- Not a source of new rules or constraints
 
-The brand book preview (`brand-book/index.html`) shows brand identity elements (logo, palette, typography, icons).
-
-Do not infer behavior from styleguide or brand book HTML; always refer to the CSS and documentation.
+Do not infer behavior from demo HTML; always refer to the CSS and documentation prose.
 
 ---
 
@@ -200,7 +205,7 @@ Never optimise prematurely.
 - Adding margins inside blocks
 - Creating new utility classes without documentation
 - Mixing layout responsibilities
-- Using inline styles (except in styleguide demos)
+- Using inline styles (except in docs demos)
 - Forgetting to update documentation when adding features
 - Using relative URLs in Open Graph tags
 - Missing viewport meta tag
@@ -216,7 +221,7 @@ Before considering code complete:
 - [ ] Documentation updated if changes were made
 - [ ] Follows layout hierarchy
 - [ ] Uses semantic tokens, not primitives
-- [ ] No inline styles (except styleguide)
+- [ ] No inline styles (except docs demos)
 - [ ] Responsive behavior considered
 - [ ] SEO meta tags included (for HTML pages)
 
@@ -266,7 +271,7 @@ After gathering answers:
    - `templates/page-template.html` → replace `Site Name` in title, OG `og:site_name`, and `yoursite.com` placeholder URLs
    - `docs/docs.config.js` → update `footerText` and `indexDescription`
    - `PROJECT_BRIEF.md` → add project name at the top
-3. Update `brand-book/brand-book.css` with any known brand tokens (fonts, colours)
+3. Update `assets/css/theme.css` with any known brand tokens — uncomment and edit the primitive overrides (fonts, `--accent`, colours)
 
 This must happen before any other work begins.
 

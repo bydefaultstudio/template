@@ -14,7 +14,7 @@ const ASSETS_SOURCE = path.join(__dirname, 'assets');
 const configPath = path.join(DOCS_DIR, 'docs.config.js');
 const userConfig = fs.existsSync(configPath) ? require(configPath) : {};
 const PROJECT_CONFIG = {
-  designSystemPath: userConfig.designSystemPath || '../../design-system/design-system.css',
+  designSystemPath: userConfig.designSystemPath || '../../assets/css/design-system.css',
   brandCssPath: userConfig.brandCssPath || null,
   googleFontsUrl: userConfig.googleFontsUrl !== undefined ? userConfig.googleFontsUrl : null,
   footerText: userConfig.footerText || '',
@@ -187,7 +187,7 @@ function generateNavigation(filesBySection, currentPage = null) {
   `;
   
   // Sort sections in custom order
-  const sectionOrder = ['Design System', 'Code', 'Content', 'Project'];
+  const sectionOrder = ['Brand', 'Design System', 'Code', 'Content', 'Project'];
   const sortedSections = Object.keys(filesBySection).sort((a, b) => {
     const indexA = sectionOrder.indexOf(a);
     const indexB = sectionOrder.indexOf(b);
@@ -249,7 +249,7 @@ function generateNavigation(filesBySection, currentPage = null) {
 function generateIndexPage(template, navigation, filesBySection) {
   let cards = '';
   
-  const sectionOrder = ['Design System', 'Code', 'Content', 'Project'];
+  const sectionOrder = ['Brand', 'Design System', 'Code', 'Content', 'Project'];
   const sortedSections = Object.keys(filesBySection).sort((a, b) => {
     const indexA = sectionOrder.indexOf(a);
     const indexB = sectionOrder.indexOf(b);

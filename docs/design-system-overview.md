@@ -34,6 +34,6 @@ By following a Design System, teams can **move faster, collaborate better, and m
 
 ## Style Guide
 
-For a visual, interactive showcase of all design tokens, components, and layout primitives, visit the [Design System Styleguide](../../design-system/index.html).
+Live demos of tokens, components, and layout primitives are embedded throughout these docs pages — see [Color](color.html), [Typography](typography.html), [Button](button.html), and the rest of the Design System section.
 
-To see the current brand identity applied, visit the [Brand Book](../../brand-book/index.html).
+To see the current brand identity applied, visit the [Brand Book](brand-book.html).

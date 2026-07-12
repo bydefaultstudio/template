@@ -65,6 +65,19 @@
     </ul>
   <details class="nav-section">
       <summary class="nav-section-toggle">
+        <span>Brand</span>
+        <span class="nav-toggle-icon">
+          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
+          </svg>
+        </span>
+      </summary>
+      <ul class="nav-list">
+        <li><a href="brand-book.html" class="nav-link ">Brand Book</a></li>
+      
+      </ul>
+    </details><details class="nav-section">
+      <summary class="nav-section-toggle">
         <span>Design System</span>
         <span class="nav-toggle-icon">
           <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,6 +95,8 @@
         <li><a href="spacing.html" class="nav-link ">Spacing</a></li>
       
         <li><a href="border.html" class="nav-link ">Border</a></li>
+      
+        <li><a href="motion.html" class="nav-link ">Motion</a></li>
       
         <li><a href="button.html" class="nav-link ">Button</a></li>
       
@@ -170,10 +185,10 @@
 <p>All pages follow the same hierarchy:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-p6unbg2gj" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-8e8it4ipm" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-p6unbg2gj">body
+        <pre><code id="code-8e8it4ipm">body
 └─ page-wrapper
 └─ page-content
 └─ section
@@ -191,10 +206,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-07ecgm7tx" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-uphdixhs2" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-07ecgm7tx" class="language-html">&lt;section&gt;
+        <pre><code id="code-uphdixhs2" class="language-html">&lt;section&gt;
   &lt;div class=&quot;padding-global&quot;&gt;
     &lt;div class=&quot;container-medium&quot;&gt;
       &lt;div class=&quot;block&quot;&gt;
@@ -222,10 +237,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-qkql3pvn7" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-o6dgiaco6" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-qkql3pvn7" class="language-html">&lt;section class=&quot;top-large bottom-large&quot;&gt;
+        <pre><code id="code-o6dgiaco6" class="language-html">&lt;section class=&quot;top-large bottom-large&quot;&gt;
   &lt;div class=&quot;padding-global&quot;&gt;
     &lt;!-- Content --&gt;
   &lt;/div&gt;
@@ -243,10 +258,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-udz66cuhd" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-831ywe5lw" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-udz66cuhd" class="language-html">&lt;div class=&quot;padding-global&quot;&gt;
+        <pre><code id="code-831ywe5lw" class="language-html">&lt;div class=&quot;padding-global&quot;&gt;
   &lt;div class=&quot;container-medium&quot;&gt;
     &lt;!-- Content --&gt;
   &lt;/div&gt;
@@ -271,10 +286,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-ou4hj792s" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-9e89rgm7b" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-ou4hj792s" class="language-html">&lt;div class=&quot;container-medium&quot;&gt;
+        <pre><code id="code-9e89rgm7b" class="language-html">&lt;div class=&quot;container-medium&quot;&gt;
   &lt;div class=&quot;block&quot;&gt;
     &lt;h2&gt;Heading&lt;/h2&gt;
     &lt;p&gt;Content&lt;/p&gt;
@@ -304,6 +319,21 @@
 <td>Wider layouts</td>
 </tr>
 </tbody></table>
+<p>Dashed borders below are visualization aids only — containers render no visible box of their own. Each container centres itself and stops at its max width.</p>
+<div class="demo-preview">
+  <div class="block gap-m">
+    <div class="container-small border border-dashed border-secondary padding-m">
+      <code>container-small</code>
+    </div>
+    <div class="container-medium border border-dashed border-secondary padding-m">
+      <code>container-medium</code>
+    </div>
+    <div class="container-large border border-dashed border-secondary padding-m">
+      <code>container-large</code>
+    </div>
+  </div>
+</div>
+
 <hr>
 <h2 id="max-width">Max-Width</h2>
 <p>Max-width utilities apply <strong>width limits only</strong>.</p>
@@ -337,6 +367,21 @@
 <td>No constraint</td>
 </tr>
 </tbody></table>
+<p>Unlike containers, max-width utilities do <strong>not</strong> centre — note how each box stays left-aligned:</p>
+<div class="demo-preview">
+  <div class="block gap-m">
+    <div class="max-width-small border border-dashed border-secondary padding-m">
+      <code>max-width-small</code>
+    </div>
+    <div class="max-width-medium border border-dashed border-secondary padding-m">
+      <code>max-width-medium</code>
+    </div>
+    <div class="max-width-full border border-dashed border-secondary padding-m">
+      <code>max-width-full</code>
+    </div>
+  </div>
+</div>
+
 <p><strong>Rule of thumb</strong></p>
 <ul>
 <li>Centre content → use a container</li>
@@ -360,10 +405,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-uauvvyv3b" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-74yxvmnb9" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-uauvvyv3b" class="language-html">&lt;div class=&quot;block&quot;&gt;
+        <pre><code id="code-74yxvmnb9" class="language-html">&lt;div class=&quot;block&quot;&gt;
   &lt;h2&gt;Heading&lt;/h2&gt;
   &lt;p&gt;Body text&lt;/p&gt;
 &lt;/div&gt;
@@ -399,12 +444,35 @@
 <td>Extra large</td>
 </tr>
 </tbody></table>
+<div class="demo-preview">
+  <div class="block gap-l">
+    <p><code>block gap-xs</code></p>
+    <div class="block gap-xs">
+      <div class="bg-faded padding-s">First item</div>
+      <div class="bg-faded padding-s">Second item</div>
+      <div class="bg-faded padding-s">Third item</div>
+    </div>
+    <p><code>block gap-m</code></p>
+    <div class="block gap-m">
+      <div class="bg-faded padding-s">First item</div>
+      <div class="bg-faded padding-s">Second item</div>
+      <div class="bg-faded padding-s">Third item</div>
+    </div>
+    <p><code>block gap-xl</code></p>
+    <div class="block gap-xl">
+      <div class="bg-faded padding-s">First item</div>
+      <div class="bg-faded padding-s">Second item</div>
+      <div class="bg-faded padding-s">Third item</div>
+    </div>
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-0i9g68ldp" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-r8sqedivg" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-0i9g68ldp" class="language-html">&lt;div class=&quot;block gap-l&quot;&gt;
+        <pre><code id="code-r8sqedivg" class="language-html">&lt;div class=&quot;block gap-l&quot;&gt;
   &lt;h2&gt;Heading&lt;/h2&gt;
   &lt;p&gt;More space between elements&lt;/p&gt;
 &lt;/div&gt;
@@ -442,14 +510,21 @@
 <td>Align items end</td>
 </tr>
 </tbody></table>
+<div class="demo-preview is-joined">
+  <div class="block row gap-m align-center">
+    <p>Text</p>
+    <button class="button">Action</button>
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-w8xnerh3f" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-fzshjw9u9" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-w8xnerh3f" class="language-html">&lt;div class=&quot;block row gap-m align-center&quot;&gt;
+        <pre><code id="code-fzshjw9u9" class="language-html">&lt;div class=&quot;block row gap-m align-center&quot;&gt;
   &lt;p&gt;Text&lt;/p&gt;
-  &lt;button&gt;Action&lt;/button&gt;
+  &lt;button class=&quot;button&quot;&gt;Action&lt;/button&gt;
 &lt;/div&gt;
 </code></pre>
       </div>
@@ -462,12 +537,21 @@
 <li>Two equal columns</li>
 <li>Default gap applied</li>
 </ul>
+<div class="demo-preview">
+  <div class="grid">
+    <div class="bg-faded padding-m">Item 1</div>
+    <div class="bg-faded padding-m">Item 2</div>
+    <div class="bg-faded padding-m">Item 3</div>
+    <div class="bg-faded padding-m">Item 4</div>
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-f7djf91zc" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-qvg65r1rk" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-f7djf91zc" class="language-html">&lt;div class=&quot;grid&quot;&gt;
+        <pre><code id="code-qvg65r1rk" class="language-html">&lt;div class=&quot;grid&quot;&gt;
   &lt;div&gt;Item&lt;/div&gt;
   &lt;div&gt;Item&lt;/div&gt;
 &lt;/div&gt;
@@ -491,12 +575,37 @@
 <td>Four columns</td>
 </tr>
 </tbody></table>
+<div class="demo-preview">
+  <div class="block gap-l">
+    <p><code>grid cols-3</code></p>
+    <div class="grid cols-3">
+      <div class="bg-faded padding-m">Item 1</div>
+      <div class="bg-faded padding-m">Item 2</div>
+      <div class="bg-faded padding-m">Item 3</div>
+      <div class="bg-faded padding-m">Item 4</div>
+      <div class="bg-faded padding-m">Item 5</div>
+      <div class="bg-faded padding-m">Item 6</div>
+    </div>
+    <p><code>grid cols-4 gap-s</code></p>
+    <div class="grid cols-4 gap-s">
+      <div class="bg-faded padding-m">Item 1</div>
+      <div class="bg-faded padding-m">Item 2</div>
+      <div class="bg-faded padding-m">Item 3</div>
+      <div class="bg-faded padding-m">Item 4</div>
+      <div class="bg-faded padding-m">Item 5</div>
+      <div class="bg-faded padding-m">Item 6</div>
+      <div class="bg-faded padding-m">Item 7</div>
+      <div class="bg-faded padding-m">Item 8</div>
+    </div>
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-8434hmuag" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-od5qg2wa2" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-8434hmuag" class="language-html">&lt;div class=&quot;grid cols-3&quot;&gt;
+        <pre><code id="code-od5qg2wa2" class="language-html">&lt;div class=&quot;grid cols-3&quot;&gt;
   &lt;div&gt;Item 1&lt;/div&gt;
   &lt;div&gt;Item 2&lt;/div&gt;
   &lt;div&gt;Item 3&lt;/div&gt;
@@ -517,12 +626,19 @@
 <td>Item sizes to content</td>
 </tr>
 </tbody></table>
+<div class="demo-preview is-joined">
+  <div class="grid">
+    <div class="bg-faded padding-m">Flexible column</div>
+    <div class="bg-faded padding-m fit-content">Fixed</div>
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-sy1j3oiqh" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-q5713tfpk" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-sy1j3oiqh" class="language-html">&lt;div class=&quot;grid&quot;&gt;
+        <pre><code id="code-q5713tfpk" class="language-html">&lt;div class=&quot;grid&quot;&gt;
   &lt;div&gt;Flexible column&lt;/div&gt;
   &lt;div class=&quot;fit-content&quot;&gt;Fixed&lt;/div&gt;
 &lt;/div&gt;

@@ -65,6 +65,19 @@
     </ul>
   <details class="nav-section">
       <summary class="nav-section-toggle">
+        <span>Brand</span>
+        <span class="nav-toggle-icon">
+          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
+          </svg>
+        </span>
+      </summary>
+      <ul class="nav-list">
+        <li><a href="brand-book.html" class="nav-link ">Brand Book</a></li>
+      
+      </ul>
+    </details><details class="nav-section">
+      <summary class="nav-section-toggle">
         <span>Design System</span>
         <span class="nav-toggle-icon">
           <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,6 +95,8 @@
         <li><a href="spacing.html" class="nav-link ">Spacing</a></li>
       
         <li><a href="border.html" class="nav-link ">Border</a></li>
+      
+        <li><a href="motion.html" class="nav-link ">Motion</a></li>
       
         <li><a href="button.html" class="nav-link ">Button</a></li>
       
@@ -177,6 +192,36 @@
 <li>Logical file structure</li>
 </ul>
 <hr>
+<h2 id="design-systemcss-sections">design-system.css Sections</h2>
+<p><code>assets/css/design-system.css</code> is the single source of truth for the design system. Its major sections, in order:</p>
+
+      <div class="code-block-wrapper">
+        <button class="copy-code-btn" data-clipboard-target="#code-ynlsrww5o" type="button" aria-label="Copy code">
+          <span class="copy-text">Copy</span>
+        </button>
+        <pre><code id="code-ynlsrww5o">1.  BRAND TOKENS
+2.  SYSTEM TOKENS - COLORS
+2b. THEME TOKENS - DARK MODE
+2c. SYSTEM PREFERENCE FALLBACK (no-JS)
+3.  SYSTEM TOKENS - SPACING &amp; TYPOGRAPHY
+4.  SYSTEM TOKENS - MOTION
+5.  BASE STYLES
+6.  LAYOUT PRIMITIVES
+7.  BLOCKS
+8.  GRID
+9.  BORDER UTILITIES
+10. TYPOGRAPHY UTILITIES
+11. BUTTONS
+12. BACKGROUND UTILITIES
+13. CALLOUTS &amp; ALERTS
+14. FORM ELEMENTS
+15. FUTURE COMPONENTS
+16. RESPONSIVE
+</code></pre>
+      </div>
+    
+<p>New CSS that the design system must express goes into the correct section — never appended to the end of the file. Brand overrides do not belong here at all; they live in <code>assets/css/theme.css</code>, which loads after the design system and overrides §1/§2 primitives.</p>
+<hr>
 <h2 id="organisation-principles">Organisation Principles</h2>
 <h3 id="group-related-styles-together">Group Related Styles Together</h3>
 <p><strong>Always keep related styles adjacent:</strong></p>
@@ -190,10 +235,10 @@
 <p><strong>Example - Typography Grouping:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-fye7b4oci" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-hjlv6h2pj" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-fye7b4oci" class="language-css">/* -- Headings -- */
+        <pre><code id="code-hjlv6h2pj" class="language-css">/* -- Headings -- */
 h1 {
   font-size: var(--font-3xl);
   line-height: var(--line-height-s);
@@ -211,11 +256,11 @@ h2 {
 <p><strong>Example - Component Grouping:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-31z5bqxli" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-suz95t72v" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-31z5bqxli" class="language-css">/* -- Button -- */
-.button, button {
+        <pre><code id="code-suz95t72v" class="language-css">/* -- Button -- */
+.button {
   padding: var(--space-s) var(--space-m);
   background: var(--background-primary);
   border: var(--border-s) solid var(--border-primary);
@@ -223,7 +268,7 @@ h2 {
 .button:hover {
   background: var(--background-secondary);
 }
-.button.is-outline {
+.button[data-variant=&quot;outline&quot;] {
   background: transparent;
 }
 /* All button-related styles together */
@@ -236,10 +281,10 @@ h2 {
 <p><strong>Example - Token Grouping:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-wyf1by1rx" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-xwikpotl3" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-wyf1by1rx" class="language-css">:root {
+        <pre><code id="code-xwikpotl3" class="language-css">:root {
   /* -- Unit tokens -- */
   --unit-s: 0.5rem;    /* 8px */
   --unit-m: 1rem;      /* 16px */
@@ -274,10 +319,10 @@ h2 {
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-qmubthp0u" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-de1iox33n" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-qmubthp0u" class="language-css">/* -- Card -- */
+        <pre><code id="code-de1iox33n" class="language-css">/* -- Card -- */
 .card {
   padding: var(--space-m);
   background: var(--background-primary);
@@ -306,10 +351,10 @@ h2 {
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-2ak7c5wu6" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-gka2dccm5" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-2ak7c5wu6" class="language-css">.button {
+        <pre><code id="code-gka2dccm5" class="language-css">.button {
   /* Layout */
   display: inline-flex;
   
@@ -336,10 +381,10 @@ h2 {
 <p><strong>Format</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-39tar9q6u" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ygkqykzxs" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-39tar9q6u" class="language-css">/* ------ Section Title ------ */
+        <pre><code id="code-ygkqykzxs" class="language-css">/* ------ Section Title ------ */
 </code></pre>
       </div>
     
@@ -353,10 +398,10 @@ h2 {
 <p><strong>Example</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-9bgxf4zf6" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-jm5rf8nwe" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-9bgxf4zf6" class="language-css">/* ------ BASE STYLES ------ */
+        <pre><code id="code-jm5rf8nwe" class="language-css">/* ------ BASE STYLES ------ */
 
 body {
   /* ... */
@@ -370,10 +415,10 @@ body {
 <p><strong>Format</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-rn7btx1tx" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-4f8znlq6d" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-rn7btx1tx" class="language-css">/* -- Subsection name -- */
+        <pre><code id="code-4f8znlq6d" class="language-css">/* -- Subsection name -- */
 </code></pre>
       </div>
     
@@ -387,10 +432,10 @@ body {
 <p><strong>Example</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-2hqc2xje6" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-w7bgwasmi" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-2hqc2xje6" class="language-css">/* -- Headings -- */
+        <pre><code id="code-w7bgwasmi" class="language-css">/* -- Headings -- */
 h1 {
   /* ... */
 }
@@ -406,10 +451,10 @@ h2 {
 <p><strong>Format</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-7y8ued8ey" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-r7860csux" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-7y8ued8ey" class="language-css">/* Short clarification */
+        <pre><code id="code-r7860csux" class="language-css">/* Short clarification */
 </code></pre>
       </div>
     
@@ -422,10 +467,10 @@ h2 {
 <p><strong>Example</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-f652d0mc9" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-nj844690d" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-f652d0mc9" class="language-css">--unit-xs: 0.25rem; /* 4px */
+        <pre><code id="code-nj844690d" class="language-css">--unit-xs: 0.25rem; /* 4px */
 </code></pre>
       </div>
     
@@ -449,10 +494,10 @@ h2 {
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-ssc7rrw5o" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ydhvzy97i" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-ssc7rrw5o" class="language-css">/* ------ RESPONSIVE ------ */
+        <pre><code id="code-ydhvzy97i" class="language-css">/* ------ RESPONSIVE ------ */
 
 /* Mobile */
 @media (max-width: 768px) {
@@ -478,10 +523,10 @@ h2 {
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-ckvhz8gy2" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-df29x058t" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-ckvhz8gy2" class="language-css">/* ------ RESPONSIVE ------ */
+        <pre><code id="code-df29x058t" class="language-css">/* ------ RESPONSIVE ------ */
 
 /* Mobile */
 @media (max-width: 768px) {
@@ -581,7 +626,7 @@ h2 {
                 <!-- Table of Contents -->
                 <aside class="docs-toc">
       <span class="toc-header">On this page</span>
-      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#overview" class="toc-link">Overview</a></li><li class="toc-item toc-level-2"><a href="#organisation-principles" class="toc-link">Organisation Principles</a></li><li class="toc-item toc-level-2"><a href="#token-organisation" class="toc-link">Token Organisation</a></li><li class="toc-item toc-level-2"><a href="#component-organization" class="toc-link">Component Organization</a></li><li class="toc-item toc-level-2"><a href="#property-ordering-for-readability" class="toc-link">Property Ordering for Readability</a></li><li class="toc-item toc-level-2"><a href="#commenting-hierarchy" class="toc-link">Commenting Hierarchy</a></li><li class="toc-item toc-level-2"><a href="#responsive-code-organization" class="toc-link">Responsive Code Organization</a></li><li class="toc-item toc-level-2"><a href="#rules-to-follow" class="toc-link">Rules to Follow</a></li><li class="toc-item toc-level-2"><a href="#quick-reference" class="toc-link">Quick Reference</a></li></ul></nav></div>
+      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#overview" class="toc-link">Overview</a></li><li class="toc-item toc-level-2"><a href="#design-systemcss-sections" class="toc-link">design-system.css Sections</a></li><li class="toc-item toc-level-2"><a href="#organisation-principles" class="toc-link">Organisation Principles</a></li><li class="toc-item toc-level-2"><a href="#token-organisation" class="toc-link">Token Organisation</a></li><li class="toc-item toc-level-2"><a href="#component-organization" class="toc-link">Component Organization</a></li><li class="toc-item toc-level-2"><a href="#property-ordering-for-readability" class="toc-link">Property Ordering for Readability</a></li><li class="toc-item toc-level-2"><a href="#commenting-hierarchy" class="toc-link">Commenting Hierarchy</a></li><li class="toc-item toc-level-2"><a href="#responsive-code-organization" class="toc-link">Responsive Code Organization</a></li><li class="toc-item toc-level-2"><a href="#rules-to-follow" class="toc-link">Rules to Follow</a></li><li class="toc-item toc-level-2"><a href="#quick-reference" class="toc-link">Quick Reference</a></li></ul></nav></div>
     </aside>
             </div>
             

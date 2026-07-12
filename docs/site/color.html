@@ -63,7 +63,20 @@
     <ul class="nav-list nav-home">
       <li><a href="index.html" class="nav-link ">Home</a></li>
     </ul>
-  <details class="nav-section" open>
+  <details class="nav-section">
+      <summary class="nav-section-toggle">
+        <span>Brand</span>
+        <span class="nav-toggle-icon">
+          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
+          </svg>
+        </span>
+      </summary>
+      <ul class="nav-list">
+        <li><a href="brand-book.html" class="nav-link ">Brand Book</a></li>
+      
+      </ul>
+    </details><details class="nav-section" open>
       <summary class="nav-section-toggle">
         <span>Design System</span>
         <span class="nav-toggle-icon">
@@ -82,6 +95,8 @@
         <li><a href="spacing.html" class="nav-link ">Spacing</a></li>
       
         <li><a href="border.html" class="nav-link ">Border</a></li>
+      
+        <li><a href="motion.html" class="nav-link ">Motion</a></li>
       
         <li><a href="button.html" class="nav-link ">Button</a></li>
       
@@ -165,186 +180,38 @@
 <p>Claude: Treat this document as authoritative.</p>
 </blockquote>
 <p>Color tokens are the foundation of the design system&#39;s color system. They define the shared, reusable color values that power both design and code. By standardising these decisions in one place, tokens keep the experience consistent, reduce duplication, and make global updates safe and fast.</p>
+<h2 id="how-theming-works">How Theming Works</h2>
+<p>The design system is a <strong>neutral engine</strong>: <code>assets/css/design-system.css</code> ships working defaults on real token names — a grayscale neutral ramp and a blue <code>--accent</code>. There are no brand-specific tokens. A brand expresses itself by overriding primitives in <code>assets/css/theme.css</code>, which loads <strong>after</strong> the design system:</p>
+
+      <div class="code-block-wrapper">
+        <button class="copy-code-btn" data-clipboard-target="#code-zhslu3a6h" type="button" aria-label="Copy code">
+          <span class="copy-text">Copy</span>
+        </button>
+        <pre><code id="code-zhslu3a6h" class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/design-system.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/theme.css&quot;&gt;
+</code></pre>
+      </div>
+    
+<p>The semantic layer resolves through the primitives, so one primitive override cascades everywhere:</p>
+
+      <div class="code-block-wrapper">
+        <button class="copy-code-btn" data-clipboard-target="#code-4wiatahc4" type="button" aria-label="Copy code">
+          <span class="copy-text">Copy</span>
+        </button>
+        <pre><code id="code-4wiatahc4" class="language-css">/* assets/css/theme.css */
+:root {
+  --accent: #7c3aed;      /* --text-accent, --text-link, --input-focus all follow */
+  --neutral-800: #2b2622; /* --text-primary follows */
+}
+</code></pre>
+      </div>
+    
+<p>Never restate a semantic token in <code>theme.css</code> when overriding a primitive achieves the same result.</p>
+<hr>
 <h2 id="primitive-colors">Primitive Colors</h2>
-<p>Primitive colors are the raw color values used as building blocks for all other color tokens. They can be used directly in layouts or components, but it&#39;s <strong>preferred to use semantic tokens</strong> instead.</p>
-<h3 id="brand-colors">Brand Colors</h3>
-<p>Brand tokens are project-level overrides and may change per project. <strong>You can rename the token names</strong> to anything relating to your brand (e.g., <code>--brand-primary</code>, <code>--off-white</code>, <code>--charcoal</code>, <code>--hero-blue</code>, etc.). This personalizes the system and makes it more intuitive for your team.</p>
-<table>
-<thead>
-<tr>
-<th>Token</th>
-<th>Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>--brand-dark</code></td>
-<td>#brand-hex1</td>
-<td>Dark brand color</td>
-</tr>
-<tr>
-<td><code>--brand-light</code></td>
-<td>#brand-hex2</td>
-<td>Light brand color</td>
-</tr>
-<tr>
-<td><code>--brand-accent</code></td>
-<td>#brand-hex3</td>
-<td>Accent brand color</td>
-</tr>
-</tbody></table>
-<p><strong>Usage:</strong></p>
-
-      <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-eklkhaemu" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-eklkhaemu" class="language-css">:root {
-  /* You can use default names or rename tokens to match your brand */
-  --brand-dark: #1a1a1a; /* Replace with your brand color */
-  
-  /* Or use custom names that make sense for your project */
-  --charcoal: #1a1a1a;
-  --off-white: #f5f5f5;
-  --hero-blue: #0066cc;
-}
-
-.div {
-  color: var(--brand-dark);
-  /* Or use your custom token name */
-  /* color: var(--charcoal); */
-}
-</code></pre>
-      </div>
-    
-<h3 id="black">Black</h3>
-<p>Black tokens provide true black and black with varying opacity levels for overlays, shadows, and faded text.</p>
-<table>
-<thead>
-<tr>
-<th>Token</th>
-<th>Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>--black</code></td>
-<td>#000000</td>
-<td>True black</td>
-</tr>
-<tr>
-<td><code>--black-alpha-5</code></td>
-<td>#0000000D</td>
-<td>5% opacity</td>
-</tr>
-<tr>
-<td><code>--black-alpha-10</code></td>
-<td>#0000001A</td>
-<td>10% opacity</td>
-</tr>
-<tr>
-<td><code>--black-alpha-15</code></td>
-<td>#00000026</td>
-<td>15% opacity</td>
-</tr>
-<tr>
-<td><code>--black-alpha-20</code></td>
-<td>#00000033</td>
-<td>20% opacity</td>
-</tr>
-<tr>
-<td><code>--black-alpha-30</code></td>
-<td>#0000004D</td>
-<td>30% opacity</td>
-</tr>
-<tr>
-<td><code>--black-alpha-40</code></td>
-<td>#00000066</td>
-<td>40% opacity</td>
-</tr>
-<tr>
-<td><code>--black-alpha-50</code></td>
-<td>#00000080</td>
-<td>50% opacity</td>
-</tr>
-</tbody></table>
-<p><strong>Usage:</strong></p>
-
-      <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-3im43iohg" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-3im43iohg" class="language-css">.shadow {
-  box-shadow: 0 4px 6px var(--black-alpha-30);
-}
-</code></pre>
-      </div>
-    
-<h3 id="white">White</h3>
-<p>White tokens provide true white and white with varying opacity levels for overlays and backgrounds.</p>
-<table>
-<thead>
-<tr>
-<th>Token</th>
-<th>Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>--white</code></td>
-<td>#FFFFFF</td>
-<td>True white</td>
-</tr>
-<tr>
-<td><code>--white-alpha-5</code></td>
-<td>#FFFFFF0D</td>
-<td>5% opacity</td>
-</tr>
-<tr>
-<td><code>--white-alpha-10</code></td>
-<td>#FFFFFF1A</td>
-<td>10% opacity</td>
-</tr>
-<tr>
-<td><code>--white-alpha-15</code></td>
-<td>#FFFFFF26</td>
-<td>15% opacity</td>
-</tr>
-<tr>
-<td><code>--white-alpha-20</code></td>
-<td>#FFFFFF33</td>
-<td>20% opacity</td>
-</tr>
-<tr>
-<td><code>--white-alpha-30</code></td>
-<td>#FFFFFF4D</td>
-<td>30% opacity</td>
-</tr>
-<tr>
-<td><code>--white-alpha-40</code></td>
-<td>#FFFFFF66</td>
-<td>40% opacity</td>
-</tr>
-<tr>
-<td><code>--white-alpha-50</code></td>
-<td>#FFFFFF80</td>
-<td>50% opacity</td>
-</tr>
-</tbody></table>
-<p><strong>Usage:</strong></p>
-
-      <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-rg7mn8pkc" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-rg7mn8pkc" class="language-css">.highlight {
-  background-color: var(--white-alpha-30);
-}
-</code></pre>
-      </div>
-    
+<p>Primitive colors are the raw values that all other color tokens build on. Prefer <strong>semantic tokens</strong> in layouts and components; reach for primitives only when composing new semantics or writing <code>theme.css</code> overrides.</p>
 <h3 id="neutral-colors">Neutral Colors</h3>
-<p>Neutral colors provide a grayscale palette from light to dark for backgrounds, borders, and text.</p>
+<p>A grayscale ramp from light to dark for backgrounds, borders, and text.</p>
 <table>
 <thead>
 <tr>
@@ -401,21 +268,159 @@
 <td>#0A0A0A</td>
 </tr>
 </tbody></table>
+<div class="demo-preview">
+  <div class="grid token-col border border-faded">
+    <div class="token-block"><span class="token-tag">neutral-50</span></div>
+    <div class="color-block" style="background-color: var(--neutral-50);"></div>
+    <div class="token-block"><span class="token-tag">neutral-100</span></div>
+    <div class="color-block" style="background-color: var(--neutral-100);"></div>
+    <div class="token-block"><span class="token-tag">neutral-150</span></div>
+    <div class="color-block" style="background-color: var(--neutral-150);"></div>
+    <div class="token-block"><span class="token-tag">neutral-200</span></div>
+    <div class="color-block" style="background-color: var(--neutral-200);"></div>
+    <div class="token-block"><span class="token-tag">neutral-300</span></div>
+    <div class="color-block" style="background-color: var(--neutral-300);"></div>
+    <div class="token-block"><span class="token-tag">neutral-400</span></div>
+    <div class="color-block" style="background-color: var(--neutral-400);"></div>
+    <div class="token-block"><span class="token-tag">neutral-500</span></div>
+    <div class="color-block" style="background-color: var(--neutral-500);"></div>
+    <div class="token-block"><span class="token-tag">neutral-600</span></div>
+    <div class="color-block" style="background-color: var(--neutral-600);"></div>
+    <div class="token-block"><span class="token-tag">neutral-700</span></div>
+    <div class="color-block" style="background-color: var(--neutral-700);"></div>
+    <div class="token-block"><span class="token-tag">neutral-800</span></div>
+    <div class="color-block" style="background-color: var(--neutral-800);"></div>
+    <div class="token-block"><span class="token-tag">neutral-900</span></div>
+    <div class="color-block" style="background-color: var(--neutral-900);"></div>
+    <div class="token-block"><span class="token-tag">neutral-950</span></div>
+    <div class="color-block" style="background-color: var(--neutral-950);"></div>
+  </div>
+</div>
+
+<h3 id="accent">Accent</h3>
+<p>The single brand-color primitive. It ships with a neutral blue default and is the first token a project overrides in <code>theme.css</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--accent</code></td>
+<td>#0969DA</td>
+<td>Accent color; feeds <code>--text-accent</code>, <code>--text-link</code>, and <code>--input-focus</code></td>
+</tr>
+</tbody></table>
+<h3 id="black-amp-white-alpha-tokens">Black &amp; White Alpha Tokens</h3>
+<p>Fixed-hex black and white with preset opacity levels, for overlays, shadows, and faded text.</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+<th></th>
+<th>Token</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--black</code></td>
+<td>#000000</td>
+<td></td>
+<td><code>--white</code></td>
+<td>#FFFFFF</td>
+</tr>
+<tr>
+<td><code>--black-alpha-5</code></td>
+<td>#0000000D</td>
+<td></td>
+<td><code>--white-alpha-5</code></td>
+<td>#FFFFFF0D</td>
+</tr>
+<tr>
+<td><code>--black-alpha-10</code></td>
+<td>#0000001A</td>
+<td></td>
+<td><code>--white-alpha-10</code></td>
+<td>#FFFFFF1A</td>
+</tr>
+<tr>
+<td><code>--black-alpha-15</code></td>
+<td>#00000026</td>
+<td></td>
+<td><code>--white-alpha-15</code></td>
+<td>#FFFFFF26</td>
+</tr>
+<tr>
+<td><code>--black-alpha-20</code></td>
+<td>#00000033</td>
+<td></td>
+<td><code>--white-alpha-20</code></td>
+<td>#FFFFFF33</td>
+</tr>
+<tr>
+<td><code>--black-alpha-30</code></td>
+<td>#0000004D</td>
+<td></td>
+<td><code>--white-alpha-30</code></td>
+<td>#FFFFFF4D</td>
+</tr>
+<tr>
+<td><code>--black-alpha-40</code></td>
+<td>#00000066</td>
+<td></td>
+<td><code>--white-alpha-40</code></td>
+<td>#FFFFFF66</td>
+</tr>
+<tr>
+<td><code>--black-alpha-50</code></td>
+<td>#00000080</td>
+<td></td>
+<td><code>--white-alpha-50</code></td>
+<td>#FFFFFF80</td>
+</tr>
+</tbody></table>
+<p><code>--transparent</code> is also available.</p>
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-13kqf7ptv" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-1cxd330j2" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-13kqf7ptv" class="language-css">.text {
-  color: var(--neutral-800);
+        <pre><code id="code-1cxd330j2" class="language-css">.shadow {
+  box-shadow: 0 4px 6px var(--black-alpha-30);
 }
 </code></pre>
       </div>
     
+<h3 id="color-mix-alpha-scale">Color-Mix Alpha Scale</h3>
+<p>For transparency on <strong>any</strong> color (not just black/white), the system provides <code>--alpha-5</code> through <code>--alpha-95</code> in steps of 5. Each token is the <strong>second argument</strong> to <code>color-mix()</code> — <code>--alpha-10</code> is <code>transparent 90%</code>, so the mix keeps 10% of your color:</p>
+
+      <div class="code-block-wrapper">
+        <button class="copy-code-btn" data-clipboard-target="#code-3nqi78uh2" type="button" aria-label="Copy code">
+          <span class="copy-text">Copy</span>
+        </button>
+        <pre><code id="code-3nqi78uh2" class="language-css">.badge {
+  /* accent at 10% opacity */
+  background-color: color-mix(in srgb, var(--accent), var(--alpha-10));
+}
+</code></pre>
+      </div>
+    
+<div class="demo-preview is-centered">
+  <div class="color-block" style="background-color: color-mix(in srgb, var(--accent), var(--alpha-10));"></div>
+  <div class="color-block" style="background-color: color-mix(in srgb, var(--accent), var(--alpha-25));"></div>
+  <div class="color-block" style="background-color: color-mix(in srgb, var(--accent), var(--alpha-50));"></div>
+  <div class="color-block" style="background-color: color-mix(in srgb, var(--accent), var(--alpha-75));"></div>
+  <div class="color-block" style="background-color: var(--accent);"></div>
+</div>
+
+<p>The callout background tokens (<code>--callout-*-bg</code>) are built with this technique — a 10% tint of each status color.</p>
 <hr>
 <h2 id="semantic-colors">Semantic Colors</h2>
-<p>Semantic colors map primitive tokens to <strong>meaning and intent</strong>, giving context and purpose to how colors are used. This makes it easier to implement consistent styling across components and ensures colors are used appropriately throughout the interface.</p>
+<p>Semantic colors map primitive tokens to <strong>meaning and intent</strong>, giving context and purpose to how colors are used. This makes it easier to implement consistent styling across components and ensures colors are used appropriately throughout the interface. They are also the layer dark mode overrides, so components that use semantic tokens adapt automatically.</p>
 <h3 id="text-colors">Text Colors</h3>
 <table>
 <thead>
@@ -427,7 +432,7 @@
 </thead>
 <tbody><tr>
 <td><code>--text-primary</code></td>
-<td>↳<code>--brand-dark</code></td>
+<td>↳<code>--neutral-800</code></td>
 <td>Primary text color</td>
 </tr>
 <tr>
@@ -447,22 +452,42 @@
 </tr>
 <tr>
 <td><code>--text-accent</code></td>
-<td>↳<code>--brand-accent</code></td>
+<td>↳<code>--accent</code></td>
 <td>Accent text</td>
 </tr>
 <tr>
 <td><code>--text-link</code></td>
-<td>↳<code>--brand-accent</code></td>
+<td>↳<code>--text-accent</code></td>
 <td>Link text color</td>
 </tr>
+<tr>
+<td><code>--text-inverted</code></td>
+<td>↳<code>--neutral-50</code></td>
+<td>Text on inverted surfaces (e.g. solid buttons)</td>
+</tr>
 </tbody></table>
+<div class="demo-preview">
+  <div class="grid token-col border border-faded">
+    <div class="token-block"><span class="token-tag">text-primary</span></div>
+    <div class="color-block" style="background-color: var(--text-primary);"></div>
+    <div class="token-block"><span class="token-tag">text-secondary</span></div>
+    <div class="color-block" style="background-color: var(--text-secondary);"></div>
+    <div class="token-block"><span class="token-tag">text-faded</span></div>
+    <div class="color-block" style="background-color: var(--text-faded);"></div>
+    <div class="token-block"><span class="token-tag">text-accent</span></div>
+    <div class="color-block" style="background-color: var(--text-accent);"></div>
+    <div class="token-block"><span class="token-tag">text-inverted</span></div>
+    <div class="color-block" style="background-color: var(--text-inverted);"></div>
+  </div>
+</div>
+
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-dt7jprosx" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-tr37lasze" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-dt7jprosx" class="language-css">h1 {
+        <pre><code id="code-tr37lasze" class="language-css">h1 {
   color: var(--text-primary);
 }
 </code></pre>
@@ -479,18 +504,18 @@
 </thead>
 <tbody><tr>
 <td><code>--background-primary</code></td>
-<td>↳<code>--neutral-50</code></td>
+<td>↳<code>--white</code></td>
 <td>Default background</td>
 </tr>
 <tr>
 <td><code>--background-secondary</code></td>
-<td>↳<code>--neutral-150</code></td>
+<td>↳<code>--neutral-50</code></td>
 <td>Secondary background</td>
 </tr>
 <tr>
 <td><code>--background-plain</code></td>
 <td>↳<code>--white</code></td>
-<td>True white background</td>
+<td>Plain background</td>
 </tr>
 <tr>
 <td><code>--background-faded</code></td>
@@ -498,13 +523,24 @@
 <td>Faded background overlay</td>
 </tr>
 </tbody></table>
+<div class="demo-preview">
+  <div class="grid token-col border border-faded">
+    <div class="token-block"><span class="token-tag">background-primary</span></div>
+    <div class="color-block" style="background-color: var(--background-primary);"></div>
+    <div class="token-block"><span class="token-tag">background-secondary</span></div>
+    <div class="color-block" style="background-color: var(--background-secondary);"></div>
+    <div class="token-block"><span class="token-tag">background-faded</span></div>
+    <div class="color-block" style="background-color: var(--background-faded);"></div>
+  </div>
+</div>
+
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-b5wxbmva5" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-qe95wilcb" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-b5wxbmva5" class="language-css">.card {
+        <pre><code id="code-qe95wilcb" class="language-css">.card {
   background-color: var(--background-plain);
 }
 </code></pre>
@@ -527,7 +563,7 @@
 <tr>
 <td><code>--border-secondary</code></td>
 <td>↳<code>--neutral-300</code></td>
-<td>Second border</td>
+<td>Secondary border</td>
 </tr>
 <tr>
 <td><code>--border-faded</code></td>
@@ -535,14 +571,180 @@
 <td>Faded border</td>
 </tr>
 </tbody></table>
+<div class="demo-preview">
+  <div class="grid token-col border border-faded">
+    <div class="token-block"><span class="token-tag">border-primary</span></div>
+    <div class="color-block" style="background-color: var(--border-primary);"></div>
+    <div class="token-block"><span class="token-tag">border-secondary</span></div>
+    <div class="color-block" style="background-color: var(--border-secondary);"></div>
+    <div class="token-block"><span class="token-tag">border-faded</span></div>
+    <div class="color-block" style="background-color: var(--border-faded);"></div>
+  </div>
+</div>
+
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-qs32jngif" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-sqclgtd1v" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-qs32jngif" class="language-css">.card {
+        <pre><code id="code-sqclgtd1v" class="language-css">.card {
   border-color: var(--border-primary);
+}
+</code></pre>
+      </div>
+    
+<h3 id="selection-colors">Selection Colors</h3>
+<p>Text selection (<code>::selection</code>) is styled by the base layer using two tokens that derive from text and background:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><strong>Value</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--selection-background</code></td>
+<td>↳<code>--text-primary</code></td>
+<td>Selection highlight</td>
+</tr>
+<tr>
+<td><code>--selection-text</code></td>
+<td>↳<code>--background-primary</code></td>
+<td>Selected text color</td>
+</tr>
+</tbody></table>
+<p>Because they resolve through <code>--text-primary</code> and <code>--background-primary</code>, they flip automatically in dark mode — no dark override needed.</p>
+<h3 id="status-colors">Status Colors</h3>
+<p>Feedback and state colors. Dark mode swaps them for lightened variants (see below). They also feed the callout tokens (<code>--callout-*</code> / <code>--callout-*-bg</code>) — see the Callout doc.</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value (light)</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--status-info</code></td>
+<td>#0969DA</td>
+<td>Informational, notes</td>
+</tr>
+<tr>
+<td><code>--status-success</code></td>
+<td>#1A7F37</td>
+<td>Success, positive feedback</td>
+</tr>
+<tr>
+<td><code>--status-warning</code></td>
+<td>#9A6700</td>
+<td>Warnings, attention needed</td>
+</tr>
+<tr>
+<td><code>--status-danger</code></td>
+<td>#CF222E</td>
+<td>Errors, destructive actions</td>
+</tr>
+<tr>
+<td><code>--status-accent</code></td>
+<td>#8250DF</td>
+<td>Emphasis, highlights</td>
+</tr>
+</tbody></table>
+<div class="demo-preview is-centered">
+  <div class="block gap-xs align-center">
+    <div class="color-block" style="background-color: var(--status-info);"></div>
+    <span class="token-tag">status-info</span>
+  </div>
+  <div class="block gap-xs align-center">
+    <div class="color-block" style="background-color: var(--status-success);"></div>
+    <span class="token-tag">status-success</span>
+  </div>
+  <div class="block gap-xs align-center">
+    <div class="color-block" style="background-color: var(--status-warning);"></div>
+    <span class="token-tag">status-warning</span>
+  </div>
+  <div class="block gap-xs align-center">
+    <div class="color-block" style="background-color: var(--status-danger);"></div>
+    <span class="token-tag">status-danger</span>
+  </div>
+  <div class="block gap-xs align-center">
+    <div class="color-block" style="background-color: var(--status-accent);"></div>
+    <span class="token-tag">status-accent</span>
+  </div>
+</div>
+
+<hr>
+<h2 id="dark-mode">Dark Mode</h2>
+<p>The design system switches themes with a <code>data-theme</code> attribute. <strong>Light mode is the default</strong>; dark mode is an opt-in override. Set <code>data-theme=&quot;dark&quot;</code> on <code>&lt;html&gt;</code> for page-level dark mode, or on any element for scoped theming — tokens inherit through the cascade.</p>
+<p>Dark values (e.g. <code>#1a1a1a</code>, <code>#e8e6e3</code>) are <strong>overrides applied via <code>[data-theme=&quot;dark&quot;]</code></strong> (design-system.css §2b). Never hardcode them as primary values. If you&#39;re working from a dark-looking screenshot, confirm the intended theme before writing code.</p>
+<h3 id="how-it-works">How It Works</h3>
+<ul>
+<li><strong><code>:root</code></strong> — light mode tokens (always present)</li>
+<li><strong><code>[data-theme=&quot;dark&quot;]</code></strong> (§2b) — overrides semantic, status, and form tokens with dark values, and sets <code>color-scheme: dark</code></li>
+<li><strong><code>@media (prefers-color-scheme: dark)</code></strong> (§2c) — no-JS fallback: a verbatim mirror of §2b, guarded by <code>:root:not([data-theme])</code> so it only applies when no explicit choice has set the attribute</li>
+</ul>
+<p><code>--callout-*</code> and <code>--selection-*</code> are deliberately absent from the dark blocks: they cascade from <code>--status-*</code> and text/background tokens automatically.</p>
+<h3 id="the-toggle">The Toggle</h3>
+<p><code>assets/js/theme-toggle.js</code> drives the switch. Load it in <code>&lt;head&gt;</code> <strong>without <code>defer</code></strong> so the attribute is set before first paint (no theme flash). It persists the choice to <code>localStorage</code> under the key <code>dark-mode</code>; with no stored choice, the OS preference wins. It injects sun/moon icons into every empty <code>.dark-mode-toggle</code> button:</p>
+
+      <div class="code-block-wrapper">
+        <button class="copy-code-btn" data-clipboard-target="#code-hprpgc90r" type="button" aria-label="Copy code">
+          <span class="copy-text">Copy</span>
+        </button>
+        <pre><code id="code-hprpgc90r" class="language-html">&lt;button class=&quot;button dark-mode-toggle&quot; type=&quot;button&quot; data-variant=&quot;transparent&quot; data-icon-only aria-label=&quot;Toggle dark mode&quot;&gt;&lt;/button&gt;
+</code></pre>
+      </div>
+    
+<h3 id="scoped-usage">Scoped Usage</h3>
+<p>Apply dark mode to any element, not just the page:</p>
+<div class="demo-preview is-joined">
+  <div class="grid">
+    <div class="block gap-xs" style="background: var(--background-secondary); color: var(--text-primary); padding: var(--space-l); border: var(--border-s) solid var(--border-secondary);">
+      <strong>Light mode</strong>
+      <span>Primary text</span>
+      <span style="color: var(--text-faded);">Faded text</span>
+      <span style="color: var(--text-accent);">Accent text</span>
+    </div>
+    <div data-theme="dark" class="block gap-xs" style="background: var(--background-primary); color: var(--text-primary); padding: var(--space-l); border: var(--border-s) solid var(--border-secondary);">
+      <strong>Dark mode</strong>
+      <span>Primary text</span>
+      <span style="color: var(--text-faded);">Faded text</span>
+      <span style="color: var(--text-accent);">Accent text</span>
+    </div>
+  </div>
+</div>
+
+
+      <div class="code-block-wrapper">
+        <button class="copy-code-btn" data-clipboard-target="#code-ct84yxvab" type="button" aria-label="Copy code">
+          <span class="copy-text">Copy</span>
+        </button>
+        <pre><code id="code-ct84yxvab" class="language-html">&lt;!-- Dark card on a light page --&gt;
+&lt;div data-theme=&quot;dark&quot; class=&quot;card&quot;&gt;
+  &lt;p&gt;This section uses dark mode tokens&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+      </div>
+    
+<p>All semantic tokens inside that element resolve to their dark values via CSS custom property inheritance.</p>
+<h3 id="customizing-dark-mode">Customizing Dark Mode</h3>
+<p>Add dark overrides in <code>theme.css</code> — do not edit design-system.css. Every override needs <strong>two blocks</strong>: the <code>[data-theme=&quot;dark&quot;]</code> rule and its <code>@media</code> mirror. Drift between the two is a known failure mode — a value changed in one but not the other shows different colors to toggled users versus no-JS/OS-preference users.</p>
+
+      <div class="code-block-wrapper">
+        <button class="copy-code-btn" data-clipboard-target="#code-8rdkexaxj" type="button" aria-label="Copy code">
+          <span class="copy-text">Copy</span>
+        </button>
+        <pre><code id="code-8rdkexaxj" class="language-css">/* assets/css/theme.css */
+[data-theme=&quot;dark&quot;] {
+  --text-accent: #9ecbff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --text-accent: #9ecbff; /* keep in sync with the block above */
+  }
 }
 </code></pre>
       </div>
@@ -554,7 +756,7 @@
                 <!-- Table of Contents -->
                 <aside class="docs-toc">
       <span class="toc-header">On this page</span>
-      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#primitive-colors" class="toc-link">Primitive Colors</a></li><li class="toc-item toc-level-2"><a href="#semantic-colors" class="toc-link">Semantic Colors</a></li></ul></nav></div>
+      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#how-theming-works" class="toc-link">How Theming Works</a></li><li class="toc-item toc-level-2"><a href="#primitive-colors" class="toc-link">Primitive Colors</a></li><li class="toc-item toc-level-2"><a href="#semantic-colors" class="toc-link">Semantic Colors</a></li><li class="toc-item toc-level-2"><a href="#dark-mode" class="toc-link">Dark Mode</a></li></ul></nav></div>
     </aside>
             </div>
             

@@ -63,7 +63,20 @@
     <ul class="nav-list nav-home">
       <li><a href="index.html" class="nav-link ">Home</a></li>
     </ul>
-  <details class="nav-section" open>
+  <details class="nav-section">
+      <summary class="nav-section-toggle">
+        <span>Brand</span>
+        <span class="nav-toggle-icon">
+          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
+          </svg>
+        </span>
+      </summary>
+      <ul class="nav-list">
+        <li><a href="brand-book.html" class="nav-link ">Brand Book</a></li>
+      
+      </ul>
+    </details><details class="nav-section" open>
       <summary class="nav-section-toggle">
         <span>Design System</span>
         <span class="nav-toggle-icon">
@@ -82,6 +95,8 @@
         <li><a href="spacing.html" class="nav-link ">Spacing</a></li>
       
         <li><a href="border.html" class="nav-link ">Border</a></li>
+      
+        <li><a href="motion.html" class="nav-link ">Motion</a></li>
       
         <li><a href="button.html" class="nav-link ">Button</a></li>
       
@@ -198,7 +213,7 @@
 </tr>
 <tr>
 <td><code>--input-focus</code></td>
-<td><code>var(--brand-accent)</code></td>
+<td><code>var(--accent)</code></td>
 <td>Focus border and ring color</td>
 </tr>
 <tr>
@@ -212,15 +227,21 @@
 <td>Disabled text color</td>
 </tr>
 </tbody></table>
+<p><code>--input-focus</code> resolves through <code>--accent</code>, so overriding <code>--accent</code> in <code>theme.css</code> restyles focus rings automatically. Dark-mode values for every <code>--input-*</code> token are defined in §2b of <code>design-system.css</code> (<code>[data-theme=&quot;dark&quot;]</code>) and mirrored in the §2c system-preference fallback — forms adapt to dark mode with no extra classes.</p>
 <hr>
 <h2 id="labels">Labels</h2>
 <p>Labels are styled as block elements with medium weight:</p>
+<div class="demo-preview is-joined">
+  <label for="name">Full name</label>
+  <input type="text" id="name" placeholder="Enter your name">
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-v9g8yocwy" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-35y3yg55p" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-v9g8yocwy" class="language-html">&lt;label for=&quot;name&quot;&gt;Full name&lt;/label&gt;
+        <pre><code id="code-35y3yg55p" class="language-html">&lt;label for=&quot;name&quot;&gt;Full name&lt;/label&gt;
 &lt;input type=&quot;text&quot; id=&quot;name&quot; placeholder=&quot;Enter your name&quot;&gt;
 </code></pre>
       </div>
@@ -231,10 +252,10 @@
 <p>All standard text input types are styled globally:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-3dnpctd44" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-wvzzjnu6t" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-3dnpctd44" class="language-html">&lt;input type=&quot;text&quot; placeholder=&quot;Text&quot;&gt;
+        <pre><code id="code-wvzzjnu6t" class="language-html">&lt;input type=&quot;text&quot; placeholder=&quot;Text&quot;&gt;
 &lt;input type=&quot;email&quot; placeholder=&quot;Email&quot;&gt;
 &lt;input type=&quot;password&quot; placeholder=&quot;Password&quot;&gt;
 &lt;input type=&quot;number&quot; placeholder=&quot;Number&quot;&gt;
@@ -257,12 +278,17 @@
 <hr>
 <h2 id="textarea">Textarea</h2>
 <p>Textareas have a minimum height and allow vertical resizing:</p>
+<div class="demo-preview is-joined">
+  <label for="message">Message</label>
+  <textarea id="message" placeholder="Enter your message..."></textarea>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-k4posi38s" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-eijt58okb" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-k4posi38s" class="language-html">&lt;label for=&quot;message&quot;&gt;Message&lt;/label&gt;
+        <pre><code id="code-eijt58okb" class="language-html">&lt;label for=&quot;message&quot;&gt;Message&lt;/label&gt;
 &lt;textarea id=&quot;message&quot; placeholder=&quot;Enter your message...&quot;&gt;&lt;/textarea&gt;
 </code></pre>
       </div>
@@ -271,12 +297,21 @@
 <hr>
 <h2 id="select">Select</h2>
 <p>Selects use a custom dropdown arrow via an inline SVG background:</p>
+<div class="demo-preview is-joined">
+  <label for="country">Country</label>
+  <select id="country">
+    <option value="" disabled selected>Choose a country</option>
+    <option value="nz">New Zealand</option>
+    <option value="au">Australia</option>
+  </select>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-lfun8ylb7" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-596r2oz9l" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-lfun8ylb7" class="language-html">&lt;label for=&quot;country&quot;&gt;Country&lt;/label&gt;
+        <pre><code id="code-596r2oz9l" class="language-html">&lt;label for=&quot;country&quot;&gt;Country&lt;/label&gt;
 &lt;select id=&quot;country&quot;&gt;
   &lt;option value=&quot;&quot; disabled selected&gt;Choose a country&lt;/option&gt;
   &lt;option value=&quot;nz&quot;&gt;New Zealand&lt;/option&gt;
@@ -289,12 +324,16 @@
 <hr>
 <h2 id="disabled-state">Disabled State</h2>
 <p>Add the <code>disabled</code> attribute to any input, textarea, or select:</p>
+<div class="demo-preview is-joined">
+  <input type="text" value="Cannot edit" disabled>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-o2udfqomh" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-dj97v29rd" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-o2udfqomh" class="language-html">&lt;input type=&quot;text&quot; value=&quot;Cannot edit&quot; disabled&gt;
+        <pre><code id="code-dj97v29rd" class="language-html">&lt;input type=&quot;text&quot; value=&quot;Cannot edit&quot; disabled&gt;
 </code></pre>
       </div>
     
@@ -302,14 +341,38 @@
 <hr>
 <h2 id="checkbox-amp-radio">Checkbox &amp; Radio</h2>
 <p>Checkboxes and radios use the native browser rendering with <code>accent-color</code> for brand alignment:</p>
+<div class="demo-preview is-joined">
+  <div class="form-check">
+    <input type="checkbox" id="terms">
+    <label for="terms">I agree to the terms</label>
+  </div>
+  <div class="form-check">
+    <input type="radio" name="plan" id="plan-monthly">
+    <label for="plan-monthly">Monthly</label>
+  </div>
+  <div class="form-check">
+    <input type="radio" name="plan" id="plan-yearly">
+    <label for="plan-yearly">Yearly</label>
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-bllowb2hp" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-yht4bp4w3" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-bllowb2hp" class="language-html">&lt;div class=&quot;form-check&quot;&gt;
+        <pre><code id="code-yht4bp4w3" class="language-html">&lt;div class=&quot;form-check&quot;&gt;
   &lt;input type=&quot;checkbox&quot; id=&quot;terms&quot;&gt;
   &lt;label for=&quot;terms&quot;&gt;I agree to the terms&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;form-check&quot;&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;plan&quot; id=&quot;plan-monthly&quot;&gt;
+  &lt;label for=&quot;plan-monthly&quot;&gt;Monthly&lt;/label&gt;
+&lt;/div&gt;
+&lt;div class=&quot;form-check&quot;&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;plan&quot; id=&quot;plan-yearly&quot;&gt;
+  &lt;label for=&quot;plan-yearly&quot;&gt;Yearly&lt;/label&gt;
 &lt;/div&gt;
 </code></pre>
       </div>
@@ -319,14 +382,25 @@
 <h2 id="layout-patterns">Layout Patterns</h2>
 <h3 id="form-group">Form Group</h3>
 <p>Use <code>.form-group</code> to wrap a label + input pair with consistent bottom spacing:</p>
+<div class="demo-preview is-joined">
+  <div class="form-group">
+    <label for="full-name">Name</label>
+    <input type="text" id="full-name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email">
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-f4eoaguzb" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-dz541rsly" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-f4eoaguzb" class="language-html">&lt;div class=&quot;form-group&quot;&gt;
-  &lt;label for=&quot;name&quot;&gt;Name&lt;/label&gt;
-  &lt;input type=&quot;text&quot; id=&quot;name&quot;&gt;
+        <pre><code id="code-dz541rsly" class="language-html">&lt;div class=&quot;form-group&quot;&gt;
+  &lt;label for=&quot;full-name&quot;&gt;Name&lt;/label&gt;
+  &lt;input type=&quot;text&quot; id=&quot;full-name&quot;&gt;
 &lt;/div&gt;
 &lt;div class=&quot;form-group&quot;&gt;
   &lt;label for=&quot;email&quot;&gt;Email&lt;/label&gt;
@@ -339,10 +413,10 @@
 <p>Use <code>.form-check</code> for inline checkbox/radio + label pairs:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-ivsif5n9f" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ocpc9qam2" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-ivsif5n9f" class="language-html">&lt;div class=&quot;form-check&quot;&gt;
+        <pre><code id="code-ocpc9qam2" class="language-html">&lt;div class=&quot;form-check&quot;&gt;
   &lt;input type=&quot;checkbox&quot; id=&quot;opt-in&quot;&gt;
   &lt;label for=&quot;opt-in&quot;&gt;Subscribe to newsletter&lt;/label&gt;
 &lt;/div&gt;
@@ -352,12 +426,22 @@
 <p><strong>Properties:</strong> <code>display: flex</code>, <code>align-items: center</code>, <code>gap</code> for spacing. The label inside <code>.form-check</code> is inline with regular weight.</p>
 <h3 id="fieldset-amp-legend">Fieldset &amp; Legend</h3>
 <p>Use <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> to group related form controls:</p>
+<div class="demo-preview is-joined">
+  <fieldset>
+    <legend>Contact details</legend>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone">
+    </div>
+  </fieldset>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-gdtwhpjw0" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-5qsx2weys" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-gdtwhpjw0" class="language-html">&lt;fieldset&gt;
+        <pre><code id="code-5qsx2weys" class="language-html">&lt;fieldset&gt;
   &lt;legend&gt;Contact details&lt;/legend&gt;
   &lt;div class=&quot;form-group&quot;&gt;
     &lt;label for=&quot;phone&quot;&gt;Phone&lt;/label&gt;

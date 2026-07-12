@@ -22,6 +22,35 @@ This guide ensures:
 
 ---
 
+## design-system.css Sections
+
+`assets/css/design-system.css` is the single source of truth for the design system. Its major sections, in order:
+
+```
+1.  BRAND TOKENS
+2.  SYSTEM TOKENS - COLORS
+2b. THEME TOKENS - DARK MODE
+2c. SYSTEM PREFERENCE FALLBACK (no-JS)
+3.  SYSTEM TOKENS - SPACING & TYPOGRAPHY
+4.  SYSTEM TOKENS - MOTION
+5.  BASE STYLES
+6.  LAYOUT PRIMITIVES
+7.  BLOCKS
+8.  GRID
+9.  BORDER UTILITIES
+10. TYPOGRAPHY UTILITIES
+11. BUTTONS
+12. BACKGROUND UTILITIES
+13. CALLOUTS & ALERTS
+14. FORM ELEMENTS
+15. FUTURE COMPONENTS
+16. RESPONSIVE
+```
+
+New CSS that the design system must express goes into the correct section — never appended to the end of the file. Brand overrides do not belong here at all; they live in `assets/css/theme.css`, which loads after the design system and overrides §1/§2 primitives.
+
+---
+
 ## Organisation Principles
 
 ### Group Related Styles Together
@@ -53,7 +82,7 @@ h2 {
 **Example - Component Grouping:**
 ```css
 /* -- Button -- */
-.button, button {
+.button {
   padding: var(--space-s) var(--space-m);
   background: var(--background-primary);
   border: var(--border-s) solid var(--border-primary);
@@ -61,7 +90,7 @@ h2 {
 .button:hover {
   background: var(--background-secondary);
 }
-.button.is-outline {
+.button[data-variant="outline"] {
   background: transparent;
 }
 /* All button-related styles together */

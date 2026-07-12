@@ -123,6 +123,22 @@ Containers constrain width and centre content in the viewport.
 | `container-medium` | Default readable width |
 | `container-large`  | Wider layouts          |
 
+Dashed borders below are visualization aids only — containers render no visible box of their own. Each container centres itself and stops at its max width.
+
+<div class="demo-preview">
+  <div class="block gap-m">
+    <div class="container-small border border-dashed border-secondary padding-m">
+      <code>container-small</code>
+    </div>
+    <div class="container-medium border border-dashed border-secondary padding-m">
+      <code>container-medium</code>
+    </div>
+    <div class="container-large border border-dashed border-secondary padding-m">
+      <code>container-large</code>
+    </div>
+  </div>
+</div>
+
 ---
 
 ## Max-Width
@@ -141,6 +157,22 @@ Max-width utilities apply **width limits only**.
 | `max-width-medium` | Default readable  |
 | `max-width-large`  | Wide constraint   |
 | `max-width-full`   | No constraint     |
+
+Unlike containers, max-width utilities do **not** centre — note how each box stays left-aligned:
+
+<div class="demo-preview">
+  <div class="block gap-m">
+    <div class="max-width-small border border-dashed border-secondary padding-m">
+      <code>max-width-small</code>
+    </div>
+    <div class="max-width-medium border border-dashed border-secondary padding-m">
+      <code>max-width-medium</code>
+    </div>
+    <div class="max-width-full border border-dashed border-secondary padding-m">
+      <code>max-width-full</code>
+    </div>
+  </div>
+</div>
 
 **Rule of thumb**
 
@@ -183,6 +215,29 @@ Blocks group **related content** and manage internal spacing.
 | `gap-l`  | Large       |
 | `gap-xl` | Extra large |
 
+<div class="demo-preview">
+  <div class="block gap-l">
+    <p><code>block gap-xs</code></p>
+    <div class="block gap-xs">
+      <div class="bg-faded padding-s">First item</div>
+      <div class="bg-faded padding-s">Second item</div>
+      <div class="bg-faded padding-s">Third item</div>
+    </div>
+    <p><code>block gap-m</code></p>
+    <div class="block gap-m">
+      <div class="bg-faded padding-s">First item</div>
+      <div class="bg-faded padding-s">Second item</div>
+      <div class="bg-faded padding-s">Third item</div>
+    </div>
+    <p><code>block gap-xl</code></p>
+    <div class="block gap-xl">
+      <div class="bg-faded padding-s">First item</div>
+      <div class="bg-faded padding-s">Second item</div>
+      <div class="bg-faded padding-s">Third item</div>
+    </div>
+  </div>
+</div>
+
 ```html
 <div class="block gap-l">
   <h2>Heading</h2>
@@ -204,10 +259,17 @@ Blocks can change layout or alignment.
 | `align-center` | Centre items        |
 | `align-end`    | Align items end     |
 
+<div class="demo-preview is-joined">
+  <div class="block row gap-m align-center">
+    <p>Text</p>
+    <button class="button">Action</button>
+  </div>
+</div>
+
 ```html
 <div class="block row gap-m align-center">
   <p>Text</p>
-  <button>Action</button>
+  <button class="button">Action</button>
 </div>
 ```
 
@@ -223,6 +285,15 @@ They are not spacing utilities.
 * Two equal columns
 * Default gap applied
 
+<div class="demo-preview">
+  <div class="grid">
+    <div class="bg-faded padding-m">Item 1</div>
+    <div class="bg-faded padding-m">Item 2</div>
+    <div class="bg-faded padding-m">Item 3</div>
+    <div class="bg-faded padding-m">Item 4</div>
+  </div>
+</div>
+
 ```html
 <div class="grid">
   <div>Item</div>
@@ -237,6 +308,31 @@ They are not spacing utilities.
 | `cols-3`    | Three columns |
 | `cols-4`    | Four columns  |
 
+<div class="demo-preview">
+  <div class="block gap-l">
+    <p><code>grid cols-3</code></p>
+    <div class="grid cols-3">
+      <div class="bg-faded padding-m">Item 1</div>
+      <div class="bg-faded padding-m">Item 2</div>
+      <div class="bg-faded padding-m">Item 3</div>
+      <div class="bg-faded padding-m">Item 4</div>
+      <div class="bg-faded padding-m">Item 5</div>
+      <div class="bg-faded padding-m">Item 6</div>
+    </div>
+    <p><code>grid cols-4 gap-s</code></p>
+    <div class="grid cols-4 gap-s">
+      <div class="bg-faded padding-m">Item 1</div>
+      <div class="bg-faded padding-m">Item 2</div>
+      <div class="bg-faded padding-m">Item 3</div>
+      <div class="bg-faded padding-m">Item 4</div>
+      <div class="bg-faded padding-m">Item 5</div>
+      <div class="bg-faded padding-m">Item 6</div>
+      <div class="bg-faded padding-m">Item 7</div>
+      <div class="bg-faded padding-m">Item 8</div>
+    </div>
+  </div>
+</div>
+
 ```html
 <div class="grid cols-3">
   <div>Item 1</div>
@@ -250,6 +346,13 @@ They are not spacing utilities.
 | Class         | Effect                |
 | ------------- | --------------------- |
 | `fit-content` | Item sizes to content |
+
+<div class="demo-preview is-joined">
+  <div class="grid">
+    <div class="bg-faded padding-m">Flexible column</div>
+    <div class="bg-faded padding-m fit-content">Fixed</div>
+  </div>
+</div>
 
 ```html
 <div class="grid">

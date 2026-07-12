@@ -63,7 +63,20 @@
     <ul class="nav-list nav-home">
       <li><a href="index.html" class="nav-link ">Home</a></li>
     </ul>
-  <details class="nav-section" open>
+  <details class="nav-section">
+      <summary class="nav-section-toggle">
+        <span>Brand</span>
+        <span class="nav-toggle-icon">
+          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
+          </svg>
+        </span>
+      </summary>
+      <ul class="nav-list">
+        <li><a href="brand-book.html" class="nav-link ">Brand Book</a></li>
+      
+      </ul>
+    </details><details class="nav-section" open>
       <summary class="nav-section-toggle">
         <span>Design System</span>
         <span class="nav-toggle-icon">
@@ -82,6 +95,8 @@
         <li><a href="spacing.html" class="nav-link ">Spacing</a></li>
       
         <li><a href="border.html" class="nav-link ">Border</a></li>
+      
+        <li><a href="motion.html" class="nav-link ">Motion</a></li>
       
         <li><a href="button.html" class="nav-link ">Button</a></li>
       
@@ -186,7 +201,7 @@
 </thead>
 <tbody><tr>
 <td><code>--status-info</code></td>
-<td><code>var(--brand-accent)</code></td>
+<td><code>#0969da</code></td>
 <td>Informational, notes</td>
 </tr>
 <tr>
@@ -213,17 +228,24 @@
 <p>Each status color generates two semantic tokens:</p>
 <ul>
 <li><code>--callout-{type}</code> — the border/title color</li>
-<li><code>--callout-{type}-bg</code> — a 10% tint for the background</li>
+<li><code>--callout-{type}-bg</code> — a 10% tint for the background (via <code>color-mix</code>)</li>
 </ul>
+<p>Status colors are plain hex values. In dark mode (§2b of <code>design-system.css</code>, mirrored in the §2c system-preference fallback), each <code>--status-*</code> token is overridden with a lighter hex — the <code>--callout-*</code> tokens cascade from them automatically, so callouts need no dark-mode overrides of their own.</p>
 <hr>
 <h2 id="base-callout">Base Callout</h2>
 <p>The <code>.callout</code> class provides the structural foundation:</p>
+<div class="demo-preview is-joined">
+  <div class="callout">
+    <p>General-purpose highlighted content.</p>
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-tmzwpps62" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-r0vkiukgg" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-tmzwpps62" class="language-html">&lt;div class=&quot;callout&quot;&gt;
+        <pre><code id="code-r0vkiukgg" class="language-html">&lt;div class=&quot;callout&quot;&gt;
   &lt;p&gt;General-purpose highlighted content.&lt;/p&gt;
 &lt;/div&gt;
 </code></pre>
@@ -241,10 +263,10 @@
 <p>Use <code>.callout-title</code> inside any callout for a styled heading:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-rpzwz9rv8" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-5qffw50ei" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-rpzwz9rv8" class="language-html">&lt;div class=&quot;callout callout-note&quot;&gt;
+        <pre><code id="code-5qffw50ei" class="language-html">&lt;div class=&quot;callout callout-note&quot;&gt;
   &lt;div class=&quot;callout-title&quot;&gt;Note&lt;/div&gt;
   &lt;p&gt;Content here.&lt;/p&gt;
 &lt;/div&gt;
@@ -256,12 +278,19 @@
 <h2 id="variants">Variants</h2>
 <h3>Note (<code>.callout-note</code>)</h3>
 <p>For useful information users should know, even when skimming.</p>
+<div class="demo-preview is-joined">
+  <div class="callout callout-note">
+    <div class="callout-title">Note</div>
+    <p>Useful information that users should know.</p>
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-qwevot0f3" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-m4gxwyq5q" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-qwevot0f3" class="language-html">&lt;div class=&quot;callout callout-note&quot;&gt;
+        <pre><code id="code-m4gxwyq5q" class="language-html">&lt;div class=&quot;callout callout-note&quot;&gt;
   &lt;div class=&quot;callout-title&quot;&gt;Note&lt;/div&gt;
   &lt;p&gt;Useful information that users should know.&lt;/p&gt;
 &lt;/div&gt;
@@ -270,12 +299,19 @@
     
 <h3>Tip (<code>.callout-tip</code>)</h3>
 <p>For helpful advice on doing things better or more easily.</p>
+<div class="demo-preview is-joined">
+  <div class="callout callout-tip">
+    <div class="callout-title">Tip</div>
+    <p>Helpful advice for doing things better.</p>
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-e223c82ch" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-xm62epelx" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-e223c82ch" class="language-html">&lt;div class=&quot;callout callout-tip&quot;&gt;
+        <pre><code id="code-xm62epelx" class="language-html">&lt;div class=&quot;callout callout-tip&quot;&gt;
   &lt;div class=&quot;callout-title&quot;&gt;Tip&lt;/div&gt;
   &lt;p&gt;Helpful advice for doing things better.&lt;/p&gt;
 &lt;/div&gt;
@@ -284,12 +320,19 @@
     
 <h3>Warning (<code>.callout-warning</code>)</h3>
 <p>For urgent information that needs immediate attention.</p>
+<div class="demo-preview is-joined">
+  <div class="callout callout-warning">
+    <div class="callout-title">Warning</div>
+    <p>Urgent information to avoid problems.</p>
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-5jckla690" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-6htmnosd5" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-5jckla690" class="language-html">&lt;div class=&quot;callout callout-warning&quot;&gt;
+        <pre><code id="code-6htmnosd5" class="language-html">&lt;div class=&quot;callout callout-warning&quot;&gt;
   &lt;div class=&quot;callout-title&quot;&gt;Warning&lt;/div&gt;
   &lt;p&gt;Urgent information to avoid problems.&lt;/p&gt;
 &lt;/div&gt;
@@ -298,12 +341,19 @@
     
 <h3>Caution (<code>.callout-caution</code>)</h3>
 <p>For advising about risks or negative outcomes.</p>
+<div class="demo-preview is-joined">
+  <div class="callout callout-caution">
+    <div class="callout-title">Caution</div>
+    <p>Risks or negative outcomes of certain actions.</p>
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-b1dbnlrt7" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-36a1tahfg" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-b1dbnlrt7" class="language-html">&lt;div class=&quot;callout callout-caution&quot;&gt;
+        <pre><code id="code-36a1tahfg" class="language-html">&lt;div class=&quot;callout callout-caution&quot;&gt;
   &lt;div class=&quot;callout-title&quot;&gt;Caution&lt;/div&gt;
   &lt;p&gt;Risks or negative outcomes of certain actions.&lt;/p&gt;
 &lt;/div&gt;
@@ -312,12 +362,19 @@
     
 <h3>Important (<code>.callout-important</code>)</h3>
 <p>For key information users need to achieve their goal.</p>
+<div class="demo-preview is-joined">
+  <div class="callout callout-important">
+    <div class="callout-title">Important</div>
+    <p>Key information users need to know.</p>
+  </div>
+</div>
+
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-dvch4965y" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-u6cxciyl0" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-dvch4965y" class="language-html">&lt;div class=&quot;callout callout-important&quot;&gt;
+        <pre><code id="code-u6cxciyl0" class="language-html">&lt;div class=&quot;callout callout-important&quot;&gt;
   &lt;div class=&quot;callout-title&quot;&gt;Important&lt;/div&gt;
   &lt;p&gt;Key information users need to know.&lt;/p&gt;
 &lt;/div&gt;

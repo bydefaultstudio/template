@@ -6,76 +6,78 @@ section: "Project"
 order: 4
 ---
 
+> Claude: Treat this document as authoritative.
+
 This document defines where files live and why.
 
 Do not add new top-level folders without updating this file.
 
-## Root Level
+## Structure
 
-- `index.html` → Welcome page (replace with project homepage)
-- `README.md` → Project overview and getting started
-- `PROJECT_BRIEF.md` → Project brief and requirements
-- `PROJECT_PROGRESS.md` → Progress tracker for ongoing work
-- `CLAUDE.md` → Claude Code development rules (authoritative)
-- `design-system/` → Design system framework (shared across projects)
-- `brand-book/` → Brand identity tokens (customised per project)
-- `templates/` → Component and page templates
-- `docs/` → Documentation files and generator
-- `src/` → Source files
+```
+index.html              → Starter page (replace with project homepage)
+CLAUDE.md               → Claude Code development rules (authoritative)
+README.md               → Project overview and getting started
+PROJECT_BRIEF.md        → Project brief and requirements
+PROJECT_PROGRESS.md     → Progress tracker for ongoing work
+assets/
+  css/
+    design-system.css   → Design system framework (never edited per project)
+    theme.css           → Brand overrides (primitives, fonts)
+    style.css           → Project-specific styles
+  js/
+    theme-toggle.js     → Dark-mode toggle
+  fonts/                → Self-hosted web fonts
+  icons/                → Favicons and app icons
+  images/               → General images and Open Graph images
+templates/              → Page and component boilerplate
+docs/                   → Documentation (markdown sources + generated site)
+```
 
-## design-system/
+## assets/css/
 
-The design system framework. Contains all utility classes, layout primitives, components, and default tokens.
+The three-layer CSS contract. Load order matters — every page links them in this sequence:
 
-- `design-system.css` → Core design system stylesheet
-- `index.html` → Styleguide preview (renders with default tokens)
+1. `design-system.css` — the framework: tokens, base styles, layout primitives, utilities, components. Ships neutral working defaults and is never edited per project.
+2. `theme.css` — your brand: overrides §1/§2 primitives (fonts, `--accent`, neutrals) and loads brand fonts via `@font-face` or `@import`. Semantics cascade through the primitives.
+3. `style.css` — project-specific styles built on top of the system.
 
-## brand-book/
+## assets/js/
 
-Brand identity tokens. Customise this per project. The design system reads these tokens via `var(--brand-*, fallback)`.
+- `theme-toggle.js` — dark-mode toggle: sets `data-theme` on `<html>`, persists to localStorage, defaults to the OS preference, and injects icons into `.dark-mode-toggle` buttons.
 
-- `brand-book.css` → Brand tokens (fonts, colours)
-- `index.html` → Brand preview page (logo, palette, typography, icons)
+## assets/fonts/
 
-## src/
+Self-hosted web font files, referenced by `@font-face` declarations in `theme.css`.
 
-### src/assets/
-- `fonts/` → Web fonts
-- `icons/` → Favicons and app icons
-- `images/` → General image assets and Open Graph images
-- `video/` → Video assets
+## assets/icons/
 
-### src/css/
-- `style.css` → Project-specific styles (sits on top of the design system)
+Favicons and app icons (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, …). Referenced directly in each page's `<head>`; treated as brand assets, not part of the design system.
 
-### src/js/
-- JavaScript modules and scripts
+## assets/images/
 
-### src/pages/
-- HTML page files
+General image assets and Open Graph images.
 
 ## templates/
 
-- `component-template.js` → JavaScript component template
+Boilerplate for new files:
+
+- `page-template.html` → HTML page template (correct stylesheet order, SEO meta tags)
 - `component-template.css` → CSS component template
-- `page-template.html` → HTML page template
+- `component-template.js` → JavaScript component template
 
 ## docs/
 
-- Markdown documentation files
-- `docs.config.js` → Project-specific doc settings (fonts, footer, description) — stays when generator is upgraded
+- Markdown documentation files (the sources — edit these)
+- `docs.config.js` → Project-specific doc settings (CSS paths, footer, description) — stays when the generator is upgraded
 - `generator/` → Documentation site engine (replaceable — drop in a new version to upgrade)
   - `VERSION` → Current engine version
   - `assets/` → Engine CSS (`docs.css`, `markdown.css`) — copied to `site/assets/` on generation
-- `site/` → Generated HTML documentation
-  - `assets/images/` → Project-specific logo and favicons — not overwritten by the generator
+- `site/` → Generated HTML documentation — **never hand-edit**; regenerate from the markdown sources
+  - `assets/images/` → The docs site's own logo and favicon copies — independent of `assets/images/` and not overwritten by the generator
+
+The docs site links the project's real stylesheets (`../../assets/css/design-system.css`, then `theme.css`), so token and component pages render live values. The old `design-system/` and `brand-book/` folders are gone — the styleguide and brand reference now live in the docs site.
 
 ## Notes
 
 Empty folders are tracked using `.gitkeep` to preserve structure in the template.
-
-### Favicons
-
-Favicons live in `src/assets/icons/`.
-
-They are referenced directly in the HTML `<head>` and are treated as brand assets, not part of the design system.

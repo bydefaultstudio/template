@@ -14,49 +14,80 @@ This template provides a solid foundation for new projects. Follow these steps t
 
 ## Brand Colors
 
-Update brand colors in `brand-book/brand-book.css`.
+Update brand colours in `assets/css/theme.css`.
 
-The brand book defines raw brand tokens using the `--brand-` prefix. The design system reads these via `var(--brand-*, fallback)` — if no brand book is loaded, sensible defaults apply.
+The design system (`assets/css/design-system.css`) ships neutral working defaults — system font stacks and a neutral accent. Your brand overrides the §1/§2 primitives in `theme.css`; the semantic layer cascades through them automatically.
 
-**What to change:**
-- `--brand-color-accent` — Your primary brand accent colour
-- `--brand-color-dark` — Your dark brand colour
-- `--brand-color-light` — Your light brand colour
+**What to change** — uncomment and edit the starter blocks in `theme.css`:
+- `--accent` — your brand accent; drives `--text-accent`, `--text-link`, and `--input-focus`
+- `--text-primary` / `--background-primary` — core text and background, if the neutral defaults don't suit
+- `--status-*` — status colours (optional)
 
 **Example:**
 ```css
-/* brand-book/brand-book.css */
+/* assets/css/theme.css */
 :root {
-  --brand-color-accent: #0066cc;
-  --brand-color-dark: #1a1a1a;
-  --brand-color-light: #f5f5f5;
+  --accent: #3485cd;
+  --text-primary: var(--neutral-800);
+  --background-primary: var(--white);
 }
 ```
 
-**Note:** The design system maps these into semantic tokens automatically. You do not need to touch `design-system/design-system.css` for brand colours.
+**Note:** You never need to edit `assets/css/design-system.css` for brand colours. Override primitives; semantics resolve through them.
 
 ---
 
 ## Fonts
 
-Update font families in `brand-book/brand-book.css`.
+Update font families in `assets/css/theme.css`:
+- `--font-primary` — your primary font family
+- `--font-secondary` — your secondary font family (if used)
+- `--font-tertiary` — your monospace font (if used)
 
-**What to change:**
-- `--brand-font-primary` — Your primary font family
-- `--brand-font-secondary` — Your secondary font family (if used)
-- `--brand-font-tertiary` — Your monospace font (if used)
+Fonts load via `theme.css` too: self-host with `@font-face` (font files in `assets/fonts/`) or `@import` a Google Fonts URL at the top of the file. No per-page font links are needed.
 
-**Also update:**
-- Google Fonts link in `docs/docs.config.js` (if using Google Fonts)
-- Google Fonts link in `design-system/index.html` (if using Google Fonts)
-- Google Fonts link in `brand-book/index.html` (if using Google Fonts)
+---
+
+## Brand Theming
+
+### Stylesheet load order
+
+Every page loads the three CSS layers in this order:
+
+```html
+<link rel="stylesheet" href="assets/css/design-system.css">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/style.css">
+```
+
+1. `design-system.css` — the framework: tokens, base styles, utilities, components. Never edited per project.
+2. `theme.css` — your brand: primitive overrides and font loading. Ships as an all-commented starter.
+3. `style.css` — project-specific styles built on top of the system.
+
+`theme.css` must load **after** `design-system.css` so brand overrides win via the cascade — no `!important` needed.
+
+### What theme.css should override
+
+- **Do** override §1/§2 primitives: fonts, `--accent`, neutrals, status colours.
+- **Don't** restate semantic tokens (`--text-*`, `--background-*`, `--border-*`) unless you are deliberately re-skinning a semantic role — the semantic layer already resolves through the primitives you set.
+
+### Dark mode
+
+Dark-mode brand overrides live in two blocks in `theme.css`:
+
+- `[data-theme="dark"]` — applies when the toggle (`assets/js/theme-toggle.js`) sets the attribute on `<html>`
+- `@media (prefers-color-scheme: dark) { :root:not([data-theme]) { … } }` — the no-JS / OS-preference fallback
+
+**Warning:** the two blocks must mirror each other exactly. Drift between them is a known failure mode — any value added to one must be added verbatim to the other.
 
 ---
 
 ## Logo
 
 Replace the logo image:
-- `docs/site/assets/images/logo.svg` - Documentation site logo
+- `docs/site/assets/images/logo.svg` — documentation site logo
+
+Favicons live in `assets/icons/` and are referenced in each page's `<head>`.
 
 ---
 
@@ -81,26 +112,26 @@ Update SEO meta tags in `docs/generator/template.html`:
 
 The documentation is ready to use, but you may want to:
 - Review and customize documentation content in `docs/` folder
-- Update the index page description in `docs/generator/generate-docs.js`
+- Update `footerText` and `indexDescription` in `docs/docs.config.js`
 - Add or remove documentation pages as needed
 
 ---
 
 ## Quick Checklist
 
-- [ ] Update brand colors in `brand-book/brand-book.css`
-- [ ] Update font families in `brand-book/brand-book.css`
+- [ ] Update brand colours in `assets/css/theme.css`
+- [ ] Update font families in `assets/css/theme.css` (plus `@font-face` or `@import`)
+- [ ] Mirror any dark-mode overrides in both dark blocks of `theme.css`
 - [ ] Replace logo in `docs/site/assets/images/logo.svg`
+- [ ] Replace favicons in `assets/icons/`
 - [ ] Fill in `PROJECT_BRIEF.md`
-- [ ] Update Google Fonts links (if applicable)
 - [ ] Review and customize documentation
 
 ---
 
 ## Next Steps
 
-1. Start building your project in the `src/` directory
-2. Use the templates in `templates/` folder for new components
+1. Start building at the repo root — `index.html` is the starter page; CSS, JS, fonts, and images live in `assets/`
+2. Use the templates in `templates/` folder for new pages and components
 3. Follow the coding standards in the documentation
 4. Keep documentation updated as you build
-

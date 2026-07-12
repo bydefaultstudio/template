@@ -87,7 +87,7 @@ Style combo classes modify the border appearance.
 
 ---
 
-## Boder Color
+## Border Color
 
 Color combo classes modify the border color using semantic tokens.
 
@@ -103,6 +103,63 @@ Color combo classes modify the border color using semantic tokens.
 <div class="border border-secondary">
   <!-- Content with subtle border -->
 </div>
+```
+
+---
+
+## Examples
+
+Compose position, width, style, and colour freely — one class per concern:
+
+<div class="demo-preview is-joined">
+  <div class="block gap-m">
+    <div class="border border-primary padding-l">Primary border</div>
+    <div class="border border-secondary padding-l">Secondary border</div>
+    <div class="border border-faded padding-l">Faded border</div>
+    <div class="border-top border-m border-dashed padding-l">Dashed top, medium width</div>
+    <div class="border border-l border-dotted padding-l">Dotted, large width</div>
+  </div>
+</div>
+
+```html
+<div class="border border-primary">Primary border</div>
+<div class="border border-secondary">Secondary border</div>
+<div class="border border-faded">Faded border</div>
+<div class="border-top border-m border-dashed">Dashed top, medium width</div>
+<div class="border border-l border-dotted">Dotted, large width</div>
+```
+
+---
+
+## Border Radius
+
+Radius tokens define the corner rounding scale. There are **no `.radius-*` utility classes** — the tokens are consumed by component CSS (the button's corners come from `--radius-s`, for example) or applied directly where a component doesn't exist yet.
+
+| Token | Value |
+| --- | --- |
+| `--radius-2xs` | 2px |
+| `--radius-xs` | 4px |
+| `--radius-s` | 6px |
+| `--radius-m` | 10px |
+| `--radius-l` | 16px |
+| `--radius-xl` | 24px |
+| `--radius-pill` | 999px (fully rounded) |
+
+<div class="demo-preview is-joined is-centered">
+  <div class="border padding-l" style="border-radius: var(--radius-xs);">xs</div>
+  <div class="border padding-l" style="border-radius: var(--radius-m);">m</div>
+  <div class="border padding-l" style="border-radius: var(--radius-xl);">xl</div>
+  <div class="border padding-l" style="border-radius: var(--radius-pill);">pill</div>
+</div>
+
+```html
+<div class="border" style="border-radius: var(--radius-m);">Rounded box</div>
+```
+
+```css
+.card {
+  border-radius: var(--radius-m);
+}
 ```
 
 ---

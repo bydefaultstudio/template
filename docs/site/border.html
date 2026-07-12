@@ -63,7 +63,20 @@
     <ul class="nav-list nav-home">
       <li><a href="index.html" class="nav-link ">Home</a></li>
     </ul>
-  <details class="nav-section" open>
+  <details class="nav-section">
+      <summary class="nav-section-toggle">
+        <span>Brand</span>
+        <span class="nav-toggle-icon">
+          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
+          </svg>
+        </span>
+      </summary>
+      <ul class="nav-list">
+        <li><a href="brand-book.html" class="nav-link ">Brand Book</a></li>
+      
+      </ul>
+    </details><details class="nav-section" open>
       <summary class="nav-section-toggle">
         <span>Design System</span>
         <span class="nav-toggle-icon">
@@ -82,6 +95,8 @@
         <li><a href="spacing.html" class="nav-link ">Spacing</a></li>
       
         <li><a href="border.html" class="nav-link nav-link-active">Border</a></li>
+      
+        <li><a href="motion.html" class="nav-link ">Motion</a></li>
       
         <li><a href="button.html" class="nav-link ">Button</a></li>
       
@@ -213,10 +228,10 @@
 <h4 id="example">Example</h4>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-0q1vqkcg2" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-r3c3rqt53" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-0q1vqkcg2" class="language-html">&lt;section class=&quot;border-bottom&quot;&gt;
+        <pre><code id="code-r3c3rqt53" class="language-html">&lt;section class=&quot;border-bottom&quot;&gt;
   &lt;!-- Content with bottom border --&gt;
 &lt;/section&gt;
 </code></pre>
@@ -252,10 +267,10 @@
 <h4 id="example">Example</h4>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-ahwq97grp" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ml7ld09k2" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-ahwq97grp" class="language-html">&lt;div class=&quot;border border-m&quot;&gt;
+        <pre><code id="code-ml7ld09k2" class="language-html">&lt;div class=&quot;border border-m&quot;&gt;
   &lt;!-- Content with medium border on all sides --&gt;
 &lt;/div&gt;
 </code></pre>
@@ -291,17 +306,17 @@
 <h4 id="example">Example</h4>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-e8fwa7s9l" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-s1cvc56qm" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-e8fwa7s9l" class="language-html">&lt;div class=&quot;border border-dashed&quot;&gt;
+        <pre><code id="code-s1cvc56qm" class="language-html">&lt;div class=&quot;border border-dashed&quot;&gt;
   &lt;!-- Content with dashed border --&gt;
 &lt;/div&gt;
 </code></pre>
       </div>
     
 <hr>
-<h2 id="boder-color">Boder Color</h2>
+<h2 id="border-color">Border Color</h2>
 <p>Color combo classes modify the border color using semantic tokens.</p>
 <table>
 <thead>
@@ -330,12 +345,104 @@
 <h4 id="example">Example</h4>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-5hyskvk74" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-zgz3wv1hw" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-5hyskvk74" class="language-html">&lt;div class=&quot;border border-secondary&quot;&gt;
+        <pre><code id="code-zgz3wv1hw" class="language-html">&lt;div class=&quot;border border-secondary&quot;&gt;
   &lt;!-- Content with subtle border --&gt;
 &lt;/div&gt;
+</code></pre>
+      </div>
+    
+<hr>
+<h2 id="examples">Examples</h2>
+<p>Compose position, width, style, and colour freely — one class per concern:</p>
+<div class="demo-preview is-joined">
+  <div class="block gap-m">
+    <div class="border border-primary padding-l">Primary border</div>
+    <div class="border border-secondary padding-l">Secondary border</div>
+    <div class="border border-faded padding-l">Faded border</div>
+    <div class="border-top border-m border-dashed padding-l">Dashed top, medium width</div>
+    <div class="border border-l border-dotted padding-l">Dotted, large width</div>
+  </div>
+</div>
+
+
+      <div class="code-block-wrapper">
+        <button class="copy-code-btn" data-clipboard-target="#code-jgwcnttat" type="button" aria-label="Copy code">
+          <span class="copy-text">Copy</span>
+        </button>
+        <pre><code id="code-jgwcnttat" class="language-html">&lt;div class=&quot;border border-primary&quot;&gt;Primary border&lt;/div&gt;
+&lt;div class=&quot;border border-secondary&quot;&gt;Secondary border&lt;/div&gt;
+&lt;div class=&quot;border border-faded&quot;&gt;Faded border&lt;/div&gt;
+&lt;div class=&quot;border-top border-m border-dashed&quot;&gt;Dashed top, medium width&lt;/div&gt;
+&lt;div class=&quot;border border-l border-dotted&quot;&gt;Dotted, large width&lt;/div&gt;
+</code></pre>
+      </div>
+    
+<hr>
+<h2 id="border-radius">Border Radius</h2>
+<p>Radius tokens define the corner rounding scale. There are <strong>no <code>.radius-*</code> utility classes</strong> — the tokens are consumed by component CSS (the button&#39;s corners come from <code>--radius-s</code>, for example) or applied directly where a component doesn&#39;t exist yet.</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--radius-2xs</code></td>
+<td>2px</td>
+</tr>
+<tr>
+<td><code>--radius-xs</code></td>
+<td>4px</td>
+</tr>
+<tr>
+<td><code>--radius-s</code></td>
+<td>6px</td>
+</tr>
+<tr>
+<td><code>--radius-m</code></td>
+<td>10px</td>
+</tr>
+<tr>
+<td><code>--radius-l</code></td>
+<td>16px</td>
+</tr>
+<tr>
+<td><code>--radius-xl</code></td>
+<td>24px</td>
+</tr>
+<tr>
+<td><code>--radius-pill</code></td>
+<td>999px (fully rounded)</td>
+</tr>
+</tbody></table>
+<div class="demo-preview is-joined is-centered">
+  <div class="border padding-l" style="border-radius: var(--radius-xs);">xs</div>
+  <div class="border padding-l" style="border-radius: var(--radius-m);">m</div>
+  <div class="border padding-l" style="border-radius: var(--radius-xl);">xl</div>
+  <div class="border padding-l" style="border-radius: var(--radius-pill);">pill</div>
+</div>
+
+
+      <div class="code-block-wrapper">
+        <button class="copy-code-btn" data-clipboard-target="#code-lvkaznr1j" type="button" aria-label="Copy code">
+          <span class="copy-text">Copy</span>
+        </button>
+        <pre><code id="code-lvkaznr1j" class="language-html">&lt;div class=&quot;border&quot; style=&quot;border-radius: var(--radius-m);&quot;&gt;Rounded box&lt;/div&gt;
+</code></pre>
+      </div>
+    
+
+      <div class="code-block-wrapper">
+        <button class="copy-code-btn" data-clipboard-target="#code-mz9ndpcl8" type="button" aria-label="Copy code">
+          <span class="copy-text">Copy</span>
+        </button>
+        <pre><code id="code-mz9ndpcl8" class="language-css">.card {
+  border-radius: var(--radius-m);
+}
 </code></pre>
       </div>
     
@@ -359,7 +466,7 @@
                 <!-- Table of Contents -->
                 <aside class="docs-toc">
       <span class="toc-header">On this page</span>
-      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#core-principles" class="toc-link">Core Principles</a></li><li class="toc-item toc-level-2"><a href="#border-structure" class="toc-link">Border Structure</a></li><li class="toc-item toc-level-2"><a href="#border-width" class="toc-link">Border Width</a></li><li class="toc-item toc-level-2"><a href="#border-style" class="toc-link">Border Style</a></li><li class="toc-item toc-level-2"><a href="#boder-color" class="toc-link">Boder Color</a></li><li class="toc-item toc-level-2"><a href="#limitations" class="toc-link">Limitations</a></li><li class="toc-item toc-level-2"><a href="#rules" class="toc-link">Rules</a></li></ul></nav></div>
+      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#core-principles" class="toc-link">Core Principles</a></li><li class="toc-item toc-level-2"><a href="#border-structure" class="toc-link">Border Structure</a></li><li class="toc-item toc-level-2"><a href="#border-width" class="toc-link">Border Width</a></li><li class="toc-item toc-level-2"><a href="#border-style" class="toc-link">Border Style</a></li><li class="toc-item toc-level-2"><a href="#border-color" class="toc-link">Border Color</a></li><li class="toc-item toc-level-2"><a href="#examples" class="toc-link">Examples</a></li><li class="toc-item toc-level-2"><a href="#border-radius" class="toc-link">Border Radius</a></li><li class="toc-item toc-level-2"><a href="#limitations" class="toc-link">Limitations</a></li><li class="toc-item toc-level-2"><a href="#rules" class="toc-link">Rules</a></li></ul></nav></div>
     </aside>
             </div>
             
