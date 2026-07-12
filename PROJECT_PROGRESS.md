@@ -39,14 +39,14 @@ The core restructure: split the monolithic `src/css/design-system.css` into two 
 - [x] Update `CLAUDE.md` — references `src/css/design-system.css` as single source of truth
 - [x] Regenerate docs after all md updates
 - [x] Add smooth scroll for anchor links in docs site (already existed in docs.css)
-- [ ] Commit all changes and push to GitHub
+- [x] Commit all changes and push to GitHub
 - [ ] Set up VS Code Live Server to serve from project root (`.vscode/settings.json`)
 
 ---
 
-## Future Work (Not Started)
+## Future Work (Superseded)
 
-These items were discussed but explicitly deferred. CSS/HTML only — no JavaScript.
+These items were discussed but explicitly deferred. **Superseded 2026-07-12:** the design system now arrives via the `@bydefaultstudio/design-system` npm package, and most of the elements below (tables, details/summary, tags, breadcrumbs, pagination, progress, tabs and more) ship in the current framework. New component requests belong in the design-system repo, not this template.
 
 ### Design System CSS — Elements to Add
 - [ ] Code snippets (`<code>`, `<pre>`, `<kbd>`)
@@ -91,3 +91,23 @@ Aligned the template with the evolved by-default design system ("BrandOS") — s
 - [x] New theme.css all-commented starter + theme-toggle.js
 - [x] Brand section in docs sidebar; demo-preview styles; docs content rewritten with live demos
 - [x] CLAUDE.md / README / folder docs updated to the new contract
+
+---
+
+## npm Design System Dependency (2026-07-12)
+
+The design system is no longer a tracked copy — it arrives via the `@bydefaultstudio/design-system` npm package. Canonical documentation lives at [bydefault.design](https://bydefault.design).
+
+### Architecture Decisions
+- **Synced, not vendored**: `scripts/sync-design-system.js` copies the package's CSS into `assets/css/design-system.css` on `npm install` (postinstall hook). The file is gitignored and never hand-edited — changes belong upstream in the design-system repo.
+- **No lockfile in the template**: `package-lock.json` is ignored so new projects resolve the newest compatible version at first install; projects may commit their own lockfile afterwards.
+- **Dependabot + Netlify**: `.github/dependabot.yml` opens PRs on new package versions; `netlify.toml` runs `npm install` on deploy so the sync happens in CI.
+- **Docs are project-scoped**: the twelve design system docs were deleted from `docs/`; cross-links point at the canonical live docs.
+
+### Completed
+- [x] Root `package.json` + postinstall sync script; design-system.css untracked and gitignored
+- [x] Compatibility pass for the 1,510 → 3,775-line version gap: `.container-small/-medium` → `.container-s/-m`; `--accent` → `--text-accent`; dark-mode-toggle icon rules re-homed to `style.css` + docs `docs.css`; framework summary chevron suppressed in docs sidebar; `.token-tag` re-homed to docs chrome
+- [x] Dependabot, netlify.toml, README install/lockfile notes
+- [x] Design system docs culled; docs site regenerated with template/project pages only
+- [x] CLAUDE.md, README, setup/template/upgrading/folder-structure docs updated to the package workflow
+- [x] Repo-wide audit: stale token/class/path references fixed across docs, generator, and templates

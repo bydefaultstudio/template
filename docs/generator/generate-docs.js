@@ -335,10 +335,10 @@ function generatePage(file, template, navigation) {
   let pageHeader = '';
   if (frontmatter.title) {
     pageHeader = `<div class="page-header">
-      <div class="container-medium">
+      <div class="container-m">
         <h1>${frontmatter.title}</h1>
         ${frontmatter.subtitle ? `<p class="page-subtitle">${frontmatter.subtitle}</p>` : ''}
-        <a href="../${file.markdownPath}" class="button is-small is-faded page-source-link" target="_blank" rel="noopener noreferrer">View as Markdown</a>
+        <a href="../${file.markdownPath}" class="button page-source-link" data-variant="faded" data-size="small" target="_blank" rel="noopener noreferrer">View as Markdown</a>
       </div>
     </div>`;
   }

@@ -129,10 +129,10 @@
         <div class="docs-main-area">
             <!-- Page Header (full width, outside grid) -->
             <div class="page-header">
-      <div class="container-medium">
+      <div class="container-m">
         <h1>Setup</h1>
         <p class="page-subtitle">Getting started with this template</p>
-        <a href="../setup.md" class="button is-small is-faded page-source-link" target="_blank" rel="noopener noreferrer">View as Markdown</a>
+        <a href="../setup.md" class="button page-source-link" data-variant="faded" data-size="small" target="_blank" rel="noopener noreferrer">View as Markdown</a>
       </div>
     </div>
             
@@ -146,24 +146,27 @@
 </blockquote>
 <p>This template provides a solid foundation for new projects. Follow these steps to customize it for your project.</p>
 <hr>
+<h2 id="install">Install</h2>
+<p>Run <code>npm install</code> at the repo root before anything else. This syncs the design system CSS from the <code>@bydefaultstudio/design-system</code> npm package into <code>assets/css/design-system.css</code> — the file is gitignored and does not exist until the sync runs. Canonical design system documentation lives at <a href="https://bydefault.design" target="_blank" rel="noopener noreferrer">bydefault.design</a>.</p>
+<hr>
 <h2 id="brand-colors">Brand Colors</h2>
 <p>Update brand colours in <code>assets/css/theme.css</code>.</p>
 <p>The design system (<code>assets/css/design-system.css</code>) ships neutral working defaults — system font stacks and a neutral accent. Your brand overrides the §1/§2 primitives in <code>theme.css</code>; the semantic layer cascades through them automatically.</p>
 <p><strong>What to change</strong> — uncomment and edit the starter blocks in <code>theme.css</code>:</p>
 <ul>
-<li><code>--accent</code> — your brand accent; drives <code>--text-accent</code>, <code>--text-link</code>, and <code>--input-focus</code></li>
+<li><code>--text-accent</code> — your brand accent; drives <code>--text-link</code> and <code>--input-focus</code></li>
 <li><code>--text-primary</code> / <code>--background-primary</code> — core text and background, if the neutral defaults don&#39;t suit</li>
 <li><code>--status-*</code> — status colours (optional)</li>
 </ul>
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-um5kmswfs" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-3o5z3ixjg" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-um5kmswfs" class="language-css">/* assets/css/theme.css */
+        <pre><code id="code-3o5z3ixjg" class="language-css">/* assets/css/theme.css */
 :root {
-  --accent: #3485cd;
+  --text-accent: #3485cd;
   --text-primary: var(--neutral-800);
   --background-primary: var(--white);
 }
@@ -186,10 +189,10 @@
 <p>Every page loads the three CSS layers in this order:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-b9acavfbg" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ppxy6hur4" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-b9acavfbg" class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/design-system.css&quot;&gt;
+        <pre><code id="code-ppxy6hur4" class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/design-system.css&quot;&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/theme.css&quot;&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/style.css&quot;&gt;
 </code></pre>
@@ -203,7 +206,7 @@
 <p><code>theme.css</code> must load <strong>after</strong> <code>design-system.css</code> so brand overrides win via the cascade — no <code>!important</code> needed.</p>
 <h3 id="what-themecss-should-override">What theme.css should override</h3>
 <ul>
-<li><strong>Do</strong> override §1/§2 primitives: fonts, <code>--accent</code>, neutrals, status colours.</li>
+<li><strong>Do</strong> override §1/§2 primitives: fonts, <code>--text-accent</code>, neutrals, status colours.</li>
 <li><strong>Don&#39;t</strong> restate semantic tokens (<code>--text-*</code>, <code>--background-*</code>, <code>--border-*</code>) unless you are deliberately re-skinning a semantic role — the semantic layer already resolves through the primitives you set.</li>
 </ul>
 <h3 id="dark-mode">Dark mode</h3>
@@ -246,6 +249,7 @@
 <hr>
 <h2 id="quick-checklist">Quick Checklist</h2>
 <ul>
+<li><input disabled="" type="checkbox"> Run <code>npm install</code> (syncs the design system CSS)</li>
 <li><input disabled="" type="checkbox"> Update brand colours in <code>assets/css/theme.css</code></li>
 <li><input disabled="" type="checkbox"> Update font families in <code>assets/css/theme.css</code> (plus <code>@font-face</code> or <code>@import</code>)</li>
 <li><input disabled="" type="checkbox"> Mirror any dark-mode overrides in both dark blocks of <code>theme.css</code></li>
@@ -269,7 +273,7 @@
                 <!-- Table of Contents -->
                 <aside class="docs-toc">
       <span class="toc-header">On this page</span>
-      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#brand-colors" class="toc-link">Brand Colors</a></li><li class="toc-item toc-level-2"><a href="#fonts" class="toc-link">Fonts</a></li><li class="toc-item toc-level-2"><a href="#brand-theming" class="toc-link">Brand Theming</a></li><li class="toc-item toc-level-2"><a href="#logo" class="toc-link">Logo</a></li><li class="toc-item toc-level-2"><a href="#project-brief" class="toc-link">Project Brief</a></li><li class="toc-item toc-level-2"><a href="#meta-tags-amp-seo" class="toc-link">Meta Tags &amp; SEO</a></li><li class="toc-item toc-level-2"><a href="#documentation" class="toc-link">Documentation</a></li><li class="toc-item toc-level-2"><a href="#quick-checklist" class="toc-link">Quick Checklist</a></li><li class="toc-item toc-level-2"><a href="#next-steps" class="toc-link">Next Steps</a></li></ul></nav></div>
+      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#install" class="toc-link">Install</a></li><li class="toc-item toc-level-2"><a href="#brand-colors" class="toc-link">Brand Colors</a></li><li class="toc-item toc-level-2"><a href="#fonts" class="toc-link">Fonts</a></li><li class="toc-item toc-level-2"><a href="#brand-theming" class="toc-link">Brand Theming</a></li><li class="toc-item toc-level-2"><a href="#logo" class="toc-link">Logo</a></li><li class="toc-item toc-level-2"><a href="#project-brief" class="toc-link">Project Brief</a></li><li class="toc-item toc-level-2"><a href="#meta-tags-amp-seo" class="toc-link">Meta Tags &amp; SEO</a></li><li class="toc-item toc-level-2"><a href="#documentation" class="toc-link">Documentation</a></li><li class="toc-item toc-level-2"><a href="#quick-checklist" class="toc-link">Quick Checklist</a></li><li class="toc-item toc-level-2"><a href="#next-steps" class="toc-link">Next Steps</a></li></ul></nav></div>
     </aside>
             </div>
             

@@ -129,10 +129,10 @@
         <div class="docs-main-area">
             <!-- Page Header (full width, outside grid) -->
             <div class="page-header">
-      <div class="container-medium">
+      <div class="container-m">
         <h1>Folders</h1>
         <p class="page-subtitle">File organization and directory structure</p>
-        <a href="../folder-structure.md" class="button is-small is-faded page-source-link" target="_blank" rel="noopener noreferrer">View as Markdown</a>
+        <a href="../folder-structure.md" class="button page-source-link" data-variant="faded" data-size="small" target="_blank" rel="noopener noreferrer">View as Markdown</a>
       </div>
     </div>
             
@@ -149,17 +149,25 @@
 <h2 id="structure">Structure</h2>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-du1vydfr1" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ac70r4pr2" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-du1vydfr1">index.html              → Starter page (replace with project homepage)
+        <pre><code id="code-ac70r4pr2">index.html              → Starter page (replace with project homepage)
 CLAUDE.md               → Claude Code development rules (authoritative)
 README.md               → Project overview and getting started
 PROJECT_BRIEF.md        → Project brief and requirements
 PROJECT_PROGRESS.md     → Progress tracker for ongoing work
+package.json            → npm manifest: design system dependency + postinstall sync
+netlify.toml            → Netlify build (runs npm install so the sync happens on deploy)
+scripts/
+  sync-design-system.js → Copies the design system CSS from node_modules into assets/css
+.github/
+  dependabot.yml        → Weekly checks for new design system versions
 assets/
   css/
-    design-system.css   → Design system framework (never edited per project)
+    design-system.css   → Design system framework — synced from the
+                          @bydefaultstudio/design-system npm package on
+                          npm install; gitignored, never hand-edited
     theme.css           → Brand overrides (primitives, fonts)
     style.css           → Project-specific styles
   js/
@@ -172,11 +180,12 @@ docs/                   → Documentation (markdown sources + generated site)
 </code></pre>
       </div>
     
+<p><code>node_modules/</code> (repo root and <code>docs/generator/</code>) and <code>package-lock.json</code> are gitignored. The lockfile is deliberately not committed in the template so new projects resolve the newest compatible design system at first install; projects may commit their own lockfile afterwards.</p>
 <h2 id="assetscss">assets/css/</h2>
 <p>The three-layer CSS contract. Load order matters — every page links them in this sequence:</p>
 <ol>
-<li><code>design-system.css</code> — the framework: tokens, base styles, layout primitives, utilities, components. Ships neutral working defaults and is never edited per project.</li>
-<li><code>theme.css</code> — your brand: overrides §1/§2 primitives (fonts, <code>--accent</code>, neutrals) and loads brand fonts via <code>@font-face</code> or <code>@import</code>. Semantics cascade through the primitives.</li>
+<li><code>design-system.css</code> — the framework: tokens, base styles, layout primitives, utilities, components. Synced from the <code>@bydefaultstudio/design-system</code> npm package on <code>npm install</code> — never edit it; changes belong upstream in the design-system repo. Ships neutral working defaults.</li>
+<li><code>theme.css</code> — your brand: overrides §1/§2 primitives (fonts, <code>--text-accent</code>, neutrals) and loads brand fonts via <code>@font-face</code> or <code>@import</code>. Semantics cascade through the primitives.</li>
 <li><code>style.css</code> — project-specific styles built on top of the system.</li>
 </ol>
 <h2 id="assetsjs">assets/js/</h2>

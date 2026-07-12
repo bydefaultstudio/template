@@ -129,10 +129,10 @@
         <div class="docs-main-area">
             <!-- Page Header (full width, outside grid) -->
             <div class="page-header">
-      <div class="container-medium">
+      <div class="container-m">
         <h1>Upgrading the Docs Engine</h1>
         <p class="page-subtitle">How to update the doc site across projects</p>
-        <a href="../upgrading-docs.md" class="button is-small is-faded page-source-link" target="_blank" rel="noopener noreferrer">View as Markdown</a>
+        <a href="../upgrading-docs.md" class="button page-source-link" data-variant="faded" data-size="small" target="_blank" rel="noopener noreferrer">View as Markdown</a>
       </div>
     </div>
             
@@ -181,10 +181,10 @@
 </ol>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-3tfazqnhf" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-a7l7w71jh" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-3tfazqnhf" class="language-bash">cd docs/generator
+        <pre><code id="code-a7l7w71jh" class="language-bash">cd docs/generator
 npm install
 npm run docgen
 </code></pre>
@@ -198,10 +198,10 @@ npm run docgen
 <p>Edit <code>docs/docs.config.js</code> in the project:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-y1mo2yswc" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ryf0jwd4i" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-y1mo2yswc" class="language-js">module.exports = {
+        <pre><code id="code-ryf0jwd4i" class="language-js">module.exports = {
   // Path to design system CSS, relative from docs/site/
   designSystemPath: &#39;../../assets/css/design-system.css&#39;,
 
@@ -224,15 +224,15 @@ npm run docgen
 <p>Replace the logo by swapping <code>docs/site/assets/images/logo.svg</code>.<br>Replace favicons by swapping <code>docs/site/assets/images/favicon.svg</code> and <code>favicon.ico</code>.</p>
 <hr>
 <h2 id="design-system-css-convention">Design System CSS Convention</h2>
-<p>The design system CSS lives at <code>assets/css/design-system.css</code>. The brand theme lives at <code>assets/css/theme.css</code>. Both paths are referenced in <code>docs/docs.config.js</code> and used by every generated doc page.</p>
+<p>The design system CSS lives at <code>assets/css/design-system.css</code> — it is synced from the <code>@bydefaultstudio/design-system</code> npm package by <code>npm install</code> at the repo root, and is gitignored. The brand theme lives at <code>assets/css/theme.css</code>. Both paths are referenced in <code>docs/docs.config.js</code> and used by every generated doc page.</p>
 <p><strong>If the path is wrong or the file is missing</strong>, every doc page will show a friendly amber banner at the top:</p>
 <blockquote>
 <p>Design system CSS not found. Check the path in <code>docs/docs.config.js</code> → <code>designSystemPath</code>, then re-run <code>npm run docgen</code>.</p>
 </blockquote>
 <p>To fix it:</p>
 <ol>
-<li>Confirm where your design system CSS lives</li>
-<li>Update <code>designSystemPath</code> in <code>docs/docs.config.js</code></li>
+<li>Run <code>npm install</code> at the repo root — a fresh clone has no <code>design-system.css</code> until the sync runs</li>
+<li>If the banner persists, update <code>designSystemPath</code> in <code>docs/docs.config.js</code></li>
 <li>Run <code>npm run docgen</code></li>
 </ol>
 <p>The banner disappears as soon as the CSS loads correctly.</p>
@@ -241,10 +241,10 @@ npm run docgen
 <p>Run these from inside <code>docs/generator/</code>:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-jasphaa0s" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-pg7g3ah63" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-jasphaa0s" class="language-bash">npm run docgen     # Generate HTML from markdown
+        <pre><code id="code-pg7g3ah63" class="language-bash">npm run docgen     # Generate HTML from markdown
 npm run serve      # View locally in browser
 npm run docwatch   # Auto-regenerate on markdown changes
 npm run docfull    # Generate + serve + watch (all at once)

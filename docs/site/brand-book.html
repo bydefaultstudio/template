@@ -129,10 +129,10 @@
         <div class="docs-main-area">
             <!-- Page Header (full width, outside grid) -->
             <div class="page-header">
-      <div class="container-medium">
+      <div class="container-m">
         <h1>Brand Book</h1>
         <p class="page-subtitle">Your project's visual identity</p>
-        <a href="../brand-book.md" class="button is-small is-faded page-source-link" target="_blank" rel="noopener noreferrer">View as Markdown</a>
+        <a href="../brand-book.md" class="button page-source-link" data-variant="faded" data-size="small" target="_blank" rel="noopener noreferrer">View as Markdown</a>
       </div>
     </div>
             
@@ -280,10 +280,10 @@
 <p><code>theme.css</code> loads after <code>design-system.css</code> and overrides <strong>§1/§2 primitives only</strong> — fonts, <code>--text-accent</code>, and the neutral ramp. Semantic tokens (<code>--text-*</code>, <code>--background-*</code>, buttons, forms) resolve through those primitives, so they cascade automatically; you should rarely restate them.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-c0pfqvtp8" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-986eovbih" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-c0pfqvtp8" class="language-css">/* assets/css/theme.css */
+        <pre><code id="code-986eovbih" class="language-css">/* assets/css/theme.css */
 :root {
   --font-primary: &quot;Your Font&quot;, sans-serif;
   --text-accent: #3485cd;
@@ -295,10 +295,10 @@
 <p>For brand values that differ in dark mode, add a <code>[data-theme=&quot;dark&quot;]</code> block <strong>and</strong> a mirrored <code>@media (prefers-color-scheme: dark) { :root:not([data-theme]) { … } }</code> block — the first serves the JS toggle, the second serves no-JS visitors following their OS preference. The two blocks must contain the same values; if they drift, toggled and OS-preference visitors see different brands.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-li91b58wc" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-k4ynflx5z" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-li91b58wc" class="language-css">[data-theme=&quot;dark&quot;] {
+        <pre><code id="code-k4ynflx5z" class="language-css">[data-theme=&quot;dark&quot;] {
   --text-accent: #6cb2ff;
 }
 

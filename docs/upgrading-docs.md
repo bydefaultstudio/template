@@ -78,15 +78,15 @@ Replace favicons by swapping `docs/site/assets/images/favicon.svg` and `favicon.
 
 ## Design System CSS Convention
 
-The design system CSS lives at `assets/css/design-system.css`. The brand theme lives at `assets/css/theme.css`. Both paths are referenced in `docs/docs.config.js` and used by every generated doc page.
+The design system CSS lives at `assets/css/design-system.css` — it is synced from the `@bydefaultstudio/design-system` npm package by `npm install` at the repo root, and is gitignored. The brand theme lives at `assets/css/theme.css`. Both paths are referenced in `docs/docs.config.js` and used by every generated doc page.
 
 **If the path is wrong or the file is missing**, every doc page will show a friendly amber banner at the top:
 
 > Design system CSS not found. Check the path in `docs/docs.config.js` → `designSystemPath`, then re-run `npm run docgen`.
 
 To fix it:
-1. Confirm where your design system CSS lives
-2. Update `designSystemPath` in `docs/docs.config.js`
+1. Run `npm install` at the repo root — a fresh clone has no `design-system.css` until the sync runs
+2. If the banner persists, update `designSystemPath` in `docs/docs.config.js`
 3. Run `npm run docgen`
 
 The banner disappears as soon as the CSS loads correctly.

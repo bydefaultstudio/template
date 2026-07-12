@@ -129,10 +129,10 @@
         <div class="docs-main-area">
             <!-- Page Header (full width, outside grid) -->
             <div class="page-header">
-      <div class="container-medium">
+      <div class="container-m">
         <h1>Template</h1>
         <p class="page-subtitle">What this template is and how to use it</p>
-        <a href="../template.md" class="button is-small is-faded page-source-link" target="_blank" rel="noopener noreferrer">View as Markdown</a>
+        <a href="../template.md" class="button page-source-link" data-variant="faded" data-size="small" target="_blank" rel="noopener noreferrer">View as Markdown</a>
       </div>
     </div>
             
@@ -168,7 +168,7 @@
 </ul>
 <p>It provides:</p>
 <ul>
-<li>A complete <strong>design system</strong> (tokens, layout, typography, utilities)</li>
+<li>A complete <strong>design system</strong> (tokens, layout, typography, utilities) via the <code>@bydefaultstudio/design-system</code> npm package</li>
 <li>Clear <strong>layout and spacing rules</strong></li>
 <li>Reusable <strong>UI patterns</strong></li>
 <li>Consistent <strong>CSS architecture</strong></li>
@@ -199,8 +199,9 @@
 <h2 id="how-to-use-this-template">How to Use This Template</h2>
 <ol>
 <li>Clone the repository</li>
+<li>Run <code>npm install</code> — this syncs the design system CSS from the <code>@bydefaultstudio/design-system</code> npm package</li>
 <li>Follow the <a href="setup.html">Setup guide</a> to customize brand tokens, fonts, and logo</li>
-<li>Use the style guide to understand available patterns</li>
+<li>Use the canonical design system docs at <a href="https://bydefault.design" target="_blank" rel="noopener noreferrer">bydefault.design</a> to understand available patterns</li>
 <li>Build pages using the documented layout structure</li>
 <li>Add project-specific logic on top</li>
 </ol>

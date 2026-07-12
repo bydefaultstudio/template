@@ -5,29 +5,29 @@
  * Version: 1.0
  */
 
-console.log("Script v1.0 — [ComponentName]");
+var VERSION = '1.0.0';
 
 //
 //------- Section Name -------//
 //
 
 // Function Name
-function testFunction() {
+function componentFunction() {
 
 }
 
 // Event Listener Name
-function testEventListener() {
+function handleComponentEvent() {
 
 }
-
 
 //
 //------- Initialize -------//
 //
 
-document.addEventListener("DOMContentLoaded", () => {
-  testFunction();
-  testEventListener();
-});
+function initComponent() {
+  componentFunction();
+  console.log('[component-name].js v' + VERSION + ' initialised');
+}
 
+document.addEventListener('DOMContentLoaded', initComponent);

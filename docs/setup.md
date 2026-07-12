@@ -12,6 +12,12 @@ This template provides a solid foundation for new projects. Follow these steps t
 
 ---
 
+## Install
+
+Run `npm install` at the repo root before anything else. This syncs the design system CSS from the `@bydefaultstudio/design-system` npm package into `assets/css/design-system.css` — the file is gitignored and does not exist until the sync runs. Canonical design system documentation lives at [bydefault.design](https://bydefault.design).
+
+---
+
 ## Brand Colors
 
 Update brand colours in `assets/css/theme.css`.
@@ -19,7 +25,7 @@ Update brand colours in `assets/css/theme.css`.
 The design system (`assets/css/design-system.css`) ships neutral working defaults — system font stacks and a neutral accent. Your brand overrides the §1/§2 primitives in `theme.css`; the semantic layer cascades through them automatically.
 
 **What to change** — uncomment and edit the starter blocks in `theme.css`:
-- `--accent` — your brand accent; drives `--text-accent`, `--text-link`, and `--input-focus`
+- `--text-accent` — your brand accent; drives `--text-link` and `--input-focus`
 - `--text-primary` / `--background-primary` — core text and background, if the neutral defaults don't suit
 - `--status-*` — status colours (optional)
 
@@ -27,7 +33,7 @@ The design system (`assets/css/design-system.css`) ships neutral working default
 ```css
 /* assets/css/theme.css */
 :root {
-  --accent: #3485cd;
+  --text-accent: #3485cd;
   --text-primary: var(--neutral-800);
   --background-primary: var(--white);
 }
@@ -68,7 +74,7 @@ Every page loads the three CSS layers in this order:
 
 ### What theme.css should override
 
-- **Do** override §1/§2 primitives: fonts, `--accent`, neutrals, status colours.
+- **Do** override §1/§2 primitives: fonts, `--text-accent`, neutrals, status colours.
 - **Don't** restate semantic tokens (`--text-*`, `--background-*`, `--border-*`) unless you are deliberately re-skinning a semantic role — the semantic layer already resolves through the primitives you set.
 
 ### Dark mode
@@ -119,6 +125,7 @@ The documentation is ready to use, but you may want to:
 
 ## Quick Checklist
 
+- [ ] Run `npm install` (syncs the design system CSS)
 - [ ] Update brand colours in `assets/css/theme.css`
 - [ ] Update font families in `assets/css/theme.css` (plus `@font-face` or `@import`)
 - [ ] Mirror any dark-mode overrides in both dark blocks of `theme.css`

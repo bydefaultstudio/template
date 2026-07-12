@@ -487,7 +487,7 @@ body:not(.sidebar-collapsed) .nav-section[open] .nav-list {
   margin-bottom: var(--space-2xl);
 }
 
-.page-header .container-medium {
+.page-header .container-m {
   text-align: center;
 }
 
@@ -506,6 +506,19 @@ body:not(.sidebar-collapsed) .nav-section[open] .nav-list {
 
 .page-source-link {
   display: inline-block;
+}
+
+/* -- Token labels (used by brand-book demos) -- */
+/* The design system dropped .token-tag; the docs chrome carries it */
+.token-tag {
+  display: inline-block;
+  font-size: var(--font-2xs);
+  font-family: var(--font-tertiary);
+  color: var(--text-plain);
+  background-color: var(--background-faded);
+  padding: var(--space-2xs) var(--space-s);
+  align-self: flex-start;
+  margin-bottom: var(--space-m);
 }
 
 

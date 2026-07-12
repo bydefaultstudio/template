@@ -39,7 +39,7 @@ This template is ideal for:
 
 It provides:
 
-- A complete **design system** (tokens, layout, typography, utilities)
+- A complete **design system** (tokens, layout, typography, utilities) via the `@bydefaultstudio/design-system` npm package
 - Clear **layout and spacing rules**
 - Reusable **UI patterns**
 - Consistent **CSS architecture**
@@ -77,10 +77,11 @@ This template works in:
 ## How to Use This Template
 
 1. Clone the repository
-2. Follow the [Setup guide](setup.html) to customize brand tokens, fonts, and logo
-3. Use the style guide to understand available patterns
-4. Build pages using the documented layout structure
-5. Add project-specific logic on top
+2. Run `npm install` — this syncs the design system CSS from the `@bydefaultstudio/design-system` npm package
+3. Follow the [Setup guide](setup.html) to customize brand tokens, fonts, and logo
+4. Use the canonical design system docs at [bydefault.design](https://bydefault.design) to understand available patterns
+5. Build pages using the documented layout structure
+6. Add project-specific logic on top
 
 You should be able to start building **immediately** without reorganising the system.
 
