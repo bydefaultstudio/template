@@ -13,7 +13,8 @@ module.exports = {
   brandCssPath: '../../assets/css/theme.css',
 
   // Google Fonts URL — set to null to disable
-  googleFontsUrl: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap',
+  // Fonts come from assets/css/theme.css under the neutral-engine contract
+  googleFontsUrl: null,
 
   // Footer text
   footerText: '© 2025 By Default',

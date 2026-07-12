@@ -24,6 +24,9 @@
     
     <!-- Docs-specific styles (additions) -->
     <link rel="stylesheet" href="assets/docs.css">
+
+    <!-- Theme toggle (in <head> so dark mode applies before first paint) -->
+    <script src="../../assets/js/theme-toggle.js"></script>
 </head>
 <body>
 
@@ -43,6 +46,7 @@
                         <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
                         <img src="assets/images/logo-small.svg" alt="Logo" class="nav-logo-small">
                     </a>
+                    <button class="dark-mode-toggle" aria-label="Toggle dark mode" type="button"></button>
                     <button class="docs-sidebar-toggle" aria-label="Collapse sidebar" type="button">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

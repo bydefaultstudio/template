@@ -1,27 +1,79 @@
 /* ─────────────────────────────
-   BRAND BOOK
+   BRAND THEME
    ─────────────────────────────
 
-   This file defines the brand identity tokens.
-   The design system framework reads these via var(--brand-*, fallback).
+   The design system (design-system.css) ships neutral defaults on
+   real token names. This file is your brand: override §1/§2
+   primitives here and the semantic layer cascades through them.
+   You should rarely need to restate semantic tokens.
 
-   Customise these values for each project's brand.
+   Load AFTER design-system.css:
+     <link rel="stylesheet" href="assets/css/design-system.css">
+     <link rel="stylesheet" href="assets/css/theme.css">
+
+   Fonts: self-host with @font-face (files in assets/fonts/), or
+   @import a Google Fonts URL at the top of this file.
+
+   Everything below is a commented example — uncomment and edit
+   to apply your brand.
    ───────────────────────────── */
 
+
+/* -- Brand fonts (self-hosted example) -- */
+/*
+@font-face {
+  font-family: "Your Font";
+  src: url("../fonts/your-font.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
 :root {
-  /* -- Typography -- */
-  --brand-font-primary: "Inter", sans-serif;
-  --brand-font-secondary: "Georgia", serif;
-  --brand-font-tertiary: monospace;
+
+  /* -- Fonts -- */
+  /*
+  --font-primary: "Your Font", sans-serif;
+  --font-secondary: Georgia, serif;
+  --font-tertiary: ui-monospace, monospace;
+  */
 
   /* -- Core colours -- */
-  --brand-color-accent: #3485cd;
-  --brand-color-dark: #333333;
-  --brand-color-light: #f7f7f7;
+  /* --accent drives --text-accent, --text-link, and --input-focus */
+  /*
+  --accent: #3485cd;
+  --text-primary: var(--neutral-800);
+  --background-primary: var(--white);
+  */
 
-  /* -- Status colours (optional — omit to use DS defaults) -- */
-  /* --brand-color-success: #1a7f37; */
-  /* --brand-color-warning: #9a6700; */
-  /* --brand-color-danger: #cf222e; */
-  /* --brand-color-info: #3485cd; */
+  /* -- Status colours (optional) -- */
+  /*
+  --status-info: #0969da;
+  --status-success: #1a7f37;
+  --status-warning: #9a6700;
+  --status-danger: #cf222e;
+  --status-accent: #8250df;
+  */
+
+}
+
+
+/* -- Dark mode overrides (optional) -- */
+[data-theme="dark"] {
+  /*
+  --accent: #7db8e8;
+  */
+}
+
+
+/* -- System preference fallback (no-JS) --
+   Must mirror the [data-theme="dark"] block above exactly.
+   Drift between the two blocks is a known failure mode. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /*
+    --accent: #7db8e8;
+    */
+  }
 }

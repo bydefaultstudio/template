@@ -17,15 +17,16 @@
     <link rel="stylesheet" href="../../assets/css/theme.css">
     
     <!-- Google Fonts (configured in docs/docs.config.js) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
        
     <!-- Markdown CSS -->
     <link rel="stylesheet" href="assets/markdown.css">
     
     <!-- Docs-specific styles (additions) -->
     <link rel="stylesheet" href="assets/docs.css">
+
+    <!-- Theme toggle (in <head> so dark mode applies before first paint) -->
+    <script src="../../assets/js/theme-toggle.js"></script>
 </head>
 <body>
 
@@ -45,6 +46,7 @@
                         <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
                         <img src="assets/images/logo-small.svg" alt="Logo" class="nav-logo-small">
                     </a>
+                    <button class="dark-mode-toggle" aria-label="Toggle dark mode" type="button"></button>
                     <button class="docs-sidebar-toggle" aria-label="Collapse sidebar" type="button">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -168,10 +170,10 @@
 <p>All pages follow the same hierarchy:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-64lquw8su" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-p6unbg2gj" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-64lquw8su">body
+        <pre><code id="code-p6unbg2gj">body
 └─ page-wrapper
 └─ page-content
 └─ section
@@ -189,10 +191,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-7iyzi5v79" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-07ecgm7tx" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-7iyzi5v79" class="language-html">&lt;section&gt;
+        <pre><code id="code-07ecgm7tx" class="language-html">&lt;section&gt;
   &lt;div class=&quot;padding-global&quot;&gt;
     &lt;div class=&quot;container-medium&quot;&gt;
       &lt;div class=&quot;block&quot;&gt;
@@ -220,10 +222,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-sqz8melww" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-qkql3pvn7" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-sqz8melww" class="language-html">&lt;section class=&quot;top-large bottom-large&quot;&gt;
+        <pre><code id="code-qkql3pvn7" class="language-html">&lt;section class=&quot;top-large bottom-large&quot;&gt;
   &lt;div class=&quot;padding-global&quot;&gt;
     &lt;!-- Content --&gt;
   &lt;/div&gt;
@@ -241,10 +243,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-yswdlyj1t" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-udz66cuhd" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-yswdlyj1t" class="language-html">&lt;div class=&quot;padding-global&quot;&gt;
+        <pre><code id="code-udz66cuhd" class="language-html">&lt;div class=&quot;padding-global&quot;&gt;
   &lt;div class=&quot;container-medium&quot;&gt;
     &lt;!-- Content --&gt;
   &lt;/div&gt;
@@ -269,10 +271,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-iwoqxexl7" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ou4hj792s" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-iwoqxexl7" class="language-html">&lt;div class=&quot;container-medium&quot;&gt;
+        <pre><code id="code-ou4hj792s" class="language-html">&lt;div class=&quot;container-medium&quot;&gt;
   &lt;div class=&quot;block&quot;&gt;
     &lt;h2&gt;Heading&lt;/h2&gt;
     &lt;p&gt;Content&lt;/p&gt;
@@ -358,10 +360,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-6tyqs9xyo" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-uauvvyv3b" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-6tyqs9xyo" class="language-html">&lt;div class=&quot;block&quot;&gt;
+        <pre><code id="code-uauvvyv3b" class="language-html">&lt;div class=&quot;block&quot;&gt;
   &lt;h2&gt;Heading&lt;/h2&gt;
   &lt;p&gt;Body text&lt;/p&gt;
 &lt;/div&gt;
@@ -399,10 +401,10 @@
 </tbody></table>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-a9u7ejta6" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-0i9g68ldp" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-a9u7ejta6" class="language-html">&lt;div class=&quot;block gap-l&quot;&gt;
+        <pre><code id="code-0i9g68ldp" class="language-html">&lt;div class=&quot;block gap-l&quot;&gt;
   &lt;h2&gt;Heading&lt;/h2&gt;
   &lt;p&gt;More space between elements&lt;/p&gt;
 &lt;/div&gt;
@@ -442,10 +444,10 @@
 </tbody></table>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-d5riqr3mb" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-w8xnerh3f" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-d5riqr3mb" class="language-html">&lt;div class=&quot;block row gap-m align-center&quot;&gt;
+        <pre><code id="code-w8xnerh3f" class="language-html">&lt;div class=&quot;block row gap-m align-center&quot;&gt;
   &lt;p&gt;Text&lt;/p&gt;
   &lt;button&gt;Action&lt;/button&gt;
 &lt;/div&gt;
@@ -462,10 +464,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-bidqrmxy2" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-f7djf91zc" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-bidqrmxy2" class="language-html">&lt;div class=&quot;grid&quot;&gt;
+        <pre><code id="code-f7djf91zc" class="language-html">&lt;div class=&quot;grid&quot;&gt;
   &lt;div&gt;Item&lt;/div&gt;
   &lt;div&gt;Item&lt;/div&gt;
 &lt;/div&gt;
@@ -491,10 +493,10 @@
 </tbody></table>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-pjj9nm6u6" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-8434hmuag" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-pjj9nm6u6" class="language-html">&lt;div class=&quot;grid cols-3&quot;&gt;
+        <pre><code id="code-8434hmuag" class="language-html">&lt;div class=&quot;grid cols-3&quot;&gt;
   &lt;div&gt;Item 1&lt;/div&gt;
   &lt;div&gt;Item 2&lt;/div&gt;
   &lt;div&gt;Item 3&lt;/div&gt;
@@ -517,10 +519,10 @@
 </tbody></table>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-43i77hett" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-sy1j3oiqh" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-43i77hett" class="language-html">&lt;div class=&quot;grid&quot;&gt;
+        <pre><code id="code-sy1j3oiqh" class="language-html">&lt;div class=&quot;grid&quot;&gt;
   &lt;div&gt;Flexible column&lt;/div&gt;
   &lt;div class=&quot;fit-content&quot;&gt;Fixed&lt;/div&gt;
 &lt;/div&gt;

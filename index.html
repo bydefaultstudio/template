@@ -13,10 +13,8 @@
   <!-- Project Styles -->
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- Google Fonts: Inter (default) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Theme toggle (in <head> so dark mode applies before first paint) -->
+  <script src="assets/js/theme-toggle.js"></script>
 </head>
 <body>
 
@@ -28,7 +26,10 @@
           <div class="container-small">
             <div class="block gap-l">
               <div class="block gap-s">
-                <p class="eyebrow">Project Template</p>
+                <div class="button-group">
+                  <p class="eyebrow" style="margin: 0; flex: 1;">Project Template</p>
+                  <button class="button dark-mode-toggle" type="button" data-variant="transparent" data-icon-only aria-label="Toggle dark mode"></button>
+                </div>
                 <h1>Welcome</h1>
                 <p>This is your starting point. Replace this page with your project's homepage.</p>
               </div>

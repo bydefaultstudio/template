@@ -17,15 +17,16 @@
     <link rel="stylesheet" href="../../assets/css/theme.css">
     
     <!-- Google Fonts (configured in docs/docs.config.js) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
        
     <!-- Markdown CSS -->
     <link rel="stylesheet" href="assets/markdown.css">
     
     <!-- Docs-specific styles (additions) -->
     <link rel="stylesheet" href="assets/docs.css">
+
+    <!-- Theme toggle (in <head> so dark mode applies before first paint) -->
+    <script src="../../assets/js/theme-toggle.js"></script>
 </head>
 <body>
 
@@ -45,6 +46,7 @@
                         <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
                         <img src="assets/images/logo-small.svg" alt="Logo" class="nav-logo-small">
                     </a>
+                    <button class="dark-mode-toggle" aria-label="Toggle dark mode" type="button"></button>
                     <button class="docs-sidebar-toggle" aria-label="Collapse sidebar" type="button">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -194,10 +196,10 @@
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-mrqlr8ijr" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-eklkhaemu" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-mrqlr8ijr" class="language-css">:root {
+        <pre><code id="code-eklkhaemu" class="language-css">:root {
   /* You can use default names or rename tokens to match your brand */
   --brand-dark: #1a1a1a; /* Replace with your brand color */
   
@@ -269,10 +271,10 @@
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-le9a9osv7" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-3im43iohg" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-le9a9osv7" class="language-css">.shadow {
+        <pre><code id="code-3im43iohg" class="language-css">.shadow {
   box-shadow: 0 4px 6px var(--black-alpha-30);
 }
 </code></pre>
@@ -332,10 +334,10 @@
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-1cajffh3x" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-rg7mn8pkc" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-1cajffh3x" class="language-css">.highlight {
+        <pre><code id="code-rg7mn8pkc" class="language-css">.highlight {
   background-color: var(--white-alpha-30);
 }
 </code></pre>
@@ -402,10 +404,10 @@
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-nq6i0vvos" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-13kqf7ptv" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-nq6i0vvos" class="language-css">.text {
+        <pre><code id="code-13kqf7ptv" class="language-css">.text {
   color: var(--neutral-800);
 }
 </code></pre>
@@ -457,10 +459,10 @@
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-o5ktw9mxs" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-dt7jprosx" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-o5ktw9mxs" class="language-css">h1 {
+        <pre><code id="code-dt7jprosx" class="language-css">h1 {
   color: var(--text-primary);
 }
 </code></pre>
@@ -499,10 +501,10 @@
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-12gg7ttlu" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-b5wxbmva5" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-12gg7ttlu" class="language-css">.card {
+        <pre><code id="code-b5wxbmva5" class="language-css">.card {
   background-color: var(--background-plain);
 }
 </code></pre>
@@ -536,10 +538,10 @@
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-en1lqz5ax" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-qs32jngif" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-en1lqz5ax" class="language-css">.card {
+        <pre><code id="code-qs32jngif" class="language-css">.card {
   border-color: var(--border-primary);
 }
 </code></pre>

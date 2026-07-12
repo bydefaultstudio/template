@@ -17,15 +17,16 @@
     <link rel="stylesheet" href="../../assets/css/theme.css">
     
     <!-- Google Fonts (configured in docs/docs.config.js) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
        
     <!-- Markdown CSS -->
     <link rel="stylesheet" href="assets/markdown.css">
     
     <!-- Docs-specific styles (additions) -->
     <link rel="stylesheet" href="assets/docs.css">
+
+    <!-- Theme toggle (in <head> so dark mode applies before first paint) -->
+    <script src="../../assets/js/theme-toggle.js"></script>
 </head>
 <body>
 
@@ -45,6 +46,7 @@
                         <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
                         <img src="assets/images/logo-small.svg" alt="Logo" class="nav-logo-small">
                     </a>
+                    <button class="dark-mode-toggle" aria-label="Toggle dark mode" type="button"></button>
                     <button class="docs-sidebar-toggle" aria-label="Collapse sidebar" type="button">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -176,10 +178,10 @@
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-yv1bacf9v" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-clzcweqx8" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-yv1bacf9v" class="language-css">/* brand-book/brand-book.css */
+        <pre><code id="code-clzcweqx8" class="language-css">/* brand-book/brand-book.css */
 :root {
   --brand-color-accent: #0066cc;
   --brand-color-dark: #1a1a1a;

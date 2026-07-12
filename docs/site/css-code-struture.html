@@ -17,15 +17,16 @@
     <link rel="stylesheet" href="../../assets/css/theme.css">
     
     <!-- Google Fonts (configured in docs/docs.config.js) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
        
     <!-- Markdown CSS -->
     <link rel="stylesheet" href="assets/markdown.css">
     
     <!-- Docs-specific styles (additions) -->
     <link rel="stylesheet" href="assets/docs.css">
+
+    <!-- Theme toggle (in <head> so dark mode applies before first paint) -->
+    <script src="../../assets/js/theme-toggle.js"></script>
 </head>
 <body>
 
@@ -45,6 +46,7 @@
                         <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
                         <img src="assets/images/logo-small.svg" alt="Logo" class="nav-logo-small">
                     </a>
+                    <button class="dark-mode-toggle" aria-label="Toggle dark mode" type="button"></button>
                     <button class="docs-sidebar-toggle" aria-label="Collapse sidebar" type="button">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -188,10 +190,10 @@
 <p><strong>Example - Typography Grouping:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-mtjc83mq0" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-fye7b4oci" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-mtjc83mq0" class="language-css">/* -- Headings -- */
+        <pre><code id="code-fye7b4oci" class="language-css">/* -- Headings -- */
 h1 {
   font-size: var(--font-3xl);
   line-height: var(--line-height-s);
@@ -209,10 +211,10 @@ h2 {
 <p><strong>Example - Component Grouping:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-daz6nfpl1" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-31z5bqxli" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-daz6nfpl1" class="language-css">/* -- Button -- */
+        <pre><code id="code-31z5bqxli" class="language-css">/* -- Button -- */
 .button, button {
   padding: var(--space-s) var(--space-m);
   background: var(--background-primary);
@@ -234,10 +236,10 @@ h2 {
 <p><strong>Example - Token Grouping:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-hs1ph70bt" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-wyf1by1rx" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-hs1ph70bt" class="language-css">:root {
+        <pre><code id="code-wyf1by1rx" class="language-css">:root {
   /* -- Unit tokens -- */
   --unit-s: 0.5rem;    /* 8px */
   --unit-m: 1rem;      /* 16px */
@@ -272,10 +274,10 @@ h2 {
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-6zpmjq0ng" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-qmubthp0u" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-6zpmjq0ng" class="language-css">/* -- Card -- */
+        <pre><code id="code-qmubthp0u" class="language-css">/* -- Card -- */
 .card {
   padding: var(--space-m);
   background: var(--background-primary);
@@ -304,10 +306,10 @@ h2 {
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-h5r78dvfq" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-2ak7c5wu6" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-h5r78dvfq" class="language-css">.button {
+        <pre><code id="code-2ak7c5wu6" class="language-css">.button {
   /* Layout */
   display: inline-flex;
   
@@ -334,10 +336,10 @@ h2 {
 <p><strong>Format</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-d4g6lzmpw" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-39tar9q6u" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-d4g6lzmpw" class="language-css">/* ------ Section Title ------ */
+        <pre><code id="code-39tar9q6u" class="language-css">/* ------ Section Title ------ */
 </code></pre>
       </div>
     
@@ -351,10 +353,10 @@ h2 {
 <p><strong>Example</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-qtlukplcz" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-9bgxf4zf6" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-qtlukplcz" class="language-css">/* ------ BASE STYLES ------ */
+        <pre><code id="code-9bgxf4zf6" class="language-css">/* ------ BASE STYLES ------ */
 
 body {
   /* ... */
@@ -368,10 +370,10 @@ body {
 <p><strong>Format</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-kfxstyswz" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-rn7btx1tx" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-kfxstyswz" class="language-css">/* -- Subsection name -- */
+        <pre><code id="code-rn7btx1tx" class="language-css">/* -- Subsection name -- */
 </code></pre>
       </div>
     
@@ -385,10 +387,10 @@ body {
 <p><strong>Example</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-1u1g5rldb" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-2hqc2xje6" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-1u1g5rldb" class="language-css">/* -- Headings -- */
+        <pre><code id="code-2hqc2xje6" class="language-css">/* -- Headings -- */
 h1 {
   /* ... */
 }
@@ -404,10 +406,10 @@ h2 {
 <p><strong>Format</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-ie776hu91" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-7y8ued8ey" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-ie776hu91" class="language-css">/* Short clarification */
+        <pre><code id="code-7y8ued8ey" class="language-css">/* Short clarification */
 </code></pre>
       </div>
     
@@ -420,10 +422,10 @@ h2 {
 <p><strong>Example</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-hy28jzigs" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-f652d0mc9" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-hy28jzigs" class="language-css">--unit-xs: 0.25rem; /* 4px */
+        <pre><code id="code-f652d0mc9" class="language-css">--unit-xs: 0.25rem; /* 4px */
 </code></pre>
       </div>
     
@@ -447,10 +449,10 @@ h2 {
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-f3mykgalr" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ssc7rrw5o" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-f3mykgalr" class="language-css">/* ------ RESPONSIVE ------ */
+        <pre><code id="code-ssc7rrw5o" class="language-css">/* ------ RESPONSIVE ------ */
 
 /* Mobile */
 @media (max-width: 768px) {
@@ -476,10 +478,10 @@ h2 {
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-pbm196gul" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ckvhz8gy2" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-pbm196gul" class="language-css">/* ------ RESPONSIVE ------ */
+        <pre><code id="code-ckvhz8gy2" class="language-css">/* ------ RESPONSIVE ------ */
 
 /* Mobile */
 @media (max-width: 768px) {

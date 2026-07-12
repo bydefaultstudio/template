@@ -17,15 +17,16 @@
     <link rel="stylesheet" href="../../assets/css/theme.css">
     
     <!-- Google Fonts (configured in docs/docs.config.js) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
        
     <!-- Markdown CSS -->
     <link rel="stylesheet" href="assets/markdown.css">
     
     <!-- Docs-specific styles (additions) -->
     <link rel="stylesheet" href="assets/docs.css">
+
+    <!-- Theme toggle (in <head> so dark mode applies before first paint) -->
+    <script src="../../assets/js/theme-toggle.js"></script>
 </head>
 <body>
 
@@ -45,6 +46,7 @@
                         <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
                         <img src="assets/images/logo-small.svg" alt="Logo" class="nav-logo-small">
                     </a>
+                    <button class="dark-mode-toggle" aria-label="Toggle dark mode" type="button"></button>
                     <button class="docs-sidebar-toggle" aria-label="Collapse sidebar" type="button">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -218,10 +220,10 @@
 <p>The <code>.callout</code> class provides the structural foundation:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-cshkf88yy" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-tmzwpps62" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-cshkf88yy" class="language-html">&lt;div class=&quot;callout&quot;&gt;
+        <pre><code id="code-tmzwpps62" class="language-html">&lt;div class=&quot;callout&quot;&gt;
   &lt;p&gt;General-purpose highlighted content.&lt;/p&gt;
 &lt;/div&gt;
 </code></pre>
@@ -239,10 +241,10 @@
 <p>Use <code>.callout-title</code> inside any callout for a styled heading:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-ml40tu084" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-rpzwz9rv8" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-ml40tu084" class="language-html">&lt;div class=&quot;callout callout-note&quot;&gt;
+        <pre><code id="code-rpzwz9rv8" class="language-html">&lt;div class=&quot;callout callout-note&quot;&gt;
   &lt;div class=&quot;callout-title&quot;&gt;Note&lt;/div&gt;
   &lt;p&gt;Content here.&lt;/p&gt;
 &lt;/div&gt;
@@ -256,10 +258,10 @@
 <p>For useful information users should know, even when skimming.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-s6eb7ny0g" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-qwevot0f3" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-s6eb7ny0g" class="language-html">&lt;div class=&quot;callout callout-note&quot;&gt;
+        <pre><code id="code-qwevot0f3" class="language-html">&lt;div class=&quot;callout callout-note&quot;&gt;
   &lt;div class=&quot;callout-title&quot;&gt;Note&lt;/div&gt;
   &lt;p&gt;Useful information that users should know.&lt;/p&gt;
 &lt;/div&gt;
@@ -270,10 +272,10 @@
 <p>For helpful advice on doing things better or more easily.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-e4vt24lkc" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-e223c82ch" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-e4vt24lkc" class="language-html">&lt;div class=&quot;callout callout-tip&quot;&gt;
+        <pre><code id="code-e223c82ch" class="language-html">&lt;div class=&quot;callout callout-tip&quot;&gt;
   &lt;div class=&quot;callout-title&quot;&gt;Tip&lt;/div&gt;
   &lt;p&gt;Helpful advice for doing things better.&lt;/p&gt;
 &lt;/div&gt;
@@ -284,10 +286,10 @@
 <p>For urgent information that needs immediate attention.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-94xjskk3l" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-5jckla690" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-94xjskk3l" class="language-html">&lt;div class=&quot;callout callout-warning&quot;&gt;
+        <pre><code id="code-5jckla690" class="language-html">&lt;div class=&quot;callout callout-warning&quot;&gt;
   &lt;div class=&quot;callout-title&quot;&gt;Warning&lt;/div&gt;
   &lt;p&gt;Urgent information to avoid problems.&lt;/p&gt;
 &lt;/div&gt;
@@ -298,10 +300,10 @@
 <p>For advising about risks or negative outcomes.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-ssyoqo37x" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-b1dbnlrt7" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-ssyoqo37x" class="language-html">&lt;div class=&quot;callout callout-caution&quot;&gt;
+        <pre><code id="code-b1dbnlrt7" class="language-html">&lt;div class=&quot;callout callout-caution&quot;&gt;
   &lt;div class=&quot;callout-title&quot;&gt;Caution&lt;/div&gt;
   &lt;p&gt;Risks or negative outcomes of certain actions.&lt;/p&gt;
 &lt;/div&gt;
@@ -312,10 +314,10 @@
 <p>For key information users need to achieve their goal.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-ytnyexpwk" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-dvch4965y" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-ytnyexpwk" class="language-html">&lt;div class=&quot;callout callout-important&quot;&gt;
+        <pre><code id="code-dvch4965y" class="language-html">&lt;div class=&quot;callout callout-important&quot;&gt;
   &lt;div class=&quot;callout-title&quot;&gt;Important&lt;/div&gt;
   &lt;p&gt;Key information users need to know.&lt;/p&gt;
 &lt;/div&gt;

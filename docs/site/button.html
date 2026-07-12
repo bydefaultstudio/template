@@ -17,15 +17,16 @@
     <link rel="stylesheet" href="../../assets/css/theme.css">
     
     <!-- Google Fonts (configured in docs/docs.config.js) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
        
     <!-- Markdown CSS -->
     <link rel="stylesheet" href="assets/markdown.css">
     
     <!-- Docs-specific styles (additions) -->
     <link rel="stylesheet" href="assets/docs.css">
+
+    <!-- Theme toggle (in <head> so dark mode applies before first paint) -->
+    <script src="../../assets/js/theme-toggle.js"></script>
 </head>
 <body>
 
@@ -45,6 +46,7 @@
                         <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
                         <img src="assets/images/logo-small.svg" alt="Logo" class="nav-logo-small">
                     </a>
+                    <button class="dark-mode-toggle" aria-label="Toggle dark mode" type="button"></button>
                     <button class="docs-sidebar-toggle" aria-label="Collapse sidebar" type="button">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -182,10 +184,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-4l0mgte47" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-5l7ut09nd" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-4l0mgte47" class="language-html">&lt;button class=&quot;button&quot;&gt;Primary Action&lt;/button&gt;
+        <pre><code id="code-5l7ut09nd" class="language-html">&lt;button class=&quot;button&quot;&gt;Primary Action&lt;/button&gt;
 </code></pre>
       </div>
     
@@ -200,10 +202,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-8mxac47rb" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-swcn9rldu" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-8mxac47rb" class="language-html">&lt;button class=&quot;button is-outline&quot;&gt;Secondary Action&lt;/button&gt;
+        <pre><code id="code-swcn9rldu" class="language-html">&lt;button class=&quot;button is-outline&quot;&gt;Secondary Action&lt;/button&gt;
 </code></pre>
       </div>
     
@@ -218,10 +220,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-i9o59a9z2" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-88sjldai4" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-i9o59a9z2" class="language-html">&lt;button class=&quot;button is-faded&quot;&gt;Optional Action&lt;/button&gt;
+        <pre><code id="code-88sjldai4" class="language-html">&lt;button class=&quot;button is-faded&quot;&gt;Optional Action&lt;/button&gt;
 </code></pre>
       </div>
     
@@ -236,10 +238,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-c1ax5jh84" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-w81rovcfb" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-c1ax5jh84" class="language-html">&lt;button class=&quot;button is-outline is-faded&quot;&gt;Tertiary Action&lt;/button&gt;
+        <pre><code id="code-w81rovcfb" class="language-html">&lt;button class=&quot;button is-outline is-faded&quot;&gt;Tertiary Action&lt;/button&gt;
 </code></pre>
       </div>
     
@@ -254,10 +256,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-jd7lemlbd" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-2kq0huwsv" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-jd7lemlbd" class="language-html">&lt;button class=&quot;button is-small&quot;&gt;Small Action&lt;/button&gt;
+        <pre><code id="code-2kq0huwsv" class="language-html">&lt;button class=&quot;button is-small&quot;&gt;Small Action&lt;/button&gt;
 </code></pre>
       </div>
     
@@ -272,10 +274,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-bx94cwz84" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ec0e6kcwm" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-bx94cwz84" class="language-html">&lt;button class=&quot;button is-icon&quot;&gt;
+        <pre><code id="code-ec0e6kcwm" class="language-html">&lt;button class=&quot;button is-icon&quot;&gt;
   &lt;div class=&quot;icn-svg&quot;&gt;
     &lt;!-- SVG icon --&gt;
   &lt;/div&gt;
@@ -294,10 +296,10 @@
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-m2n3lnije" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ya17bphd9" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-m2n3lnije" class="language-html">&lt;button class=&quot;button&quot; disabled&gt;Disabled Action&lt;/button&gt;
+        <pre><code id="code-ya17bphd9" class="language-html">&lt;button class=&quot;button&quot; disabled&gt;Disabled Action&lt;/button&gt;
 &lt;button class=&quot;button is-outline&quot; disabled&gt;Disabled Outline&lt;/button&gt;
 </code></pre>
       </div>

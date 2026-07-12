@@ -4,30 +4,26 @@
 
 
 
-/* ------ 1. BRAND MAPPING ------ */
+/* ------ 1. BRAND TOKENS ------ */
 
 /*
- * This section maps brand book tokens into the design system.
- * The brand book (brand-book/brand-book.css) defines --brand-* tokens.
- * The DS reads them here with fallback defaults.
+ * Neutral engine defaults. The design system ships working values on
+ * real token names; a brand expresses itself by overriding these
+ * primitives in assets/css/theme.css. The semantic layer (§2) resolves
+ * through them, so a theme never restates semantics it can reach
+ * through a primitive.
  *
- * If no brand book is loaded, the defaults below are used.
- * Load order does not matter — CSS custom property fallbacks handle it.
+ * theme.css MUST load after this file:
  *
- *   <link rel="stylesheet" href="design-system/design-system.css">
- *   <link rel="stylesheet" href="brand-book/brand-book.css">
+ *   <link rel="stylesheet" href="assets/css/design-system.css">
+ *   <link rel="stylesheet" href="assets/css/theme.css">
  */
 
 :root {
-  /* -- Fonts (from brand book) -- */
-  --font-primary: var(--brand-font-primary, "Inter", sans-serif);
-  --font-secondary: var(--brand-font-secondary, "Georgia", serif);
-  --font-tertiary: var(--brand-font-tertiary, monospace);
-
-  /* -- Brand colours (from brand book) -- */
-  --brand-dark: var(--brand-color-dark, #333333);
-  --brand-light: var(--brand-color-light, #f7f7f7);
-  --brand-accent: var(--brand-color-accent, #3485cd);
+  /* -- Fonts (neutral system stacks; override in theme.css) -- */
+  --font-primary: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-secondary: Georgia, "Times New Roman", serif;
+  --font-tertiary: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   /* -- Base font sizes -- */
   --font-2xs: 12px;
@@ -43,11 +39,8 @@
   --font-6xl: 55px;
   --font-7xl: 64px;
 
-  /* -- UI font sizes -- */
-  --button-font-size: var(--font-xs);
-  --button-font-size-small: var(--font-2xs);
-
   /* -- Line height tokens -- */
+  --line-height-xs: 0.7;
   --line-height-s: 1;
   --line-height-m: 1.2;
   --line-height-l: 1.4;
@@ -68,6 +61,9 @@
   --letter-spacing-m: 0.06em;
   --letter-spacing-l: 0.08em;
   --letter-spacing-xl: 0.11em;
+
+  /* -- Icon size -- */
+  --icon-size: 1.3rem;
 }
 
 /* ------ 2. SYSTEM TOKENS - COLORS ------ */
@@ -108,13 +104,38 @@
 
   --transparent: transparent;
 
+  /* -- Color-Mix Alpha Scale (second arg for color-mix) -- */
+  --alpha-5: transparent 95%;
+  --alpha-10: transparent 90%;
+  --alpha-15: transparent 85%;
+  --alpha-20: transparent 80%;
+  --alpha-25: transparent 75%;
+  --alpha-30: transparent 70%;
+  --alpha-35: transparent 65%;
+  --alpha-40: transparent 60%;
+  --alpha-45: transparent 55%;
+  --alpha-50: transparent 50%;
+  --alpha-55: transparent 45%;
+  --alpha-60: transparent 40%;
+  --alpha-65: transparent 35%;
+  --alpha-70: transparent 30%;
+  --alpha-75: transparent 25%;
+  --alpha-80: transparent 20%;
+  --alpha-85: transparent 15%;
+  --alpha-90: transparent 10%;
+  --alpha-95: transparent 5%;
+
+  /* -- Accent (neutral default; brands override in theme.css) -- */
+  --accent: #0969da;
+
   /* -- Semantic colours -- */
-  --text-primary: var(--brand-dark);
+  --text-primary: var(--neutral-800);
   --text-secondary: var(--neutral-600);
   --text-plain: var(--black);
   --text-faded: var(--black-alpha-50);
-  --text-accent: var(--brand-accent);
-  --text-link: var(--brand-accent);
+  --text-accent: var(--accent);
+  --text-link: var(--text-accent);
+  --text-inverted: var(--neutral-50);
 
   --background-primary: var(--white);
   --background-secondary: var(--neutral-50);
@@ -125,16 +146,16 @@
   --border-secondary: var(--neutral-300);
   --border-faded: var(--black-alpha-15);
 
-  --button-primary: var(--text-link);
-  --button-text: var(--white);
-  --button-faded: color-mix(in srgb, var(--button-primary), transparent 80%);
+  /* -- Selection (derive from text/background; auto-flip in dark) -- */
+  --selection-background: var(--text-primary);
+  --selection-text: var(--background-primary);
 
-  /* -- Status colours (from brand book or defaults) -- */
-  --status-info: var(--brand-color-info, var(--brand-accent));
-  --status-success: var(--brand-color-success, #1a7f37);
-  --status-warning: var(--brand-color-warning, #9a6700);
-  --status-danger: var(--brand-color-danger, #cf222e);
-  --status-accent: var(--brand-color-accent-alt, #8250df);
+  /* -- Status colours -- */
+  --status-info: #0969da;
+  --status-success: #1a7f37;
+  --status-warning: #9a6700;
+  --status-danger: #cf222e;
+  --status-accent: #8250df;
 
   /* -- Callout semantic tokens -- */
   --callout-info: var(--status-info);
@@ -153,10 +174,110 @@
   --input-background: var(--background-primary);
   --input-text: var(--text-plain);
   --input-placeholder: var(--text-faded);
-  --input-focus: var(--brand-accent);
+  --input-focus: var(--accent);
   --input-disabled-bg: var(--background-faded);
   --input-disabled-text: var(--text-faded);
 
+}
+
+/* ------ 2b. THEME TOKENS - DARK MODE ------ */
+
+/*
+ * Set data-theme="dark" on <html> for page-level dark mode, or on any
+ * element for scoped theming. Toggled by assets/js/theme-toggle.js.
+ *
+ * --callout-* and --selection-* are deliberately omitted: they cascade
+ * from --status-* and text/background tokens automatically.
+ */
+
+[data-theme="dark"] {
+  /* -- Text -- */
+  --text-primary: #e8e6e3;
+  --text-secondary: #a8a5a2;
+  --text-plain: #f0eeeb;
+  --text-faded: rgba(255, 255, 255, 0.45);
+  --text-accent: #58a6ff;
+  --text-link: var(--text-accent);
+  --text-inverted: #1a1a1a;
+
+  /* -- Background -- */
+  --background-primary: var(--neutral-900);
+  --background-secondary: #222222;
+  --background-plain: #2a2a2a;
+  --background-faded: rgba(255, 255, 255, 0.06);
+
+  /* -- Border -- */
+  --border-primary: #e8e6e3;
+  --border-secondary: #3a3a3a;
+  --border-faded: var(--white-alpha-20);
+
+  /* -- Status (lightened for dark backgrounds) -- */
+  --status-info: #58a6ff;
+  --status-success: #3fb950;
+  --status-warning: #d29922;
+  --status-danger: #f85149;
+  --status-accent: #a371f7;
+
+  /* -- Form -- */
+  --input-border: #3a3a3a;
+  --input-background: rgba(255, 255, 255, 0.08);
+  --input-text: #f0eeeb;
+  --input-placeholder: rgba(255, 255, 255, 0.45);
+  --input-focus: var(--text-accent);
+  --input-disabled-bg: rgba(255, 255, 255, 0.06);
+  --input-disabled-text: rgba(255, 255, 255, 0.3);
+
+  color-scheme: dark;
+}
+
+/* ------ 2c. SYSTEM PREFERENCE FALLBACK (no-JS) ------ */
+
+/*
+ * Verbatim mirror of §2b for users whose OS prefers dark and who have
+ * no stored choice (no data-theme attribute set). Keep in sync with
+ * §2b — drift between the two blocks is a known failure mode.
+ */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /* -- Text -- */
+    --text-primary: #e8e6e3;
+    --text-secondary: #a8a5a2;
+    --text-plain: #f0eeeb;
+    --text-faded: rgba(255, 255, 255, 0.45);
+    --text-accent: #58a6ff;
+    --text-link: var(--text-accent);
+    --text-inverted: #1a1a1a;
+
+    /* -- Background -- */
+    --background-primary: var(--neutral-900);
+    --background-secondary: #222222;
+    --background-plain: #2a2a2a;
+    --background-faded: rgba(255, 255, 255, 0.06);
+
+    /* -- Border -- */
+    --border-primary: #e8e6e3;
+    --border-secondary: #3a3a3a;
+    --border-faded: var(--white-alpha-20);
+
+    /* -- Status (lightened for dark backgrounds) -- */
+    --status-info: #58a6ff;
+    --status-success: #3fb950;
+    --status-warning: #d29922;
+    --status-danger: #f85149;
+    --status-accent: #a371f7;
+
+    /* -- Form -- */
+    --input-border: #3a3a3a;
+    --input-background: rgba(255, 255, 255, 0.08);
+    --input-text: #f0eeeb;
+    --input-placeholder: rgba(255, 255, 255, 0.45);
+    --input-focus: var(--text-accent);
+    --input-disabled-bg: rgba(255, 255, 255, 0.06);
+    --input-disabled-text: rgba(255, 255, 255, 0.3);
+
+    color-scheme: dark;
+  }
 }
 
 /* ------ 3. SYSTEM TOKENS - SPACING & TYPOGRAPHY ------ */
@@ -242,10 +363,44 @@
   --border-style: solid;
   --border-color: var(--border-primary);
 
-
+  /* -- Border radius tokens -- */
+  --radius-2xs: 2px;
+  --radius-xs: 4px;
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
 }
 
-/* ------ 4. BASE STYLES ------ */
+/* ------ 4. SYSTEM TOKENS - MOTION ------ */
+
+/*
+ * Motion primitives. Easing names match the standard CSS keywords
+ * (in / out / in-out); the cubic-bezier values are refined replacements
+ * for the browser defaults. Durations share the t-shirt scale used by
+ * spacing and type.
+ */
+
+:root {
+  /* -- Easing primitives -- */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  /* fast start, slow end. for exits. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  /* slow start, long tail. for entrances. */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  /* symmetric. for swaps and continuous motion. */
+
+  /* -- Duration primitives -- */
+  --duration-2xs: 100ms;
+  --duration-xs: 200ms;
+  --duration-s: 400ms;
+  --duration-m: 600ms;
+  --duration-l: 800ms;
+  --duration-xl: 1200ms;
+}
+
+/* ------ 5. BASE STYLES ------ */
 
 *,
 *::before,
@@ -331,7 +486,7 @@ a {
   -webkit-text-decoration-color: var(--text-link);
   text-decoration-color: var(--text-link);
   text-decoration-thickness: 1.5px;
-  transition: all 0.3s;
+  transition: color var(--duration-s) var(--ease-out), text-underline-offset var(--duration-s) var(--ease-out);
 }
 
 a:hover {
@@ -402,7 +557,13 @@ hr {
   height: 0;
 }
 
-/* ------ 5. LAYOUT PRIMITIVES ------ */
+/* -- Text selection -- */
+::selection {
+  color: var(--selection-text);
+  background-color: var(--selection-background);
+}
+
+/* ------ 6. LAYOUT PRIMITIVES ------ */
 
 /* -- Global horizontal padding -- */
 .padding-global {
@@ -521,7 +682,7 @@ section {
   padding-bottom: var(--section-xl);
 }
 
-/* ------ 6. BLOCKS ------ */
+/* ------ 7. BLOCKS ------ */
 
 .block {
   display: flex;
@@ -592,7 +753,7 @@ section {
   max-height: 100px;
 }
 
-/* ------ 7. GRID ------ */
+/* ------ 8. GRID ------ */
 
 /* -- Grid -- */
 .grid {
@@ -621,7 +782,7 @@ section {
   width: fit-content;
 }
 
-/* ------ 8. BORDER UTILITIES ------ */
+/* ------ 9. BORDER UTILITIES ------ */
 
 /* -- Structural classes -- */
 .border {
@@ -683,7 +844,7 @@ section {
   --border-color: var(--border-faded);
 }
 
-/* ------ 9. TYPOGRAPHY UTILITIES ------ */
+/* ------ 10. TYPOGRAPHY UTILITIES ------ */
 
 /* -- Font size utilities -- */
 .font-2xs {
@@ -775,93 +936,234 @@ section {
   text-transform: uppercase;
 }
 
-/* -- Button -- */
+/* ------ 11. BUTTONS ------ */
+
+/* -- Button reset (bare element) -- */
+/* The bare <button> gets only a minimal reset. Add class="button"
+   for the full component appearance. */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-s);
+  transition: transform var(--duration-2xs) var(--ease-out);
+}
+
+/* -- Button component (CUBE pattern) -- */
+/* All tokens live at component level. data-* exceptions override them. */
 
 .button,
-button {
-  font-family: var(--font-primary);
-  font-size: var(--button-font-size);
-  line-height: var(--line-height-s);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: var(--letter-spacing-s);
-  text-transform: uppercase;
-  text-align: center;
-  justify-content: center;
+button.button {
+  /* -- Component tokens (overridable by exceptions) -- */
+  --button-color: var(--text-primary);
+  --button-faded: color-mix(in srgb, var(--button-color), var(--alpha-10));
+  --button-bg: var(--button-color);
+  --button-border: var(--button-color);
+  --button-text-color: var(--text-inverted);
+  --button-font: var(--font-primary);
+  --button-text-size: var(--font-m);
+  --button-padding-y: var(--space-l);
+  --button-padding-x: var(--space-xl);
+  --button-gap: var(--space-m);
+
+  /* -- Layout -- */
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: var(--button-gap);
+
+  /* -- Box model -- */
+  padding: var(--button-padding-y) var(--button-padding-x);
+
+  /* -- Visual -- */
+  background-color: var(--button-bg);
+  border: var(--border-s) solid var(--button-border);
+  border-radius: var(--radius-s);
+
+  /* -- Typography -- */
+  font-family: var(--button-font);
+  font-size: var(--button-text-size);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-xs);
+  text-transform: none;
   text-decoration: none;
-  display: inline-block;
-  align-self: flex-start;
-  padding: var(--space-l) var(--space-2xl);
-  background-color: var(--button-primary);
-  color: var(--button-text);
-  border: var(--border-m) solid var(--button-primary);
+  color: var(--button-text-color);
+
+  /* -- Icon -- */
+  --icon-size: 0.9em;
+
+  /* -- Other -- */
   cursor: pointer;
-  transform: scale3d(1none, 1none, 1none);
-  transform-style: preserve-3d;
-  transition: all .15s ease-in-out;
-  display: flex;
+  transition: background-color var(--duration-m) var(--ease-out), color var(--duration-2xs) var(--ease-out), border-color var(--duration-2xs) var(--ease-out), opacity var(--duration-2xs) var(--ease-out), transform var(--duration-2xs) var(--ease-out);
 }
 
-.button:hover,
-.is-outline.is-faded:hover,
-.demo-hover.button {
-  transform: scale(1.05);
-  background-color: var(--button-text);
-  color: var(--button-primary);
-  border: var(--border-m) solid var(--button-primary);
-  text-decoration: none;
-
+/* -- Hover -- */
+.button:hover {
+  --button-color: color-mix(in srgb, var(--text-primary), var(--background-primary) 10%);
 }
 
-.button:active,
-.demo-active.button {
-  transform: scale3d(1.0, 1.0, 1.0);
+/* -- Active (press) -- */
+.button:active {
+  transform: scale(0.98);
 }
 
-.is-faded {
-  background-color: var(--button-faded);
-  color: var(--button-primary);
-  border: var(--border-m) solid var(--transparent);
+/* -- Variant exceptions -- */
+
+.button[data-variant="outline"] {
+  --button-bg: transparent;
+  --button-text-color: var(--button-color);
 }
 
-.is-outline {
-  background-color: var(--transparent);
-  color: var(--button-primary);
-  border: var(--border-m) solid var(--button-primary);
+.button[data-variant="faded"] {
+  --button-bg: var(--button-faded);
+  --button-border: transparent;
+  --button-text-color: var(--button-color);
 }
 
-.is-outline.is-faded {
-  background-color: var(--transparent);
-  color: var(--button-primary);
-  border: var(--border-m) solid var(--button-faded);
+.button[data-variant="outline-faded"] {
+  --button-bg: transparent;
+  --button-border: var(--button-faded);
+  --button-text-color: var(--button-color);
 }
 
-.is-small {
-  font-size: var(--button-font-size-small);
-  padding: var(--space-m) var(--space-xl);
+.button[data-variant="transparent"] {
+  --button-bg: transparent;
+  --button-border: transparent;
+  --button-text-color: var(--button-color);
 }
+
+.button[data-variant="text"] {
+  --button-bg: transparent;
+  --button-border: transparent;
+  --button-text-color: var(--button-color);
+  --button-padding-x: 0;
+  --button-padding-y: 0;
+}
+
+.button[data-variant="text"]:hover {
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
+}
+
+.button[data-variant="text"]:active {
+  transform: none;
+}
+
+/* Unfilled variants: subtle fill on hover instead of darkening transparent */
+.button[data-variant="outline"]:hover,
+.button[data-variant="faded"]:hover,
+.button[data-variant="outline-faded"]:hover,
+.button[data-variant="transparent"]:hover {
+  background-color: color-mix(in srgb, var(--button-color), var(--alpha-5));
+}
+
+/* -- Size exceptions -- */
+
+.button[data-size="small"] {
+  --button-padding-y: var(--space-s);
+  --button-padding-x: var(--space-m);
+  --button-text-size: var(--font-xs);
+}
+
+.button[data-size="xsmall"] {
+  --button-padding-y: var(--space-xs);
+  --button-padding-x: var(--space-s);
+  --button-text-size: var(--font-2xs);
+}
+
+/* -- Boolean modifiers -- */
+
+.button[data-icon-only] {
+  --button-padding-x: var(--button-padding-y);
+  --icon-size: 1.3rem;
+}
+
+.button[data-full-width] {
+  width: 100%;
+}
+
+/* -- Colour exceptions -- */
+/* Semantic names and colour aliases produce identical output.
+   --button-color drives bg, border, and faded automatically. */
+
+.button[data-color="danger"],
+.button[data-color="red"] {
+  --button-color: var(--status-danger);
+  --button-text-color: var(--text-inverted);
+}
+
+.button[data-color="danger"]:hover,
+.button[data-color="red"]:hover {
+  --button-color: color-mix(in srgb, var(--status-danger), var(--text-primary) 15%);
+}
+
+.button[data-color="success"],
+.button[data-color="green"] {
+  --button-color: var(--status-success);
+  --button-text-color: var(--text-inverted);
+}
+
+.button[data-color="success"]:hover,
+.button[data-color="green"]:hover {
+  --button-color: color-mix(in srgb, var(--status-success), var(--text-primary) 15%);
+}
+
+/* No dark-mode override for --button-faded: the component-scoped
+   color-mix derives from --button-color (= --text-primary), which
+   flips in dark mode, so the faded fill self-adjusts. */
+
+/* -- States -- */
 
 .button:disabled,
 .button.is-disabled {
   opacity: 0.4;
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
-.is-icon {
-  padding: var(--space-l);
-  border-radius: 50%;
+.button.is-loading {
+  pointer-events: none;
+  opacity: 0.6;
 }
 
-.icn-svg {
+/* -- Reduced motion -- */
+@media (prefers-reduced-motion: reduce) {
+  .button:active {
+    transform: none;
+  }
+}
+
+/* -- SVG icon wrapper -- */
+.svg-icn {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: var(--icon-size);
+  height: var(--icon-size);
   display: flex;
+  aspect-ratio: 1 / 1;
+  transition: color var(--duration-m) var(--ease-out);
+  margin: -0.175em;
 }
 
+.svg-icn svg,
+.svg-icn path {
+  transition: fill var(--duration-m) var(--ease-out);
+}
+
+.svg-icn.is-preview {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+/* -- Button group -- */
 .button-group {
   grid-column-gap: var(--space-m);
   grid-row-gap: var(--space-m);
@@ -870,29 +1172,32 @@ button {
   display: flex;
 }
 
-/* -- Demo specific styles -- */
-.type-demo > h1,
-.type-demo > h2,
-.type-demo > h3,
-.type-demo > h4,
-.type-demo > h5,
-.type-demo > h6 {
-  margin-top: var(--space-none);
-  margin-bottom: var(--space-xl);
+/* -- Dark mode toggle (icon swap) -- */
+/* Icons injected by assets/js/theme-toggle.js */
+.dark-mode-toggle .dark-mode-icon-dark {
+  display: none;
 }
 
-.button-demo > button {
-  margin-top: var(--space-none);
-  margin-bottom: var(--space-l);
+[data-theme="dark"] .dark-mode-toggle .dark-mode-icon-light {
+  display: none;
 }
 
-.button-demo > .token-tag {
-  margin-top: var(--space-none);
-  margin-bottom: var(--space-none);
+[data-theme="dark"] .dark-mode-toggle .dark-mode-icon-dark {
+  display: flex;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .dark-mode-toggle .dark-mode-icon-light {
+    display: none;
+  }
+
+  :root:not([data-theme]) .dark-mode-toggle .dark-mode-icon-dark {
+    display: flex;
+  }
 }
 
 
-/* ------ 10. BACKGROUND UTILITIES ------ */
+/* ------ 12. BACKGROUND UTILITIES ------ */
 
 /* -- Background utilities -- */
 .bg-primary {
@@ -911,7 +1216,7 @@ button {
   background-color: var(--background-faded);
 }
 
-/* ------ 11. CALLOUTS & ALERTS ------ */
+/* ------ 13. CALLOUTS & ALERTS ------ */
 
 /* -- Base callout -- */
 .callout {
@@ -987,7 +1292,7 @@ button {
   color: var(--callout-accent);
 }
 
-/* ------ 12. FORM ELEMENTS ------ */
+/* ------ 14. FORM ELEMENTS ------ */
 
 /* -- Labels -- */
 label {
@@ -1017,7 +1322,7 @@ select {
   padding: var(--space-s) var(--space-m);
   width: 100%;
   display: block;
-  transition: border-color 0.2s ease;
+  transition: border-color var(--duration-xs) var(--ease-out), box-shadow var(--duration-xs) var(--ease-out);
 }
 
 input[type="text"]:focus,
@@ -1107,7 +1412,7 @@ input[type="radio"] {
   margin-bottom: var(--space-l);
 }
 
-/* ------ 13. FUTURE COMPONENTS ------ */
+/* ------ 15. FUTURE COMPONENTS ------ */
 
 /*
  * The following elements are candidates for future design system styling.
@@ -1137,10 +1442,6 @@ input[type="radio"] {
  * - Status labels, version tags, category indicators
  * - Composable: .badge + .badge-info, .badge-success, etc.
  * - Should reuse --status-* tokens
- *
- * -- Text selection --
- * - ::selection pseudo-element
- * - Brand-aligned highlight color
  *
  * -- Scrollbar styling --
  * - Custom scrollbar for overflow containers
@@ -1172,7 +1473,7 @@ input[type="radio"] {
  * - Should reuse callout/status tokens
  */
 
-/* ------ 14. RESPONSIVE ------ */
+/* ------ 16. RESPONSIVE ------ */
 
 @media (max-width: 768px) {
   :root {
