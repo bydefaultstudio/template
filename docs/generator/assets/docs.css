@@ -9,11 +9,15 @@
 
 
 :root {
-  --sidebar-width: 250px;
+  --top-nav-height: 80px;
+  --sidebar-width: 280px;
   --sidebar-collapsed-width: 64px;
   --toc-width: 300px;
-  --toc-top-offset: var(--space-xl);
+  --toc-top-offset: calc(var(--top-nav-height) + var(--space-xl));
   --sidebar-transition: 0.3s ease;
+  /* Open nav section tint — one step lighter than --background-faded
+     so link hovers inside an open section stay visible */
+  --nav-open-bg: color-mix(in srgb, var(--text-primary) 3%, transparent);
 }
 
 
@@ -22,24 +26,32 @@ html {
   scroll-behavior: smooth;
 }
 
-/* CSS grid drives the two-column layout.
-   Transitioning grid-template-columns animates the sidebar open/close. */
-.docs-container {
+/* CSS grid drives the layout (BrandOS pattern): the sidebar spans the
+   full height as its own column; the sticky top nav and main content
+   share the second column. Transitioning grid-template-columns
+   animates the sidebar open/close. */
+.docs-layout {
   display: grid;
   grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--top-nav-height) 1fr;
+  grid-template-areas:
+    "sidebar topbar"
+    "sidebar main";
   min-height: 100vh;
+  background: var(--background-primary);
   transition: grid-template-columns var(--sidebar-transition);
 }
 
 /* Collapsed state: shrink the sidebar column */
-.docs-container.sidebar-collapsed {
+body.sidebar-collapsed .docs-layout {
   grid-template-columns: var(--sidebar-collapsed-width) 1fr;
 }
 
 .docs-main-area {
+  grid-area: main;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh - var(--top-nav-height));
   position: relative;
 }
 
@@ -83,58 +95,125 @@ html {
 }
 
 
-/* ------ 3. DOCS SIDEBAR ------ */
+/* ------ 2B. TOP NAV (sticky in grid) ------ */
 
-/* position: sticky keeps the sidebar fixed in the viewport while
-   remaining in normal grid flow — no margin-left hacks needed. */
-.docs-sidebar {
+.top-nav {
+  grid-area: topbar;
   position: sticky;
   top: 0;
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  align-self: start;
-  background: var(--background-secondary);
-  border-right: var(--border-s) solid var(--black-alpha-10);
-  padding: var(--space-xl);
-  z-index: 10;
-  transition: padding var(--sidebar-transition);
-}
-
-/* Sidebar header: logo + toggle buttons */
-.docs-sidebar-header {
+  height: var(--top-nav-height);
+  z-index: 100;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--space-xl);
-  gap: var(--space-s);
-  min-height: 40px;
+  justify-content: space-between;
+  padding: 0 var(--space-l);
+  background: var(--background-primary);
+  border-bottom: var(--border-s) solid var(--border-faded);
 }
 
-.docs-logo-link {
-  display: block;
-  flex: 1;
+.top-nav-left {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  gap: var(--space-m);
   min-width: 0;
-  overflow: hidden;
+}
+
+.top-nav-right {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+.top-nav-logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .nav-logo {
   display: block;
+  height: 50px;
   width: auto;
-  height: auto;
-  max-height: 70px;
-  max-width: 100%;
 }
 
-.nav-logo-small {
+/* Top-nav links — standalone interactive items (dark mode toggle etc.) */
+.top-nav-link {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  gap: var(--space-s);
+  padding: 0 var(--space-m);
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--font-primary);
+  font-size: var(--font-s);
+  line-height: 1;
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+}
+
+.top-nav-link:hover {
+  color: var(--text-plain);
+  background: var(--background-faded);
+}
+
+.top-nav-link .svg-icn {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Hamburger — visible on mobile only */
+.top-nav-hamburger {
   display: none;
-  width: 40px;
-  height: 40px;
+}
+
+.hamburger-icon-close {
+  display: none;
+}
+
+body.mobile-nav-open .hamburger-icon-open {
+  display: none;
+}
+
+body.mobile-nav-open .hamburger-icon-close {
+  display: flex;
+}
+
+
+/* ------ 3. SITE SIDEBAR (sticky in grid) ------ */
+
+.site-sidebar {
+  grid-area: sidebar;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 50;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--background-primary);
+  border-right: var(--border-s) solid var(--border-faded);
+  padding-bottom: var(--space-l);
+  display: flex;
+  flex-direction: column;
+  transition: width var(--sidebar-transition), padding var(--sidebar-transition);
+}
+
+/* Sidebar header: just the collapse toggle (logo lives in the top nav) */
+.site-sidebar-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 var(--space-m);
+  height: var(--top-nav-height);
   flex-shrink: 0;
 }
 
 /* Desktop sidebar toggle button */
-.docs-sidebar-toggle {
+.site-sidebar-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -142,71 +221,83 @@ html {
   height: 32px;
   flex-shrink: 0;
   background: none;
-  border: var(--border-s) solid var(--border-secondary);
-  border-radius: 4px;
+  border: none;
   cursor: pointer;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   padding: 0;
   transition: color 0.2s, background 0.2s;
 }
 
-.docs-sidebar-toggle:hover {
+.site-sidebar-toggle:hover {
   color: var(--text-plain);
-  background: var(--background-plain);
+  background: var(--background-faded);
 }
 
-/* Rotate chevron 180deg when collapsed (now points right = "open") */
-.docs-sidebar-toggle svg {
-  transition: transform var(--sidebar-transition);
+.site-sidebar-toggle .svg-icn {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
-.sidebar-collapsed .docs-sidebar-toggle svg {
-  transform: rotate(180deg);
-}
-
-/* Mobile toggle button — hidden on desktop */
-.docs-mobile-toggle {
+/* Sidebar toggle: swap between collapse/expand icons */
+.sidebar-icon-close {
   display: none;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text-secondary);
-  padding: 0;
 }
 
-.docs-mobile-toggle:hover {
-  color: var(--text-plain);
+body.sidebar-collapsed .sidebar-icon-open {
+  display: none;
 }
 
-/* Nav content wrapper */
-.docs-nav-content {
+body.sidebar-collapsed .sidebar-icon-close {
+  display: flex;
+}
+
+/* Sidebar nav content wrapper */
+.site-sidebar-content {
+  flex: 1;
+  overflow-y: auto;
   transition: opacity 0.2s ease;
 }
 
-.nav-section {
-  margin-bottom: var(--space-l);
+/* Mobile sidebar backdrop */
+.site-sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  top: var(--top-nav-height);
+  z-index: 49;
+  background: rgba(0, 0, 0, 0.5);
 }
 
-/* Desktop: Toggle styling */
+body.mobile-nav-open .site-sidebar-backdrop {
+  display: block;
+}
+
+
+/* ------ 3B. NAV SECTIONS & LINKS ------ */
+
+.nav-section {
+  margin: 0;
+}
+
 .nav-section-toggle {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--space-s);
-  padding: 0;
-  font-weight: var(--font-weight-semi-bold);
-  color: var(--text-faded);
-  font-size: var(--font-2xs);
+  gap: var(--space-l);
+  padding: var(--space-l);
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  font-size: var(--font-m);
+  line-height: 1;
   cursor: pointer;
   list-style: none;
   user-select: none;
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-m);
+  transition: color 0.2s, background 0.2s;
+}
+
+.nav-section-toggle:hover {
+  color: var(--text-secondary);
+  background: var(--background-faded);
 }
 
 /* Remove default WebKit arrow */
@@ -214,12 +305,20 @@ html {
   display: none;
 }
 
-/* Toggle icon styling */
+/* Section + link icon sizing */
+.nav-section-toggle .svg-icn,
+.nav-link .svg-icn {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Toggle chevron */
 .nav-toggle-icon {
   display: inline-flex;
   align-items: center;
   transition: transform 0.3s ease;
-  margin-left: var(--space-xs);
+  margin-left: auto;
 }
 
 .nav-toggle-icon svg {
@@ -228,14 +327,21 @@ html {
   height: 10px;
 }
 
-/* Rotate icon when open (90deg to point down) */
+/* Rotate chevron when open (90deg to point down) */
 .nav-section[open] .nav-toggle-icon {
   transform: rotate(90deg);
 }
 
-/* Desktop: Ensure nav-list is always visible regardless of details state */
-.nav-section[open] .nav-list,
+/* Open section gets a subtle tint; closed sections hide their list */
+.nav-section[open] {
+  background: var(--nav-open-bg);
+}
+
 .nav-section:not([open]) .nav-list {
+  display: none;
+}
+
+body:not(.sidebar-collapsed) .nav-section[open] .nav-list {
   display: block;
 }
 
@@ -246,29 +352,75 @@ html {
 }
 
 .nav-list li {
-  margin-top: var(--space-xs);
-}
-
-.nav-home {
-  margin-bottom: var(--space-l);
+  margin: 0;
 }
 
 .nav-link {
-  display: block;
-  padding: var(--space-xs) 0;
-  color: var(--text-plain);
+  display: flex;
+  align-items: center;
+  gap: var(--space-l);
+  padding: var(--space-l);
+  color: var(--text-primary);
   text-decoration: none;
-  transition: color 0.2s;
-  font-size: var(--font-s);
+  font-family: var(--font-primary);
+  font-size: var(--font-m);
+  line-height: var(--line-height-l);
+  transition: color 0.2s, background 0.2s;
 }
 
 .nav-link:hover {
-  color: var(--text-link);
+  color: var(--text-plain);
+  background: var(--background-faded);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--text-link);
+  outline-offset: -2px;
 }
 
 .nav-link-active {
   color: var(--text-link);
   font-weight: var(--font-weight-semi-bold);
+  background: var(--background-faded);
+}
+
+/* Links inside a section list are indented past the section icon */
+.nav-list .nav-link {
+  padding: var(--space-m) var(--space-l) var(--space-m) var(--space-4xl);
+}
+
+.nav-list li:last-child .nav-link {
+  padding-bottom: var(--space-xl);
+}
+
+/* --- Collapsed sidebar state (desktop only; mobile uses the overlay) --- */
+
+@media (min-width: 769px) {
+  body.sidebar-collapsed .site-sidebar-header {
+    justify-content: center;
+    padding: 0;
+  }
+
+  /* Collapsed: hide text, lists, and chevrons — icons remain */
+  body.sidebar-collapsed .nav-section-toggle span:not(.nav-toggle-icon):not(.svg-icn),
+  body.sidebar-collapsed .nav-section-toggle .nav-toggle-icon,
+  body.sidebar-collapsed .nav-list,
+  body.sidebar-collapsed .nav-link > span:not(.svg-icn) {
+    display: none;
+  }
+
+  /* Collapsed: center icons in the narrow strip */
+  body.sidebar-collapsed .nav-section-toggle,
+  body.sidebar-collapsed .nav-link {
+    justify-content: center;
+    padding: var(--space-l) 0;
+    gap: 0;
+  }
+
+  /* Collapsed: remove open section tint */
+  body.sidebar-collapsed .nav-section[open] {
+    background: none;
+  }
 }
 
 
@@ -474,52 +626,14 @@ html {
 
 /* ------ 8. RESPONSIVE ------ */
 
-/* ---- Desktop: Collapsed sidebar state ---- */
-@media (min-width: 769px) {
-
-  /* Reduce padding in collapsed state */
-  .sidebar-collapsed .docs-sidebar {
-    padding: var(--space-m);
-  }
-
-  /* Stack header items vertically to fit the narrow column */
-  .sidebar-collapsed .docs-sidebar-header {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: var(--space-s);
-    margin-bottom: var(--space-m);
-  }
-
-  .sidebar-collapsed .docs-logo-link {
-    flex: 0 0 auto;
-  }
-
-  /* Swap full logo for small logo */
-  .sidebar-collapsed .nav-logo {
-    display: none;
-  }
-
-  .sidebar-collapsed .nav-logo-small {
-    display: block;
-  }
-
-  /* Hide nav links when sidebar is collapsed */
-  .sidebar-collapsed .docs-nav-content {
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
-  }
-}
-
 /* ---- Tablet: Narrower sidebar ---- */
-@media (max-width: 1024px) {
+@media (max-width: 1024px) and (min-width: 769px) {
 
-  .docs-container {
+  .docs-layout {
     grid-template-columns: 240px 1fr;
   }
 
-  .docs-container.sidebar-collapsed {
+  body.sidebar-collapsed .docs-layout {
     grid-template-columns: var(--sidebar-collapsed-width) 1fr;
   }
 
@@ -533,59 +647,62 @@ html {
   }
 }
 
-/* ---- Mobile: Stacked layout with hamburger nav ---- */
+/* ---- Mobile: sidebar becomes an overlay under the top nav ---- */
 @media (max-width: 768px) {
 
-  /* Switch to block layout — sidebar stacks above main content */
-  .docs-container {
-    display: block;
-    transition: none;
-  }
-
-  /* Show hamburger, hide desktop toggle */
-  .docs-sidebar-toggle {
-    display: none;
-  }
-
-  .docs-mobile-toggle {
-    display: flex;
-  }
-
-  /* Sidebar becomes a slim top bar */
-  .docs-sidebar {
-    position: static;
-    height: auto;
-    max-height: none;
-    overflow: hidden;
-    border-right: none;
-    border-bottom: var(--border-s) solid var(--border-secondary);
-    padding: var(--space-m) var(--space-xl);
-    align-self: auto;
-    transition: none;
+  /* Top nav: hamburger appears, tighter spacing */
+  .top-nav {
+    padding: 0;
   }
 
   .nav-logo {
-    max-height: 50px;
+    height: 45px;
   }
 
-  /* Header fills the top bar: logo left, hamburger right */
-  .docs-sidebar-header {
-    margin-bottom: 0;
+  .top-nav-right .top-nav-link {
+    padding: 0 var(--space-l);
+    gap: var(--space-xs);
   }
 
-  /* Nav content hidden by default — expands on hamburger tap */
-  .docs-nav-content {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.2s ease;
+  .top-nav-hamburger {
+    display: flex;
+    padding: 0 var(--space-l);
   }
 
-  /* Open state: nav pushes content down */
-  .mobile-nav-open .docs-nav-content {
-    max-height: 800px;
-    opacity: 1;
-    padding-top: var(--space-l);
+  /* Hide the desktop collapse toggle (and its header row) on mobile */
+  .site-sidebar-toggle {
+    display: none;
+  }
+
+  .site-sidebar-header {
+    display: none;
+  }
+
+  /* Grid: single column — the sidebar leaves the grid entirely */
+  .docs-layout,
+  body.sidebar-collapsed .docs-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--top-nav-height) 1fr;
+    grid-template-areas:
+      "topbar"
+      "main";
+  }
+
+  /* Sidebar: fixed overlay sliding in from the left */
+  .site-sidebar {
+    position: fixed;
+    top: var(--top-nav-height);
+    left: 0;
+    bottom: 0;
+    height: auto;
+    width: 75vw;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 101;
+  }
+
+  body.mobile-nav-open .site-sidebar {
+    transform: translateX(0);
   }
 
   .docs-main-area {
@@ -603,41 +720,6 @@ html {
     position: static;
     max-height: none;
     display: none;
-  }
-
-  /* Mobile: Collapsible nav sections */
-  .nav-section {
-    margin-bottom: var(--space-m);
-    padding: var(--space-s) var(--space-m);
-    background: var(--background-plain);
-    border: var(--border-s) solid var(--border-secondary);
-    border-radius: 4px;
-    transition: background-color 0.2s;
-  }
-
-  .nav-section:hover {
-    background: var(--background-secondary);
-  }
-
-  /* Toggle takes full width */
-  .nav-section-toggle {
-    width: 100%;
-    margin-bottom: 0;
-  }
-
-  /* Show/hide nav-list based on details open state */
-  .nav-section:not([open]) .nav-list {
-    display: none;
-  }
-
-  .nav-section[open] .nav-list {
-    display: block;
-    margin-top: var(--space-s);
-  }
-
-  .nav-link {
-    padding: var(--space-xs) 0;
-    white-space: normal;
   }
 
   /* Make grid single column on mobile */

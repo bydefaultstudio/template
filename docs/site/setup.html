@@ -30,6 +30,9 @@
 </head>
 <body>
 
+    <!-- Restore sidebar state before first paint (no expand/collapse flash) -->
+    <script>try{if(localStorage.getItem('docs-sidebar-collapsed')==='true')document.body.classList.add('sidebar-collapsed')}catch(e){}</script>
+
     <!-- Design system missing banner (shown by JS if CSS variables fail to load) -->
     <div id="ds-missing-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#fffbea;border-bottom:1px solid #f0c040;padding:12px 20px;font-family:sans-serif;font-size:14px;color:#7a5c00;align-items:center;gap:12px;">
         <span>⚠️</span>
@@ -37,34 +40,24 @@
         <button onclick="document.getElementById('ds-missing-banner').style.display='none'" style="margin-left:auto;background:none;border:1px solid #f0c040;border-radius:4px;padding:4px 10px;cursor:pointer;color:#7a5c00;font-size:13px;">Dismiss</button>
     </div>
 
-    <div class="docs-container">
-        <!-- Sidebar Navigation (sticky on desktop, top bar on mobile) -->
-        <aside class="docs-sidebar">
-            <nav class="docs-nav">
-                <div class="docs-sidebar-header">
-                    <a href="index.html" class="docs-logo-link">
-                        <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
-                        <img src="assets/images/logo-small.svg" alt="Logo" class="nav-logo-small">
-                    </a>
-                    <button class="dark-mode-toggle" aria-label="Toggle dark mode" type="button"></button>
-                    <button class="docs-sidebar-toggle" aria-label="Collapse sidebar" type="button">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                    <button class="docs-mobile-toggle" aria-label="Open navigation" type="button">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M3 5H17M3 10H17M3 15H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="docs-nav-content">
-                    
-    <ul class="nav-list nav-home">
-      <li><a href="index.html" class="nav-link ">Home</a></li>
-    </ul>
+    <div class="docs-layout">
+        <!-- Sidebar Navigation (sticky full-height on desktop, overlay on mobile) -->
+        <aside class="site-sidebar" role="navigation" aria-label="Site navigation">
+            <div class="site-sidebar-header">
+                <button class="site-sidebar-toggle" aria-label="Collapse sidebar" type="button">
+                    <span class="svg-icn sidebar-icon-open"><svg data-icon="sidebar-close" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M5.6 12L9.6 8L11 9.4L9.81421 10.5858C9.03316 11.3668 9.03316 12.6332 9.81421 13.4142L11 14.6L9.6 16L5.6 12Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M22 22H2V2H22V22ZM4 18C4 19.1046 4.89543 20 6 20H12C13.1046 20 14 19.1046 14 18V6C14 4.89543 13.1046 4 12 4H6C4.89543 4 4 4.89543 4 6V18ZM16 18C16 19.1046 16.8954 20 18 20C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4C16.8954 4 16 4.89543 16 6V18Z" fill="currentColor"/></svg></span>
+                    <span class="svg-icn sidebar-icon-close"><svg data-icon="sidebar-open" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M12.4 12L8.4 16L7 14.6L8.18579 13.4142C8.96684 12.6332 8.96684 11.3668 8.18579 10.5858L7 9.4L8.4 8L12.4 12Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M22 22H2V2H22V22ZM4 18C4 19.1046 4.89543 20 6 20H12C13.1046 20 14 19.1046 14 18V6C14 4.89543 13.1046 4 12 4H6C4.89543 4 4 4.89543 4 6V18ZM16 18C16 19.1046 16.8954 20 18 20C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4C16.8954 4 16 4.89543 16 6V18Z" fill="currentColor"/></svg></span>
+                </button>
+            </div>
+            <div class="site-sidebar-content">
+                
+    <a href="index.html" class="nav-link nav-home">
+      <span class="svg-icn"><svg data-icon="home" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M6 17C6 18.1046 6.89543 19 8 19H16C17.1046 19 18 18.1046 18 17V10L13.2 6.4C12.4889 5.86667 11.5111 5.86667 10.8 6.4L6 10V17ZM4 21V9L12 3L20 9V21H4Z" fill="currentColor"/></svg></span>
+      <span>Home</span>
+    </a>
   <details class="nav-section">
-      <summary class="nav-section-toggle">
+      <summary class="nav-section-toggle" title="Brand">
+        <span class="svg-icn"><svg data-icon="brand-book" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><g clip-path="url(#nav_icon_brand)"><path d="M18 6.99953V5.18605L7.45312 6.99953H18ZM3 18.4644L5.30273 19.9995H21V8.99953H5.7998L3 7.83351V18.4644ZM6.91211 5.06203L12 4.188V2.97121L6.91211 5.06203ZM23 6.99953V21.9995H4.69727L1 19.5347V5.32961L14 -0.0121918V3.84425L20 2.813V6.99953H23Z" fill="currentColor"/></g><defs><clipPath id="nav_icon_brand"><rect width="24" height="24" fill="white"/></clipPath></defs></svg></span>
         <span>Brand</span>
         <span class="nav-toggle-icon">
           <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,7 +70,8 @@
       
       </ul>
     </details><details class="nav-section">
-      <summary class="nav-section-toggle">
+      <summary class="nav-section-toggle" title="Design System">
+        <span class="svg-icn"><svg data-icon="design-system" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M21 21H13V13H21V21ZM15 19H19V15H15V19Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M22.2998 7.34961L16.6504 13L11 7.34961L16.6504 1.7002L22.2998 7.34961ZM13.8496 7.375L16.6748 10.2002L19.5 7.375L16.6748 4.5498L13.8496 7.375Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M11 11H3V3H11V11ZM5 9H9V5H5V9Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8 11C10.7614 11 13 13.2386 13 16C13 18.7614 10.7614 21 8 21C5.23858 21 3 18.7614 3 16C3 13.2386 5.23858 11 8 11ZM8 13C6.34315 13 5 14.3431 5 16C5 17.6569 6.34315 19 8 19C9.65685 19 11 17.6569 11 16C11 14.3431 9.65685 13 8 13Z" fill="currentColor"/></svg></span>
         <span>Design System</span>
         <span class="nav-toggle-icon">
           <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +100,8 @@
       
       </ul>
     </details><details class="nav-section">
-      <summary class="nav-section-toggle">
+      <summary class="nav-section-toggle" title="Code">
+        <span class="svg-icn"><svg data-icon="code" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M6 17L1 12L6 7L7.4 8.4L4.87462 10.943C4.29375 11.528 4.29375 12.472 4.87462 13.057L7.4 15.6L6 17ZM10.45 20.3L8.55 19.7L13.55 3.7L15.45 4.3L10.45 20.3ZM18 17L16.6 15.6L19.1254 13.057C19.7062 12.472 19.7063 11.528 19.1254 10.943L16.6 8.4L18 7L23 12L18 17Z" fill="currentColor"/></svg></span>
         <span>Code</span>
         <span class="nav-toggle-icon">
           <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -123,7 +118,8 @@
       
       </ul>
     </details><details class="nav-section">
-      <summary class="nav-section-toggle">
+      <summary class="nav-section-toggle" title="Content">
+        <span class="svg-icn"><svg data-icon="docs" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M2 21V3H22V21H2ZM4 17C4 18.1046 4.89543 19 6 19H18C19.1046 19 20 18.1046 20 17V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V17ZM6 17H15V15H6V17ZM6 13H18V11H6V13ZM6 9H18V7H6V9Z" fill="currentColor"/></svg></span>
         <span>Content</span>
         <span class="nav-toggle-icon">
           <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -138,7 +134,8 @@
       
       </ul>
     </details><details class="nav-section" open>
-      <summary class="nav-section-toggle">
+      <summary class="nav-section-toggle" title="Project">
+        <span class="svg-icn"><svg data-icon="folder" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M2 20V4H10L12 6H22V20H2ZM4 16C4 17.1046 4.89543 18 6 18H18C19.1046 18 20 17.1046 20 16V10C20 8.89543 19.1046 8 18 8H11.175L9.175 6H6C4.89543 6 4 6.89543 4 8V16Z" fill="currentColor"/></svg></span>
         <span>Project</span>
         <span class="nav-toggle-icon">
           <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -157,9 +154,25 @@
       
       </ul>
     </details>
-                </div>
-            </nav>
+            </div>
         </aside>
+        <div class="site-sidebar-backdrop"></div>
+
+        <!-- Top Nav (sticky): logo left, dark mode toggle right -->
+        <header class="top-nav">
+            <div class="top-nav-left">
+                <button class="top-nav-link top-nav-hamburger" aria-label="Open navigation" type="button">
+                    <span class="svg-icn hamburger-icon-open"><svg data-icon="menu" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M3 18V16H21V18H3ZM3 13V11H21V13H3ZM3 8V6H21V8H3Z" fill="currentColor"/></svg></span>
+                    <span class="svg-icn hamburger-icon-close"><svg data-icon="close" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M6.4 19L5 17.6L9.18579 13.4142C9.96684 12.6332 9.96684 11.3668 9.18579 10.5858L5 6.4L6.4 5L10.5858 9.18579C11.3668 9.96684 12.6332 9.96684 13.4142 9.18579L17.6 5L19 6.4L14.8142 10.5858C14.0332 11.3668 14.0332 12.6332 14.8142 13.4142L19 17.6L17.6 19L13.4142 14.8142C12.6332 14.0332 11.3668 14.0332 10.5858 14.8142L6.4 19Z" fill="currentColor"/></svg></span>
+                </button>
+                <a href="index.html" class="top-nav-logo-link">
+                    <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
+                </a>
+            </div>
+            <div class="top-nav-right">
+                <button class="top-nav-link dark-mode-toggle" aria-label="Toggle dark mode" type="button"></button>
+            </div>
+        </header>
 
         <div class="docs-main-area">
             <!-- Page Header (full width, outside grid) -->
@@ -193,10 +206,10 @@
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-piwysx2x8" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-3v3d16hkn" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-piwysx2x8" class="language-css">/* assets/css/theme.css */
+        <pre><code id="code-3v3d16hkn" class="language-css">/* assets/css/theme.css */
 :root {
   --accent: #3485cd;
   --text-primary: var(--neutral-800);
@@ -221,10 +234,10 @@
 <p>Every page loads the three CSS layers in this order:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-eufd6p3k3" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-y44rkso2a" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-eufd6p3k3" class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/design-system.css&quot;&gt;
+        <pre><code id="code-y44rkso2a" class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/design-system.css&quot;&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/theme.css&quot;&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/style.css&quot;&gt;
 </code></pre>
@@ -362,40 +375,54 @@
             
             function initSidebarToggle() {
                 var SIDEBAR_KEY = 'docs-sidebar-collapsed';
-                var MOBILE_NAV_KEY = 'docs-mobile-nav-open';
-                var container = document.querySelector('.docs-container');
-                var sidebarToggle = document.querySelector('.docs-sidebar-toggle');
-                var mobileToggle = document.querySelector('.docs-mobile-toggle');
+                var body = document.body;
+                var sidebarToggle = document.querySelector('.site-sidebar-toggle');
+                var hamburger = document.querySelector('.top-nav-hamburger');
+                var backdrop = document.querySelector('.site-sidebar-backdrop');
 
-                if (!container) return;
-
-                // Restore desktop sidebar state
-                if (localStorage.getItem(SIDEBAR_KEY) === 'true') {
-                    container.classList.add('sidebar-collapsed');
-                    if (sidebarToggle) sidebarToggle.setAttribute('aria-label', 'Expand sidebar');
-                }
-
-                // Restore mobile nav state
-                if (localStorage.getItem(MOBILE_NAV_KEY) === 'true') {
-                    container.classList.add('mobile-nav-open');
-                    if (mobileToggle) mobileToggle.setAttribute('aria-label', 'Close navigation');
+                // Collapsed state is restored pre-paint by the inline script
+                // at the top of <body>; here we only sync the aria-label.
+                if (sidebarToggle && body.classList.contains('sidebar-collapsed')) {
+                    sidebarToggle.setAttribute('aria-label', 'Expand sidebar');
                 }
 
                 if (sidebarToggle) {
                     sidebarToggle.addEventListener('click', function onSidebarToggle() {
-                        var isCollapsed = container.classList.toggle('sidebar-collapsed');
-                        localStorage.setItem(SIDEBAR_KEY, isCollapsed);
+                        var isCollapsed = body.classList.toggle('sidebar-collapsed');
+                        try { localStorage.setItem(SIDEBAR_KEY, isCollapsed); } catch (e) {}
                         sidebarToggle.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
                     });
                 }
 
-                if (mobileToggle) {
-                    mobileToggle.addEventListener('click', function onMobileToggle() {
-                        var isOpen = container.classList.toggle('mobile-nav-open');
-                        localStorage.setItem(MOBILE_NAV_KEY, isOpen);
-                        mobileToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+                function setMobileNav(open) {
+                    body.classList.toggle('mobile-nav-open', open);
+                    if (hamburger) hamburger.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+                }
+
+                if (hamburger) {
+                    hamburger.addEventListener('click', function onHamburger() {
+                        setMobileNav(!body.classList.contains('mobile-nav-open'));
                     });
                 }
+
+                if (backdrop) {
+                    backdrop.addEventListener('click', function onBackdrop() {
+                        setMobileNav(false);
+                    });
+                }
+
+                // Collapsed sidebar: clicking a section icon expands the
+                // sidebar (the toggled-open list would be invisible otherwise)
+                document.addEventListener('click', function onCollapsedNavClick(event) {
+                    if (!body.classList.contains('sidebar-collapsed')) return;
+                    if (window.innerWidth <= 768) return;
+                    var toggle = event.target.closest('.nav-section-toggle');
+                    if (!toggle) return;
+                    event.preventDefault();
+                    body.classList.remove('sidebar-collapsed');
+                    try { localStorage.setItem(SIDEBAR_KEY, 'false'); } catch (e) {}
+                    if (sidebarToggle) sidebarToggle.setAttribute('aria-label', 'Collapse sidebar');
+                });
             }
 
             function initTOCActiveState() {

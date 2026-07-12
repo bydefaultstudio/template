@@ -174,18 +174,30 @@ function generateTableOfContents(html) {
 /**
  * Generate navigation HTML
  */
+// Section icons (BrandOS icon set) — shown beside section labels and as
+// the icon-only strip when the sidebar is collapsed
+const ICON_HOME = '<svg data-icon="home" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M6 17C6 18.1046 6.89543 19 8 19H16C17.1046 19 18 18.1046 18 17V10L13.2 6.4C12.4889 5.86667 11.5111 5.86667 10.8 6.4L6 10V17ZM4 21V9L12 3L20 9V21H4Z" fill="currentColor"/></svg>';
+const SECTION_ICONS = {
+  'Brand': '<svg data-icon="brand-book" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><g clip-path="url(#nav_icon_brand)"><path d="M18 6.99953V5.18605L7.45312 6.99953H18ZM3 18.4644L5.30273 19.9995H21V8.99953H5.7998L3 7.83351V18.4644ZM6.91211 5.06203L12 4.188V2.97121L6.91211 5.06203ZM23 6.99953V21.9995H4.69727L1 19.5347V5.32961L14 -0.0121918V3.84425L20 2.813V6.99953H23Z" fill="currentColor"/></g><defs><clipPath id="nav_icon_brand"><rect width="24" height="24" fill="white"/></clipPath></defs></svg>',
+  'Design System': '<svg data-icon="design-system" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M21 21H13V13H21V21ZM15 19H19V15H15V19Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M22.2998 7.34961L16.6504 13L11 7.34961L16.6504 1.7002L22.2998 7.34961ZM13.8496 7.375L16.6748 10.2002L19.5 7.375L16.6748 4.5498L13.8496 7.375Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M11 11H3V3H11V11ZM5 9H9V5H5V9Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8 11C10.7614 11 13 13.2386 13 16C13 18.7614 10.7614 21 8 21C5.23858 21 3 18.7614 3 16C3 13.2386 5.23858 11 8 11ZM8 13C6.34315 13 5 14.3431 5 16C5 17.6569 6.34315 19 8 19C9.65685 19 11 17.6569 11 16C11 14.3431 9.65685 13 8 13Z" fill="currentColor"/></svg>',
+  'Code': '<svg data-icon="code" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M6 17L1 12L6 7L7.4 8.4L4.87462 10.943C4.29375 11.528 4.29375 12.472 4.87462 13.057L7.4 15.6L6 17ZM10.45 20.3L8.55 19.7L13.55 3.7L15.45 4.3L10.45 20.3ZM18 17L16.6 15.6L19.1254 13.057C19.7062 12.472 19.7063 11.528 19.1254 10.943L16.6 8.4L18 7L23 12L18 17Z" fill="currentColor"/></svg>',
+  'Content': '<svg data-icon="docs" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M2 21V3H22V21H2ZM4 17C4 18.1046 4.89543 19 6 19H18C19.1046 19 20 18.1046 20 17V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V17ZM6 17H15V15H6V17ZM6 13H18V11H6V13ZM6 9H18V7H6V9Z" fill="currentColor"/></svg>',
+  'Project': '<svg data-icon="folder" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M2 20V4H10L12 6H22V20H2ZM4 16C4 17.1046 4.89543 18 6 18H18C19.1046 18 20 17.1046 20 16V10C20 8.89543 19.1046 8 18 8H11.175L9.175 6H6C4.89543 6 4 6.89543 4 8V16Z" fill="currentColor"/></svg>',
+};
+
 function generateNavigation(filesBySection, currentPage = null) {
   let navigation = '';
-  
+
   // Add Home link (outside of sections)
   const isHomeActive = currentPage && currentPage.filename === 'index';
-  const homeActiveClass = isHomeActive ? 'nav-link-active' : '';
+  const homeActiveClass = isHomeActive ? ' nav-link-active' : '';
   navigation += `
-    <ul class="nav-list nav-home">
-      <li><a href="index.html" class="nav-link ${homeActiveClass}">Home</a></li>
-    </ul>
+    <a href="index.html" class="nav-link nav-home${homeActiveClass}">
+      <span class="svg-icn">${ICON_HOME}</span>
+      <span>Home</span>
+    </a>
   `;
-  
+
   // Sort sections in custom order
   const sectionOrder = ['Brand', 'Design System', 'Code', 'Content', 'Project'];
   const sortedSections = Object.keys(filesBySection).sort((a, b) => {
@@ -214,9 +226,11 @@ function generateNavigation(filesBySection, currentPage = null) {
     
     // Display "Pages" instead of section name
     const sectionLabel = section === 'overview' ? 'Pages' : section.charAt(0).toUpperCase() + section.slice(1);
-    
+    const sectionIcon = SECTION_ICONS[sectionLabel] || SECTION_ICONS['Content'];
+
     navigation += `<details class="nav-section"${openAttr}>
-      <summary class="nav-section-toggle">
+      <summary class="nav-section-toggle" title="${sectionLabel}">
+        <span class="svg-icn">${sectionIcon}</span>
         <span>${sectionLabel}</span>
         <span class="nav-toggle-icon">
           <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
