@@ -266,10 +266,10 @@
 <p>Always reference the tokens — never hardcode <code>cubic-bezier()</code> or millisecond values:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-98uaufcl9" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-eutfrmp1m" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-98uaufcl9" class="language-css">.card {
+        <pre><code id="code-eutfrmp1m" class="language-css">.card {
   transition: transform var(--duration-xs) var(--ease-out);
 }
 </code></pre>
@@ -278,10 +278,10 @@
 <p>The design system itself composes them this way. Links transition colour and underline offset at element pace:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-joodesr2u" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-ozm3mekxp" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-joodesr2u" class="language-css">a {
+        <pre><code id="code-ozm3mekxp" class="language-css">a {
   transition:
     color var(--duration-s) var(--ease-out),
     text-underline-offset var(--duration-s) var(--ease-out);
@@ -292,10 +292,10 @@
 <p>The button mixes durations per property — a slow background fade with instant feedback on everything else:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-f3fco1cf9" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-f1uiz2ypo" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-f3fco1cf9" class="language-css">.button {
+        <pre><code id="code-f1uiz2ypo" class="language-css">.button {
   transition:
     background-color var(--duration-m) var(--ease-out),
     color var(--duration-2xs) var(--ease-out),
@@ -315,10 +315,10 @@
 <p>Read the tokens via <code>getComputedStyle</code> so JS animations stay in sync with CSS:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-iow4gpjkt" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-uxz3qflxs" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-iow4gpjkt" class="language-js">function readToken(name) {
+        <pre><code id="code-uxz3qflxs" class="language-js">function readToken(name) {
   return getComputedStyle(document.documentElement)
     .getPropertyValue(name)
     .trim();
@@ -335,10 +335,10 @@ element.animate([{ opacity: 0 }, { opacity: 1 }], { duration, easing });
 <p>Respect <code>prefers-reduced-motion</code> for any non-essential movement — especially transforms and large entrances:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-5exxb5rx1" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-zoqke9p55" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-5exxb5rx1" class="language-css">@media (prefers-reduced-motion: reduce) {
+        <pre><code id="code-zoqke9p55" class="language-css">@media (prefers-reduced-motion: reduce) {
   .card {
     transition: none;
   }
@@ -350,10 +350,10 @@ element.animate([{ opacity: 0 }, { opacity: 1 }], { duration, easing });
 <p>In JavaScript, check the preference before animating:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-xufuw6aw4" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-6ywa5lmam" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-xufuw6aw4" class="language-js">const reducedMotion = window.matchMedia(&quot;(prefers-reduced-motion: reduce)&quot;).matches;
+        <pre><code id="code-6ywa5lmam" class="language-js">const reducedMotion = window.matchMedia(&quot;(prefers-reduced-motion: reduce)&quot;).matches;
 if (!reducedMotion) {
   element.animate(keyframes, { duration, easing });
 }

@@ -5,3 +5,29 @@
    Project-specific styles. Prefer the design system;
    add here only what it can't express.
    ───────────────────────────── */
+
+
+/* -- Dark mode toggle (icon swap) -- */
+/* Icons injected by assets/js/theme-toggle.js; the framework no
+   longer ships these rules, so they live here alongside the script. */
+.dark-mode-toggle .dark-mode-icon-dark {
+  display: none;
+}
+
+[data-theme="dark"] .dark-mode-toggle .dark-mode-icon-light {
+  display: none;
+}
+
+[data-theme="dark"] .dark-mode-toggle .dark-mode-icon-dark {
+  display: flex;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .dark-mode-toggle .dark-mode-icon-light {
+    display: none;
+  }
+
+  :root:not([data-theme]) .dark-mode-toggle .dark-mode-icon-dark {
+    display: flex;
+  }
+}

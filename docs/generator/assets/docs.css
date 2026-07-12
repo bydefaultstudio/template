@@ -166,6 +166,31 @@ body.sidebar-collapsed .docs-layout {
   height: 1.25rem;
 }
 
+/* -- Dark mode toggle (icon swap) -- */
+/* Icons injected by assets/js/theme-toggle.js; the design system no
+   longer ships these rules, so the docs chrome carries its own copy */
+.dark-mode-toggle .dark-mode-icon-dark {
+  display: none;
+}
+
+[data-theme="dark"] .dark-mode-toggle .dark-mode-icon-light {
+  display: none;
+}
+
+[data-theme="dark"] .dark-mode-toggle .dark-mode-icon-dark {
+  display: flex;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .dark-mode-toggle .dark-mode-icon-light {
+    display: none;
+  }
+
+  :root:not([data-theme]) .dark-mode-toggle .dark-mode-icon-dark {
+    display: flex;
+  }
+}
+
 /* Hamburger — visible on mobile only */
 .top-nav-hamburger {
   display: none;
@@ -303,6 +328,12 @@ body.mobile-nav-open .site-sidebar-backdrop {
 /* Remove default WebKit arrow */
 .nav-section-toggle::-webkit-details-marker {
   display: none;
+}
+
+/* Suppress the design system's base summary chevron —
+   the sidebar draws its own .nav-toggle-icon on the right */
+.nav-section-toggle::before {
+  content: none;
 }
 
 /* Section + link icon sizing */

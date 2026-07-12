@@ -30,11 +30,11 @@ These are the tokens a theme owns. Overriding them in `theme.css` re-colours the
 
 ### Accent
 
-`--accent` drives `--text-accent`, `--text-link`, and `--input-focus`.
+`--text-accent` drives `--text-link` and `--input-focus`.
 
 <div class="demo-preview is-centered">
-  <div style="background-color: var(--accent); width: 160px; height: 80px; border-radius: var(--radius-s);"></div>
-  <span class="token-tag">--accent</span>
+  <div style="background-color: var(--text-accent); width: 160px; height: 80px; border-radius: var(--radius-s);"></div>
+  <span class="token-tag">--text-accent</span>
 </div>
 
 ### Neutral ramp
@@ -145,13 +145,13 @@ The favicon set lives in `assets/icons/`. Regenerate all four files from your ma
 
 ## Theming this template
 
-`theme.css` loads after `design-system.css` and overrides **§1/§2 primitives only** — fonts, `--accent`, and the neutral ramp. Semantic tokens (`--text-*`, `--background-*`, buttons, forms) resolve through those primitives, so they cascade automatically; you should rarely restate them.
+`theme.css` loads after `design-system.css` and overrides **§1/§2 primitives only** — fonts, `--text-accent`, and the neutral ramp. Semantic tokens (`--text-*`, `--background-*`, buttons, forms) resolve through those primitives, so they cascade automatically; you should rarely restate them.
 
 ```css
 /* assets/css/theme.css */
 :root {
   --font-primary: "Your Font", sans-serif;
-  --accent: #3485cd;
+  --text-accent: #3485cd;
   --neutral-900: #14161a; /* tinted darks, if the brand calls for it */
 }
 ```
@@ -160,12 +160,12 @@ For brand values that differ in dark mode, add a `[data-theme="dark"]` block **a
 
 ```css
 [data-theme="dark"] {
-  --accent: #6cb2ff;
+  --text-accent: #6cb2ff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --accent: #6cb2ff;
+    --text-accent: #6cb2ff;
   }
 }
 ```

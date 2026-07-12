@@ -207,10 +207,10 @@
 <h2 id="colours">Colours</h2>
 <p>These are the tokens a theme owns. Overriding them in <code>theme.css</code> re-colours the whole system — semantic tokens cascade through them. See <a href="color.html">Color</a> for the full token reference.</p>
 <h3 id="accent">Accent</h3>
-<p><code>--accent</code> drives <code>--text-accent</code>, <code>--text-link</code>, and <code>--input-focus</code>.</p>
+<p><code>--text-accent</code> drives <code>--text-link</code> and <code>--input-focus</code>.</p>
 <div class="demo-preview is-centered">
-  <div style="background-color: var(--accent); width: 160px; height: 80px; border-radius: var(--radius-s);"></div>
-  <span class="token-tag">--accent</span>
+  <div style="background-color: var(--text-accent); width: 160px; height: 80px; border-radius: var(--radius-s);"></div>
+  <span class="token-tag">--text-accent</span>
 </div>
 
 <h3 id="neutral-ramp">Neutral ramp</h3>
@@ -325,16 +325,16 @@
 </div>
 
 <h2 id="theming-this-template">Theming this template</h2>
-<p><code>theme.css</code> loads after <code>design-system.css</code> and overrides <strong>§1/§2 primitives only</strong> — fonts, <code>--accent</code>, and the neutral ramp. Semantic tokens (<code>--text-*</code>, <code>--background-*</code>, buttons, forms) resolve through those primitives, so they cascade automatically; you should rarely restate them.</p>
+<p><code>theme.css</code> loads after <code>design-system.css</code> and overrides <strong>§1/§2 primitives only</strong> — fonts, <code>--text-accent</code>, and the neutral ramp. Semantic tokens (<code>--text-*</code>, <code>--background-*</code>, buttons, forms) resolve through those primitives, so they cascade automatically; you should rarely restate them.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-b3y041u8j" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-aak4j19io" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-b3y041u8j" class="language-css">/* assets/css/theme.css */
+        <pre><code id="code-aak4j19io" class="language-css">/* assets/css/theme.css */
 :root {
   --font-primary: &quot;Your Font&quot;, sans-serif;
-  --accent: #3485cd;
+  --text-accent: #3485cd;
   --neutral-900: #14161a; /* tinted darks, if the brand calls for it */
 }
 </code></pre>
@@ -343,16 +343,16 @@
 <p>For brand values that differ in dark mode, add a <code>[data-theme=&quot;dark&quot;]</code> block <strong>and</strong> a mirrored <code>@media (prefers-color-scheme: dark) { :root:not([data-theme]) { … } }</code> block — the first serves the JS toggle, the second serves no-JS visitors following their OS preference. The two blocks must contain the same values; if they drift, toggled and OS-preference visitors see different brands.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-mdkvugu4e" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-vqezxcxdk" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-mdkvugu4e" class="language-css">[data-theme=&quot;dark&quot;] {
-  --accent: #6cb2ff;
+        <pre><code id="code-vqezxcxdk" class="language-css">[data-theme=&quot;dark&quot;] {
+  --text-accent: #6cb2ff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --accent: #6cb2ff;
+    --text-accent: #6cb2ff;
   }
 }
 </code></pre>

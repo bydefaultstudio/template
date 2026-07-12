@@ -40,9 +40,9 @@
   */
 
   /* -- Core colours -- */
-  /* --accent drives --text-accent, --text-link, and --input-focus */
+  /* --text-accent drives --text-link and --input-focus */
   /*
-  --accent: #3485cd;
+  --text-accent: #3485cd;
   --text-primary: var(--neutral-800);
   --background-primary: var(--white);
   */
@@ -53,7 +53,6 @@
   --status-success: #1a7f37;
   --status-warning: #9a6700;
   --status-danger: #cf222e;
-  --status-accent: #8250df;
   */
 
 }
@@ -62,7 +61,7 @@
 /* -- Dark mode overrides (optional) -- */
 [data-theme="dark"] {
   /*
-  --accent: #7db8e8;
+  --text-accent: #7db8e8;
   */
 }
 
@@ -73,7 +72,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     /*
-    --accent: #7db8e8;
+    --text-accent: #7db8e8;
     */
   }
 }

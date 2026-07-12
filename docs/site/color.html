@@ -197,10 +197,10 @@
 <p>The design system is a <strong>neutral engine</strong>: <code>assets/css/design-system.css</code> ships working defaults on real token names — a grayscale neutral ramp and a blue <code>--accent</code>. There are no brand-specific tokens. A brand expresses itself by overriding primitives in <code>assets/css/theme.css</code>, which loads <strong>after</strong> the design system:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-im6tzt63k" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-1tdxiefkj" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-im6tzt63k" class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/design-system.css&quot;&gt;
+        <pre><code id="code-1tdxiefkj" class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/design-system.css&quot;&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/theme.css&quot;&gt;
 </code></pre>
       </div>
@@ -208,10 +208,10 @@
 <p>The semantic layer resolves through the primitives, so one primitive override cascades everywhere:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-rblzoh2kn" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-hhb19hmg8" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-rblzoh2kn" class="language-css">/* assets/css/theme.css */
+        <pre><code id="code-hhb19hmg8" class="language-css">/* assets/css/theme.css */
 :root {
   --accent: #7c3aed;      /* --text-accent, --text-link, --input-focus all follow */
   --neutral-800: #2b2622; /* --text-primary follows */
@@ -399,10 +399,10 @@
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-s4lfnf3kz" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-rhtzlunsm" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-s4lfnf3kz" class="language-css">.shadow {
+        <pre><code id="code-rhtzlunsm" class="language-css">.shadow {
   box-shadow: 0 4px 6px var(--black-alpha-30);
 }
 </code></pre>
@@ -412,10 +412,10 @@
 <p>For transparency on <strong>any</strong> color (not just black/white), the system provides <code>--alpha-5</code> through <code>--alpha-95</code> in steps of 5. Each token is the <strong>second argument</strong> to <code>color-mix()</code> — <code>--alpha-10</code> is <code>transparent 90%</code>, so the mix keeps 10% of your color:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-kn0c73hbd" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-90tolsald" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-kn0c73hbd" class="language-css">.badge {
+        <pre><code id="code-90tolsald" class="language-css">.badge {
   /* accent at 10% opacity */
   background-color: color-mix(in srgb, var(--accent), var(--alpha-10));
 }
@@ -497,10 +497,10 @@
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-90v7os6kz" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-chh2zbgz0" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-90v7os6kz" class="language-css">h1 {
+        <pre><code id="code-chh2zbgz0" class="language-css">h1 {
   color: var(--text-primary);
 }
 </code></pre>
@@ -550,10 +550,10 @@
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-qkoe36zqv" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-e3fd7u9p5" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-qkoe36zqv" class="language-css">.card {
+        <pre><code id="code-e3fd7u9p5" class="language-css">.card {
   background-color: var(--background-plain);
 }
 </code></pre>
@@ -598,10 +598,10 @@
 <p><strong>Usage:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-ejhyqgmki" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-dxtesme78" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-ejhyqgmki" class="language-css">.card {
+        <pre><code id="code-dxtesme78" class="language-css">.card {
   border-color: var(--border-primary);
 }
 </code></pre>
@@ -703,10 +703,10 @@
 <p><code>assets/js/theme-toggle.js</code> drives the switch. Load it in <code>&lt;head&gt;</code> <strong>without <code>defer</code></strong> so the attribute is set before first paint (no theme flash). It persists the choice to <code>localStorage</code> under the key <code>dark-mode</code>; with no stored choice, the OS preference wins. It injects sun/moon icons into every empty <code>.dark-mode-toggle</code> button:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-vqn8vskbh" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-lmbzmvis8" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-vqn8vskbh" class="language-html">&lt;button class=&quot;button dark-mode-toggle&quot; type=&quot;button&quot; data-variant=&quot;transparent&quot; data-icon-only aria-label=&quot;Toggle dark mode&quot;&gt;&lt;/button&gt;
+        <pre><code id="code-lmbzmvis8" class="language-html">&lt;button class=&quot;button dark-mode-toggle&quot; type=&quot;button&quot; data-variant=&quot;transparent&quot; data-icon-only aria-label=&quot;Toggle dark mode&quot;&gt;&lt;/button&gt;
 </code></pre>
       </div>
     
@@ -731,10 +731,10 @@
 
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-zu2u8ldty" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-0juvf5ta9" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-zu2u8ldty" class="language-html">&lt;!-- Dark card on a light page --&gt;
+        <pre><code id="code-0juvf5ta9" class="language-html">&lt;!-- Dark card on a light page --&gt;
 &lt;div data-theme=&quot;dark&quot; class=&quot;card&quot;&gt;
   &lt;p&gt;This section uses dark mode tokens&lt;/p&gt;
 &lt;/div&gt;
@@ -746,10 +746,10 @@
 <p>Add dark overrides in <code>theme.css</code> — do not edit design-system.css. Every override needs <strong>two blocks</strong>: the <code>[data-theme=&quot;dark&quot;]</code> rule and its <code>@media</code> mirror. Drift between the two is a known failure mode — a value changed in one but not the other shows different colors to toggled users versus no-JS/OS-preference users.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-wjflwta6k" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-6473en4em" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-wjflwta6k" class="language-css">/* assets/css/theme.css */
+        <pre><code id="code-6473en4em" class="language-css">/* assets/css/theme.css */
 [data-theme=&quot;dark&quot;] {
   --text-accent: #9ecbff;
 }

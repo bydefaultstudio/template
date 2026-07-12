@@ -10,6 +10,9 @@ docs/generator/package-lock.json
 # Package files
 package-lock.json
 
+# Design system CSS is synced from @bydefaultstudio/design-system on npm install
+assets/css/design-system.css
+
 # OS files
 Thumbs.db
 

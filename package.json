@@ -1,0 +1,10 @@
+{
+  "name": "project-template",
+  "private": true,
+  "scripts": {
+    "postinstall": "node scripts/sync-design-system.js"
+  },
+  "dependencies": {
+    "@bydefaultstudio/design-system": "^1.0.0"
+  }
+}

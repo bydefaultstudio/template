@@ -13,12 +13,15 @@ This project includes:
 
 ## Getting Started
 
-1. Review `PROJECT_BRIEF.md` for project goals and requirements
-2. Follow the [Setup guide](docs/site/setup.html) to customize brand colors, fonts, and logo
-3. Explore the [Documentation](docs/site/index.html) for design system details
-4. Browse the design system docs (with live demos) — start at the [Design System Overview](docs/site/design-system-overview.html)
-5. Check the [Brand Book](docs/site/brand-book.html) to see the current brand identity
-6. Start building pages at the repo root — edit `index.html`, copy `templates/page-template.html` for new pages, and keep css/js/images in `assets/`
+1. Run `npm install` — this syncs the design system CSS from the `@bydefaultstudio/design-system` package into `assets/css/design-system.css`
+2. Review `PROJECT_BRIEF.md` for project goals and requirements
+3. Follow the [Setup guide](docs/site/setup.html) to customize brand colors, fonts, and logo
+4. Explore the [Documentation](docs/site/index.html) for design system details
+5. Browse the design system docs (with live demos) — start at the [Design System Overview](docs/site/design-system-overview.html)
+6. Check the [Brand Book](docs/site/brand-book.html) to see the current brand identity
+7. Start building pages at the repo root — edit `index.html`, copy `templates/page-template.html` for new pages, and keep css/js/images in `assets/`
+
+> **Note on the lockfile:** this template deliberately ignores `package-lock.json`, so a project created from it resolves the newest compatible design system version at first install. Once your project is under way, feel free to commit your own lockfile for stability.
 
 ## Documentation
 
