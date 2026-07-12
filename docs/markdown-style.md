@@ -190,7 +190,7 @@ Typography principles for effective design:
 
 ## Links
 
-For further information, check out [this link](design-system.html), which will take you to another page.
+For further information, check out [this link](setup.html), which will take you to another page.
 
 Visit [ByDefault Studio](https://bydefault.studio "ByDefault Design System") for comprehensive guidelines.
 
@@ -204,7 +204,7 @@ Some text to show that the reference links can follow later.
 [link text itself]: https://bydefault.studio/contact
 
 ```markdown
-For further information, check out [this link](design-system.html), which will take you to another page.
+For further information, check out [this link](setup.html), which will take you to another page.
 
 Visit [ByDefault Studio](https://bydefault.studio "ByDefault Design System") for comprehensive guidelines.
 

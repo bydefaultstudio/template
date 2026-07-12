@@ -6,7 +6,7 @@ You are a Senior Front-End Developer working inside this project's **Design Syst
 - Write correct, best-practice, DRY, bug-free code — no TODOs or placeholders
 - Prefer readability; avoid unnecessary abstractions
 - Use semantic tokens over primitives; prefer existing utility classes over new CSS
-- Only write new CSS if the design system can't express the requirement — and if so, add it to `assets/css/design-system.css` under the correct section
+- Only write new CSS if the design system can't express the requirement — and if so, add it to `assets/css/style.css`. Never edit `assets/css/design-system.css`: it is synced from the `@bydefaultstudio/design-system` npm package on `npm install` and any edit is overwritten
 - Accessibility required: keyboard navigation, `aria-label`, focus states, `<button>` for actions, `<a>` for links
 - If unsure, say so — never guess
 
@@ -14,26 +14,27 @@ You are a Senior Front-End Developer working inside this project's **Design Syst
 
 ## 1. Read Order (Mandatory)
 
-Before generating or modifying code, treat the following files as authoritative:
+The design system arrives via the `@bydefaultstudio/design-system` npm package; its canonical documentation lives at [bydefault.design](https://bydefault.design). This repo's docs cover only the template and the project built from it.
+
+Before generating or modifying code, treat the following as authoritative:
+
+**Local files:**
 
 1. `PROJECT_BRIEF.md` — project intent and constraints
-2. `docs/layout.md` — HTML layout hierarchy and structure
-3. `docs/css-code-struture.md` — CSS organization and commenting
-4. `docs/js-code-structure.md` — JavaScript patterns and structure
-5. `docs/color.md` — color tokens and usage
-6. `docs/typography.md` — typography tokens and usage
-7. `docs/spacing.md` — spacing tokens and usage
-8. `docs/border.md` — border strategy and composable classes
-9. `docs/button.md` — button component usage
-10. `docs/motion.md` — motion tokens and transitions
-11. `docs/brand-book.md` — brand identity preview and theming
-12. `docs/seo-best-practices.md` — SEO meta tags and social sharing
-13. `docs/folder-structure.md` — file organization rules
-14. `docs/setup.md` — project setup and customization
+2. `docs/brand-book.md` — brand identity preview and theming
+3. `docs/seo-best-practices.md` — SEO meta tags and social sharing
+4. `docs/folder-structure.md` — file organization rules
+5. `docs/setup.md` — project setup and customization
+
+**Canonical design system docs** (fetch with WebFetch when needed):
+
+- Tokens: [color](https://bydefault.design/design-system/color.html), [typography](https://bydefault.design/design-system/typography.html), [spacing](https://bydefault.design/design-system/spacing.html), [motion](https://bydefault.design/design-system/motion.html)
+- Components: [button](https://bydefault.design/design-system/button.html), [border](https://bydefault.design/design-system/border.html), [form](https://bydefault.design/design-system/form.html), [callout](https://bydefault.design/design-system/callout.html)
+- Layout and code structure: browse from [the design system index](https://bydefault.design/design-system/)
 
 If any instruction conflicts with these documents, **the documents take precedence**.
 
-Use Explore sub-agents to read multiple docs files in parallel before starting work.
+Use Explore sub-agents to read multiple docs in parallel before starting work.
 
 ---
 
@@ -57,7 +58,7 @@ If something cannot be implemented cleanly using existing patterns, **pause and 
 ## 3. Quick Reference
 
 ### Layout Hierarchy
-See `docs/layout.md` for complete details.
+See the [canonical design system docs](https://bydefault.design/design-system/) for complete details.
 
 ```
 body → page-wrapper → page-content → section → padding-global → container/max-width → block
@@ -70,18 +71,18 @@ body → page-wrapper → page-content → section → padding-global → contai
 - Never mix responsibilities across layers
 
 ### Design Tokens
-See `docs/color.md`, `docs/typography.md`, `docs/spacing.md` for complete token reference.
+See the canonical [color](https://bydefault.design/design-system/color.html), [typography](https://bydefault.design/design-system/typography.html), and [spacing](https://bydefault.design/design-system/spacing.html) docs for the complete token reference.
 
 **Critical rules:**
 - Use semantic tokens, not primitives
-- Primitive tokens (e.g., `--accent`, `--neutral-800`) must never be used directly
+- Primitive tokens (e.g., `--neutral-800`, `--blue`) must never be used directly
 - Semantic tokens (e.g., `--text-primary`, `--background-faded`) are always preferred
 
 ### CSS Structure
-See `docs/css-code-struture.md` for complete organization guidelines.
+See the [canonical design system docs](https://bydefault.design/design-system/) for complete organization guidelines.
 
 **Critical rules:**
-- Design system CSS (`assets/css/design-system.css`) is the single source of truth — it ships neutral engine defaults
+- Design system CSS (`assets/css/design-system.css`) is synced from the `@bydefaultstudio/design-system` npm package on `npm install` — never edit it; it ships neutral engine defaults
 - Brand overrides live in `assets/css/theme.css` — it overrides §1/§2 primitive tokens directly (there is no `var(--brand-*)` indirection) and must load after design-system.css
 - Project-specific CSS goes in `assets/css/style.css` (third layer) only when the design system can't express it
 - Dark mode: `[data-theme="dark"]` tokens in §2b must stay a verbatim mirror of the `prefers-color-scheme` block in §2c — drift between them is a known failure mode
@@ -90,7 +91,7 @@ See `docs/css-code-struture.md` for complete organization guidelines.
 - Never hardcode values that should use tokens
 
 ### JavaScript Structure
-See `docs/js-code-structure.md` for complete patterns.
+See the [canonical design system docs](https://bydefault.design/design-system/) for complete patterns.
 
 **Critical rules:**
 - One responsibility per file
@@ -101,7 +102,7 @@ See `docs/js-code-structure.md` for complete patterns.
 - Log version and init success
 
 ### Border Strategy
-See `docs/border.md` for complete composable architecture.
+See the canonical [border docs](https://bydefault.design/design-system/border.html) for the complete composable architecture.
 
 **Critical rules:**
 - Structural classes define position (`.border`, `.border-top`, etc.)
@@ -109,7 +110,7 @@ See `docs/border.md` for complete composable architecture.
 - Never create classes like `.border-top-m` or hardcode border values
 
 ### Components
-See `docs/button.md` for button usage. Buttons require `class="button"` (bare `<button>` gets only a minimal reset) and vary via `data-*` attributes (`data-variant`, `data-size`, `data-color`, `data-icon-only`, `data-full-width`) plus `.is-*` state classes.
+See the canonical [button docs](https://bydefault.design/design-system/button.html) for button usage. Buttons require `class="button"` (bare `<button>` gets only a minimal reset) and vary via `data-*` attributes (`data-variant`, `data-size`, `data-color`, `data-icon-only`, `data-full-width`) plus `.is-*` state classes.
 
 ---
 
@@ -119,7 +120,7 @@ See `docs/button.md` for button usage. Buttons require `class="button"` (bare `<
 - Always use `templates/page-template.html` as the base
 - Include all SEO meta tags (see `docs/seo-best-practices.md`)
 - Use semantic HTML structure
-- Follow the layout hierarchy (see `docs/layout.md`)
+- Follow the layout hierarchy (see the [canonical design system docs](https://bydefault.design/design-system/))
 
 ### SEO Meta Tags
 See `docs/seo-best-practices.md` for complete requirements.
@@ -140,7 +141,7 @@ Every page must include:
 See `docs/folder-structure.md` for complete directory structure.
 
 **Key locations:**
-- `assets/css/design-system.css` — design system framework (neutral engine)
+- `assets/css/design-system.css` — design system framework (neutral engine), synced from the `@bydefaultstudio/design-system` npm package on `npm install`; not tracked by git and never edited by hand
 - `assets/css/theme.css` — brand token overrides
 - `assets/css/style.css` — project-specific styles
 - `assets/js/` — JavaScript files (incl. `theme-toggle.js`)
@@ -271,7 +272,7 @@ After gathering answers:
    - `templates/page-template.html` → replace `Site Name` in title, OG `og:site_name`, and `yoursite.com` placeholder URLs
    - `docs/docs.config.js` → update `footerText` and `indexDescription`
    - `PROJECT_BRIEF.md` → add project name at the top
-3. Update `assets/css/theme.css` with any known brand tokens — uncomment and edit the primitive overrides (fonts, `--accent`, colours)
+3. Update `assets/css/theme.css` with any known brand tokens — uncomment and edit the primitive overrides (fonts, `--text-accent`, colours)
 
 This must happen before any other work begins.
 
@@ -297,9 +298,9 @@ Use sub-agents liberally to keep the main context window clean. Offload research
 - For complex problems, throw more compute at it via parallel agents
 
 Example: before building a new section, launch simultaneously:
-- `docs/layout.md` + `docs/spacing.md` (layout agent)
-- `docs/color.md` + `docs/typography.md` (tokens agent)
-- `docs/css-code-struture.md` (CSS patterns agent)
+- Canonical layout + [spacing](https://bydefault.design/design-system/spacing.html) docs (layout agent)
+- Canonical [color](https://bydefault.design/design-system/color.html) + [typography](https://bydefault.design/design-system/typography.html) docs (tokens agent)
+- `docs/brand-book.md` (theming agent)
 
 ### Task Tracking
 Use **TodoWrite** for any multi-step task:

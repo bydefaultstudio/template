@@ -16,8 +16,8 @@ This project includes:
 1. Run `npm install` — this syncs the design system CSS from the `@bydefaultstudio/design-system` package into `assets/css/design-system.css`
 2. Review `PROJECT_BRIEF.md` for project goals and requirements
 3. Follow the [Setup guide](docs/site/setup.html) to customize brand colors, fonts, and logo
-4. Explore the [Documentation](docs/site/index.html) for design system details
-5. Browse the design system docs (with live demos) — start at the [Design System Overview](docs/site/design-system-overview.html)
+4. Explore the [Documentation](docs/site/index.html) for template and project guides
+5. Browse the canonical design system docs at [bydefault.design](https://bydefault.design/design-system/what-is-a-design-system.html)
 6. Check the [Brand Book](docs/site/brand-book.html) to see the current brand identity
 7. Start building pages at the repo root — edit `index.html`, copy `templates/page-template.html` for new pages, and keep css/js/images in `assets/`
 
@@ -25,14 +25,13 @@ This project includes:
 
 ## Documentation
 
-Complete documentation is available in the [Documentation site](docs/site/index.html), including:
+Template and project documentation is available in the [Documentation site](docs/site/index.html), including:
 
 - **Brand** — Brand book and theming guide
-- **Design System** — Color, typography, spacing, borders, motion, components
-- **Code Structure** — CSS and JavaScript organization patterns
-- **HTML Layout** — Page structure and layout primitives
 - **Content** — Markdown style and SEO best practices
 - **Project** — Setup, folder structure, and project overview
+
+The design system itself arrives via the `@bydefaultstudio/design-system` npm package; its canonical documentation lives at [bydefault.design](https://bydefault.design).
 
 ---
 
