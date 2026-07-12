@@ -54,11 +54,11 @@ Edit `docs/docs.config.js` in the project:
 ```js
 module.exports = {
   // Path to design system CSS, relative from docs/site/
-  designSystemPath: '../../design-system/design-system.css',
+  designSystemPath: '../../assets/css/design-system.css',
 
   // Path to brand book CSS, relative from docs/site/
   // Set to null to use framework defaults only
-  brandCssPath: '../../brand-book/brand-book.css',
+  brandCssPath: '../../assets/css/theme.css',
 
   // Google Fonts URL — set to null to disable
   googleFontsUrl: 'https://fonts.googleapis.com/...',
@@ -78,7 +78,7 @@ Replace favicons by swapping `docs/site/assets/images/favicon.svg` and `favicon.
 
 ## Design System CSS Convention
 
-The design system CSS lives at `design-system/design-system.css`. The brand book lives at `brand-book/brand-book.css`. Both paths are referenced in `docs/docs.config.js` and used by every generated doc page.
+The design system CSS lives at `assets/css/design-system.css`. The brand theme lives at `assets/css/theme.css`. Both paths are referenced in `docs/docs.config.js` and used by every generated doc page.
 
 **If the path is wrong or the file is missing**, every doc page will show a friendly amber banner at the top:
 

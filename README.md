@@ -18,7 +18,7 @@ This project includes:
 3. Explore the [Documentation](docs/site/index.html) for design system details
 4. Check the [Design System Styleguide](design-system/index.html) to see available patterns
 5. Check the [Brand Book](brand-book/index.html) to see the current brand identity
-6. Start building pages inside `/src`
+6. Start building pages at the repo root — edit `index.html`, copy `templates/page-template.html` for new pages, and keep css/js/images in `assets/`
 
 ## Documentation
 

@@ -11,10 +11,10 @@
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     
     <!-- Design System Framework (path set in docs/docs.config.js) -->
-    <link rel="stylesheet" href="../../design-system/design-system.css" id="design-system-css"
+    <link rel="stylesheet" href="../../assets/css/design-system.css" id="design-system-css"
           onerror="document.getElementById('ds-missing-banner').style.display='flex'">
     <!-- Brand Book (path set in docs/docs.config.js) -->
-    <link rel="stylesheet" href="../../brand-book/brand-book.css">
+    <link rel="stylesheet" href="../../assets/css/theme.css">
     
     <!-- Google Fonts (configured in docs/docs.config.js) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -199,10 +199,10 @@
 </ol>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-tl2tpmw1g" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-qnc7aw6g7" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-tl2tpmw1g" class="language-bash">cd docs/generator
+        <pre><code id="code-qnc7aw6g7" class="language-bash">cd docs/generator
 npm install
 npm run docgen
 </code></pre>
@@ -216,16 +216,16 @@ npm run docgen
 <p>Edit <code>docs/docs.config.js</code> in the project:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-qgt36njie" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-19n3qkxc5" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-qgt36njie" class="language-js">module.exports = {
+        <pre><code id="code-19n3qkxc5" class="language-js">module.exports = {
   // Path to design system CSS, relative from docs/site/
-  designSystemPath: &#39;../../design-system/design-system.css&#39;,
+  designSystemPath: &#39;../../assets/css/design-system.css&#39;,
 
   // Path to brand book CSS, relative from docs/site/
   // Set to null to use framework defaults only
-  brandCssPath: &#39;../../brand-book/brand-book.css&#39;,
+  brandCssPath: &#39;../../assets/css/theme.css&#39;,
 
   // Google Fonts URL — set to null to disable
   googleFontsUrl: &#39;https://fonts.googleapis.com/...&#39;,
@@ -242,7 +242,7 @@ npm run docgen
 <p>Replace the logo by swapping <code>docs/site/assets/images/logo.svg</code>.<br>Replace favicons by swapping <code>docs/site/assets/images/favicon.svg</code> and <code>favicon.ico</code>.</p>
 <hr>
 <h2 id="design-system-css-convention">Design System CSS Convention</h2>
-<p>The design system CSS lives at <code>design-system/design-system.css</code>. The brand book lives at <code>brand-book/brand-book.css</code>. Both paths are referenced in <code>docs/docs.config.js</code> and used by every generated doc page.</p>
+<p>The design system CSS lives at <code>assets/css/design-system.css</code>. The brand theme lives at <code>assets/css/theme.css</code>. Both paths are referenced in <code>docs/docs.config.js</code> and used by every generated doc page.</p>
 <p><strong>If the path is wrong or the file is missing</strong>, every doc page will show a friendly amber banner at the top:</p>
 <blockquote>
 <p>Design system CSS not found. Check the path in <code>docs/docs.config.js</code> → <code>designSystemPath</code>, then re-run <code>npm run docgen</code>.</p>
@@ -259,10 +259,10 @@ npm run docgen
 <p>Run these from inside <code>docs/generator/</code>:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-g3bzulf6w" type="button" aria-label="Copy code">
+        <button class="copy-code-btn" data-clipboard-target="#code-s39zawrwx" type="button" aria-label="Copy code">
           <span class="copy-text">Copy</span>
         </button>
-        <pre><code id="code-g3bzulf6w" class="language-bash">npm run docgen     # Generate HTML from markdown
+        <pre><code id="code-s39zawrwx" class="language-bash">npm run docgen     # Generate HTML from markdown
 npm run serve      # View locally in browser
 npm run docwatch   # Auto-regenerate on markdown changes
 npm run docfull    # Generate + serve + watch (all at once)
