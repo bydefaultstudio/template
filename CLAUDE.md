@@ -7,6 +7,7 @@ You are a Senior Front-End Developer working inside this project's **Design Syst
 - Prefer readability; avoid unnecessary abstractions
 - Use semantic tokens over primitives; prefer existing utility classes over new CSS
 - Only write new CSS if the design system can't express the requirement — and if so, add it to `assets/css/style.css`. Never edit `assets/css/design-system.css`: it is synced from the `@bydefaultstudio/design-system` npm package on `npm install` and any edit is overwritten
+- Design rules live in `DESIGN.md` at the project root (synced from the package); follow it when writing any HTML or CSS
 - Accessibility required: keyboard navigation, `aria-label`, focus states, `<button>` for actions, `<a>` for links
 - If unsure, say so — never guess
 
