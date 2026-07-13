@@ -1,37 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown - Documentation</title>
     <meta name="description" content="Documentation for markdown styling and design system integration">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-    
-    <!-- Design System Framework (path set in docs/docs.config.js) -->
-    <link rel="stylesheet" href="../../assets/css/design-system.css" id="design-system-css"
-          onerror="document.getElementById('ds-missing-banner').style.display='flex'">
-    <!-- Brand Book (path set in docs/docs.config.js) -->
-    <link rel="stylesheet" href="../../assets/css/theme.css">
-    
-    <!-- Google Fonts (configured in docs/docs.config.js) -->
-    
-       
-    <!-- Markdown CSS -->
-    <link rel="stylesheet" href="assets/markdown.css">
-    
-    <!-- Docs-specific styles (additions) -->
-    <link rel="stylesheet" href="assets/docs.css">
 
-    <!-- Theme toggle (in <head> so dark mode applies before first paint) -->
-    <script src="../../assets/js/theme-toggle.js"></script>
+    <!-- Favicon (per-brand via brand.json, site default otherwise) -->
+    <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="./assets/icons/favicon.ico">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Markdown - Documentation">
+    <meta property="og:description" content="Documentation for markdown styling and design system integration">
+    <meta property="og:image" content="./assets/images/og/og-default.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- Design System Framework (path set in docs.config.js) -->
+    <link rel="stylesheet" href="./assets/docs-kit/design-system.css" id="design-system-css"
+          onerror="document.getElementById('ds-missing-banner').style.display='flex'">
+    <link rel="stylesheet" href="./assets/css/theme.css">
+
+    
+
+    <!-- Docs chrome styles (layout, nav, page chrome; path set in docs.config.js) -->
+    <link rel="stylesheet" href="./assets/docs-kit/docs.css">
+
+    
+
+    
+
+    
 </head>
 <body>
-
-    <!-- Restore sidebar state before first paint (no expand/collapse flash) -->
-    <script>try{if(localStorage.getItem('docs-sidebar-collapsed')==='true')document.body.classList.add('sidebar-collapsed')}catch(e){}</script>
 
     <!-- Design system missing banner (shown by JS if CSS variables fail to load) -->
     <div id="ds-missing-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#fffbea;border-bottom:1px solid #f0c040;padding:12px 20px;font-family:sans-serif;font-size:14px;color:#7a5c00;align-items:center;gap:12px;">
@@ -40,108 +41,29 @@
         <button onclick="document.getElementById('ds-missing-banner').style.display='none'" style="margin-left:auto;background:none;border:1px solid #f0c040;border-radius:4px;padding:4px 10px;cursor:pointer;color:#7a5c00;font-size:13px;">Dismiss</button>
     </div>
 
-    <div class="docs-layout">
-        <!-- Sidebar Navigation (sticky full-height on desktop, overlay on mobile) -->
-        <aside class="site-sidebar" role="navigation" aria-label="Site navigation">
-            <div class="site-sidebar-header">
-                <button class="site-sidebar-toggle" aria-label="Collapse sidebar" type="button">
-                    <span class="svg-icn sidebar-icon-open"><svg data-icon="sidebar-close" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M5.6 12L9.6 8L11 9.4L9.81421 10.5858C9.03316 11.3668 9.03316 12.6332 9.81421 13.4142L11 14.6L9.6 16L5.6 12Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M22 22H2V2H22V22ZM4 18C4 19.1046 4.89543 20 6 20H12C13.1046 20 14 19.1046 14 18V6C14 4.89543 13.1046 4 12 4H6C4.89543 4 4 4.89543 4 6V18ZM16 18C16 19.1046 16.8954 20 18 20C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4C16.8954 4 16 4.89543 16 6V18Z" fill="currentColor"/></svg></span>
-                    <span class="svg-icn sidebar-icon-close"><svg data-icon="sidebar-open" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M12.4 12L8.4 16L7 14.6L8.18579 13.4142C8.96684 12.6332 8.96684 11.3668 8.18579 10.5858L7 9.4L8.4 8L12.4 12Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M22 22H2V2H22V22ZM4 18C4 19.1046 4.89543 20 6 20H12C13.1046 20 14 19.1046 14 18V6C14 4.89543 13.1046 4 12 4H6C4.89543 4 4 4.89543 4 6V18ZM16 18C16 19.1046 16.8954 20 18 20C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4C16.8954 4 16 4.89543 16 6V18Z" fill="currentColor"/></svg></span>
-                </button>
-            </div>
-            <div class="site-sidebar-content">
-                
-    <a href="index.html" class="nav-link nav-home">
-      <span class="svg-icn"><svg data-icon="home" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M6 17C6 18.1046 6.89543 19 8 19H16C17.1046 19 18 18.1046 18 17V10L13.2 6.4C12.4889 5.86667 11.5111 5.86667 10.8 6.4L6 10V17ZM4 21V9L12 3L20 9V21H4Z" fill="currentColor"/></svg></span>
-      <span>Home</span>
-    </a>
-  <details class="nav-section">
-      <summary class="nav-section-toggle" title="Brand">
-        <span class="svg-icn"><svg data-icon="brand-book" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><g clip-path="url(#nav_icon_brand)"><path d="M18 6.99953V5.18605L7.45312 6.99953H18ZM3 18.4644L5.30273 19.9995H21V8.99953H5.7998L3 7.83351V18.4644ZM6.91211 5.06203L12 4.188V2.97121L6.91211 5.06203ZM23 6.99953V21.9995H4.69727L1 19.5347V5.32961L14 -0.0121918V3.84425L20 2.813V6.99953H23Z" fill="currentColor"/></g><defs><clipPath id="nav_icon_brand"><rect width="24" height="24" fill="white"/></clipPath></defs></svg></span>
-        <span>Brand</span>
-        <span class="nav-toggle-icon">
-          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
-          </svg>
-        </span>
-      </summary>
-      <ul class="nav-list">
-        <li><a href="brand-book.html" class="nav-link ">Brand Book</a></li>
-      
-      </ul>
-    </details><details class="nav-section" open>
-      <summary class="nav-section-toggle" title="Content">
-        <span class="svg-icn"><svg data-icon="docs" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M2 21V3H22V21H2ZM4 17C4 18.1046 4.89543 19 6 19H18C19.1046 19 20 18.1046 20 17V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V17ZM6 17H15V15H6V17ZM6 13H18V11H6V13ZM6 9H18V7H6V9Z" fill="currentColor"/></svg></span>
-        <span>Content</span>
-        <span class="nav-toggle-icon">
-          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
-          </svg>
-        </span>
-      </summary>
-      <ul class="nav-list">
-        <li><a href="seo-best-practices.html" class="nav-link ">SEO</a></li>
-      
-        <li><a href="markdown-style.html" class="nav-link nav-link-active">Markdown</a></li>
-      
-      </ul>
-    </details><details class="nav-section">
-      <summary class="nav-section-toggle" title="Project">
-        <span class="svg-icn"><svg data-icon="folder" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M2 20V4H10L12 6H22V20H2ZM4 16C4 17.1046 4.89543 18 6 18H18C19.1046 18 20 17.1046 20 16V10C20 8.89543 19.1046 8 18 8H11.175L9.175 6H6C4.89543 6 4 6.89543 4 8V16Z" fill="currentColor"/></svg></span>
-        <span>Project</span>
-        <span class="nav-toggle-icon">
-          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
-          </svg>
-        </span>
-      </summary>
-      <ul class="nav-list">
-        <li><a href="setup.html" class="nav-link ">Setup</a></li>
-      
-        <li><a href="template.html" class="nav-link ">Template</a></li>
-      
-        <li><a href="folder-structure.html" class="nav-link ">Folders</a></li>
-      
-        <li><a href="upgrading-docs.html" class="nav-link ">Upgrading the Docs Engine</a></li>
-      
-      </ul>
-    </details>
-            </div>
-        </aside>
-        <div class="site-sidebar-backdrop"></div>
-
-        <!-- Top Nav (sticky): logo left, dark mode toggle right -->
-        <header class="top-nav">
-            <div class="top-nav-left">
-                <button class="top-nav-link top-nav-hamburger" aria-label="Open navigation" type="button">
-                    <span class="svg-icn hamburger-icon-open"><svg data-icon="menu" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M3 18V16H21V18H3ZM3 13V11H21V13H3ZM3 8V6H21V8H3Z" fill="currentColor"/></svg></span>
-                    <span class="svg-icn hamburger-icon-close"><svg data-icon="close" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M6.4 19L5 17.6L9.18579 13.4142C9.96684 12.6332 9.96684 11.3668 9.18579 10.5858L5 6.4L6.4 5L10.5858 9.18579C11.3668 9.96684 12.6332 9.96684 13.4142 9.18579L17.6 5L19 6.4L14.8142 10.5858C14.0332 11.3668 14.0332 12.6332 14.8142 13.4142L19 17.6L17.6 19L13.4142 14.8142C12.6332 14.0332 11.3668 14.0332 10.5858 14.8142L6.4 19Z" fill="currentColor"/></svg></span>
-                </button>
-                <a href="index.html" class="top-nav-logo-link">
-                    <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
-                </a>
-            </div>
-            <div class="top-nav-right">
-                <button class="top-nav-link dark-mode-toggle" aria-label="Toggle dark mode" type="button"></button>
-            </div>
-        </header>
-
-        <div class="docs-main-area">
-            <!-- Page Header (full width, outside grid) -->
-            <div class="page-header">
-      <div class="container-m">
-        <h1>Markdown</h1>
-        <p class="page-subtitle">Styling guidelines for markdown content</p>
-        <a href="../markdown-style.md" class="button page-source-link" data-variant="faded" data-size="small" target="_blank" rel="noopener noreferrer">View as Markdown</a>
+    <!-- Layout grid: nav.js injects header + sidebar before <main> via insertAdjacentHTML -->
+    <div class="docs-layout" id="site-nav" data-base="./">
+    <main class="docs-main-area">
+    <div>
+    <div>
+        <!-- Page Header (full width, outside grid) -->
+        <div class="page-header">
+      <div class="container-s">
+        <h1 data-flip-id="markdown-style">Markdown</h1>
+        <p class="page-subtitle" data-text-wrap="pretty">Styling guidelines for markdown content</p>
+        
       </div>
     </div>
-            
-            <!-- Main Content + TOC grid -->
-            <div class="docs-content-grid padding-global">
-                <!-- Main Content -->
-                <main class="docs-main">
-                    <article class="markdown-body">
-                        <p>This guide defines the consistent formatting standards for all documentation pages in the ByDefault project.</p>
+
+        <!-- Page sub-header bar (full width, sticky: breadcrumb + filename + actions) -->
+        
+
+        <!-- Main Content + TOC grid -->
+        <div class="docs-content-grid padding-global">
+            <!-- Main Content -->
+            <main class="docs-main">
+                <article>
+                    <p>This guide defines the consistent formatting standards for all documentation pages in the ByDefault project.</p>
 <h2 id="overview">Overview</h2>
 <p>All markdown files should follow these standardized patterns to ensure:</p>
 <ul>
@@ -155,10 +77,8 @@
 <p>Every markdown file in the documentation must start with frontmatter (YAML metadata) that defines the page&#39;s metadata and organization:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-v9948fg82" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-v9948fg82" class="language-markdown">---
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-0" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-0" class="language-markdown">---
 title: &quot;Your Documentation Title Here&quot;
 subtitle: &quot;Your page subtitle or brief description&quot;
 description: &quot;Guide defining how to structure and organize your content&quot;
@@ -190,10 +110,8 @@ Your markdown content starts here...
 <h6 id="clear-navigation-heading-for-important-information">Clear Navigation Heading for Important Information</h6>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-e0gmz6zry" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-e0gmz6zry" class="language-markdown"># Your Primary Headline, Big, Bold, and Unmissable
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-1" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-1" class="language-markdown"># Your Primary Headline, Big, Bold, and Unmissable
 
 ## Supporting Headline to Guide Your Content
 
@@ -212,10 +130,8 @@ Your markdown content starts here...
 <p>This paragraph demonstrates how body text will look across your layout. <strong>Bold text</strong> adds emphasis, while <em>italics</em> offer a subtle highlight. You can also use <del>strikethrough</del> to show edits. Combined emphasis with <strong>asterisks and <em>underscores</em></strong> for clarity.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-g4w92nxqw" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-g4w92nxqw" class="language-markdown">This paragraph demonstrates how body text will look across your layout. **Bold text** adds emphasis, while *italics* offer a subtle highlight. You can also use ~~strikethrough~~ to show edits. Combined emphasis with **asterisks and _underscores_** for clarity.
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-2" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-2" class="language-markdown">This paragraph demonstrates how body text will look across your layout. **Bold text** adds emphasis, while *italics* offer a subtle highlight. You can also use ~~strikethrough~~ to show edits. Combined emphasis with **asterisks and _underscores_** for clarity.
 </code></pre>
       </div>
     
@@ -255,10 +171,8 @@ Your markdown content starts here...
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-n5nsbsi7e" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-n5nsbsi7e" class="language-markdown">Typography principles for effective design:
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-3" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-3" class="language-markdown">Typography principles for effective design:
 
 1. **Readability** - Use clear, legible typefaces
 2. **Hierarchy** - Establish visual order with size and weight
@@ -299,10 +213,8 @@ Your markdown content starts here...
 </ol>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-k4h1nicet" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-k4h1nicet" class="language-markdown">1. Type with Purpose
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-4" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-4" class="language-markdown">1. Type with Purpose
    1. Design with Intent
       1. Making Letters Matter
          1. Typography That Tells Your Story
@@ -325,10 +237,8 @@ Your markdown content starts here...
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-rtn4ijx3p" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-rtn4ijx3p" class="language-markdown">* Fonts That Speak Volumes
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-5" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-5" class="language-markdown">* Fonts That Speak Volumes
   * Modern Design Principles
     * Visual Hierarchy
       * Content Organization
@@ -348,10 +258,8 @@ Your markdown content starts here...
 </ul>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-t1mzjjl59" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-t1mzjjl59" class="language-markdown">- [ ] Review heading hierarchy
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-6" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-6" class="language-markdown">- [ ] Review heading hierarchy
 - [x] Document font scales
 - [ ] Update spacing guidelines
   - [x] Define line heights
@@ -367,10 +275,8 @@ Your markdown content starts here...
 <p>Some text to show that the reference links can follow later.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-tacb4ry7y" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-tacb4ry7y" class="language-markdown">For further information, check out [this link](setup.html), which will take you to another page.
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-7" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-7" class="language-markdown">For further information, check out [this link](setup.html), which will take you to another page.
 
 Visit [ByDefault Studio](https://bydefault.studio &quot;ByDefault Design System&quot;) for comprehensive guidelines.
 
@@ -393,10 +299,8 @@ Some text to show that the reference links can follow later.
 <p>Reference-style:<br><img src="../../assets/icons/favicon.svg" alt="ByDefault Logo" title="ByDefault Studio Logo"></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-ei8fnr9me" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-ei8fnr9me" class="language-markdown">Here&#39;s the ByDefault favicon (hover to see the title text):
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-8" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-8" class="language-markdown">Here&#39;s the ByDefault favicon (hover to see the title text):
 
 Inline-style: ![ByDefault Favicon](../../assets/icons/favicon.svg &quot;ByDefault Studio Favicon&quot;)
 
@@ -416,10 +320,8 @@ Reference-style:
 
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-nm5qwydop" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-nm5qwydop" class="language-markdown">&lt;img src=&quot;../../assets/images/og-default.jpg&quot; alt=&quot;Example image&quot; class=&quot;border border-secondary padding-m max-width-full&quot;&gt;
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-9" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-9" class="language-markdown">&lt;img src=&quot;../../assets/images/og-default.jpg&quot; alt=&quot;Example image&quot; class=&quot;border border-secondary padding-m max-width-full&quot;&gt;
 </code></pre>
       </div>
     
@@ -433,10 +335,8 @@ Reference-style:
 
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-soz6jipcb" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-soz6jipcb" class="language-markdown">&lt;div class=&quot;block gap-l border border-secondary padding-l&quot;&gt;
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-10" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-10" class="language-markdown">&lt;div class=&quot;block gap-l border border-secondary padding-l&quot;&gt;
   &lt;h3&gt;Custom Block Example&lt;/h3&gt;
   &lt;p&gt;This is a custom HTML block with a heading, text, and button. You can use any design system classes to style it.&lt;/p&gt;
   &lt;button class=&quot;button&quot;&gt;Action Button&lt;/button&gt;
@@ -450,10 +350,8 @@ Reference-style:
 <p>The ByDefault design system uses <code>CSS custom properties</code> for all design tokens. Inline <code>code</code> has <code>back-ticks around</code> it for clarity.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-gwo1it9yl" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-gwo1it9yl" class="language-css">:root {
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-11" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-11" class="language-css">:root {
   /* Typography tokens */
   --font-primary: &quot;Arial&quot;, sans-serif;
   --font-s: 16px;
@@ -469,10 +367,8 @@ Reference-style:
     
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-vuctq8njz" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-vuctq8njz" class="language-javascript">// Design system token usage
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-12" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-12" class="language-javascript">// Design system token usage
 const designTokens = {
   spacing: {
     xs: &#39;var(--space-xs)&#39;,
@@ -489,10 +385,8 @@ const designTokens = {
     
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-gb6kvu3hs" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-gb6kvu3hs">No language indicated, so no syntax highlighting.
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-13" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-13">No language indicated, so no syntax highlighting.
 Use this for plain text examples or design notes.
 </code></pre>
       </div>
@@ -500,10 +394,8 @@ Use this for plain text examples or design notes.
 <p>Markdown code (shown as indented code block):</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-2woqj0i8d" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-2woqj0i8d">The ByDefault design system uses `CSS custom properties` for all design tokens. Inline `code` has `back-ticks around` it for clarity.
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-14" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-14">The ByDefault design system uses `CSS custom properties` for all design tokens. Inline `code` has `back-ticks around` it for clarity.
 
 ```css
 :root {
@@ -544,7 +436,7 @@ Use this for plain text examples or design notes.
 <hr>
 <h2 id="tables">Tables</h2>
 <p>Design system spacing tokens:</p>
-<table>
+<div class="table-scroll"><table class="table">
 <thead>
 <tr>
 <th>Token</th>
@@ -554,38 +446,38 @@ Use this for plain text examples or design notes.
 </tr>
 </thead>
 <tbody><tr>
-<td><code>--space-xs</code></td>
+<td><button type="button" class="token-copy is-token" data-copy="var(--space-xs)" aria-label="Copy var(--space-xs)"><code>--space-xs</code></button></td>
 <td align="center">0.25rem</td>
 <td align="right">4px</td>
 <td>Tight spacing</td>
 </tr>
 <tr>
-<td><code>--space-s</code></td>
+<td><button type="button" class="token-copy is-token" data-copy="var(--space-s)" aria-label="Copy var(--space-s)"><code>--space-s</code></button></td>
 <td align="center">0.5rem</td>
 <td align="right">8px</td>
 <td>Small gaps</td>
 </tr>
 <tr>
-<td><code>--space-m</code></td>
+<td><button type="button" class="token-copy is-token" data-copy="var(--space-m)" aria-label="Copy var(--space-m)"><code>--space-m</code></button></td>
 <td align="center">0.75rem</td>
 <td align="right">12px</td>
 <td>Medium spacing</td>
 </tr>
 <tr>
-<td><code>--space-l</code></td>
+<td><button type="button" class="token-copy is-token" data-copy="var(--space-l)" aria-label="Copy var(--space-l)"><code>--space-l</code></button></td>
 <td align="center">1rem</td>
 <td align="right">16px</td>
 <td>Standard spacing</td>
 </tr>
 <tr>
-<td><code>--space-xl</code></td>
+<td><button type="button" class="token-copy is-token" data-copy="var(--space-xl)" aria-label="Copy var(--space-xl)"><code>--space-xl</code></button></td>
 <td align="center">1.5rem</td>
 <td align="right">24px</td>
 <td>Large spacing</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 <p>Typography scale tokens:</p>
-<table>
+<div class="table-scroll"><table class="table">
 <thead>
 <tr>
 <th>Token</th>
@@ -595,42 +487,40 @@ Use this for plain text examples or design notes.
 </tr>
 </thead>
 <tbody><tr>
-<td><code>--font-xs</code></td>
+<td><button type="button" class="token-copy is-token" data-copy="var(--font-xs)" aria-label="Copy var(--font-xs)"><code>--font-xs</code></button></td>
 <td>14px</td>
 <td>1.4</td>
 <td>Small text</td>
 </tr>
 <tr>
-<td><code>--font-s</code></td>
+<td><button type="button" class="token-copy is-token" data-copy="var(--font-s)" aria-label="Copy var(--font-s)"><code>--font-s</code></button></td>
 <td>16px</td>
 <td>1.4</td>
 <td>Body text</td>
 </tr>
 <tr>
-<td><code>--font-m</code></td>
+<td><button type="button" class="token-copy is-token" data-copy="var(--font-m)" aria-label="Copy var(--font-m)"><code>--font-m</code></button></td>
 <td>18px</td>
 <td>1.4</td>
 <td>Default</td>
 </tr>
 <tr>
-<td><code>--font-l</code></td>
+<td><button type="button" class="token-copy is-token" data-copy="var(--font-l)" aria-label="Copy var(--font-l)"><code>--font-l</code></button></td>
 <td>22px</td>
 <td>1.2</td>
 <td>Subheadings</td>
 </tr>
 <tr>
-<td><code>--font-xl</code></td>
+<td><button type="button" class="token-copy is-token" data-copy="var(--font-xl)" aria-label="Copy var(--font-xl)"><code>--font-xl</code></button></td>
 <td>28px</td>
 <td>1.2</td>
 <td>Headings</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-sz4rpigw8" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-sz4rpigw8" class="language-markdown">Design system spacing tokens:
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-15" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-15" class="language-markdown">Design system spacing tokens:
 
 | Token | Value | Pixels | Usage |
 | ----- |:-----:| -----: | ----- |
@@ -665,10 +555,8 @@ Typography scale tokens:
 </blockquote>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-7a0fderpf" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-7a0fderpf" class="language-markdown">&gt; Words matter, but how those words are presented matters just as much. Typography transforms content from mundane to magical, from ordinary to extraordinary.
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-16" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-16" class="language-markdown">&gt; Words matter, but how those words are presented matters just as much. Typography transforms content from mundane to magical, from ordinary to extraordinary.
 
 &gt; Typography is more than style; it&#39;s about communication. The right type makes content readable, relatable, and engaging, drawing readers into the heart of the message.
 
@@ -686,10 +574,8 @@ Typography scale tokens:
 </blockquote>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-rdpkafvqa" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-rdpkafvqa" class="language-markdown">&gt; Typography is the craft of endowing human language with a durable visual form.
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-17" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-17" class="language-markdown">&gt; Typography is the craft of endowing human language with a durable visual form.
 &gt;
 &gt; &gt; Good design is as little design as possible. — Dieter Rams
 &gt;
@@ -707,10 +593,8 @@ Typography scale tokens:
 <p>Here&#39;s how to apply spacing:</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-feph5kahl" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-feph5kahl">padding: var(--space-l);
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-18" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-18">padding: var(--space-l);
 margin: var(--space-xl);
 </code></pre>
       </div>
@@ -718,10 +602,8 @@ margin: var(--space-xl);
 </blockquote>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-9ax8yafwg" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-9ax8yafwg" class="language-markdown">&gt; ## Typography Principles
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-19" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-19" class="language-markdown">&gt; ## Typography Principles
 &gt;
 &gt; 1.   **Readability** - Use clear, legible typefaces
 &gt; 2.   **Hierarchy** - Establish visual order with size and weight
@@ -744,10 +626,8 @@ margin: var(--space-xl);
 <p>Content organization section</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-wypy7uo98" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-wypy7uo98" class="language-markdown">Section break
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-20" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-20" class="language-markdown">Section break
 
 ---
 
@@ -770,10 +650,8 @@ Content organization section
 <p>This line is also a separate paragraph, but...<br>This line is only separated by a single newline, so it&#39;s a separate line in the <em>same paragraph</em>.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-l11d8cx1s" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-l11d8cx1s" class="language-markdown">This paragraph demonstrates how body text will look across your layout. **Bold text** adds emphasis, while *italics* offer a subtle highlight.
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-21" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-21" class="language-markdown">This paragraph demonstrates how body text will look across your layout. **Bold text** adds emphasis, while *italics* offer a subtle highlight.
 
 This line is separated from the one above by two newlines, so it will be a *separate paragraph*.
 
@@ -788,10 +666,8 @@ This line is only separated by a single newline, so it&#39;s a separate line in 
 <p>Contact us: <a href="mailto:hello@bydefault.studio">hello@bydefault.studio</a></p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-o6kgwf36o" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-o6kgwf36o" class="language-markdown">Visit our website: &lt;https://bydefault.studio&gt;
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-22" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-22" class="language-markdown">Visit our website: &lt;https://bydefault.studio&gt;
 
 Contact us: &lt;hello@bydefault.studio&gt;
 </code></pre>
@@ -821,203 +697,137 @@ Contact us: &lt;hello@bydefault.studio&gt;
 <li><strong>Follow standards</strong> - Use this guide as reference</li>
 </ul>
 
-                    </article>
-                </main>
+                </article>
+            </main>
 
-                <!-- Table of Contents -->
-                <aside class="docs-toc">
+            <!-- Table of Contents -->
+            <aside class="docs-toc">
       <span class="toc-header">On this page</span>
       <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#overview" class="toc-link">Overview</a></li><li class="toc-item toc-level-2"><a href="#frontmatter" class="toc-link">Frontmatter</a></li><li class="toc-item toc-level-2"><a href="#headers" class="toc-link">Headers</a></li><li class="toc-item toc-level-1"><a href="#your-primary-headline-big-bold-and-unmissable" class="toc-link">Your Primary Headline, Big, Bold, and Unmissable</a></li><li class="toc-item toc-level-2"><a href="#supporting-headline-to-guide-your-content" class="toc-link">Supporting Headline to Guide Your Content</a></li><li class="toc-item toc-level-2"><a href="#emphasis" class="toc-link">Emphasis</a></li><li class="toc-item toc-level-2"><a href="#lists" class="toc-link">Lists</a></li><li class="toc-item toc-level-2"><a href="#links" class="toc-link">Links</a></li><li class="toc-item toc-level-2"><a href="#images" class="toc-link">Images</a></li><li class="toc-item toc-level-2"><a href="#html-in-markdown" class="toc-link">HTML in Markdown</a></li><li class="toc-item toc-level-2"><a href="#code-and-syntax-highlighting" class="toc-link">Code and Syntax Highlighting</a></li><li class="toc-item toc-level-2"><a href="#tables" class="toc-link">Tables</a></li><li class="toc-item toc-level-2"><a href="#blockquotes" class="toc-link">Blockquotes</a></li><li class="toc-item toc-level-2"><a href="#typography-principles" class="toc-link">Typography Principles</a></li><li class="toc-item toc-level-2"><a href="#horizontal-rule" class="toc-link">Horizontal Rule</a></li><li class="toc-item toc-level-2"><a href="#line-breaks" class="toc-link">Line Breaks</a></li><li class="toc-item toc-level-2"><a href="#automatic-links" class="toc-link">Automatic Links</a></li><li class="toc-item toc-level-2"><a href="#best-practices" class="toc-link">Best Practices</a></li></ul></nav></div>
     </aside>
-            </div>
-            
-            <!-- Footer -->
-            <footer class="docs-footer">
-                <div class="docs-footer-inner padding-global">
-                    <p class="docs-footer-text">© 2025 By Default</p>
-                </div>
-            </footer>
         </div>
-    </div>
 
-    <!-- Highlight.js -->
+        <!-- Page Navigation (Previous / Next) -->
+        <nav class="page-nav" aria-label="Page navigation"><div class="page-nav-inner padding-global"><a href="seo-best-practices.html" class="page-nav-link page-nav-prev" rel="prev">
+      <div class="svg-icn page-nav-arrow"><svg data-icon="chevron-left-large" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M15.225 22L5.225 12L15.225 2L17 3.775L10.1892 10.5858C9.40817 11.3668 9.40816 12.6332 10.1892 13.4142L17 20.225L15.225 22Z" fill="currentColor"/></svg></div>
+      <span class="page-nav-text">
+        <span class="page-nav-label">Previous</span>
+        
+        <h3 class="page-nav-title">SEO</h3>
+      </span>
+    </a><a href="setup.html" class="page-nav-link page-nav-next" rel="next">
+      <span class="page-nav-text">
+        <span class="page-nav-label">Next</span>
+        <span class="page-nav-section">Project</span>
+        <h3 class="page-nav-title">Setup</h3>
+      </span>
+      <div class="svg-icn page-nav-arrow"><svg data-icon="chevron-right-large" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8.775 22L7 20.225L13.8108 13.4142C14.5918 12.6332 14.5918 11.3668 13.8108 10.5858L7 3.775L8.775 2L18.775 12L8.775 22Z" fill="currentColor"/></svg></div>
+    </a></div></nav>
+
+        
+
+        <!-- Footer -->
+        <footer class="docs-footer">
+            <div class="docs-footer-inner padding-global">
+                <p class="docs-footer-text">© 2025 By Default</p>
+            </div>
+        </footer>
+
+        <!-- Per-page scripts (inside the page container so they re-execute on transition) -->
+        
+    </div>
+    </div>
+    </main>
+    </div><!-- /.docs-layout #site-nav -->
+
+    <!-- Syntax highlighting (source set in docs.config.js) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    
-    <!-- Initialize Highlight.js and Copy functionality -->
+
+    <!-- Initialize Highlight.js and TOC (re-callable after client-side navigation) -->
     <script>
         (function() {
             'use strict';
-            
-            function initHighlight() {
-                // Initialize Highlight.js on all code blocks
-                document.querySelectorAll('pre code').forEach((block) => {
+
+            // Track TOC observer + scroll listener so we can clean up before re-init
+            var tocObserver = null;
+            var tocScrollHandler = null;
+
+            window.bdInitHighlight = function initHighlight() {
+                if (!window.hljs) return;
+                document.querySelectorAll('pre code').forEach(function(block) {
                     hljs.highlightElement(block);
                 });
-            }
-            
-            function initClipboard() {
-                const buttons = document.querySelectorAll('.copy-code-btn');
-                
-                buttons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        const targetId = this.getAttribute('data-clipboard-target');
-                        const codeElement = document.querySelector(targetId);
-                        
-                        if (codeElement) {
-                            const text = codeElement.textContent;
-                            
-                            // Use modern clipboard API
-                            navigator.clipboard.writeText(text).then(() => {
-                                const textSpan = this.querySelector('.copy-text');
-                                if (textSpan) {
-                                    textSpan.textContent = 'Copied!';
-                                    setTimeout(() => {
-                                        textSpan.textContent = 'Copy';
-                                    }, 1500);
-                                }
-                            }).catch(err => {
-                                console.error('Copy failed:', err);
-                            });
-                        }
-                    });
-                });
-            }
-            
-            function initSidebarToggle() {
-                var SIDEBAR_KEY = 'docs-sidebar-collapsed';
-                var body = document.body;
-                var sidebarToggle = document.querySelector('.site-sidebar-toggle');
-                var hamburger = document.querySelector('.top-nav-hamburger');
-                var backdrop = document.querySelector('.site-sidebar-backdrop');
+            };
 
-                // Collapsed state is restored pre-paint by the inline script
-                // at the top of <body>; here we only sync the aria-label.
-                if (sidebarToggle && body.classList.contains('sidebar-collapsed')) {
-                    sidebarToggle.setAttribute('aria-label', 'Expand sidebar');
+            window.bdInitTOCActiveState = function initTOCActiveState() {
+                // Tear down any prior observer + scroll listener (re-init safe)
+                if (tocObserver) { tocObserver.disconnect(); tocObserver = null; }
+                if (tocScrollHandler) {
+                    window.removeEventListener('scroll', tocScrollHandler);
+                    tocScrollHandler = null;
                 }
 
-                if (sidebarToggle) {
-                    sidebarToggle.addEventListener('click', function onSidebarToggle() {
-                        var isCollapsed = body.classList.toggle('sidebar-collapsed');
-                        try { localStorage.setItem(SIDEBAR_KEY, isCollapsed); } catch (e) {}
-                        sidebarToggle.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
-                    });
-                }
-
-                function setMobileNav(open) {
-                    body.classList.toggle('mobile-nav-open', open);
-                    if (hamburger) hamburger.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-                }
-
-                if (hamburger) {
-                    hamburger.addEventListener('click', function onHamburger() {
-                        setMobileNav(!body.classList.contains('mobile-nav-open'));
-                    });
-                }
-
-                if (backdrop) {
-                    backdrop.addEventListener('click', function onBackdrop() {
-                        setMobileNav(false);
-                    });
-                }
-
-                // Collapsed sidebar: clicking a section icon expands the
-                // sidebar (the toggled-open list would be invisible otherwise)
-                document.addEventListener('click', function onCollapsedNavClick(event) {
-                    if (!body.classList.contains('sidebar-collapsed')) return;
-                    if (window.innerWidth <= 768) return;
-                    var toggle = event.target.closest('.nav-section-toggle');
-                    if (!toggle) return;
-                    event.preventDefault();
-                    body.classList.remove('sidebar-collapsed');
-                    try { localStorage.setItem(SIDEBAR_KEY, 'false'); } catch (e) {}
-                    if (sidebarToggle) sidebarToggle.setAttribute('aria-label', 'Collapse sidebar');
-                });
-            }
-
-            function initTOCActiveState() {
-                const tocLinks = document.querySelectorAll('.toc-link');
-                const headings = document.querySelectorAll('h1[id], h2[id]');
-                
+                var tocLinks = document.querySelectorAll('.toc-link');
+                var headings = document.querySelectorAll('h1[id], h2[id]');
                 if (tocLinks.length === 0 || headings.length === 0) return;
-                
-                // Create a map of heading IDs to TOC links
-                const linkMap = new Map();
-                tocLinks.forEach(link => {
-                    const href = link.getAttribute('href');
+
+                var linkMap = new Map();
+                tocLinks.forEach(function(link) {
+                    var href = link.getAttribute('href');
                     if (href && href.startsWith('#')) {
-                        const id = href.substring(1);
-                        linkMap.set(id, link);
+                        linkMap.set(href.substring(1), link);
                     }
                 });
-                
-                // Intersection Observer to detect which heading is in view
-                const observerOptions = {
-                    rootMargin: '-20% 0px -70% 0px', // Trigger when heading is in top 30% of viewport
-                    threshold: 0
-                };
-                
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        const id = entry.target.id;
-                        const link = linkMap.get(id);
-                        
+
+                var observerOptions = { rootMargin: '-20% 0px -70% 0px', threshold: 0 };
+
+                tocObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        var id = entry.target.id;
+                        var link = linkMap.get(id);
                         if (entry.isIntersecting) {
-                            // Remove active from all links
-                            tocLinks.forEach(l => l.classList.remove('toc-link-active'));
-                            // Add active to current link
-                            if (link) {
-                                link.classList.add('toc-link-active');
-                            }
+                            tocLinks.forEach(function(l) { l.classList.remove('toc-link-active'); });
+                            if (link) link.classList.add('toc-link-active');
                         }
                     });
                 }, observerOptions);
-                
-                // Observe all headings
-                headings.forEach(heading => {
-                    if (heading.id) {
-                        observer.observe(heading);
-                    }
+
+                headings.forEach(function(heading) {
+                    if (heading.id) tocObserver.observe(heading);
                 });
-                
-                // Set initial active state based on scroll position
+
                 function setInitialActive() {
-                    let activeHeading = null;
-                    let maxTop = -Infinity;
-                    
-                    headings.forEach(heading => {
-                        const rect = heading.getBoundingClientRect();
+                    var activeHeading = null;
+                    var maxTop = -Infinity;
+                    headings.forEach(function(heading) {
+                        var rect = heading.getBoundingClientRect();
                         if (rect.top <= 100 && rect.top > maxTop) {
                             maxTop = rect.top;
                             activeHeading = heading;
                         }
                     });
-                    
                     if (activeHeading && activeHeading.id) {
-                        const link = linkMap.get(activeHeading.id);
+                        var link = linkMap.get(activeHeading.id);
                         if (link) {
-                            tocLinks.forEach(l => l.classList.remove('toc-link-active'));
+                            tocLinks.forEach(function(l) { l.classList.remove('toc-link-active'); });
                             link.classList.add('toc-link-active');
                         }
                     }
                 }
-                
-                // Set initial state
+
                 setInitialActive();
-                
-                // Update on scroll (debounced)
-                let scrollTimeout;
-                window.addEventListener('scroll', () => {
+
+                var scrollTimeout;
+                tocScrollHandler = function() {
                     clearTimeout(scrollTimeout);
                     scrollTimeout = setTimeout(setInitialActive, 100);
-                });
-            }
-            
+                };
+                window.addEventListener('scroll', tocScrollHandler);
+            };
+
             function init() {
-                initSidebarToggle();
-                initHighlight();
-                initClipboard();
-                initTOCActiveState();
+                window.bdInitHighlight();
+                window.bdInitTOCActiveState();
             }
 
             if (document.readyState === 'loading') {
@@ -1027,6 +837,74 @@ Contact us: &lt;hello@bydefault.studio&gt;
             }
         })();
     </script>
+
+    <!-- Back to Top -->
+    <div class="back-to-top-wrapper">
+      <button class="button back-to-top-btn" data-icon-only aria-label="Back to top" type="button">
+        <div class="svg-icn"><svg data-icon="arrow-top" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M4 4V2H20V4H4Z" fill="currentColor"/><path d="M11 22V12.2392C11 11.3483 9.92286 10.9021 9.29289 11.5321L5.4 15.425L4 14L12 6L20 14L18.6 15.425L14.7071 11.5321C14.0771 10.9021 13 11.3483 13 12.2392V22H11Z" fill="currentColor"/></svg></div>
+      </button>
+    </div>
+    <script>
+      (function() {
+        var btn = document.querySelector('.back-to-top-wrapper');
+        if (!btn) return;
+        window.addEventListener('scroll', function() {
+          btn.classList.toggle('is-visible', window.scrollY > 300);
+        });
+        btn.querySelector('button').addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      })();
+    </script>
+
+    <!-- Site nav + docs UI behaviours -->
+    <script src="./assets/js/nav.js" defer></script>
+    <script src="./assets/docs-kit/copy-button.js" defer></script>
+    <script src="./assets/docs-kit/dropdown.js" defer></script>
+
+    
+
+    <script>
+      /* Tag dismiss — delegated to document, attached once */
+      document.addEventListener('click', function (e) {
+        var removeBtn = e.target.closest('.tag-remove');
+        if (removeBtn) {
+          var tag = removeBtn.closest('.tag');
+          if (tag) tag.remove();
+        }
+      });
+
+      /* Table scroll overflow hint — re-callable after client-side navigation */
+      (function() {
+        function checkOverflow(wrapper) {
+          var isOverflowing = wrapper.scrollWidth > wrapper.clientWidth;
+          var isAtEnd = wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - 1;
+          wrapper.classList.toggle('is-overflowing', isOverflowing);
+          wrapper.classList.toggle('is-scrolled-end', isAtEnd);
+        }
+
+        window.bdInitTableScroll = function initTableScroll() {
+          var wrappers = document.querySelectorAll('.table-scroll');
+          wrappers.forEach(function(wrapper) {
+            if (wrapper.__bdTableScrollBound) return;
+            wrapper.__bdTableScrollBound = true;
+            checkOverflow(wrapper);
+            wrapper.addEventListener('scroll', function() { checkOverflow(wrapper); });
+          });
+        };
+
+        // Window resize handler attached once — re-checks all wrappers
+        window.addEventListener('resize', function() {
+          document.querySelectorAll('.table-scroll').forEach(checkOverflow);
+        });
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', window.bdInitTableScroll);
+        } else {
+          window.bdInitTableScroll();
+        }
+      })();
+    </script>
+    
 </body>
 </html>
-

@@ -42,7 +42,7 @@ templates/              → Page and component boilerplate
 docs/                   → Documentation (markdown sources + generated site)
 ```
 
-`node_modules/` (repo root and `docs/generator/`) and `package-lock.json` are gitignored. The lockfile is deliberately not committed in the template so new projects resolve the newest compatible design system at first install; projects may commit their own lockfile afterwards.
+`node_modules/` and `package-lock.json` are gitignored. The lockfile is deliberately not committed in the template so new projects resolve the newest compatible design system at first install; projects may commit their own lockfile afterwards.
 
 ## assets/css/
 
@@ -79,14 +79,12 @@ Boilerplate for new files:
 ## docs/
 
 - Markdown documentation files (the sources — edit these)
-- `docs.config.js` → Project-specific doc settings (CSS paths, footer, description) — stays when the generator is upgraded
-- `generator/` → Documentation site engine (replaceable — drop in a new version to upgrade)
-  - `VERSION` → Current engine version
-  - `assets/` → Engine CSS (`docs.css`, `markdown.css`) — copied to `site/assets/` on generation
-- `site/` → Generated HTML documentation — **never hand-edit**; regenerate from the markdown sources
-  - `assets/images/` → The docs site's own logo and favicon copies — independent of `assets/images/` and not overwritten by the generator
+- `docs.config.js` → Project-specific doc settings (base path, brand CSS path, footer, description)
+- `site/` → Generated HTML documentation — **never hand-edit**; regenerate with `npm run docs:build`
+  - `assets/icons/` → Docs favicons — preserved across rebuilds
+  - `assets/docs-kit/` → Engine CSS and scripts, copied in by the generator on every build
 
-The docs site links the project's real stylesheets (`../../assets/css/design-system.css`, then `theme.css`), so token and component pages render live values. The old `design-system/` and `brand-book/` folders are gone — the styleguide and brand reference now live in the docs site.
+The docs site engine (docs-kit) ships inside the `@bydefaultstudio/design-system` npm package and runs from `node_modules` — there is no vendored generator to maintain. The generator bundles the packaged framework CSS into the output and copies `theme.css` in after it, so docs pages render live brand values. Built for serving at the `/docs/site` subpath of the main site (`basePath` in `docs.config.js`).
 
 ## Notes
 

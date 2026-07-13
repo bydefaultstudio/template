@@ -91,9 +91,9 @@ Dark-mode brand overrides live in two blocks in `theme.css`:
 ## Logo
 
 Replace the logo image:
-- `docs/site/assets/images/logo.svg` — documentation site logo
+- `assets/images/logo.svg` — the project logo, referenced by pages and the brand book
 
-Favicons live in `assets/icons/` and are referenced in each page's `<head>`.
+Favicons live in `assets/icons/` and are referenced in each page's `<head>`. The docs site keeps its own favicon copies in `docs/site/assets/icons/`.
 
 ---
 
@@ -107,10 +107,7 @@ Fill in `PROJECT_BRIEF.md` with your project details:
 
 ## Meta Tags & SEO
 
-Update SEO meta tags in `docs/generator/template.html`:
-- Update `<title>` template if needed
-- Add Open Graph tags for social sharing
-- Update favicon references if using custom favicons
+Site pages carry their own SEO meta tags — `templates/page-template.html` includes the full set (see the [SEO guide](seo-best-practices.html)). The docs site's page titles and descriptions come from each markdown file's frontmatter.
 
 ---
 

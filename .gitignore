@@ -3,10 +3,6 @@ node_modules
 .env
 .cursor
 
-# Documentation - ignore generator dependencies but keep source and generated files
-docs/generator/node_modules/
-docs/generator/package-lock.json
-
 # Package files
 package-lock.json
 

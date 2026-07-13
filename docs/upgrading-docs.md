@@ -8,7 +8,7 @@ order: 5
 
 > Claude: Treat this document as authoritative.
 
-The doc site is split into two parts: **content** (your markdown files) and the **engine** (the generator that turns them into HTML). They are kept separate so you can upgrade the engine — better mobile nav, new sidebar, restyled layout — without ever touching your content.
+The doc site is split into two parts: **content** (your markdown files) and the **engine** (the docs-kit generator that turns them into HTML). The engine ships inside the `@bydefaultstudio/design-system` npm package and runs in place from `node_modules` — it is never copied into the project. Upgrading the engine means upgrading the package.
 
 ---
 
@@ -17,51 +17,37 @@ The doc site is split into two parts: **content** (your markdown files) and the 
 | File/Folder | What it controls |
 | --- | --- |
 | `docs/*.md` | All documentation content |
-| `docs/docs.config.js` | Design system path, brand book path, fonts, footer text, index description |
-| `docs/site/assets/images/` | Logo (`logo.svg`) and favicons |
+| `docs/docs.config.js` | Base path, brand CSS path, footer text, index description |
+| `docs/site/assets/icons/` | Docs favicons (`favicon.svg`, `favicon.ico`) |
 
 ---
 
-## What Gets Replaced on Upgrade
+## How to Upgrade
 
-Everything inside `docs/generator/` is the engine. Replace this folder to upgrade.
-
-Check `docs/generator/VERSION` to see which version a project is running.
-
----
-
-## How to Upgrade a Project
-
-1. Open the **Project Template** — this is always where engine improvements happen first
-2. Copy the `docs/generator/` folder from the template
-3. Paste it into the target project, replacing the existing `docs/generator/` folder
-4. Open a terminal in the target project and run:
+The docs-kit has no version of its own — it is versioned by the design system package. To upgrade:
 
 ```bash
-cd docs/generator
-npm install
-npm run docgen
+npm update @bydefaultstudio/design-system
+npm run docs:build
 ```
 
-5. Done — your markdown files, config, and images are untouched
+Dependabot also opens a PR whenever a new package version publishes; merging it and rebuilding the docs is the same upgrade.
 
 ---
 
 ## Customising a Project's Doc Site
 
-Edit `docs/docs.config.js` in the project:
+Edit `docs/docs.config.js` in the project. All paths are project-root-relative:
 
 ```js
 module.exports = {
-  // Path to design system CSS, relative from docs/site/
-  designSystemPath: '../../assets/css/design-system.css',
+  // The docs site is served at this subpath of the main site
+  // ('' if the output is served as its own site root)
+  basePath: '/docs/site',
 
-  // Path to brand book CSS, relative from docs/site/
-  // Set to null to use framework defaults only
-  brandCssPath: '../../assets/css/theme.css',
-
-  // Google Fonts URL — set to null to disable
-  googleFontsUrl: 'https://fonts.googleapis.com/...',
+  // Optional extra brand stylesheet, copied into the output and
+  // linked after the framework CSS
+  brandCssPath: 'assets/css/theme.css',
 
   // Footer copyright text
   footerText: '© 2025 Your Studio Name',
@@ -71,41 +57,31 @@ module.exports = {
 };
 ```
 
-Replace the logo by swapping `docs/site/assets/images/logo.svg`.
-Replace favicons by swapping `docs/site/assets/images/favicon.svg` and `favicon.ico`.
+The full configuration reference lives in the docs-kit README inside the package: `node_modules/@bydefaultstudio/design-system/dist/docs-kit/README.md`.
+
+Favicons are optional: drop `favicon.svg` and/or `favicon.ico` into `docs/site/assets/icons/` and rebuild — pages link them once the files exist.
 
 ---
 
 ## Design System CSS Convention
 
-The design system CSS lives at `assets/css/design-system.css` — it is synced from the `@bydefaultstudio/design-system` npm package by `npm install` at the repo root, and is gitignored. The brand theme lives at `assets/css/theme.css`. Both paths are referenced in `docs/docs.config.js` and used by every generated doc page.
+With no `designSystemPath` configured (this template's setup), the generator uses the packaged `design-system.css` and copies it into the output automatically — the docs are always styled by the same framework version the project installs. The brand stylesheet configured in `brandCssPath` is copied into the output and linked after it.
 
-**If the path is wrong or the file is missing**, every doc page will show a friendly amber banner at the top:
-
-> Design system CSS not found. Check the path in `docs/docs.config.js` → `designSystemPath`, then re-run `npm run docgen`.
-
-To fix it:
-1. Run `npm install` at the repo root — a fresh clone has no `design-system.css` until the sync runs
-2. If the banner persists, update `designSystemPath` in `docs/docs.config.js`
-3. Run `npm run docgen`
-
-The banner disappears as soon as the CSS loads correctly.
+**If the docs look unstyled**, run `npm install` at the repo root (a fresh clone has no `node_modules` until then), then `npm run docs:build`.
 
 ---
 
 ## Doc Generator Commands
 
-Run these from inside `docs/generator/`:
+Run these from the repo root:
 
 ```bash
-npm run docgen     # Generate HTML from markdown
-npm run serve      # View locally in browser
-npm run docwatch   # Auto-regenerate on markdown changes
-npm run docfull    # Generate + serve + watch (all at once)
+npm run docs:build   # Generate HTML from markdown
+npm run docs:watch   # Auto-regenerate on markdown changes
 ```
 
 ---
 
 ## When to Update the Template First
 
-Always improve the engine in the **Project Template**, not in a live project. That way the improvement is available to all future projects and can be copied across to existing ones cleanly.
+Engine improvements happen in the design-system repo (the docs-kit ships with the package). Template-side, the only thing to keep current is the package version — Dependabot handles that. Improve project docs content here; improve the engine upstream.

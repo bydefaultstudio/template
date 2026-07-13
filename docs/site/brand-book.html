@@ -1,37 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brand Book - Documentation</title>
     <meta name="description" content="Preview of the brand layer applied by theme.css — logo, colours, typography, and iconography — over the neutral design system.">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-    
-    <!-- Design System Framework (path set in docs/docs.config.js) -->
-    <link rel="stylesheet" href="../../assets/css/design-system.css" id="design-system-css"
-          onerror="document.getElementById('ds-missing-banner').style.display='flex'">
-    <!-- Brand Book (path set in docs/docs.config.js) -->
-    <link rel="stylesheet" href="../../assets/css/theme.css">
-    
-    <!-- Google Fonts (configured in docs/docs.config.js) -->
-    
-       
-    <!-- Markdown CSS -->
-    <link rel="stylesheet" href="assets/markdown.css">
-    
-    <!-- Docs-specific styles (additions) -->
-    <link rel="stylesheet" href="assets/docs.css">
 
-    <!-- Theme toggle (in <head> so dark mode applies before first paint) -->
-    <script src="../../assets/js/theme-toggle.js"></script>
+    <!-- Favicon (per-brand via brand.json, site default otherwise) -->
+    <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="./assets/icons/favicon.ico">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Brand Book - Documentation">
+    <meta property="og:description" content="Preview of the brand layer applied by theme.css — logo, colours, typography, and iconography — over the neutral design system.">
+    <meta property="og:image" content="./assets/images/og/og-default.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- Design System Framework (path set in docs.config.js) -->
+    <link rel="stylesheet" href="./assets/docs-kit/design-system.css" id="design-system-css"
+          onerror="document.getElementById('ds-missing-banner').style.display='flex'">
+    <link rel="stylesheet" href="./assets/css/theme.css">
+
+    
+
+    <!-- Docs chrome styles (layout, nav, page chrome; path set in docs.config.js) -->
+    <link rel="stylesheet" href="./assets/docs-kit/docs.css">
+
+    
+
+    
+
+    
 </head>
 <body>
-
-    <!-- Restore sidebar state before first paint (no expand/collapse flash) -->
-    <script>try{if(localStorage.getItem('docs-sidebar-collapsed')==='true')document.body.classList.add('sidebar-collapsed')}catch(e){}</script>
 
     <!-- Design system missing banner (shown by JS if CSS variables fail to load) -->
     <div id="ds-missing-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#fffbea;border-bottom:1px solid #f0c040;padding:12px 20px;font-family:sans-serif;font-size:14px;color:#7a5c00;align-items:center;gap:12px;">
@@ -40,108 +41,29 @@
         <button onclick="document.getElementById('ds-missing-banner').style.display='none'" style="margin-left:auto;background:none;border:1px solid #f0c040;border-radius:4px;padding:4px 10px;cursor:pointer;color:#7a5c00;font-size:13px;">Dismiss</button>
     </div>
 
-    <div class="docs-layout">
-        <!-- Sidebar Navigation (sticky full-height on desktop, overlay on mobile) -->
-        <aside class="site-sidebar" role="navigation" aria-label="Site navigation">
-            <div class="site-sidebar-header">
-                <button class="site-sidebar-toggle" aria-label="Collapse sidebar" type="button">
-                    <span class="svg-icn sidebar-icon-open"><svg data-icon="sidebar-close" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M5.6 12L9.6 8L11 9.4L9.81421 10.5858C9.03316 11.3668 9.03316 12.6332 9.81421 13.4142L11 14.6L9.6 16L5.6 12Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M22 22H2V2H22V22ZM4 18C4 19.1046 4.89543 20 6 20H12C13.1046 20 14 19.1046 14 18V6C14 4.89543 13.1046 4 12 4H6C4.89543 4 4 4.89543 4 6V18ZM16 18C16 19.1046 16.8954 20 18 20C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4C16.8954 4 16 4.89543 16 6V18Z" fill="currentColor"/></svg></span>
-                    <span class="svg-icn sidebar-icon-close"><svg data-icon="sidebar-open" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M12.4 12L8.4 16L7 14.6L8.18579 13.4142C8.96684 12.6332 8.96684 11.3668 8.18579 10.5858L7 9.4L8.4 8L12.4 12Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M22 22H2V2H22V22ZM4 18C4 19.1046 4.89543 20 6 20H12C13.1046 20 14 19.1046 14 18V6C14 4.89543 13.1046 4 12 4H6C4.89543 4 4 4.89543 4 6V18ZM16 18C16 19.1046 16.8954 20 18 20C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4C16.8954 4 16 4.89543 16 6V18Z" fill="currentColor"/></svg></span>
-                </button>
-            </div>
-            <div class="site-sidebar-content">
-                
-    <a href="index.html" class="nav-link nav-home">
-      <span class="svg-icn"><svg data-icon="home" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M6 17C6 18.1046 6.89543 19 8 19H16C17.1046 19 18 18.1046 18 17V10L13.2 6.4C12.4889 5.86667 11.5111 5.86667 10.8 6.4L6 10V17ZM4 21V9L12 3L20 9V21H4Z" fill="currentColor"/></svg></span>
-      <span>Home</span>
-    </a>
-  <details class="nav-section" open>
-      <summary class="nav-section-toggle" title="Brand">
-        <span class="svg-icn"><svg data-icon="brand-book" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><g clip-path="url(#nav_icon_brand)"><path d="M18 6.99953V5.18605L7.45312 6.99953H18ZM3 18.4644L5.30273 19.9995H21V8.99953H5.7998L3 7.83351V18.4644ZM6.91211 5.06203L12 4.188V2.97121L6.91211 5.06203ZM23 6.99953V21.9995H4.69727L1 19.5347V5.32961L14 -0.0121918V3.84425L20 2.813V6.99953H23Z" fill="currentColor"/></g><defs><clipPath id="nav_icon_brand"><rect width="24" height="24" fill="white"/></clipPath></defs></svg></span>
-        <span>Brand</span>
-        <span class="nav-toggle-icon">
-          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
-          </svg>
-        </span>
-      </summary>
-      <ul class="nav-list">
-        <li><a href="brand-book.html" class="nav-link nav-link-active">Brand Book</a></li>
-      
-      </ul>
-    </details><details class="nav-section">
-      <summary class="nav-section-toggle" title="Content">
-        <span class="svg-icn"><svg data-icon="docs" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M2 21V3H22V21H2ZM4 17C4 18.1046 4.89543 19 6 19H18C19.1046 19 20 18.1046 20 17V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V17ZM6 17H15V15H6V17ZM6 13H18V11H6V13ZM6 9H18V7H6V9Z" fill="currentColor"/></svg></span>
-        <span>Content</span>
-        <span class="nav-toggle-icon">
-          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
-          </svg>
-        </span>
-      </summary>
-      <ul class="nav-list">
-        <li><a href="seo-best-practices.html" class="nav-link ">SEO</a></li>
-      
-        <li><a href="markdown-style.html" class="nav-link ">Markdown</a></li>
-      
-      </ul>
-    </details><details class="nav-section">
-      <summary class="nav-section-toggle" title="Project">
-        <span class="svg-icn"><svg data-icon="folder" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M2 20V4H10L12 6H22V20H2ZM4 16C4 17.1046 4.89543 18 6 18H18C19.1046 18 20 17.1046 20 16V10C20 8.89543 19.1046 8 18 8H11.175L9.175 6H6C4.89543 6 4 6.89543 4 8V16Z" fill="currentColor"/></svg></span>
-        <span>Project</span>
-        <span class="nav-toggle-icon">
-          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.58943 3L1.28943 0.7L1.98943 0L4.98943 3L1.98943 6L1.28943 5.3L3.58943 3Z" fill="currentColor"/>
-          </svg>
-        </span>
-      </summary>
-      <ul class="nav-list">
-        <li><a href="setup.html" class="nav-link ">Setup</a></li>
-      
-        <li><a href="template.html" class="nav-link ">Template</a></li>
-      
-        <li><a href="folder-structure.html" class="nav-link ">Folders</a></li>
-      
-        <li><a href="upgrading-docs.html" class="nav-link ">Upgrading the Docs Engine</a></li>
-      
-      </ul>
-    </details>
-            </div>
-        </aside>
-        <div class="site-sidebar-backdrop"></div>
-
-        <!-- Top Nav (sticky): logo left, dark mode toggle right -->
-        <header class="top-nav">
-            <div class="top-nav-left">
-                <button class="top-nav-link top-nav-hamburger" aria-label="Open navigation" type="button">
-                    <span class="svg-icn hamburger-icon-open"><svg data-icon="menu" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M3 18V16H21V18H3ZM3 13V11H21V13H3ZM3 8V6H21V8H3Z" fill="currentColor"/></svg></span>
-                    <span class="svg-icn hamburger-icon-close"><svg data-icon="close" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M6.4 19L5 17.6L9.18579 13.4142C9.96684 12.6332 9.96684 11.3668 9.18579 10.5858L5 6.4L6.4 5L10.5858 9.18579C11.3668 9.96684 12.6332 9.96684 13.4142 9.18579L17.6 5L19 6.4L14.8142 10.5858C14.0332 11.3668 14.0332 12.6332 14.8142 13.4142L19 17.6L17.6 19L13.4142 14.8142C12.6332 14.0332 11.3668 14.0332 10.5858 14.8142L6.4 19Z" fill="currentColor"/></svg></span>
-                </button>
-                <a href="index.html" class="top-nav-logo-link">
-                    <img src="assets/images/logo.svg" alt="Logo" class="nav-logo">
-                </a>
-            </div>
-            <div class="top-nav-right">
-                <button class="top-nav-link dark-mode-toggle" aria-label="Toggle dark mode" type="button"></button>
-            </div>
-        </header>
-
-        <div class="docs-main-area">
-            <!-- Page Header (full width, outside grid) -->
-            <div class="page-header">
-      <div class="container-m">
-        <h1>Brand Book</h1>
-        <p class="page-subtitle">Your project's visual identity</p>
-        <a href="../brand-book.md" class="button page-source-link" data-variant="faded" data-size="small" target="_blank" rel="noopener noreferrer">View as Markdown</a>
+    <!-- Layout grid: nav.js injects header + sidebar before <main> via insertAdjacentHTML -->
+    <div class="docs-layout" id="site-nav" data-base="./">
+    <main class="docs-main-area">
+    <div>
+    <div>
+        <!-- Page Header (full width, outside grid) -->
+        <div class="page-header">
+      <div class="container-s">
+        <h1 data-flip-id="brand-book">Brand Book</h1>
+        <p class="page-subtitle" data-text-wrap="pretty">Your project's visual identity</p>
+        
       </div>
     </div>
-            
-            <!-- Main Content + TOC grid -->
-            <div class="docs-content-grid padding-global">
-                <!-- Main Content -->
-                <main class="docs-main">
-                    <article class="markdown-body">
-                        <blockquote>
+
+        <!-- Page sub-header bar (full width, sticky: breadcrumb + filename + actions) -->
+        
+
+        <!-- Main Content + TOC grid -->
+        <div class="docs-content-grid padding-global">
+            <!-- Main Content -->
+            <main class="docs-main">
+                <article>
+                    <blockquote>
 <p>Claude: Treat this document as authoritative.</p>
 </blockquote>
 <p>This page previews the brand that <code>assets/css/theme.css</code> applies over the neutral design system. Out of the box it shows the engine defaults — system font stacks, a neutral grey ramp, and the default accent. As you fill in <code>theme.css</code>, every demo on this page (and every page built with the system) picks up your brand automatically.</p>
@@ -248,7 +170,7 @@
 
 <h2 id="iconography">Iconography</h2>
 <p>The favicon set lives in <code>assets/icons/</code>. Regenerate all four files from your mark when branding a project:</p>
-<table>
+<div class="table-scroll"><table class="table">
 <thead>
 <tr>
 <th>File</th>
@@ -271,7 +193,7 @@
 <td><code>apple-touch-icon.png</code></td>
 <td>iOS home-screen icon (180×180)</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 <div class="demo-preview is-centered">
   <img src="../../assets/icons/favicon.svg" alt="Favicon" style="width: 64px; height: 64px;">
 </div>
@@ -280,10 +202,8 @@
 <p><code>theme.css</code> loads after <code>design-system.css</code> and overrides <strong>§1/§2 primitives only</strong> — fonts, <code>--text-accent</code>, and the neutral ramp. Semantic tokens (<code>--text-*</code>, <code>--background-*</code>, buttons, forms) resolve through those primitives, so they cascade automatically; you should rarely restate them.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-986eovbih" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-986eovbih" class="language-css">/* assets/css/theme.css */
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-0" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-0" class="language-css">/* assets/css/theme.css */
 :root {
   --font-primary: &quot;Your Font&quot;, sans-serif;
   --text-accent: #3485cd;
@@ -295,10 +215,8 @@
 <p>For brand values that differ in dark mode, add a <code>[data-theme=&quot;dark&quot;]</code> block <strong>and</strong> a mirrored <code>@media (prefers-color-scheme: dark) { :root:not([data-theme]) { … } }</code> block — the first serves the JS toggle, the second serves no-JS visitors following their OS preference. The two blocks must contain the same values; if they drift, toggled and OS-preference visitors see different brands.</p>
 
       <div class="code-block-wrapper">
-        <button class="copy-code-btn" data-clipboard-target="#code-k4ynflx5z" type="button" aria-label="Copy code">
-          <span class="copy-text">Copy</span>
-        </button>
-        <pre><code id="code-k4ynflx5z" class="language-css">[data-theme=&quot;dark&quot;] {
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-1" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-1" class="language-css">[data-theme=&quot;dark&quot;] {
   --text-accent: #6cb2ff;
 }
 
@@ -312,203 +230,130 @@
     
 <p>See <a href="setup.html">Setup</a> for the full project-branding checklist and <a href="https://bydefault.design/design-system/color.html" target="_blank" rel="noopener noreferrer">Color</a> for the complete token reference.</p>
 
-                    </article>
-                </main>
+                </article>
+            </main>
 
-                <!-- Table of Contents -->
-                <aside class="docs-toc">
+            <!-- Table of Contents -->
+            <aside class="docs-toc">
       <span class="toc-header">On this page</span>
       <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#logo" class="toc-link">Logo</a></li><li class="toc-item toc-level-2"><a href="#colours" class="toc-link">Colours</a></li><li class="toc-item toc-level-2"><a href="#typography" class="toc-link">Typography</a></li><li class="toc-item toc-level-2"><a href="#iconography" class="toc-link">Iconography</a></li><li class="toc-item toc-level-2"><a href="#theming-this-template" class="toc-link">Theming this template</a></li></ul></nav></div>
     </aside>
-            </div>
-            
-            <!-- Footer -->
-            <footer class="docs-footer">
-                <div class="docs-footer-inner padding-global">
-                    <p class="docs-footer-text">© 2025 By Default</p>
-                </div>
-            </footer>
         </div>
-    </div>
 
-    <!-- Highlight.js -->
+        <!-- Page Navigation (Previous / Next) -->
+        <nav class="page-nav" aria-label="Page navigation"><div class="page-nav-inner padding-global"><span class="page-nav-link page-nav-placeholder"></span><a href="seo-best-practices.html" class="page-nav-link page-nav-next" rel="next">
+      <span class="page-nav-text">
+        <span class="page-nav-label">Next</span>
+        <span class="page-nav-section">Content</span>
+        <h3 class="page-nav-title">SEO</h3>
+      </span>
+      <div class="svg-icn page-nav-arrow"><svg data-icon="chevron-right-large" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8.775 22L7 20.225L13.8108 13.4142C14.5918 12.6332 14.5918 11.3668 13.8108 10.5858L7 3.775L8.775 2L18.775 12L8.775 22Z" fill="currentColor"/></svg></div>
+    </a></div></nav>
+
+        
+
+        <!-- Footer -->
+        <footer class="docs-footer">
+            <div class="docs-footer-inner padding-global">
+                <p class="docs-footer-text">© 2025 By Default</p>
+            </div>
+        </footer>
+
+        <!-- Per-page scripts (inside the page container so they re-execute on transition) -->
+        
+    </div>
+    </div>
+    </main>
+    </div><!-- /.docs-layout #site-nav -->
+
+    <!-- Syntax highlighting (source set in docs.config.js) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    
-    <!-- Initialize Highlight.js and Copy functionality -->
+
+    <!-- Initialize Highlight.js and TOC (re-callable after client-side navigation) -->
     <script>
         (function() {
             'use strict';
-            
-            function initHighlight() {
-                // Initialize Highlight.js on all code blocks
-                document.querySelectorAll('pre code').forEach((block) => {
+
+            // Track TOC observer + scroll listener so we can clean up before re-init
+            var tocObserver = null;
+            var tocScrollHandler = null;
+
+            window.bdInitHighlight = function initHighlight() {
+                if (!window.hljs) return;
+                document.querySelectorAll('pre code').forEach(function(block) {
                     hljs.highlightElement(block);
                 });
-            }
-            
-            function initClipboard() {
-                const buttons = document.querySelectorAll('.copy-code-btn');
-                
-                buttons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        const targetId = this.getAttribute('data-clipboard-target');
-                        const codeElement = document.querySelector(targetId);
-                        
-                        if (codeElement) {
-                            const text = codeElement.textContent;
-                            
-                            // Use modern clipboard API
-                            navigator.clipboard.writeText(text).then(() => {
-                                const textSpan = this.querySelector('.copy-text');
-                                if (textSpan) {
-                                    textSpan.textContent = 'Copied!';
-                                    setTimeout(() => {
-                                        textSpan.textContent = 'Copy';
-                                    }, 1500);
-                                }
-                            }).catch(err => {
-                                console.error('Copy failed:', err);
-                            });
-                        }
-                    });
-                });
-            }
-            
-            function initSidebarToggle() {
-                var SIDEBAR_KEY = 'docs-sidebar-collapsed';
-                var body = document.body;
-                var sidebarToggle = document.querySelector('.site-sidebar-toggle');
-                var hamburger = document.querySelector('.top-nav-hamburger');
-                var backdrop = document.querySelector('.site-sidebar-backdrop');
+            };
 
-                // Collapsed state is restored pre-paint by the inline script
-                // at the top of <body>; here we only sync the aria-label.
-                if (sidebarToggle && body.classList.contains('sidebar-collapsed')) {
-                    sidebarToggle.setAttribute('aria-label', 'Expand sidebar');
+            window.bdInitTOCActiveState = function initTOCActiveState() {
+                // Tear down any prior observer + scroll listener (re-init safe)
+                if (tocObserver) { tocObserver.disconnect(); tocObserver = null; }
+                if (tocScrollHandler) {
+                    window.removeEventListener('scroll', tocScrollHandler);
+                    tocScrollHandler = null;
                 }
 
-                if (sidebarToggle) {
-                    sidebarToggle.addEventListener('click', function onSidebarToggle() {
-                        var isCollapsed = body.classList.toggle('sidebar-collapsed');
-                        try { localStorage.setItem(SIDEBAR_KEY, isCollapsed); } catch (e) {}
-                        sidebarToggle.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
-                    });
-                }
-
-                function setMobileNav(open) {
-                    body.classList.toggle('mobile-nav-open', open);
-                    if (hamburger) hamburger.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-                }
-
-                if (hamburger) {
-                    hamburger.addEventListener('click', function onHamburger() {
-                        setMobileNav(!body.classList.contains('mobile-nav-open'));
-                    });
-                }
-
-                if (backdrop) {
-                    backdrop.addEventListener('click', function onBackdrop() {
-                        setMobileNav(false);
-                    });
-                }
-
-                // Collapsed sidebar: clicking a section icon expands the
-                // sidebar (the toggled-open list would be invisible otherwise)
-                document.addEventListener('click', function onCollapsedNavClick(event) {
-                    if (!body.classList.contains('sidebar-collapsed')) return;
-                    if (window.innerWidth <= 768) return;
-                    var toggle = event.target.closest('.nav-section-toggle');
-                    if (!toggle) return;
-                    event.preventDefault();
-                    body.classList.remove('sidebar-collapsed');
-                    try { localStorage.setItem(SIDEBAR_KEY, 'false'); } catch (e) {}
-                    if (sidebarToggle) sidebarToggle.setAttribute('aria-label', 'Collapse sidebar');
-                });
-            }
-
-            function initTOCActiveState() {
-                const tocLinks = document.querySelectorAll('.toc-link');
-                const headings = document.querySelectorAll('h1[id], h2[id]');
-                
+                var tocLinks = document.querySelectorAll('.toc-link');
+                var headings = document.querySelectorAll('h1[id], h2[id]');
                 if (tocLinks.length === 0 || headings.length === 0) return;
-                
-                // Create a map of heading IDs to TOC links
-                const linkMap = new Map();
-                tocLinks.forEach(link => {
-                    const href = link.getAttribute('href');
+
+                var linkMap = new Map();
+                tocLinks.forEach(function(link) {
+                    var href = link.getAttribute('href');
                     if (href && href.startsWith('#')) {
-                        const id = href.substring(1);
-                        linkMap.set(id, link);
+                        linkMap.set(href.substring(1), link);
                     }
                 });
-                
-                // Intersection Observer to detect which heading is in view
-                const observerOptions = {
-                    rootMargin: '-20% 0px -70% 0px', // Trigger when heading is in top 30% of viewport
-                    threshold: 0
-                };
-                
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        const id = entry.target.id;
-                        const link = linkMap.get(id);
-                        
+
+                var observerOptions = { rootMargin: '-20% 0px -70% 0px', threshold: 0 };
+
+                tocObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        var id = entry.target.id;
+                        var link = linkMap.get(id);
                         if (entry.isIntersecting) {
-                            // Remove active from all links
-                            tocLinks.forEach(l => l.classList.remove('toc-link-active'));
-                            // Add active to current link
-                            if (link) {
-                                link.classList.add('toc-link-active');
-                            }
+                            tocLinks.forEach(function(l) { l.classList.remove('toc-link-active'); });
+                            if (link) link.classList.add('toc-link-active');
                         }
                     });
                 }, observerOptions);
-                
-                // Observe all headings
-                headings.forEach(heading => {
-                    if (heading.id) {
-                        observer.observe(heading);
-                    }
+
+                headings.forEach(function(heading) {
+                    if (heading.id) tocObserver.observe(heading);
                 });
-                
-                // Set initial active state based on scroll position
+
                 function setInitialActive() {
-                    let activeHeading = null;
-                    let maxTop = -Infinity;
-                    
-                    headings.forEach(heading => {
-                        const rect = heading.getBoundingClientRect();
+                    var activeHeading = null;
+                    var maxTop = -Infinity;
+                    headings.forEach(function(heading) {
+                        var rect = heading.getBoundingClientRect();
                         if (rect.top <= 100 && rect.top > maxTop) {
                             maxTop = rect.top;
                             activeHeading = heading;
                         }
                     });
-                    
                     if (activeHeading && activeHeading.id) {
-                        const link = linkMap.get(activeHeading.id);
+                        var link = linkMap.get(activeHeading.id);
                         if (link) {
-                            tocLinks.forEach(l => l.classList.remove('toc-link-active'));
+                            tocLinks.forEach(function(l) { l.classList.remove('toc-link-active'); });
                             link.classList.add('toc-link-active');
                         }
                     }
                 }
-                
-                // Set initial state
+
                 setInitialActive();
-                
-                // Update on scroll (debounced)
-                let scrollTimeout;
-                window.addEventListener('scroll', () => {
+
+                var scrollTimeout;
+                tocScrollHandler = function() {
                     clearTimeout(scrollTimeout);
                     scrollTimeout = setTimeout(setInitialActive, 100);
-                });
-            }
-            
+                };
+                window.addEventListener('scroll', tocScrollHandler);
+            };
+
             function init() {
-                initSidebarToggle();
-                initHighlight();
-                initClipboard();
-                initTOCActiveState();
+                window.bdInitHighlight();
+                window.bdInitTOCActiveState();
             }
 
             if (document.readyState === 'loading') {
@@ -518,6 +363,74 @@
             }
         })();
     </script>
+
+    <!-- Back to Top -->
+    <div class="back-to-top-wrapper">
+      <button class="button back-to-top-btn" data-icon-only aria-label="Back to top" type="button">
+        <div class="svg-icn"><svg data-icon="arrow-top" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M4 4V2H20V4H4Z" fill="currentColor"/><path d="M11 22V12.2392C11 11.3483 9.92286 10.9021 9.29289 11.5321L5.4 15.425L4 14L12 6L20 14L18.6 15.425L14.7071 11.5321C14.0771 10.9021 13 11.3483 13 12.2392V22H11Z" fill="currentColor"/></svg></div>
+      </button>
+    </div>
+    <script>
+      (function() {
+        var btn = document.querySelector('.back-to-top-wrapper');
+        if (!btn) return;
+        window.addEventListener('scroll', function() {
+          btn.classList.toggle('is-visible', window.scrollY > 300);
+        });
+        btn.querySelector('button').addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      })();
+    </script>
+
+    <!-- Site nav + docs UI behaviours -->
+    <script src="./assets/js/nav.js" defer></script>
+    <script src="./assets/docs-kit/copy-button.js" defer></script>
+    <script src="./assets/docs-kit/dropdown.js" defer></script>
+
+    
+
+    <script>
+      /* Tag dismiss — delegated to document, attached once */
+      document.addEventListener('click', function (e) {
+        var removeBtn = e.target.closest('.tag-remove');
+        if (removeBtn) {
+          var tag = removeBtn.closest('.tag');
+          if (tag) tag.remove();
+        }
+      });
+
+      /* Table scroll overflow hint — re-callable after client-side navigation */
+      (function() {
+        function checkOverflow(wrapper) {
+          var isOverflowing = wrapper.scrollWidth > wrapper.clientWidth;
+          var isAtEnd = wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - 1;
+          wrapper.classList.toggle('is-overflowing', isOverflowing);
+          wrapper.classList.toggle('is-scrolled-end', isAtEnd);
+        }
+
+        window.bdInitTableScroll = function initTableScroll() {
+          var wrappers = document.querySelectorAll('.table-scroll');
+          wrappers.forEach(function(wrapper) {
+            if (wrapper.__bdTableScrollBound) return;
+            wrapper.__bdTableScrollBound = true;
+            checkOverflow(wrapper);
+            wrapper.addEventListener('scroll', function() { checkOverflow(wrapper); });
+          });
+        };
+
+        // Window resize handler attached once — re-checks all wrappers
+        window.addEventListener('resize', function() {
+          document.querySelectorAll('.table-scroll').forEach(checkOverflow);
+        });
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', window.bdInitTableScroll);
+        } else {
+          window.bdInitTableScroll();
+        }
+      })();
+    </script>
+    
 </body>
 </html>
-

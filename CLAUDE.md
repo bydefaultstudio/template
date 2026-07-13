@@ -168,9 +168,9 @@ You must:
 - explain why the change exists
 - keep code and documentation in sync
 
-After updating any `docs/*.md` file, regenerate the HTML docs:
+After updating any `docs/*.md` file, regenerate the HTML docs (from the repo root):
 ```bash
-cd docs/generator && npm run docgen
+npm run docs:build
 ```
 
 ---

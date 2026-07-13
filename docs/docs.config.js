@@ -1,20 +1,23 @@
 /**
  * Docs Configuration
- * Project-specific settings for the documentation site.
- * This file stays in place when the docs/generator/ folder is upgraded.
+ * Project-specific settings for the documentation site, consumed by the
+ * docs-kit generator shipped inside @bydefaultstudio/design-system
+ * (run via `npm run docs:build`). All paths are project-root-relative.
+ *
+ * designSystemPath is deliberately omitted: the generator uses the
+ * packaged design-system.css, which is identical to the synced copy
+ * in assets/css/.
  */
 module.exports = {
 
-  // Path to the design system framework CSS, relative from docs/site/
-  designSystemPath: '../../assets/css/design-system.css',
+  // The docs site is served at this subpath of the main site
+  // ('' if the output is served as its own site root)
+  basePath: '/docs/site',
 
-  // Path to the brand theme CSS, relative from docs/site/
-  // Set to null if using the framework defaults only
-  brandCssPath: '../../assets/css/theme.css',
-
-  // Google Fonts URL — set to null to disable
-  // Fonts come from assets/css/theme.css under the neutral-engine contract
-  googleFontsUrl: null,
+  // Optional extra brand stylesheet, loaded after the design system;
+  // the generator copies it into the output and links it after the
+  // framework CSS
+  brandCssPath: 'assets/css/theme.css',
 
   // Footer text
   footerText: '© 2025 By Default',

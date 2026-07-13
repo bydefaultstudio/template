@@ -2,9 +2,11 @@
   "name": "project-template",
   "private": true,
   "scripts": {
-    "postinstall": "node scripts/sync-design-system.js"
+    "postinstall": "node scripts/sync-design-system.js",
+    "docs:build": "node node_modules/@bydefaultstudio/design-system/dist/docs-kit/generate-docs.js",
+    "docs:watch": "node node_modules/@bydefaultstudio/design-system/dist/docs-kit/watch-docs.js"
   },
   "dependencies": {
-    "@bydefaultstudio/design-system": "github:bydefaultstudio/design-system-dist#semver:^1.4.1"
+    "@bydefaultstudio/design-system": "github:bydefaultstudio/design-system-dist#semver:^1.5.0"
   }
 }
