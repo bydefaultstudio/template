@@ -244,6 +244,8 @@ These govern every decision — design system or otherwise.
 
 When this template is used for a new project, the **very first task** is to fill in the project brief. Before writing any code, use the `AskUserQuestion` tool to gather project details and populate `PROJECT_BRIEF.md`.
 
+**Step 0 — sync the design system.** Before anything else, check that `assets/css/design-system.css` exists. If it doesn't, run `npm install` from the repo root and confirm the postinstall output reports the synced artefacts (`design-system.css`, `icons.svg`, `DESIGN.md`). Nothing renders correctly without this file.
+
 Ask questions in batches (max 4 per call) covering:
 
 **Batch 1 — Project basics:**
@@ -274,6 +276,8 @@ After gathering answers:
    - `docs/docs.config.js` → update `footerText` and `indexDescription`
    - `PROJECT_BRIEF.md` → add project name at the top
 3. Update `assets/css/theme.css` with any known brand tokens — uncomment and edit the primitive overrides (fonts, `--text-accent`, colours)
+4. Run `npm run docs:build` so the docs site picks up the new `docs.config.js` values
+5. Point the user at the remaining Quick Checklist items in `docs/setup.md` (logo, favicons, fonts) for when those assets are available
 
 This must happen before any other work begins.
 
@@ -309,6 +313,8 @@ Use **TodoWrite** for any multi-step task:
 2. Mark `in_progress` while working (one at a time)
 3. Mark `completed` immediately when done — not before it's proven to work
 4. Add a brief summary of what changed at each major step
+
+TodoWrite is per-session only. Log progress that must survive across sessions in `PROJECT_PROGRESS.md` — dated sections, newest first.
 
 ### Verification Before Done
 Never mark a task complete without proving it works:

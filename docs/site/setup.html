@@ -160,13 +160,23 @@
 <li>Add or remove documentation pages as needed</li>
 </ul>
 <hr>
+<h2 id="deployment">Deployment</h2>
+<p>The site is static — any static host works. One requirement is non-negotiable: <strong>the host must run <code>npm install</code> as its build step</strong>. <code>assets/css/design-system.css</code> is gitignored and only exists after the postinstall sync, so a deploy that skips the install ships every page unstyled.</p>
+<p>Configure your host with:</p>
+<ul>
+<li><strong>Build command:</strong> <code>npm install</code></li>
+<li><strong>Output / publish directory:</strong> <code>/</code> (the repo root)</li>
+</ul>
+<p>On Cloudflare Pages these are set under <strong>Settings → Builds &amp; deployments</strong>. Other hosts (Netlify, Vercel) have equivalent settings. GitHub Pages has no build step by default and would need a small Actions workflow to run the install first.</p>
+<p>This pairs with Dependabot (<code>.github/dependabot.yml</code>): when a new design system version is released, Dependabot opens a PR; merging it triggers a redeploy, and the install pulls the new version.</p>
+<hr>
 <h2 id="quick-checklist">Quick Checklist</h2>
 <ul>
 <li><input disabled="" type="checkbox"> Run <code>npm install</code> (syncs the design system CSS)</li>
 <li><input disabled="" type="checkbox"> Update brand colours in <code>assets/css/theme.css</code></li>
 <li><input disabled="" type="checkbox"> Update font families in <code>assets/css/theme.css</code> (plus <code>@font-face</code> or <code>@import</code>)</li>
 <li><input disabled="" type="checkbox"> Mirror any dark-mode overrides in both dark blocks of <code>theme.css</code></li>
-<li><input disabled="" type="checkbox"> Replace logo in <code>docs/site/assets/images/logo.svg</code></li>
+<li><input disabled="" type="checkbox"> Replace logo in <code>assets/images/logo.svg</code></li>
 <li><input disabled="" type="checkbox"> Replace favicons in <code>assets/icons/</code></li>
 <li><input disabled="" type="checkbox"> Fill in <code>PROJECT_BRIEF.md</code></li>
 <li><input disabled="" type="checkbox"> Review and customize documentation</li>
@@ -186,7 +196,7 @@
             <!-- Table of Contents -->
             <aside class="docs-toc">
       <span class="toc-header">On this page</span>
-      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#install" class="toc-link">Install</a></li><li class="toc-item toc-level-2"><a href="#brand-colors" class="toc-link">Brand Colors</a></li><li class="toc-item toc-level-2"><a href="#fonts" class="toc-link">Fonts</a></li><li class="toc-item toc-level-2"><a href="#brand-theming" class="toc-link">Brand Theming</a></li><li class="toc-item toc-level-2"><a href="#logo" class="toc-link">Logo</a></li><li class="toc-item toc-level-2"><a href="#project-brief" class="toc-link">Project Brief</a></li><li class="toc-item toc-level-2"><a href="#meta-tags-amp-seo" class="toc-link">Meta Tags &amp; SEO</a></li><li class="toc-item toc-level-2"><a href="#documentation" class="toc-link">Documentation</a></li><li class="toc-item toc-level-2"><a href="#quick-checklist" class="toc-link">Quick Checklist</a></li><li class="toc-item toc-level-2"><a href="#next-steps" class="toc-link">Next Steps</a></li></ul></nav></div>
+      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#install" class="toc-link">Install</a></li><li class="toc-item toc-level-2"><a href="#brand-colors" class="toc-link">Brand Colors</a></li><li class="toc-item toc-level-2"><a href="#fonts" class="toc-link">Fonts</a></li><li class="toc-item toc-level-2"><a href="#brand-theming" class="toc-link">Brand Theming</a></li><li class="toc-item toc-level-2"><a href="#logo" class="toc-link">Logo</a></li><li class="toc-item toc-level-2"><a href="#project-brief" class="toc-link">Project Brief</a></li><li class="toc-item toc-level-2"><a href="#meta-tags-amp-seo" class="toc-link">Meta Tags &amp; SEO</a></li><li class="toc-item toc-level-2"><a href="#documentation" class="toc-link">Documentation</a></li><li class="toc-item toc-level-2"><a href="#deployment" class="toc-link">Deployment</a></li><li class="toc-item toc-level-2"><a href="#quick-checklist" class="toc-link">Quick Checklist</a></li><li class="toc-item toc-level-2"><a href="#next-steps" class="toc-link">Next Steps</a></li></ul></nav></div>
     </aside>
         </div>
 

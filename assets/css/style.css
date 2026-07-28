@@ -7,6 +7,17 @@
    ───────────────────────────── */
 
 
+/* -- Starter page header (index.html) -- */
+/* Eyebrow left, dark-mode toggle right. Remove with the starter page. */
+.intro-header {
+  justify-content: space-between;
+}
+
+.intro-header .eyebrow {
+  margin: 0;
+}
+
+
 /* -- Dark mode toggle (icon swap) -- */
 /* Icons injected by assets/js/theme-toggle.js; the framework no
    longer ships these rules, so they live here alongside the script. */

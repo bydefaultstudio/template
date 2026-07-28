@@ -120,13 +120,28 @@ The documentation is ready to use, but you may want to:
 
 ---
 
+## Deployment
+
+The site is static — any static host works. One requirement is non-negotiable: **the host must run `npm install` as its build step**. `assets/css/design-system.css` is gitignored and only exists after the postinstall sync, so a deploy that skips the install ships every page unstyled.
+
+Configure your host with:
+
+- **Build command:** `npm install`
+- **Output / publish directory:** `/` (the repo root)
+
+On Cloudflare Pages these are set under **Settings → Builds & deployments**. Other hosts (Netlify, Vercel) have equivalent settings. GitHub Pages has no build step by default and would need a small Actions workflow to run the install first.
+
+This pairs with Dependabot (`.github/dependabot.yml`): when a new design system version is released, Dependabot opens a PR; merging it triggers a redeploy, and the install pulls the new version.
+
+---
+
 ## Quick Checklist
 
 - [ ] Run `npm install` (syncs the design system CSS)
 - [ ] Update brand colours in `assets/css/theme.css`
 - [ ] Update font families in `assets/css/theme.css` (plus `@font-face` or `@import`)
 - [ ] Mirror any dark-mode overrides in both dark blocks of `theme.css`
-- [ ] Replace logo in `docs/site/assets/images/logo.svg`
+- [ ] Replace logo in `assets/images/logo.svg`
 - [ ] Replace favicons in `assets/icons/`
 - [ ] Fill in `PROJECT_BRIEF.md`
 - [ ] Review and customize documentation
