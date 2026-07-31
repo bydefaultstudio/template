@@ -33,6 +33,50 @@ Claude follows the onboarding flow in `CLAUDE.md`: it runs `npm install` to sync
 7. Check the [Brand Book](docs/site/brand-book.html) to see the current brand identity
 8. Start building pages at the repo root — edit `index.html`, copy `templates/page-template.html` for new pages, and keep css/js/images in `assets/`
 
+## Project Structure
+
+The shape of the repo — everything marked *synced* is written into place by `npm install`, gitignored, and never committed or hand-edited.
+
+<!-- structure:start -->
+```text
+template/
+├── .claude/                   # Claude Code hooks and slash commands
+├── .github/
+│   └── dependabot.yml         # weekly design system version checks
+├── .vscode/
+│   └── settings.json          # Live Server port pin — one per project
+├── assets/
+│   ├── css/
+│   │   ├── design-system/     # component companion CSS — synced
+│   │   ├── design-system.css  # the framework — synced
+│   │   ├── style.css          # project-specific styles
+│   │   └── theme.css          # brand overrides: fonts, colours
+│   ├── fonts/                 # self-hosted brand fonts
+│   ├── icons/                 # favicons + synced icon/cursor sprites
+│   ├── images/                # general and Open Graph images
+│   └── js/
+│       ├── design-system/     # component JS modules — synced
+│       └── theme-toggle.js    # dark-mode toggle
+├── docs/                      # markdown sources — edit these
+│   ├── site/                  # generated HTML — never hand-edit
+│   └── docs.config.js         # base path, footer, brand CSS path
+├── handovers/
+│   └── HANDOVER.md            # where the work stands right now
+├── templates/                 # page and component boilerplate
+├── .gitignore                 # lists every bd-sync artefact
+├── CLAUDE.md                  # development rules — authoritative
+├── DESIGN.md                  # design rules — synced
+├── PROJECT_BRIEF.md           # project intent and constraints
+├── PROJECT_PROGRESS.md        # dated log of what shipped
+├── README.md
+├── ROADMAP.md                 # ideas not yet started
+├── index.html                 # starter homepage — replace this
+└── package.json               # design system dep + bd-sync postinstall
+```
+<!-- structure:end -->
+
+Full explanations of every folder — and the synced-vs-authored rule — are in [docs/folder-structure.md](docs/folder-structure.md).
+
 ## The design system
 
 The design system arrives as a versioned package and is **vendored, not committed**. `npx bd-sync` runs on every `npm install` and writes:
