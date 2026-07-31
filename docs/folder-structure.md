@@ -19,29 +19,56 @@ index.html              → Starter page (replace with project homepage)
 CLAUDE.md               → Claude Code development rules (authoritative)
 README.md               → Project overview and getting started
 PROJECT_BRIEF.md        → Project brief and requirements
-PROJECT_PROGRESS.md     → Progress tracker for ongoing work
-package.json            → npm manifest: design system dependency + postinstall sync
-scripts/
-  sync-design-system.js → Copies the design system CSS from node_modules into assets/css
+ROADMAP.md              → Ideas and debt not yet started
+PROJECT_PROGRESS.md     → Dated log of what has shipped
+DESIGN.md               → Design rules — synced, gitignored, never hand-edited
+package.json            → npm manifest: design system dependency + bd-sync postinstall
+handovers/
+  HANDOVER.md           → Where the work stands right now (rewritten each session)
+.claude/
+  settings.json         → Session hooks (handover prompts)
+  commands/handover.md  → The /handover command: format and rules
+.vscode/
+  settings.json         → Live Server port pin (see Local ports below)
 .github/
   dependabot.yml        → Weekly checks for new design system versions
 assets/
   css/
-    design-system.css   → Design system framework — synced from the
-                          @bydefaultstudio/design-system npm package on
-                          npm install; gitignored, never hand-edited
+    design-system.css   → Design system framework — synced, gitignored
+    design-system/      → Component companion CSS — synced, gitignored
     theme.css           → Brand overrides (primitives, fonts)
     style.css           → Project-specific styles
   js/
+    design-system/      → Component JS modules — synced, gitignored
     theme-toggle.js     → Dark-mode toggle
   fonts/                → Self-hosted web fonts
-  icons/                → Favicons and app icons
+  icons/                → Favicons, app icons, and synced sprites
   images/               → General images and Open Graph images
 templates/              → Page and component boilerplate
 docs/                   → Documentation (markdown sources + generated site)
 ```
 
-`node_modules/` and `package-lock.json` are gitignored. The lockfile is deliberately not committed in the template so new projects resolve the newest compatible design system at first install; projects may commit their own lockfile afterwards.
+`node_modules/` and `package-lock.json` are gitignored. The lockfile is deliberately not committed in the template so new projects resolve the newest compatible design system at first install; commit your own lockfile once the project is under way — it pins the build, and some hosts detect the package manager from it.
+
+## Synced vs. authored
+
+The single most important distinction in this tree. Everything `bd-sync` writes on `npm install` is gitignored and regenerated:
+
+- `assets/css/design-system.css`
+- `assets/css/design-system/`
+- `assets/js/design-system/`
+- `assets/icons/icons.svg`, `assets/icons/cursors.svg`
+- `DESIGN.md`
+
+Editing any of these appears to work and is destroyed by the next install, with no warning. Shared code changes upstream in the design-system repo, then arrives here via a version bump. Everything else in the tree is yours to author.
+
+## Local ports
+
+Each project pins one fixed local address — this one is `http://localhost:2300/`, set in `.vscode/settings.json`. Any other dev server the project runs must pin the same number, or it silently drifts onto a neighbouring project's port. Bands and rules are in `CLAUDE.md` §15.
+
+## Session continuity
+
+`ROADMAP.md` (future) → `handovers/HANDOVER.md` (present) → `PROJECT_PROGRESS.md` (past). Split by tense so none of them becomes a dumping ground; the handover is rewritten each session while progress is appended. See `CLAUDE.md` §14.
 
 ## assets/css/
 

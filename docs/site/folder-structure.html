@@ -76,30 +76,51 @@
 CLAUDE.md               → Claude Code development rules (authoritative)
 README.md               → Project overview and getting started
 PROJECT_BRIEF.md        → Project brief and requirements
-PROJECT_PROGRESS.md     → Progress tracker for ongoing work
-package.json            → npm manifest: design system dependency + postinstall sync
-scripts/
-  sync-design-system.js → Copies the design system CSS from node_modules into assets/css
+ROADMAP.md              → Ideas and debt not yet started
+PROJECT_PROGRESS.md     → Dated log of what has shipped
+DESIGN.md               → Design rules — synced, gitignored, never hand-edited
+package.json            → npm manifest: design system dependency + bd-sync postinstall
+handovers/
+  HANDOVER.md           → Where the work stands right now (rewritten each session)
+.claude/
+  settings.json         → Session hooks (handover prompts)
+  commands/handover.md  → The /handover command: format and rules
+.vscode/
+  settings.json         → Live Server port pin (see Local ports below)
 .github/
   dependabot.yml        → Weekly checks for new design system versions
 assets/
   css/
-    design-system.css   → Design system framework — synced from the
-                          @bydefaultstudio/design-system npm package on
-                          npm install; gitignored, never hand-edited
+    design-system.css   → Design system framework — synced, gitignored
+    design-system/      → Component companion CSS — synced, gitignored
     theme.css           → Brand overrides (primitives, fonts)
     style.css           → Project-specific styles
   js/
+    design-system/      → Component JS modules — synced, gitignored
     theme-toggle.js     → Dark-mode toggle
   fonts/                → Self-hosted web fonts
-  icons/                → Favicons and app icons
+  icons/                → Favicons, app icons, and synced sprites
   images/               → General images and Open Graph images
 templates/              → Page and component boilerplate
 docs/                   → Documentation (markdown sources + generated site)
 </code></pre>
       </div>
     
-<p><code>node_modules/</code> and <code>package-lock.json</code> are gitignored. The lockfile is deliberately not committed in the template so new projects resolve the newest compatible design system at first install; projects may commit their own lockfile afterwards.</p>
+<p><code>node_modules/</code> and <code>package-lock.json</code> are gitignored. The lockfile is deliberately not committed in the template so new projects resolve the newest compatible design system at first install; commit your own lockfile once the project is under way — it pins the build, and some hosts detect the package manager from it.</p>
+<h2 id="synced-vs-authored">Synced vs. authored</h2>
+<p>The single most important distinction in this tree. Everything <code>bd-sync</code> writes on <code>npm install</code> is gitignored and regenerated:</p>
+<ul>
+<li><code>assets/css/design-system.css</code></li>
+<li><code>assets/css/design-system/</code></li>
+<li><code>assets/js/design-system/</code></li>
+<li><code>assets/icons/icons.svg</code>, <code>assets/icons/cursors.svg</code></li>
+<li><code>DESIGN.md</code></li>
+</ul>
+<p>Editing any of these appears to work and is destroyed by the next install, with no warning. Shared code changes upstream in the design-system repo, then arrives here via a version bump. Everything else in the tree is yours to author.</p>
+<h2 id="local-ports">Local ports</h2>
+<p>Each project pins one fixed local address — this one is <code>http://localhost:2300/</code>, set in <code>.vscode/settings.json</code>. Any other dev server the project runs must pin the same number, or it silently drifts onto a neighbouring project&#39;s port. Bands and rules are in <code>CLAUDE.md</code> §15.</p>
+<h2 id="session-continuity">Session continuity</h2>
+<p><code>ROADMAP.md</code> (future) → <code>handovers/HANDOVER.md</code> (present) → <code>PROJECT_PROGRESS.md</code> (past). Split by tense so none of them becomes a dumping ground; the handover is rewritten each session while progress is appended. See <code>CLAUDE.md</code> §14.</p>
 <h2 id="assetscss">assets/css/</h2>
 <p>The three-layer CSS contract. Load order matters — every page links them in this sequence:</p>
 <ol>
@@ -144,7 +165,7 @@ docs/                   → Documentation (markdown sources + generated site)
             <!-- Table of Contents -->
             <aside class="docs-toc">
       <span class="toc-header">On this page</span>
-      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#structure" class="toc-link">Structure</a></li><li class="toc-item toc-level-2"><a href="#assetscss" class="toc-link">assets/css/</a></li><li class="toc-item toc-level-2"><a href="#assetsjs" class="toc-link">assets/js/</a></li><li class="toc-item toc-level-2"><a href="#assetsfonts" class="toc-link">assets/fonts/</a></li><li class="toc-item toc-level-2"><a href="#assetsicons" class="toc-link">assets/icons/</a></li><li class="toc-item toc-level-2"><a href="#assetsimages" class="toc-link">assets/images/</a></li><li class="toc-item toc-level-2"><a href="#templates" class="toc-link">templates/</a></li><li class="toc-item toc-level-2"><a href="#docs" class="toc-link">docs/</a></li><li class="toc-item toc-level-2"><a href="#notes" class="toc-link">Notes</a></li></ul></nav></div>
+      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#structure" class="toc-link">Structure</a></li><li class="toc-item toc-level-2"><a href="#synced-vs-authored" class="toc-link">Synced vs. authored</a></li><li class="toc-item toc-level-2"><a href="#local-ports" class="toc-link">Local ports</a></li><li class="toc-item toc-level-2"><a href="#session-continuity" class="toc-link">Session continuity</a></li><li class="toc-item toc-level-2"><a href="#assetscss" class="toc-link">assets/css/</a></li><li class="toc-item toc-level-2"><a href="#assetsjs" class="toc-link">assets/js/</a></li><li class="toc-item toc-level-2"><a href="#assetsfonts" class="toc-link">assets/fonts/</a></li><li class="toc-item toc-level-2"><a href="#assetsicons" class="toc-link">assets/icons/</a></li><li class="toc-item toc-level-2"><a href="#assetsimages" class="toc-link">assets/images/</a></li><li class="toc-item toc-level-2"><a href="#templates" class="toc-link">templates/</a></li><li class="toc-item toc-level-2"><a href="#docs" class="toc-link">docs/</a></li><li class="toc-item toc-level-2"><a href="#notes" class="toc-link">Notes</a></li></ul></nav></div>
     </aside>
         </div>
 
@@ -301,6 +322,7 @@ docs/                   → Documentation (markdown sources + generated site)
     <!-- Site nav + docs UI behaviours -->
     <script src="./assets/js/nav.js" defer></script>
     <script src="./assets/docs-kit/copy-button.js" defer></script>
+    <script src="./assets/docs-kit/docs-copy-chrome.js" defer></script>
     <script src="./assets/docs-kit/dropdown.js" defer></script>
 
     

@@ -14,7 +14,32 @@ This template provides a solid foundation for new projects. Follow these steps t
 
 ## Install
 
-Run `npm install` at the repo root before anything else. This syncs the design system CSS from the `@bydefaultstudio/design-system` npm package into `assets/css/design-system.css` — the file is gitignored and does not exist until the sync runs. Canonical design system documentation lives at [bydefault.design](https://bydefault.design).
+Run `npm install` at the repo root before anything else. Its postinstall step runs `npx bd-sync`, which copies the design system artefacts out of the `@bydefaultstudio/design-system` package and into the project — the framework CSS, component CSS and JS modules, icon and cursor sprites, and `DESIGN.md`.
+
+All of these are gitignored and **do not exist in a fresh clone** until the sync runs. `bd-sync` prints a summary of what it wrote plus the version stamp it landed; read it rather than assuming success.
+
+Never hand-edit anything in that list — the next install overwrites it. Canonical design system documentation lives at [bydefault.design](https://bydefault.design).
+
+---
+
+## Local Development
+
+Every project has one fixed local address. This one is:
+
+**http://localhost:2300/**
+
+Pinned in `.vscode/settings.json` for Live Server:
+
+```json
+{
+    "liveServer.settings.port": 2300,
+    "liveServer.settings.root": "/"
+}
+```
+
+If you create a project from this template, change this number — otherwise every project shares 2300. Take the next free hundred in the 3xxx products band; the full allocation table and the rules for other dev servers are in `CLAUDE.md` §15.
+
+The reason this matters: an unpinned server does not error on a taken port. It silently starts on the next one up, so you get a working page that belongs to a different project.
 
 ---
 
@@ -131,19 +156,25 @@ Configure your host with:
 
 On Cloudflare Pages these are set under **Settings → Builds & deployments**. Other hosts (Netlify, Vercel) have equivalent settings. GitHub Pages has no build step by default and would need a small Actions workflow to run the install first.
 
-This pairs with Dependabot (`.github/dependabot.yml`): when a new design system version is released, Dependabot opens a PR; merging it triggers a redeploy, and the install pulls the new version.
+**Commit a lockfile before the first deploy.** The template ships without one so a new project resolves the newest compatible design system, but some hosts detect the package manager from the lockfile — without one, Cloudflare may fall back to bun, which cannot resolve the design system's `#semver:` git range, and the build fails.
+
+**Watch for the silent-unstyled failure.** Both failure modes above produce a *green* build status with a completely unstyled site, because the missing CSS is gitignored and the host has nothing to complain about. If a deploy looks like the stylesheet vanished, check that the install actually ran before assuming a CSS bug.
+
+This pairs with Dependabot (`.github/dependabot.yml`): when a new design system version is released, Dependabot opens a PR; merging it triggers a redeploy, and the install pulls the new version. Minor and patch releases are safe to merge; a **major** version needs the caret range widened by hand and a visual check, because a major means breaking changes.
 
 ---
 
 ## Quick Checklist
 
-- [ ] Run `npm install` (syncs the design system CSS)
+- [ ] Run `npm install` (syncs the design system)
+- [ ] Allocate a local port and pin it in `.vscode/settings.json`
 - [ ] Update brand colours in `assets/css/theme.css`
 - [ ] Update font families in `assets/css/theme.css` (plus `@font-face` or `@import`)
 - [ ] Mirror any dark-mode overrides in both dark blocks of `theme.css`
 - [ ] Replace logo in `assets/images/logo.svg`
 - [ ] Replace favicons in `assets/icons/`
 - [ ] Fill in `PROJECT_BRIEF.md`
+- [ ] Replace the starter `handovers/HANDOVER.md` and `ROADMAP.md`
 - [ ] Review and customize documentation
 
 ---

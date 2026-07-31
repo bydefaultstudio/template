@@ -1,0 +1,24 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ls handovers 2>/dev/null | grep -q 'HANDOVER.*\\.md' && echo '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"This project keeps session handovers in handovers/. Read handovers/HANDOVER.md (and any HANDOVER-<topic>.md) BEFORE starting work — it records where the last session left off, what is half-finished, and known traps. Then check PROJECT_PROGRESS.md for history and ROADMAP.md for direction.\"}}' || true"
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"Context was just compacted — earlier detail from this session is now summarized and will degrade further on the next compaction. If you are mid-task, follow .claude/commands/handover.md NOW: write or refresh handovers/HANDOVER.md so this work can resume in a fresh session, then continue the task.\"}}'"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -6,7 +6,7 @@ You are a Senior Front-End Developer working inside this project's **Design Syst
 - Write correct, best-practice, DRY, bug-free code — no TODOs or placeholders
 - Prefer readability; avoid unnecessary abstractions
 - Use semantic tokens over primitives; prefer existing utility classes over new CSS
-- Only write new CSS if the design system can't express the requirement — and if so, add it to `assets/css/style.css`. Never edit `assets/css/design-system.css`: it is synced from the `@bydefaultstudio/design-system` npm package on `npm install` and any edit is overwritten
+- Only write new CSS if the design system can't express the requirement — and if so, add it to `assets/css/style.css`. Never edit anything `bd-sync` writes (see §5): those files are synced from the `@bydefaultstudio/design-system` package on `npm install` and any edit is silently destroyed on the next sync
 - Design rules live in `DESIGN.md` at the project root (synced from the package); follow it when writing any HTML or CSS
 - Accessibility required: keyboard navigation, `aria-label`, focus states, `<button>` for actions, `<a>` for links
 - If unsure, say so — never guess
@@ -19,13 +19,20 @@ The design system arrives via the `@bydefaultstudio/design-system` npm package; 
 
 Before generating or modifying code, treat the following as authoritative:
 
+**Start of every session — read these first:**
+
+1. `handovers/HANDOVER.md` — where the last session left off, what is half-finished, known traps. Plus any `handovers/HANDOVER-<topic>.md`. This is the fastest path back into context; read it before anything else (see §14)
+2. `PROJECT_PROGRESS.md` — what has already shipped
+3. `ROADMAP.md` — direction not yet started
+
 **Local files:**
 
-1. `PROJECT_BRIEF.md` — project intent and constraints
-2. `docs/brand-book.md` — brand identity preview and theming
-3. `docs/seo-best-practices.md` — SEO meta tags and social sharing
-4. `docs/folder-structure.md` — file organization rules
-5. `docs/setup.md` — project setup and customization
+4. `PROJECT_BRIEF.md` — project intent and constraints
+5. `DESIGN.md` — design rules, synced from the package
+6. `docs/brand-book.md` — brand identity preview and theming
+7. `docs/seo-best-practices.md` — SEO meta tags and social sharing
+8. `docs/folder-structure.md` — file organization rules
+9. `docs/setup.md` — project setup and customization
 
 **Canonical design system docs** (fetch with WebFetch when needed):
 
@@ -83,7 +90,8 @@ See the canonical [color](https://bydefault.design/design-system/color.html), [t
 See the [canonical design system docs](https://bydefault.design/design-system/) for complete organization guidelines.
 
 **Critical rules:**
-- Design system CSS (`assets/css/design-system.css`) is synced from the `@bydefaultstudio/design-system` npm package on `npm install` — never edit it; it ships neutral engine defaults
+- Design system CSS (`assets/css/design-system.css`) is synced by `bd-sync` on `npm install` — never edit it; it ships neutral engine defaults
+- Component companion CSS lands in `assets/css/design-system/` (e.g. `bd-cursor.css`, `bd-video.css`) — also synced, also never edited. Link only the ones the project actually uses
 - Brand overrides live in `assets/css/theme.css` — it overrides §1/§2 primitive tokens directly (there is no `var(--brand-*)` indirection) and must load after design-system.css
 - Project-specific CSS goes in `assets/css/style.css` (third layer) only when the design system can't express it
 - Dark mode: `[data-theme="dark"]` tokens in §2b must stay a verbatim mirror of the `prefers-color-scheme` block in §2c — drift between them is a known failure mode
@@ -101,6 +109,13 @@ See the [canonical design system docs](https://bydefault.design/design-system/) 
 - No global variables
 - Use named functions
 - Log version and init success
+
+The package ships ready-made JS modules into `assets/js/design-system/` —
+`accordion`, `dialog`, `dropdown`, `tabs`, `toast`, `rating`, `number-input`,
+`password-toggle`, `copy-button`, `bd-audio`, `bd-cursor`, `bd-video`. Reach for
+one of these before hand-rolling the same behaviour. They are synced artefacts:
+never edit them, and never fix a bug in one locally — the fix belongs upstream in
+the design-system repo, released, and pulled down via a version bump.
 
 ### Border Strategy
 See the canonical [border docs](https://bydefault.design/design-system/border.html) for the complete composable architecture.
@@ -142,15 +157,55 @@ Every page must include:
 See `docs/folder-structure.md` for complete directory structure.
 
 **Key locations:**
-- `assets/css/design-system.css` — design system framework (neutral engine), synced from the `@bydefaultstudio/design-system` npm package on `npm install`; not tracked by git and never edited by hand
 - `assets/css/theme.css` — brand token overrides
 - `assets/css/style.css` — project-specific styles
-- `assets/js/` — JavaScript files (incl. `theme-toggle.js`)
+- `assets/js/` — project JavaScript (incl. `theme-toggle.js`)
 - `assets/images/` — general images and Open Graph images
-- `assets/icons/` — favicons
+- `assets/icons/` — favicons and sprites
 - `assets/fonts/` — self-hosted brand fonts
 - `templates/` — reusable templates
 - `docs/` — documentation (markdown sources; generated site in `docs/site/`)
+- `handovers/` — session handovers (see §14)
+
+### Synced by bd-sync — never edit, never commit
+
+`npx bd-sync` runs as a postinstall step and writes these. Every one is
+gitignored and regenerated on each `npm install`:
+
+| Path | Contents |
+| --- | --- |
+| `assets/css/design-system.css` | The framework (neutral engine defaults) |
+| `assets/css/design-system/` | Component companion CSS |
+| `assets/js/design-system/` | Component JS modules |
+| `assets/icons/icons.svg` | Icon sprite (full set, or a subset — see below) |
+| `assets/icons/cursors.svg` | Two-tone cursor sprite (separate from icons) |
+| `DESIGN.md` | Design rules, project root |
+
+Every artefact carries a `@bydefaultstudio/design-system vX.Y.Z` first-line
+stamp, so drift between what is vendored and what is released is greppable.
+
+**Upstream-first.** Shared code changes only in the design-system repo, then
+ships as a release and arrives here through a version bump. A local patch to a
+synced file survives exactly until the next install.
+
+**Developing against a local checkout:** `npx bd-sync --local "../Design System"`
+syncs from a sibling working tree (rebuilding it first) instead of the published
+package — for verifying a design-system change here before releasing it.
+
+**Icon subsetting (optional).** Adding an `icons.manifest.json` at the repo root
+makes `bd-sync` build a project-sized sprite via `bd-sprite` instead of shipping
+the full master set:
+
+```json
+{ "output": "assets/icons/icons.svg", "icons": ["close", "copy", "info"] }
+```
+
+The template ships without one — a new project doesn't yet know which icons it
+needs, and the full sprite is the safe default. Add the manifest once the icon
+set settles. To use a new icon afterwards, add its name to the array and re-run
+`npx bd-sync`. A hand-maintained sprite of the project's *own* icons is a
+separate, git-tracked file (e.g. `assets/icons/project-icons.svg`) and is never
+merged into the synced one.
 
 ---
 
@@ -244,7 +299,7 @@ These govern every decision — design system or otherwise.
 
 When this template is used for a new project, the **very first task** is to fill in the project brief. Before writing any code, use the `AskUserQuestion` tool to gather project details and populate `PROJECT_BRIEF.md`.
 
-**Step 0 — sync the design system.** Before anything else, check that `assets/css/design-system.css` exists. If it doesn't, run `npm install` from the repo root and confirm the postinstall output reports the synced artefacts (`design-system.css`, `icons.svg`, `DESIGN.md`). Nothing renders correctly without this file.
+**Step 0 — sync the design system.** Before anything else, check that `assets/css/design-system.css` exists. If it doesn't, run `npm install` from the repo root. `bd-sync` prints a summary table of what it wrote and the version stamp it landed — read it. It hard-fails rather than half-syncing, so a clean run means every artefact in §5 is present. Nothing renders correctly until it has run.
 
 Ask questions in batches (max 4 per call) covering:
 
@@ -276,8 +331,19 @@ After gathering answers:
    - `docs/docs.config.js` → update `footerText` and `indexDescription`
    - `PROJECT_BRIEF.md` → add project name at the top
 3. Update `assets/css/theme.css` with any known brand tokens — uncomment and edit the primitive overrides (fonts, `--text-accent`, colours)
-4. Run `npm run docs:build` so the docs site picks up the new `docs.config.js` values
-5. Point the user at the remaining Quick Checklist items in `docs/setup.md` (logo, favicons, fonts) for when those assets are available
+4. **Allocate a local port** (see §15). The template ships pinned to `2300`, its own
+   allocation — leaving it there would put every project created from this template
+   on the same port, which is the exact collision the strategy exists to prevent.
+   Ask the user for the number, take the next free hundred in the **3xxx products
+   band** if they have no preference, then:
+   - update `.vscode/settings.json` → `liveServer.settings.port`
+   - pin it at any other server the project runs (§15 rule 3)
+   - record it in the §15 table in this file
+   - tell the user the project's address: `http://localhost:<port>/`
+5. Replace the starter contents of `handovers/HANDOVER.md` and `ROADMAP.md` with
+   something real for this project
+6. Run `npm run docs:build` so the docs site picks up the new `docs.config.js` values
+7. Point the user at the remaining Quick Checklist items in `docs/setup.md` (logo, favicons, fonts) for when those assets are available
 
 This must happen before any other work begins.
 
@@ -314,7 +380,7 @@ Use **TodoWrite** for any multi-step task:
 3. Mark `completed` immediately when done — not before it's proven to work
 4. Add a brief summary of what changed at each major step
 
-TodoWrite is per-session only. Log progress that must survive across sessions in `PROJECT_PROGRESS.md` — dated sections, newest first.
+TodoWrite is per-session only and dies with the session. Anything that must survive goes into the three tracking documents — see §14.
 
 ### Verification Before Done
 Never mark a task complete without proving it works:
@@ -365,3 +431,99 @@ The following MCP tools are available for this project:
 **Slack** — for team communication:
 - `slack_send_message`, `slack_read_channel`
 - Use only when explicitly asked to send or read Slack messages
+
+---
+
+## 14. Session Continuity
+
+Three documents carry state across sessions. They differ by **tense**, and
+keeping that boundary is what stops any one of them turning into a dumping
+ground.
+
+| File | Tense | Answers | Lifecycle |
+| --- | --- | --- | --- |
+| `ROADMAP.md` | Future | What we might do | Edited freely; items leave when started |
+| `handovers/HANDOVER.md` | Present | Where the work stands right now | **Rewritten** each session |
+| `PROJECT_PROGRESS.md` | Past | What actually shipped | **Appended**, dated, newest first |
+
+The handover is a baton, not a log. It is replaced wholesale every session — if
+it were appended to, it would just become a second progress file. Anything worth
+keeping permanently moves to `PROJECT_PROGRESS.md` before the rewrite.
+
+### Start of every session
+
+Read `handovers/HANDOVER.md` first, plus any `handovers/HANDOVER-<topic>.md`.
+It is the fastest way to rebuild context: what is half-finished, what is
+blocked, and which traps were already discovered. Then `PROJECT_PROGRESS.md`
+for history and `ROADMAP.md` for direction.
+
+A SessionStart hook (`.claude/settings.json`) prints this reminder automatically
+when handovers exist.
+
+### End of every session
+
+Run `/handover`. It:
+
+1. moves newly-shipped work into `PROJECT_PROGRESS.md` (dated, newest first)
+2. moves new un-started ideas into `ROADMAP.md`
+3. rewrites `handovers/HANDOVER.md` with what is live
+
+Do this whenever work pauses — not only at a tidy stopping point. A session that
+ends mid-task is exactly the one where the handover pays for itself. The format
+and rules live in `.claude/commands/handover.md`.
+
+Also write one **immediately after context compaction**, without being asked. A
+second SessionStart hook fires on compaction to prompt this: detail from earlier
+in the session is already summarized at that point and degrades further with each
+subsequent compaction, so capture it to disk while it is still recoverable.
+
+### Multiple handovers
+
+One handover per project is the standard. Split into
+`handovers/HANDOVER-<topic>.md` only when genuinely separate tracks are in flight
+at once and merging them would confuse rather than help. Name by topic, never by
+date (`HANDOVER-nav-rebuild.md`, not `HANDOVER-july.md`), and note the split in
+`handovers/HANDOVER.md` so the default file stays the index.
+
+---
+
+## 15. Local Port Strategy
+
+Every project has one fixed local address, written as: `http://localhost:3100/`
+
+**This project runs on `http://localhost:2300/`** — replace this line and the
+allocation below when creating a project from the template (§12 step 4).
+
+Thousands digit = category. Projects allocated in hundreds within the band.
+
+| Band | Category | Allocated |
+| --- | --- | --- |
+| **2xxx** | Foundation & owned sites | 2000 Design System · 2100 Studio · 2200 erlenmasson · 2300 Template |
+| **3xxx** | Products | 3100 Folder Structure · 3200 Quiz — next free 3300 |
+| **4xxx** | Tools & utilities | unallocated — next free 4000 |
+
+Projects created from this template are **products**: take the next free hundred
+in the 3xxx band unless the owner says otherwise.
+
+**Rules:**
+
+1. Never assign 3000 — Next.js claims it by default, so products start at 3100.
+2. Bands 5, 7, 8, 9 are off-limits: Vite (5173), Live Server (5500/5501),
+   macOS AirPlay Receiver (5000, 7000), wrangler dev (8787), netlify dev (8888),
+   Python (8000), generic (8080).
+3. Pin the port at every server the project runs, or the number is decorative:
+   - Live Server → `.vscode/settings.json` → `"liveServer.settings.port"`
+   - `npx serve` → `npx serve . -l <port>`
+   - `netlify dev` → `netlify.toml` `[dev] port` (or `--port <port>`)
+   - `wrangler dev` → `wrangler dev --port <port>`
+   - `next dev` → `next dev -p <port>`
+4. Write the URL as `http://localhost:<port>/` — localhost over 127.0.0.1, with
+   the trailing slash. (The `--bind 127.0.0.1` flag on a python server stays as an
+   address, not a URL.)
+5. Record every new allocation in the table above (master copy lives in the
+   Design System repo's `CLAUDE.md`) and in that project's own `CLAUDE.md`.
+
+**Why:** seven repos previously shared 5501, so opening two at once silently
+bumped the second to 5502 — which then collided with the Design System. Note the
+failure mode: nothing errors. The server reports success on a port you did not
+choose, and you only discover the collision when the wrong project loads.
