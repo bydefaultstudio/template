@@ -6,6 +6,10 @@
         "hooks": [
           {
             "type": "command",
+            "command": "grep -q '\\[Example:' PROJECT_BRIEF.md 2>/dev/null && echo '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"UN-ONBOARDED PROJECT — PROJECT_BRIEF.md still contains template placeholders, so this project has not been set up yet. Run the onboarding flow in CLAUDE.md section 12 NOW, before any other work and before answering questions about the code: (1) run npm install to sync the design system, (2) use AskUserQuestion in batches of up to 4 to gather project details, (3) fill in PROJECT_BRIEF.md, propagate the project name, allocate a local port, and rebuild the docs. If the user asked for something else, tell them onboarding comes first and offer to run it — a brief filled in now makes every later task cheaper. This notice disappears once the placeholders are gone.\"}}' || true"
+          },
+          {
+            "type": "command",
             "command": "ls handovers 2>/dev/null | grep -q 'HANDOVER.*\\.md' && echo '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"This project keeps session handovers in handovers/. Read handovers/HANDOVER.md (and any HANDOVER-<topic>.md) BEFORE starting work — it records where the last session left off, what is half-finished, and known traps. Then check PROJECT_PROGRESS.md for history and ROADMAP.md for direction.\"}}' || true"
           }
         ]

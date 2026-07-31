@@ -228,6 +228,8 @@ After updating any `docs/*.md` file, regenerate the HTML docs (from the repo roo
 npm run docs:build
 ```
 
+When files or folders are added or removed, regenerate the tree (and the viewer link below it) between the `<!-- structure:start -->` and `<!-- structure:end -->` markers in `README.md`, deriving it from `git ls-files` plus the gitignored `bd-sync` artefacts.
+
 ---
 
 ## 7. Demo Rules
@@ -299,6 +301,17 @@ These govern every decision — design system or otherwise.
 
 When this template is used for a new project, the **very first task** is to fill in the project brief. Before writing any code, use the `AskUserQuestion` tool to gather project details and populate `PROJECT_BRIEF.md`.
 
+**This fires automatically.** A SessionStart hook in `.claude/settings.json` checks
+whether `PROJECT_BRIEF.md` still contains `[Example:` placeholders. While it does,
+every session opens with a directive to run this section. The check is
+self-disabling — filling in the brief removes the placeholders and the notice
+stops, so there is no flag to clear and no way to leave it nagging a live project.
+
+Do not wait to be asked. If the hook fires and the user opens with an unrelated
+request, say onboarding comes first and offer to run it — an hour of work against
+an empty brief is an hour spent guessing at the audience, the goals, and the
+brand. If they decline, proceed with their request and leave the brief alone.
+
 **Step 0 — sync the design system.** Before anything else, check that `assets/css/design-system.css` exists. If it doesn't, run `npm install` from the repo root. `bd-sync` prints a summary table of what it wrote and the version stamp it landed — read it. It hard-fails rather than half-syncing, so a clean run means every artefact in §5 is present. Nothing renders correctly until it has run.
 
 Ask questions in batches (max 4 per call) covering:
@@ -335,11 +348,18 @@ After gathering answers:
    allocation — leaving it there would put every project created from this template
    on the same port, which is the exact collision the strategy exists to prevent.
    Ask the user for the number, take the next free hundred in the **3xxx products
-   band** if they have no preference, then:
-   - update `.vscode/settings.json` → `liveServer.settings.port`
-   - pin it at any other server the project runs (§15 rule 3)
-   - record it in the §15 table in this file
-   - tell the user the project's address: `http://localhost:<port>/`
+   band** if they have no preference, then replace `2300` **everywhere it is
+   written down** — `grep -rn 2300` and fix every hit. At the time of writing:
+   - `.vscode/settings.json` → `liveServer.settings.port` (the only one that
+     actually binds the port; the rest are documentation that goes stale silently)
+   - `CLAUDE.md` → §15 heading line, and the allocation table
+   - `README.md` → Local development
+   - `docs/setup.md` → Local Development (two places: prose and the JSON sample)
+   - `docs/folder-structure.md` → Local ports
+   - any other server the project runs (§15 rule 3)
+
+   Then rebuild the docs (`npm run docs:build`) so the generated pages match, and
+   tell the user the project's address: `http://localhost:<port>/`
 5. Replace the starter contents of `handovers/HANDOVER.md` and `ROADMAP.md` with
    something real for this project
 6. Run `npm run docs:build` so the docs site picks up the new `docs.config.js` values
