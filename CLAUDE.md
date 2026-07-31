@@ -482,9 +482,9 @@ when handovers exist.
 
 ### On every commit
 
-`PROJECT_PROGRESS.md` and `ROADMAP.md` are updated **as work lands**, not in a
-sweep at the end. A PostToolUse hook fires after every `git commit` and prompts
-for both:
+The tracking documents are updated **as work lands**, not in a sweep at the end.
+A PostToolUse hook fires after every `git commit` that touched real files and
+prompts for three things:
 
 - **`PROJECT_PROGRESS.md`** — record what the commit shipped under a `YYYY-MM-DD`
   heading, newest first. Write what changed and why; the commit subject is
@@ -492,12 +492,16 @@ for both:
 - **`ROADMAP.md`** — delete anything the commit completed or made obsolete, and
   add any debt or idea it surfaced. A roadmap that only ever grows is one nobody
   trusts.
+- **`handovers/HANDOVER.md`** — refresh *Status* and *In flight* if the commit
+  moved them. A full rewrite is only needed at session end.
 
-Skip only for commits a future session would not care about: typo and formatting
-fixes, and commits touching nothing but the tracking documents themselves.
+Then commit those files. **There is no loop to avoid:** the hook inspects what
+the commit actually touched and stays silent when it touched nothing but these
+three, so a documentation commit cannot re-trigger it. The guard is in the hook,
+not in a rule you have to remember.
 
-**Do not commit these edits on their own.** Leave them for the next commit to
-carry, or every commit spawns another one documenting it.
+Skip entirely for commits a future session would not care about — typo and
+formatting fixes.
 
 **Exception — the template repo itself.** In `bydefaultstudio/template`,
 `PROJECT_PROGRESS.md`, `ROADMAP.md` and `handovers/HANDOVER.md` are starter
