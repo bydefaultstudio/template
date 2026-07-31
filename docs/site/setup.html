@@ -69,7 +69,26 @@
 <p>This template provides a solid foundation for new projects. Follow these steps to customize it for your project.</p>
 <hr>
 <h2 id="install">Install</h2>
-<p>Run <code>npm install</code> at the repo root before anything else. This syncs the design system CSS from the <code>@bydefaultstudio/design-system</code> npm package into <code>assets/css/design-system.css</code> — the file is gitignored and does not exist until the sync runs. Canonical design system documentation lives at <a href="https://bydefault.design" target="_blank" rel="noopener noreferrer">bydefault.design</a>.</p>
+<p>Run <code>npm install</code> at the repo root before anything else. Its postinstall step runs <code>npx bd-sync</code>, which copies the design system artefacts out of the <code>@bydefaultstudio/design-system</code> package and into the project — the framework CSS, component CSS and JS modules, icon and cursor sprites, and <code>DESIGN.md</code>.</p>
+<p>All of these are gitignored and <strong>do not exist in a fresh clone</strong> until the sync runs. <code>bd-sync</code> prints a summary of what it wrote plus the version stamp it landed; read it rather than assuming success.</p>
+<p>Never hand-edit anything in that list — the next install overwrites it. Canonical design system documentation lives at <a href="https://bydefault.design" target="_blank" rel="noopener noreferrer">bydefault.design</a>.</p>
+<hr>
+<h2 id="local-development">Local Development</h2>
+<p>Every project has one fixed local address. This one is:</p>
+<p><strong><a href="http://localhost:2300/" target="_blank" rel="noopener noreferrer">http://localhost:2300/</a></strong></p>
+<p>Pinned in <code>.vscode/settings.json</code> for Live Server:</p>
+
+      <div class="code-block-wrapper">
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-0" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-0" class="language-json">{
+    &quot;liveServer.settings.port&quot;: 2300,
+    &quot;liveServer.settings.root&quot;: &quot;/&quot;
+}
+</code></pre>
+      </div>
+    
+<p>If you create a project from this template, change this number — otherwise every project shares 2300. Take the next free hundred in the 3xxx products band; the full allocation table and the rules for other dev servers are in <code>CLAUDE.md</code> §15.</p>
+<p>The reason this matters: an unpinned server does not error on a taken port. It silently starts on the next one up, so you get a working page that belongs to a different project.</p>
 <hr>
 <h2 id="brand-colors">Brand Colors</h2>
 <p>Update brand colours in <code>assets/css/theme.css</code>.</p>
@@ -83,8 +102,8 @@
 <p><strong>Example:</strong></p>
 
       <div class="code-block-wrapper">
-        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-0" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
-        <pre><code id="code-0" class="language-css">/* assets/css/theme.css */
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-1" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-1" class="language-css">/* assets/css/theme.css */
 :root {
   --text-accent: #3485cd;
   --text-primary: var(--neutral-800);
@@ -109,8 +128,8 @@
 <p>Every page loads the three CSS layers in this order:</p>
 
       <div class="code-block-wrapper">
-        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-1" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
-        <pre><code id="code-1" class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/design-system.css&quot;&gt;
+        <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-2" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
+        <pre><code id="code-2" class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/design-system.css&quot;&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/theme.css&quot;&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;assets/css/style.css&quot;&gt;
 </code></pre>
@@ -168,17 +187,21 @@
 <li><strong>Output / publish directory:</strong> <code>/</code> (the repo root)</li>
 </ul>
 <p>On Cloudflare Pages these are set under <strong>Settings → Builds &amp; deployments</strong>. Other hosts (Netlify, Vercel) have equivalent settings. GitHub Pages has no build step by default and would need a small Actions workflow to run the install first.</p>
-<p>This pairs with Dependabot (<code>.github/dependabot.yml</code>): when a new design system version is released, Dependabot opens a PR; merging it triggers a redeploy, and the install pulls the new version.</p>
+<p><strong>Commit a lockfile before the first deploy.</strong> The template ships without one so a new project resolves the newest compatible design system, but some hosts detect the package manager from the lockfile — without one, Cloudflare may fall back to bun, which cannot resolve the design system&#39;s <code>#semver:</code> git range, and the build fails.</p>
+<p><strong>Watch for the silent-unstyled failure.</strong> Both failure modes above produce a <em>green</em> build status with a completely unstyled site, because the missing CSS is gitignored and the host has nothing to complain about. If a deploy looks like the stylesheet vanished, check that the install actually ran before assuming a CSS bug.</p>
+<p>This pairs with Dependabot (<code>.github/dependabot.yml</code>): when a new design system version is released, Dependabot opens a PR; merging it triggers a redeploy, and the install pulls the new version. Minor and patch releases are safe to merge; a <strong>major</strong> version needs the caret range widened by hand and a visual check, because a major means breaking changes.</p>
 <hr>
 <h2 id="quick-checklist">Quick Checklist</h2>
 <ul>
-<li><input disabled="" type="checkbox"> Run <code>npm install</code> (syncs the design system CSS)</li>
+<li><input disabled="" type="checkbox"> Run <code>npm install</code> (syncs the design system)</li>
+<li><input disabled="" type="checkbox"> Allocate a local port and pin it in <code>.vscode/settings.json</code></li>
 <li><input disabled="" type="checkbox"> Update brand colours in <code>assets/css/theme.css</code></li>
 <li><input disabled="" type="checkbox"> Update font families in <code>assets/css/theme.css</code> (plus <code>@font-face</code> or <code>@import</code>)</li>
 <li><input disabled="" type="checkbox"> Mirror any dark-mode overrides in both dark blocks of <code>theme.css</code></li>
 <li><input disabled="" type="checkbox"> Replace logo in <code>assets/images/logo.svg</code></li>
 <li><input disabled="" type="checkbox"> Replace favicons in <code>assets/icons/</code></li>
 <li><input disabled="" type="checkbox"> Fill in <code>PROJECT_BRIEF.md</code></li>
+<li><input disabled="" type="checkbox"> Replace the starter <code>handovers/HANDOVER.md</code> and <code>ROADMAP.md</code></li>
 <li><input disabled="" type="checkbox"> Review and customize documentation</li>
 </ul>
 <hr>
@@ -196,7 +219,7 @@
             <!-- Table of Contents -->
             <aside class="docs-toc">
       <span class="toc-header">On this page</span>
-      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#install" class="toc-link">Install</a></li><li class="toc-item toc-level-2"><a href="#brand-colors" class="toc-link">Brand Colors</a></li><li class="toc-item toc-level-2"><a href="#fonts" class="toc-link">Fonts</a></li><li class="toc-item toc-level-2"><a href="#brand-theming" class="toc-link">Brand Theming</a></li><li class="toc-item toc-level-2"><a href="#logo" class="toc-link">Logo</a></li><li class="toc-item toc-level-2"><a href="#project-brief" class="toc-link">Project Brief</a></li><li class="toc-item toc-level-2"><a href="#meta-tags-amp-seo" class="toc-link">Meta Tags &amp; SEO</a></li><li class="toc-item toc-level-2"><a href="#documentation" class="toc-link">Documentation</a></li><li class="toc-item toc-level-2"><a href="#deployment" class="toc-link">Deployment</a></li><li class="toc-item toc-level-2"><a href="#quick-checklist" class="toc-link">Quick Checklist</a></li><li class="toc-item toc-level-2"><a href="#next-steps" class="toc-link">Next Steps</a></li></ul></nav></div>
+      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#install" class="toc-link">Install</a></li><li class="toc-item toc-level-2"><a href="#local-development" class="toc-link">Local Development</a></li><li class="toc-item toc-level-2"><a href="#brand-colors" class="toc-link">Brand Colors</a></li><li class="toc-item toc-level-2"><a href="#fonts" class="toc-link">Fonts</a></li><li class="toc-item toc-level-2"><a href="#brand-theming" class="toc-link">Brand Theming</a></li><li class="toc-item toc-level-2"><a href="#logo" class="toc-link">Logo</a></li><li class="toc-item toc-level-2"><a href="#project-brief" class="toc-link">Project Brief</a></li><li class="toc-item toc-level-2"><a href="#meta-tags-amp-seo" class="toc-link">Meta Tags &amp; SEO</a></li><li class="toc-item toc-level-2"><a href="#documentation" class="toc-link">Documentation</a></li><li class="toc-item toc-level-2"><a href="#deployment" class="toc-link">Deployment</a></li><li class="toc-item toc-level-2"><a href="#quick-checklist" class="toc-link">Quick Checklist</a></li><li class="toc-item toc-level-2"><a href="#next-steps" class="toc-link">Next Steps</a></li></ul></nav></div>
     </aside>
         </div>
 
@@ -353,6 +376,7 @@
     <!-- Site nav + docs UI behaviours -->
     <script src="./assets/js/nav.js" defer></script>
     <script src="./assets/docs-kit/copy-button.js" defer></script>
+    <script src="./assets/docs-kit/docs-copy-chrome.js" defer></script>
     <script src="./assets/docs-kit/dropdown.js" defer></script>
 
     

@@ -4,11 +4,20 @@ node_modules
 .cursor
 
 # Package files
+# Deliberately ignored in the template so a new project resolves the newest
+# compatible design system at first install. Commit your own lockfile once the
+# project is under way — some hosts (Cloudflare) detect the package manager
+# from it, and without one they may fall back to bun, which cannot resolve the
+# design system's #semver: git range.
 package-lock.json
 
-# Design system artefacts synced from @bydefaultstudio/design-system on npm install
+# Design system artefacts synced from @bydefaultstudio/design-system by
+# bd-sync on npm install. All regenerated on every sync — never hand-edited.
 assets/css/design-system.css
+assets/css/design-system/
+assets/js/design-system/
 assets/icons/icons.svg
+assets/icons/cursors.svg
 DESIGN.md
 
 # OS files
