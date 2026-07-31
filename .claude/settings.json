@@ -23,6 +23,17 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.command' | grep -qE '(^|[;&|(])[[:space:]]*git[[:space:]]+commit([[:space:]]|$)' && echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"A git commit just ran. Keep the tracking documents current (CLAUDE.md section 14): (1) PROJECT_PROGRESS.md — record what this commit shipped under a YYYY-MM-DD heading, newest first, creating today section if absent or extending it if present; (2) ROADMAP.md — delete anything this commit completed or made obsolete, and add any new debt or idea it surfaced. Write what changed and why, not the commit subject verbatim. Skip only for commits a future session would not care about: typo and formatting fixes, and commits that touch nothing but the tracking documents themselves. Do NOT commit these edits on their own — leave them staged or unstaged and fold them into your next commit, otherwise every commit spawns another.\"}}' || true"
+          }
+        ]
+      }
     ]
   }
 }

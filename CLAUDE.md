@@ -480,6 +480,35 @@ for history and `ROADMAP.md` for direction.
 A SessionStart hook (`.claude/settings.json`) prints this reminder automatically
 when handovers exist.
 
+### On every commit
+
+`PROJECT_PROGRESS.md` and `ROADMAP.md` are updated **as work lands**, not in a
+sweep at the end. A PostToolUse hook fires after every `git commit` and prompts
+for both:
+
+- **`PROJECT_PROGRESS.md`** — record what the commit shipped under a `YYYY-MM-DD`
+  heading, newest first. Write what changed and why; the commit subject is
+  already in the log, so repeating it verbatim adds nothing.
+- **`ROADMAP.md`** — delete anything the commit completed or made obsolete, and
+  add any debt or idea it surfaced. A roadmap that only ever grows is one nobody
+  trusts.
+
+Skip only for commits a future session would not care about: typo and formatting
+fixes, and commits touching nothing but the tracking documents themselves.
+
+**Do not commit these edits on their own.** Leave them for the next commit to
+carry, or every commit spawns another one documenting it.
+
+**Exception — the template repo itself.** In `bydefaultstudio/template`,
+`PROJECT_PROGRESS.md`, `ROADMAP.md` and `handovers/HANDOVER.md` are starter
+content that ships to every new project, not working documents. Work on the
+template is recorded in its commits and pull requests instead. Never write
+template-development notes into files a new project inherits.
+
+Waiting until the end of a session to write this up is how it gets skipped, and
+it is also when the detail is thinnest — by then the reasoning behind a change
+three hours ago has already been compacted away.
+
 ### End of every session
 
 Run `/handover`. It:
