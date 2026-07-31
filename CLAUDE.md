@@ -553,7 +553,7 @@ Thousands digit = category. Projects allocated in hundreds within the band.
 | --- | --- | --- |
 | **2xxx** | Foundation & owned sites | 2000 Design System · 2100 Studio · 2200 erlenmasson · 2300 Template · 2400 erlen-writing — next free 2500 |
 | **3xxx** | Products | 3100 Folder Structure · 3200 Quiz — next free 3300 |
-| **4xxx** | Tools & utilities | 4000 svg-cleaner · 4100 CPM Calculator · 4200 social media 2 — next free 4300 |
+| **4xxx** | Tools & utilities | 4000 svg-cleaner · 4100 CPM Calculator — next free 4200 |
 
 Projects created from this template are **products**: take the next free hundred
 in the 3xxx band unless the owner says otherwise.
