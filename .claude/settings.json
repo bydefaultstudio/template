@@ -23,6 +23,17 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.command' | grep -qE '(^|[;&|(])[[:space:]]*git[[:space:]]+commit([[:space:]]|$)' || exit 0; [ -n \"$(git diff-tree --no-commit-id --name-only -r --root HEAD 2>/dev/null | grep -vE '^(PROJECT_PROGRESS\\.md|ROADMAP\\.md|handovers/)')\" ] || exit 0; echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"A git commit just landed real work. Bring the tracking documents up to date now, while the reasoning is still in context (CLAUDE.md section 14): (1) PROJECT_PROGRESS.md — record what shipped under a YYYY-MM-DD heading, newest first; create today section if absent, extend it if present. Write what changed and why, not the commit subject verbatim. (2) ROADMAP.md — delete anything this commit completed or made obsolete, add any debt or idea it surfaced. (3) handovers/HANDOVER.md — refresh Status and In flight if this commit moved them; a full rewrite is only needed at session end. Then commit those files. A commit touching only these files does not re-trigger this hook, so there is no loop to avoid. Skip entirely for commits a future session would not care about, such as typo or formatting fixes.\"}}'"
+          }
+        ]
+      }
     ]
   }
 }

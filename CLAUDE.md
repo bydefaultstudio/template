@@ -480,6 +480,39 @@ for history and `ROADMAP.md` for direction.
 A SessionStart hook (`.claude/settings.json`) prints this reminder automatically
 when handovers exist.
 
+### On every commit
+
+The tracking documents are updated **as work lands**, not in a sweep at the end.
+A PostToolUse hook fires after every `git commit` that touched real files and
+prompts for three things:
+
+- **`PROJECT_PROGRESS.md`** — record what the commit shipped under a `YYYY-MM-DD`
+  heading, newest first. Write what changed and why; the commit subject is
+  already in the log, so repeating it verbatim adds nothing.
+- **`ROADMAP.md`** — delete anything the commit completed or made obsolete, and
+  add any debt or idea it surfaced. A roadmap that only ever grows is one nobody
+  trusts.
+- **`handovers/HANDOVER.md`** — refresh *Status* and *In flight* if the commit
+  moved them. A full rewrite is only needed at session end.
+
+Then commit those files. **There is no loop to avoid:** the hook inspects what
+the commit actually touched and stays silent when it touched nothing but these
+three, so a documentation commit cannot re-trigger it. The guard is in the hook,
+not in a rule you have to remember.
+
+Skip entirely for commits a future session would not care about — typo and
+formatting fixes.
+
+**Exception — the template repo itself.** In `bydefaultstudio/template`,
+`PROJECT_PROGRESS.md`, `ROADMAP.md` and `handovers/HANDOVER.md` are starter
+content that ships to every new project, not working documents. Work on the
+template is recorded in its commits and pull requests instead. Never write
+template-development notes into files a new project inherits.
+
+Waiting until the end of a session to write this up is how it gets skipped, and
+it is also when the detail is thinnest — by then the reasoning behind a change
+three hours ago has already been compacted away.
+
 ### End of every session
 
 Run `/handover`. It:
@@ -518,9 +551,9 @@ Thousands digit = category. Projects allocated in hundreds within the band.
 
 | Band | Category | Allocated |
 | --- | --- | --- |
-| **2xxx** | Foundation & owned sites | 2000 Design System · 2100 Studio · 2200 erlenmasson · 2300 Template |
+| **2xxx** | Foundation & owned sites | 2000 Design System · 2100 Studio · 2200 erlenmasson · 2300 Template · 2400 erlen-writing — next free 2500 |
 | **3xxx** | Products | 3100 Folder Structure · 3200 Quiz — next free 3300 |
-| **4xxx** | Tools & utilities | unallocated — next free 4000 |
+| **4xxx** | Tools & utilities | 4000 svg-cleaner · 4100 CPM Calculator · 4200 social media 2 — next free 4300 |
 
 Projects created from this template are **products**: take the next free hundred
 in the 3xxx band unless the owner says otherwise.
