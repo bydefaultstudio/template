@@ -29,7 +29,7 @@ Claude follows the onboarding flow in `CLAUDE.md`: it runs `npm install` to sync
 3. Allocate a local port and pin it in `.vscode/settings.json` (see [Local development](#local-development))
 4. Follow the [Setup guide](docs/site/setup.html) to customize brand colors, fonts, and logo
 5. Explore the [Documentation](docs/site/index.html) for template and project guides
-6. Browse the canonical design system docs at [bydefault.design](https://bydefault.design/design-system/what-is-a-design-system.html)
+6. Browse the canonical design system docs at [bydefault.design](https://bydefault.design/website/what-is-a-design-system.html)
 7. Check the [Brand Book](docs/site/brand-book.html) to see the current brand identity
 8. Start building pages at the repo root — edit `index.html`, copy `templates/page-template.html` for new pages, and keep css/js/images in `assets/`
 
