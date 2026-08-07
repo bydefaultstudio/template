@@ -401,8 +401,8 @@ markdown, so the §1 read order never changes.
    guaranteed-broken command)
 3. `index.html` → remove the Documentation link (`<a href="docs/site/index.html">`)
 4. `README.md` →
-   - edit the *With Claude Code* paragraph to drop only the module-selection
-     and docs-rebuild clauses
+   - in the *With Claude Code* numbered list, delete the module-selection
+     step and drop the docs-rebuild clause from the final step
    - in Manual setup, delete the two steps that reference the docs site (the
      opt-out step and *Explore the Documentation*), and retarget the Setup
      guide and Brand Book steps at `docs/setup.md` and `docs/brand-book.md`

@@ -15,17 +15,46 @@ This project includes:
 
 ## Getting Started
 
+### Get the template
+
+On GitHub, use **Use this template → Create a new repository** on [bydefaultstudio/template](https://github.com/bydefaultstudio/template) — a fresh repo with clean history — then clone it:
+
+```bash
+git clone https://github.com/<your-account>/<your-project>.git
+cd <your-project>
+npm install
+```
+
+Or copy the template directly without GitHub:
+
+```bash
+git clone https://github.com/bydefaultstudio/template.git my-project
+cd my-project
+rm -rf .git && git init -b main
+npm install
+```
+
+### What `npm install` does here
+
+More than fetch dependencies. Its postinstall step runs `npx bd-sync`, which writes the design system into the project: `assets/css/design-system.css`, the component CSS and JS modules, the icon and cursor sprites, and `DESIGN.md`. All of these are gitignored — **a fresh clone does not contain them, and every page renders unstyled until the install has run**. The same applies to any new checkout, which is why the deploy build command is `npm install` (see [Deployment](#deployment)). `bd-sync` prints a table of what it wrote; a clean run means every artefact landed.
+
 ### With Claude Code (recommended)
 
-Open the project in Claude Code and say:
+Open the project folder in Claude Code and paste:
 
-> Set up this project
+> Set up this project — run the onboarding in CLAUDE.md §12.
 
-Claude follows the onboarding flow in `CLAUDE.md`: it runs `npm install` to sync the design system, interviews you to fill in `PROJECT_BRIEF.md`, asks which optional modules the project needs (currently the docs site) and removes what you skip, propagates your project name across the template, applies any known brand tokens to `assets/css/theme.css`, allocates a local port, and regenerates the docs site if it was kept.
+Plain "Set up this project" works too: a SessionStart hook spots the unfilled `PROJECT_BRIEF.md` and points Claude at onboarding automatically. Claude then:
+
+1. runs `npm install` if the design system has not been synced yet
+2. interviews you in short batches and fills in `PROJECT_BRIEF.md`
+3. asks which optional modules the project needs (currently the docs site) and removes what you skip
+4. propagates the project name, applies known brand tokens to `assets/css/theme.css`, and allocates a local port
+5. rebuilds the docs site if it was kept, and points you at the remaining checklist (logo, favicons, fonts)
 
 ### Manual setup
 
-1. Run `npm install` — `bd-sync` copies the design system artefacts from the `@bydefaultstudio/design-system` package into the project
+1. Run `npm install` (see [what it does](#what-npm-install-does-here) above)
 2. Review `PROJECT_BRIEF.md` for project goals and requirements
 3. Decide whether the project needs the generated docs site — if not, remove it by following the removal map in `CLAUDE.md` §12 (see [Optional modules](#optional-modules) below)
 4. Allocate a local port and pin it in `.vscode/settings.json` (see [Local development](#local-development))
