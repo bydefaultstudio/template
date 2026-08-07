@@ -138,7 +138,9 @@ Site pages carry their own SEO meta tags — `templates/page-template.html` incl
 
 ## Documentation
 
-The documentation is ready to use, but you may want to:
+The docs site is an optional module: projects that do not need it have it removed at onboarding (the removal map lives in `CLAUDE.md` §12), and the guides stay in `docs/` as plain markdown either way.
+
+With the module present, the documentation is ready to use, but you may want to:
 - Review and customize documentation content in `docs/` folder
 - Update `footerText` and `indexDescription` in `docs/docs.config.js`
 - Add or remove documentation pages as needed

@@ -164,7 +164,7 @@ See `docs/folder-structure.md` for complete directory structure.
 - `assets/icons/` — favicons and sprites
 - `assets/fonts/` — self-hosted brand fonts
 - `templates/` — reusable templates
-- `docs/` — documentation (markdown sources; generated site in `docs/site/`)
+- `docs/` — project guides (markdown), plus the generated site in `docs/site/` when the docs site module is present (see §12 — Optional modules)
 - `handovers/` — session handovers (see §14)
 
 ### Synced by bd-sync — never edit, never commit
@@ -223,10 +223,12 @@ You must:
 - explain why the change exists
 - keep code and documentation in sync
 
-After updating any `docs/*.md` file, regenerate the HTML docs (from the repo root):
+When the docs site module is present (see §12 — Optional modules), regenerate the HTML docs after updating any `docs/*.md` file (from the repo root):
 ```bash
 npm run docs:build
 ```
+
+In a project that removed the docs site there is nothing to rebuild — the markdown guides are the documentation.
 
 When files or folders are added or removed, regenerate the tree (and the viewer link below it) between the `<!-- structure:start -->` and `<!-- structure:end -->` markers in `README.md`, deriving it from `git ls-files` plus the gitignored `bd-sync` artefacts.
 
@@ -234,7 +236,7 @@ When files or folders are added or removed, regenerate the tree (and the viewer 
 
 ## 7. Demo Rules
 
-Live demos are embedded in the docs pages themselves (raw HTML inside `docs/*.md`, wrapped in `.demo-preview` blocks, rendered in `docs/site/`). The Brand Book is a docs page too (`docs/brand-book.md`).
+Live demos are embedded in the docs pages themselves (raw HTML inside `docs/*.md`, wrapped in `.demo-preview` blocks). When the docs site module is present they render in `docs/site/`; without it they remain raw-HTML reference inside the markdown guides. The Brand Book is a docs page too (`docs/brand-book.md`).
 
 Demos are:
 - A demonstrative reference only
@@ -334,6 +336,16 @@ Ask questions in batches (max 4 per call) covering:
 - Technical constraints (hosting, performance targets, accessibility level)
 - Known risks or open questions
 
+**Module selection.** The template ships complete; optional modules are removed
+now if the project does not need them (see *Optional modules* below). Ask one
+more `AskUserQuestion`: does this project need the generated docs site?
+Recommend from the project type answered in Batch 1 — content-led sites that
+will grow their own documentation (marketing, editorial, styleguides) usually
+keep it; apps, Webflow exports, and prototypes usually drop it. If it is
+dropped, run the docs site removal map (in *Optional modules*, end of this
+section) **before** the steps below, so nothing below edits a file that no
+longer exists.
+
 After gathering answers:
 
 1. Write answers into `PROJECT_BRIEF.md`, replacing all bracketed placeholders
@@ -341,7 +353,7 @@ After gathering answers:
    - `README.md` → replace `[Your Project Name]` in the heading
    - `index.html` → update `<title>` and eyebrow text
    - `templates/page-template.html` → replace `Site Name` in title, OG `og:site_name`, and `yoursite.com` placeholder URLs
-   - `docs/docs.config.js` → update `footerText` and `indexDescription`
+   - `docs/docs.config.js` → update `footerText` and `indexDescription` *(docs site module only)*
    - `PROJECT_BRIEF.md` → add project name at the top
 3. Update `assets/css/theme.css` with any known brand tokens — uncomment and edit the primitive overrides (fonts, `--text-accent`, colours)
 4. **Allocate a local port** (see §15). The template ships pinned to `2300`, its own
@@ -358,14 +370,71 @@ After gathering answers:
    - `docs/folder-structure.md` → Local ports
    - any other server the project runs (§15 rule 3)
 
-   Then rebuild the docs (`npm run docs:build`) so the generated pages match, and
-   tell the user the project's address: `http://localhost:<port>/`
+   Then rebuild the docs (`npm run docs:build`) so the generated pages match
+   *(docs site module only)*, and tell the user the project's address:
+   `http://localhost:<port>/`
 5. Replace the starter contents of `handovers/HANDOVER.md` and `ROADMAP.md` with
    something real for this project
-6. Run `npm run docs:build` so the docs site picks up the new `docs.config.js` values
+6. Run `npm run docs:build` so the docs site picks up the new `docs.config.js` values *(docs site module only)*
 7. Point the user at the remaining Quick Checklist items in `docs/setup.md` (logo, favicons, fonts) for when those assets are available
 
 This must happen before any other work begins.
+
+### Optional modules
+
+The template ships complete rather than being assembled by a scaffolder — every
+project starts from the same tree, and modules the project does not need are
+removed at onboarding. A removed module can be restored later by copying its
+files back from the template repo and reversing the patches below.
+
+One module is optional today: the **docs site**. The four authoritative guides
+(`docs/brand-book.md`, `docs/seo-best-practices.md`, `docs/folder-structure.md`,
+`docs/setup.md`) are not part of it — they stay in every project as plain
+markdown, so the §1 read order never changes.
+
+**Removal map — docs site.** Execute in this order:
+
+1. Delete `docs/site/` (the whole folder), `docs/docs.config.js`,
+   `docs/markdown-style.md`, `docs/upgrading-docs.md`, and `docs/template.md`
+2. `package.json` → remove the `docs:build` and `docs:watch` scripts (the
+   generator hard-exits without `docs/docs.config.js`, so leaving them leaves a
+   guaranteed-broken command)
+3. `index.html` → remove the Documentation link (`<a href="docs/site/index.html">`)
+4. `README.md` →
+   - edit the *With Claude Code* paragraph to drop only the module-selection
+     and docs-rebuild clauses
+   - in Manual setup, delete the two steps that reference the docs site (the
+     opt-out step and *Explore the Documentation*), and retarget the Setup
+     guide and Brand Book steps at `docs/setup.md` and `docs/brand-book.md`
+   - delete the Optional modules bullet in Overview and the whole Optional
+     modules section
+   - delete the Documentation section, moving its closing design-system
+     pointer (canonical docs at bydefault.design) into *The design system*
+     section
+   - retarget the Deployment link at `docs/setup.md#deployment` (keep the
+     anchor)
+   - regenerate the structure tree and viewer link per §6 (the `site/` and
+     `docs.config.js` rows go)
+5. `docs/setup.md` → replace the Documentation section with a markdown-only
+   version (drop the optional-module paragraph, the *With the module present*
+   prefix, and the `docs.config.js` bullet), remove the
+   `docs/site/assets/icons/` sentence under *Logo*, and remove the frontmatter
+   sentence under *Meta Tags & SEO*
+6. `docs/folder-structure.md` → update the `docs/` line in the Structure block
+   and rewrite the whole `docs/` section including both trailing paragraphs
+   (no `site/`, no `docs.config.js`)
+7. Retarget the guides' links to each other from site pages to markdown:
+   `docs/brand-book.md` `[Setup](setup.html)` → `setup.md`, and
+   `docs/setup.md` `[SEO guide](seo-best-practices.html)` →
+   `seo-best-practices.md`
+8. `PROJECT_PROGRESS.md` → delete the *Regenerate the docs site* item from the
+   starter onboarding checklist (leave the module-selection item — it records
+   the choice)
+
+`handovers/HANDOVER.md` needs no separate patching — onboarding rewrites it
+anyway. The design system is unaffected: `bd-sync` and the docs generator are
+independent tools inside the same package, so syncing, theming, and deployment
+work identically without the docs site.
 
 ---
 
@@ -407,7 +476,7 @@ Never mark a task complete without proving it works:
 - Ask yourself: "Would a staff engineer approve this?"
 - Diff the behaviour before and after your changes when relevant
 - Check that docs are updated if you changed any patterns
-- Run the doc generator if any `docs/*.md` files changed
+- Run the doc generator if any `docs/*.md` files changed (docs site module only)
 
 ### Autonomous Bug Fixing
 When given a bug report — just fix it:

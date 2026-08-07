@@ -11,6 +11,7 @@ This project includes:
 - Clear **layout and spacing rules** for consistent page structure
 - Documented **best practices** for CSS, JavaScript, and HTML
 - A **session handover** system so work resumes cleanly across sessions
+- **Optional modules** — parts a project may not need (currently the docs site) are removed at onboarding, so any type of project starts clean
 
 ## Getting Started
 
@@ -20,18 +21,27 @@ Open the project in Claude Code and say:
 
 > Set up this project
 
-Claude follows the onboarding flow in `CLAUDE.md`: it runs `npm install` to sync the design system, interviews you to fill in `PROJECT_BRIEF.md`, propagates your project name across the template, allocates a local port, applies any known brand tokens to `assets/css/theme.css`, and regenerates the docs site.
+Claude follows the onboarding flow in `CLAUDE.md`: it runs `npm install` to sync the design system, interviews you to fill in `PROJECT_BRIEF.md`, asks which optional modules the project needs (currently the docs site) and removes what you skip, propagates your project name across the template, applies any known brand tokens to `assets/css/theme.css`, allocates a local port, and regenerates the docs site if it was kept.
 
 ### Manual setup
 
 1. Run `npm install` — `bd-sync` copies the design system artefacts from the `@bydefaultstudio/design-system` package into the project
 2. Review `PROJECT_BRIEF.md` for project goals and requirements
-3. Allocate a local port and pin it in `.vscode/settings.json` (see [Local development](#local-development))
-4. Follow the [Setup guide](docs/site/setup.html) to customize brand colors, fonts, and logo
-5. Explore the [Documentation](docs/site/index.html) for template and project guides
-6. Browse the canonical design system docs at [bydefault.design](https://bydefault.design/website/what-is-a-design-system.html)
-7. Check the [Brand Book](docs/site/brand-book.html) to see the current brand identity
-8. Start building pages at the repo root — edit `index.html`, copy `templates/page-template.html` for new pages, and keep css/js/images in `assets/`
+3. Decide whether the project needs the generated docs site — if not, remove it by following the removal map in `CLAUDE.md` §12 (see [Optional modules](#optional-modules) below)
+4. Allocate a local port and pin it in `.vscode/settings.json` (see [Local development](#local-development))
+5. Follow the [Setup guide](docs/site/setup.html) to customize brand colors, fonts, and logo
+6. Explore the [Documentation](docs/site/index.html) for template and project guides
+7. Browse the canonical design system docs at [bydefault.design](https://bydefault.design/website/what-is-a-design-system.html)
+8. Check the [Brand Book](docs/site/brand-book.html) to see the current brand identity
+9. Start building pages at the repo root — edit `index.html`, copy `templates/page-template.html` for new pages, and keep css/js/images in `assets/`
+
+## Optional modules
+
+The template ships complete — every project starts from the same tree — and parts a project does not need are removed at onboarding rather than assembled by a scaffolder.
+
+One module is optional today: the **docs site**. It consists of the generated `docs/site/` pages, `docs/docs.config.js`, the `docs:build` / `docs:watch` scripts, and the site-only pages (`markdown-style.md`, `upgrading-docs.md`, `template.md`). Removing it does not delete the four authoritative guides — `docs/brand-book.md`, `docs/seo-best-practices.md`, `docs/folder-structure.md`, `docs/setup.md` stay in every project as plain markdown (their cross-links get retargeted) — and the design system is unaffected: `bd-sync` and the docs generator are independent tools inside the same package.
+
+The exact removal procedure lives in `CLAUDE.md` §12 (Optional modules). Claude runs it automatically at onboarding if you skip the module; the same map works later if you kept it and change your mind. A removed module can be restored by copying its files back from the template repo and reversing the patches the map applied.
 
 ## Project Structure
 
@@ -129,6 +139,8 @@ Template and project documentation is available in the [Documentation site](docs
 - **Brand** — Brand book and theming guide
 - **Content** — Markdown style and SEO best practices
 - **Project** — Setup, folder structure, and project overview
+
+The site is the rendered form of the markdown guides in `docs/` — the guides are always present; the site itself is an optional module (see [Optional modules](#optional-modules)).
 
 The design system itself arrives via the `@bydefaultstudio/design-system` npm package; its canonical documentation lives at [bydefault.design](https://bydefault.design).
 

@@ -45,7 +45,7 @@ assets/
   icons/                → Favicons, app icons, and synced sprites
   images/               → General images and Open Graph images
 templates/              → Page and component boilerplate
-docs/                   → Documentation (markdown sources + generated site)
+docs/                   → Documentation (markdown guides + optional generated site)
 ```
 
 `node_modules/` and `package-lock.json` are gitignored. The lockfile is deliberately not committed in the template so new projects resolve the newest compatible design system at first install; commit your own lockfile once the project is under way — it pins the build, and some hosts detect the package manager from it.
@@ -111,6 +111,8 @@ Boilerplate for new files:
   - `assets/docs-kit/` → Engine CSS and scripts, copied in by the generator on every build
 
 The docs site engine (docs-kit) ships inside the `@bydefaultstudio/design-system` npm package and runs from `node_modules` — there is no vendored generator to maintain. The generator bundles the packaged framework CSS into the output and copies `theme.css` in after it, so docs pages render live brand values. Built for serving at the `/docs/site` subpath of the main site (`basePath` in `docs.config.js`).
+
+The docs site is an optional module: projects that do not need it have `site/`, `docs.config.js`, and the site-only pages removed at onboarding (removal map in `CLAUDE.md` §12). The markdown guides stay either way.
 
 ## Notes
 

@@ -18,11 +18,12 @@ Claude: keep this updated as you complete work. Write the date as `YYYY-MM-DD`.
 ## Onboarding
 
 - [ ] Run `npm install` (syncs the design system via `bd-sync`)
+- [ ] Choose optional modules — keep or remove the docs site (see `CLAUDE.md` §12)
 - [ ] Fill in `PROJECT_BRIEF.md`
 - [ ] Propagate the project name across the template (see `CLAUDE.md` §12)
 - [ ] Allocate a local port and pin it (see `CLAUDE.md` §15)
 - [ ] Apply brand tokens in `assets/css/theme.css`
 - [ ] Replace logo (`assets/images/logo.svg`) and favicons (`assets/icons/`)
-- [ ] Regenerate the docs site (`npm run docs:build`)
+- [ ] Regenerate the docs site (`npm run docs:build`) — docs site module only
 - [ ] Configure hosting (build command `npm install`, publish directory `/`)
 - [ ] Replace the starter `handovers/HANDOVER.md` and `ROADMAP.md` contents
