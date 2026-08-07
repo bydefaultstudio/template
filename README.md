@@ -17,7 +17,7 @@ This project includes:
 
 ### Get the template
 
-On GitHub, use **Use this template → Create a new repository** on [bydefaultstudio/template](https://github.com/bydefaultstudio/template) — a fresh repo with clean history — then clone it:
+On GitHub, use **Use this template → Create a new repository** on [bydefaultstudio/template](https://github.com/bydefaultstudio/template) — a fresh repo with clean history — then clone it. Anything in `<angle brackets>` is a placeholder: replace it with your own values before running.
 
 ```bash
 git clone https://github.com/<your-account>/<your-project>.git
@@ -28,8 +28,8 @@ npm install
 Or copy the template directly without GitHub:
 
 ```bash
-git clone https://github.com/bydefaultstudio/template.git my-project
-cd my-project
+git clone https://github.com/bydefaultstudio/template.git <your-project>
+cd <your-project>
 rm -rf .git && git init -b main
 npm install
 ```
