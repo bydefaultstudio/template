@@ -27,10 +27,10 @@
 
   if (hasSidebar) {
     // Hamburger for mobile sidebar
-    headerLeft += '<div class="top-nav-link top-nav-hamburger" role="button" tabindex="0" aria-label="Open navigation">'
+    headerLeft += '<button type="button" class="top-nav-link top-nav-hamburger" aria-label="Open navigation">'
       + '<div class="svg-icn hamburger-icon-open">' + ICON_HAMBURGER + '</div>'
       + '<div class="svg-icn hamburger-icon-close">' + ICON_CLOSE + '</div>'
-      + '</div>';
+      + '</button>';
   }
 
   headerLeft += '<a href="/docs/site/index.html" class="top-nav-logo-link">'
@@ -41,10 +41,10 @@
 
   var headerRight = '<div class="top-nav-right">'
     + '<div class="top-nav-auth-container"></div>'
-    + '<div class="top-nav-link dark-mode-toggle" role="button" tabindex="0" aria-label="Toggle dark mode">'
+    + '<button type="button" class="top-nav-link dark-mode-toggle" aria-label="Dark mode">'
     + '<div class="svg-icn dark-mode-icon-light">' + ICON_SUN + '</div>'
     + '<div class="svg-icn dark-mode-icon-dark">' + ICON_MOON + '</div>'
-    + '</div>'
+    + '</button>'
     + '</div>';
 
   var headerHtml = '<header class="top-nav">' + headerLeft + headerRight + '</header>';
@@ -60,12 +60,12 @@
       + '</button>'
       + '</div>'
       + '<div class="site-sidebar-content">'
-      + '<a href="/docs/site/index.html" class="nav-link nav-home" data-access="team">'
+      + '<a href="/docs/site/index.html" class="nav-link nav-home" data-access="team" aria-label="Home" data-tooltip="Home" data-tooltip-position="right">'
       + '<div class="svg-icn">' + ICON_HOME + '</div>'
       + '<span>Home</span>'
       + '</a>'
       + `<details class="nav-section">
-      <summary class="nav-section-toggle">
+      <summary class="nav-section-toggle" aria-label="Brand" data-tooltip="Brand" data-tooltip-position="right">
         <span>Brand</span>
         <span class="nav-toggle-icon">
           <svg width="6" height="6" viewBox="0 0 6 6" fill="none" aria-hidden="true">
@@ -74,7 +74,7 @@
         </span>
       </summary>
       <ul class="nav-list"><li><a href="/docs/site/brand-book.html" class="nav-link" data-section="brand" data-order="1" data-access="team"><span>Brand Book</span></a></li></ul></details><details class="nav-section">
-      <summary class="nav-section-toggle">
+      <summary class="nav-section-toggle" aria-label="Content" data-tooltip="Content" data-tooltip-position="right">
         <span>Content</span>
         <span class="nav-toggle-icon">
           <svg width="6" height="6" viewBox="0 0 6 6" fill="none" aria-hidden="true">
@@ -83,7 +83,7 @@
         </span>
       </summary>
       <ul class="nav-list"><li><a href="/docs/site/seo-best-practices.html" class="nav-link" data-section="content" data-order="1" data-access="team"><span>SEO</span></a></li><li><a href="/docs/site/markdown-style.html" class="nav-link" data-section="content" data-order="2" data-access="team"><span>Markdown</span></a></li></ul></details><details class="nav-section">
-      <summary class="nav-section-toggle">
+      <summary class="nav-section-toggle" aria-label="Project" data-tooltip="Project" data-tooltip-position="right">
         <span>Project</span>
         <span class="nav-toggle-icon">
           <svg width="6" height="6" viewBox="0 0 6 6" fill="none" aria-hidden="true">
@@ -178,22 +178,56 @@
         this.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
       });
     }
+
+    // Esc dismisses the collapsed-sidebar tooltips (WCAG 1.4.13); moving the
+    // pointer to another row or shifting focus re-arms them.
+    var sidebarEl = mount.querySelector('.site-sidebar');
+
+    function dismissSidebarTooltips(e) {
+      if (e.key === 'Escape' && document.body.classList.contains('sidebar-collapsed')) {
+        document.body.classList.add('sidebar-tooltips-dismissed');
+      }
+    }
+
+    function rearmSidebarTooltips() {
+      document.body.classList.remove('sidebar-tooltips-dismissed');
+    }
+
+    document.addEventListener('keydown', dismissSidebarTooltips);
+    if (sidebarEl) {
+      sidebarEl.addEventListener('mouseover', rearmSidebarTooltips);
+      sidebarEl.addEventListener('focusin', rearmSidebarTooltips);
+    }
   }
 
-  // ── Section icon links: prevent details toggle without swallowing clicks ──
-  // These <a> tags live inside <summary>. stopPropagation would prevent the
-  // click from reaching any document-level router listener. Instead we
-  // intercept on the <summary> itself and preventDefault when the click
-  // originated from an icon link, which stops the toggle but lets the
-  // event keep bubbling so navigation still happens.
+  // ── Section toggle clicks: delegated guard on the sidebar ──
+  // Delegated (not per-summary) so it survives theme-loader.js rebuilding
+  // the nav for brand users. stopPropagation would hide the click from
+  // document-level router listeners; preventDefault stops the details
+  // toggle / native follow while the event keeps bubbling so navigation
+  // still happens.
   if (hasSidebar) {
-    var summaries = mount.querySelectorAll('.nav-section-toggle');
-    for (var s = 0; s < summaries.length; s++) {
-      summaries[s].addEventListener('click', function(e) {
-        if (e.target.closest && e.target.closest('.nav-section-icon')) {
-          e.preventDefault();
-        }
-      });
+    var sidebarClickRoot = mount.querySelector('.site-sidebar');
+
+    function guardSummaryClick(e) {
+      if (!e.target.closest || !e.target.closest('.nav-section-toggle')) return;
+      if (e.target.closest('.nav-section-icon')) {
+        e.preventDefault();
+        return;
+      }
+      // Collapsed strip (desktop only — the class persists on mobile,
+      // where the overlay still needs toggling): the list is hidden, so
+      // toggling would only flip aria-expanded with nothing revealed.
+      // Negated max-width matches the CSS breakpoint exactly, including
+      // fractional viewport widths between 768 and 769px.
+      if (document.body.classList.contains('sidebar-collapsed')
+          && !window.matchMedia('(max-width: 768px)').matches) {
+        e.preventDefault();
+      }
+    }
+
+    if (sidebarClickRoot) {
+      sidebarClickRoot.addEventListener('click', guardSummaryClick);
     }
   }
 
@@ -228,24 +262,46 @@
   }
 
   // ── Dark mode toggle ──
+  // Three states on <html>: no data-theme = follow the OS (the
+  // prefers-color-scheme fallback), "light"/"dark" = explicit choice.
+  // Never remove the attribute — absence re-arms the fallback, so an
+  // OS-dark visitor could never reach light mode.
   var DARK_KEY = 'dark-mode';
   var darkToggle = mount.querySelector('.dark-mode-toggle');
 
-  // Apply saved preference or system default
-  var savedDark = localStorage.getItem(DARK_KEY);
-  if (savedDark === 'true' || (savedDark === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.setAttribute('data-theme', 'dark');
+  function isDarkNow() {
+    var choice = document.documentElement.getAttribute('data-theme');
+    if (choice) return choice === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  // Apply saved preference; without one the attribute stays unset and the
+  // OS preference drives the theme
+  var savedDark = null;
+  try { savedDark = localStorage.getItem(DARK_KEY); } catch (e) { /* storage unavailable */ }
+  if (savedDark !== null) {
+    document.documentElement.setAttribute('data-theme', savedDark === 'true' ? 'dark' : 'light');
   }
 
   if (darkToggle) {
+    darkToggle.setAttribute('aria-pressed', String(isDarkNow()));
     darkToggle.addEventListener('click', function toggleDarkMode() {
-      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      if (isDark) {
-        document.documentElement.removeAttribute('data-theme');
-      } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
+      var next = isDarkNow() ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      darkToggle.setAttribute('aria-pressed', String(next === 'dark'));
+      try { localStorage.setItem(DARK_KEY, next === 'dark'); } catch (e) { /* theme still applies for this page */ }
+    });
+    // A held Enter re-fires click on native buttons — suppress the repeats
+    // so the page can't strobe between themes (WCAG 2.3.1)
+    darkToggle.addEventListener('keydown', function suppressHeldEnter(event) {
+      if (event.repeat) event.preventDefault();
+    });
+    // With no explicit choice the OS drives the theme — keep the reported
+    // state in sync when it changes mid-session
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function syncTogglePressed() {
+      if (!document.documentElement.hasAttribute('data-theme')) {
+        darkToggle.setAttribute('aria-pressed', String(isDarkNow()));
       }
-      localStorage.setItem(DARK_KEY, !isDark);
     });
   }
 
