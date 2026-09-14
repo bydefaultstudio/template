@@ -19,6 +19,9 @@ assets/js/design-system/
 assets/icons/icons.svg
 assets/icons/cursors.svg
 DESIGN.md
+# React adapters (v4.7.0+). Bundler input, not served assets — they import
+# React by bare specifier. Only written when the release ships them.
+vendor/design-system-react/
 
 # OS files
 Thumbs.db

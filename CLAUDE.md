@@ -111,11 +111,18 @@ See the [canonical design system docs](https://bydefault.design/website/) for co
 - Log version and init success
 
 The package ships ready-made JS modules into `assets/js/design-system/` —
-`accordion`, `dialog`, `dropdown`, `tabs`, `toast`, `rating`, `number-input`,
-`password-toggle`, `copy-button`, `bd-audio`, `bd-cursor`, `bd-video`. Reach for
-one of these before hand-rolling the same behaviour. They are synced artefacts:
-never edit them, and never fix a bug in one locally — the fix belongs upstream in
-the design-system repo, released, and pulled down via a version bump.
+`accordion`, `bar`, `cell-input`, `dialog`, `dropdown`, `tabs`, `toast`,
+`rating`, `number-input`, `password-toggle`, `copy-button`, `bd-audio`,
+`bd-cursor`, `bd-video`. Reach for one of these before hand-rolling the same
+behaviour. They are synced artefacts: never edit them, and never fix a bug in
+one locally — the fix belongs upstream in the design-system repo, released, and
+pulled down via a version bump.
+
+In a React project, import the adapters (`Dialog`, `Sheet`, `Tabs`,
+`SegmentedControl`, `Dropdown`, `showToast`, `Rating`, `CellInput`) from the
+package's `./react` export rather than hand-rolling the markup. `bd-sync` also
+drops a copy in `vendor/design-system-react/` for projects that vendor
+everything; this template is static HTML and uses neither.
 
 ### Border Strategy
 See the canonical [border docs](https://bydefault.design/website/border.html) for the complete composable architecture.
@@ -177,6 +184,7 @@ gitignored and regenerated on each `npm install`:
 | `assets/css/design-system.css` | The framework (neutral engine defaults) |
 | `assets/css/design-system/` | Component companion CSS |
 | `assets/js/design-system/` | Component JS modules |
+| `vendor/design-system-react/` | React adapters — bundler input, not served assets |
 | `assets/icons/icons.svg` | Icon sprite (full set, or a subset — see below) |
 | `assets/icons/cursors.svg` | Two-tone cursor sprite (separate from icons) |
 | `DESIGN.md` | Design rules, project root |

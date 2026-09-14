@@ -34,6 +34,14 @@
 </head>
 <body>
 
+    <!-- Pre-paint sidebar-state guard: nav.js restores the collapsed state
+         from localStorage only after it loads, so without this a collapsed
+         sidebar paints open first and the content area (a query container)
+         reflows visibly. Runs before first paint; key matches SIDEBAR_KEY
+         in assets/js/nav.js. The per-page data-sidebar-default case stays
+         with nav.js. Same pattern as the studio repo's chrome template. -->
+    <script>try{if(localStorage.getItem('docs-sidebar-collapsed')==='true')document.body.classList.add('sidebar-collapsed');}catch(e){}</script>
+
     <!-- Design system missing banner (shown by JS if CSS variables fail to load) -->
     <div id="ds-missing-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#fffbea;border-bottom:1px solid #f0c040;padding:12px 20px;font-family:sans-serif;font-size:14px;color:#7a5c00;align-items:center;gap:12px;">
         <span>⚠️</span>
@@ -41,27 +49,77 @@
         <button onclick="document.getElementById('ds-missing-banner').style.display='none'" style="margin-left:auto;background:none;border:1px solid #f0c040;border-radius:4px;padding:4px 10px;cursor:pointer;color:#7a5c00;font-size:13px;">Dismiss</button>
     </div>
 
-    <!-- Layout grid: nav.js injects header + sidebar before <main> via insertAdjacentHTML -->
+    <!-- Layout grid: nav.js injects header + sidebar before the content column
+         via insertAdjacentHTML.
+
+         .docs-main-area is a <div>, not a <main>. It is the layout column — the
+         grid track beside the sidebar — and it holds the page header, the
+         sticky bar, the pager, the feedback block and the footer as well as the
+         content. Two things went wrong while it was a <main>: the page carried
+         two main landmarks (this one and .docs-main below), and <footer> mapped
+         to `generic` instead of `contentinfo`, because footer only becomes the
+         landmark when it is not inside main. nav.js gives this element id="main"
+         for the skip link, which it finds by class, so the element name is free
+         to be the honest one. -->
     <div class="docs-layout" id="site-nav" data-base="./">
-    <main class="docs-main-area">
+    <div class="docs-main-area">
     <div>
     <div>
+        <!-- The main landmark opens here, not at .docs-main below, so it holds
+             the page header as well as the article. A <header> maps to `banner`
+             unless it is inside main/article/aside/nav/section, so a page header
+             left outside main becomes a second banner alongside the site
+             header's. The tool pages are arranged the same way. -->
+        <main>
         <!-- Page Header (full width, outside grid) -->
-        <div class="page-header">
-      <div class="container-s">
-        <h1 data-flip-id="markdown-style">Markdown</h1>
-        <p class="page-subtitle" data-text-wrap="pretty">Styling guidelines for markdown content</p>
-        
+        <header class="page-header" data-align="center">
+      <div class="page-header-container">
+        <h1 class="page-header-title" data-flip-id="markdown-style">Markdown</h1>
+        <p class="page-header-subtitle">Styling guidelines for markdown content</p>
+      </div>
+    </header>
+
+        <!-- Page sub-header bar (full width, sticky: breadcrumb + filename + actions) -->
+        <div class="bar" data-density="regular" data-width="docs" data-sticky="true">
+      <div class="bar-container">
+        <div class="bar-content">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/docs/site/index.html">Home</a>
+            <span class="breadcrumb-separator" aria-hidden="true">/</span>
+            <span aria-current="page">Markdown</span>
+          </nav>
+        </div>
+        <div class="bar-actions">
+          <div class="dropdown">
+            <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Markdown source options">
+              <div class="svg-icn"><svg data-icon="more-horizontal" aria-hidden="true" viewBox="0 0 24 24" fill="none" width="100%" height="100%"><path d="M2 10L6 10V14H2L2 10ZM10 10L14 10V14H10V10ZM18 10L22 10V14H18V10Z" fill="currentColor"/></svg></div>
+            </button>
+            <div class="dropdown-menu is-right" role="menu">
+              <button type="button" class="dropdown-item js-copy-url" role="menuitem">
+                <div class="svg-icn"><svg data-icon="link" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M14.8284 16.2426L8.46446 22.6066L1.39339 15.5355L7.75735 9.17158L9.17156 10.5858L5.63603 14.1213C4.85498 14.9024 4.85498 16.1687 5.63603 16.9498L7.05024 18.364C7.83129 19.145 9.09762 19.145 9.87867 18.364L13.4142 14.8284L14.8284 16.2426ZM9.17156 16.2426L7.75735 14.8284L14.8284 7.75736L16.2426 9.17158L9.17156 16.2426ZM16.2426 14.8284L14.8284 13.4142L18.3639 9.87868C19.145 9.09763 19.145 7.8313 18.3639 7.05026L16.9497 5.63604C16.1687 4.85499 14.9024 4.85499 14.1213 5.63604L10.5858 9.17158L9.17156 7.75736L15.5355 1.3934L22.6066 8.46447L16.2426 14.8284Z" fill="currentColor"/></svg></div>
+                <span>Copy link</span>
+              </button>
+              
+            </div>
+          </div>
+          <a href="/docs/site/index.html" class="bar-close" data-page-close aria-label="Back to Home">
+            <div class="svg-icn"><svg data-icon="close-large" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M5.4 20L4 18.6L9.18579 13.4142C9.96684 12.6332 9.96684 11.3668 9.18579 10.5858L4 5.4L5.4 4L10.5858 9.18579C11.3668 9.96684 12.6332 9.96684 13.4142 9.18579L18.6 4L20 5.4L14.8142 10.5858C14.0332 11.3668 14.0332 12.6332 14.8142 13.4142L20 18.6L18.6 20L13.4142 14.8142C12.6332 14.0332 11.3668 14.0332 10.5858 14.8142L5.4 20Z" fill="currentColor"/></svg></div>
+          </a>
+        </div>
       </div>
     </div>
 
-        <!-- Page sub-header bar (full width, sticky: breadcrumb + filename + actions) -->
-        
-
-        <!-- Main Content + TOC grid -->
+        <!-- Page body. The content frame is part of it, because the frame is
+             not universal: a `doc` gets the measured grid with its TOC rail, a
+             `page` gets the same grid at full measure, and a `tool` gets no
+             frame at all and lays itself out. See PAGE_TYPES. -->
         <div class="docs-content-grid padding-global">
             <!-- Main Content -->
-            <main class="docs-main">
+            <div class="docs-main">
+                <details class="docs-toc-dropdown">
+      <summary>On this page</summary>
+      <div class="disclosure-content"><nav class="toc" aria-label="Table of contents"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#overview" class="toc-link">Overview</a></li><li class="toc-item toc-level-2"><a href="#frontmatter" class="toc-link">Frontmatter</a></li><li class="toc-item toc-level-2"><a href="#headers" class="toc-link">Headers</a></li><li class="toc-item toc-level-1"><a href="#your-primary-headline-big-bold-and-unmissable" class="toc-link">Your Primary Headline, Big, Bold, and Unmissable</a></li><li class="toc-item toc-level-2"><a href="#supporting-headline-to-guide-your-content" class="toc-link">Supporting Headline to Guide Your Content</a></li><li class="toc-item toc-level-2"><a href="#emphasis" class="toc-link">Emphasis</a></li><li class="toc-item toc-level-2"><a href="#lists" class="toc-link">Lists</a></li><li class="toc-item toc-level-2"><a href="#links" class="toc-link">Links</a></li><li class="toc-item toc-level-2"><a href="#images" class="toc-link">Images</a></li><li class="toc-item toc-level-2"><a href="#html-in-markdown" class="toc-link">HTML in Markdown</a></li><li class="toc-item toc-level-2"><a href="#code-and-syntax-highlighting" class="toc-link">Code and Syntax Highlighting</a></li><li class="toc-item toc-level-2"><a href="#tables" class="toc-link">Tables</a></li><li class="toc-item toc-level-2"><a href="#blockquotes" class="toc-link">Blockquotes</a></li><li class="toc-item toc-level-2"><a href="#typography-principles" class="toc-link">Typography Principles</a></li><li class="toc-item toc-level-2"><a href="#horizontal-rule" class="toc-link">Horizontal Rule</a></li><li class="toc-item toc-level-2"><a href="#line-breaks" class="toc-link">Line Breaks</a></li><li class="toc-item toc-level-2"><a href="#automatic-links" class="toc-link">Automatic Links</a></li><li class="toc-item toc-level-2"><a href="#best-practices" class="toc-link">Best Practices</a></li></ul></nav></div>
+    </details>
                 <article>
                     <p>This guide defines the consistent formatting standards for all documentation pages in the ByDefault project.</p>
 <h2 id="overview">Overview</h2>
@@ -698,12 +756,12 @@ Contact us: &lt;hello@bydefault.studio&gt;
 </ul>
 
                 </article>
-            </main>
+            </div>
 
             <!-- Table of Contents -->
             <aside class="docs-toc">
       <span class="toc-header">On this page</span>
-      <div class="toc-wrapper"><nav class="toc"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#overview" class="toc-link">Overview</a></li><li class="toc-item toc-level-2"><a href="#frontmatter" class="toc-link">Frontmatter</a></li><li class="toc-item toc-level-2"><a href="#headers" class="toc-link">Headers</a></li><li class="toc-item toc-level-1"><a href="#your-primary-headline-big-bold-and-unmissable" class="toc-link">Your Primary Headline, Big, Bold, and Unmissable</a></li><li class="toc-item toc-level-2"><a href="#supporting-headline-to-guide-your-content" class="toc-link">Supporting Headline to Guide Your Content</a></li><li class="toc-item toc-level-2"><a href="#emphasis" class="toc-link">Emphasis</a></li><li class="toc-item toc-level-2"><a href="#lists" class="toc-link">Lists</a></li><li class="toc-item toc-level-2"><a href="#links" class="toc-link">Links</a></li><li class="toc-item toc-level-2"><a href="#images" class="toc-link">Images</a></li><li class="toc-item toc-level-2"><a href="#html-in-markdown" class="toc-link">HTML in Markdown</a></li><li class="toc-item toc-level-2"><a href="#code-and-syntax-highlighting" class="toc-link">Code and Syntax Highlighting</a></li><li class="toc-item toc-level-2"><a href="#tables" class="toc-link">Tables</a></li><li class="toc-item toc-level-2"><a href="#blockquotes" class="toc-link">Blockquotes</a></li><li class="toc-item toc-level-2"><a href="#typography-principles" class="toc-link">Typography Principles</a></li><li class="toc-item toc-level-2"><a href="#horizontal-rule" class="toc-link">Horizontal Rule</a></li><li class="toc-item toc-level-2"><a href="#line-breaks" class="toc-link">Line Breaks</a></li><li class="toc-item toc-level-2"><a href="#automatic-links" class="toc-link">Automatic Links</a></li><li class="toc-item toc-level-2"><a href="#best-practices" class="toc-link">Best Practices</a></li></ul></nav></div>
+      <div class="toc-wrapper"><nav class="toc" aria-label="Table of contents"><ul class="toc-list"><li class="toc-item toc-level-2"><a href="#overview" class="toc-link">Overview</a></li><li class="toc-item toc-level-2"><a href="#frontmatter" class="toc-link">Frontmatter</a></li><li class="toc-item toc-level-2"><a href="#headers" class="toc-link">Headers</a></li><li class="toc-item toc-level-1"><a href="#your-primary-headline-big-bold-and-unmissable" class="toc-link">Your Primary Headline, Big, Bold, and Unmissable</a></li><li class="toc-item toc-level-2"><a href="#supporting-headline-to-guide-your-content" class="toc-link">Supporting Headline to Guide Your Content</a></li><li class="toc-item toc-level-2"><a href="#emphasis" class="toc-link">Emphasis</a></li><li class="toc-item toc-level-2"><a href="#lists" class="toc-link">Lists</a></li><li class="toc-item toc-level-2"><a href="#links" class="toc-link">Links</a></li><li class="toc-item toc-level-2"><a href="#images" class="toc-link">Images</a></li><li class="toc-item toc-level-2"><a href="#html-in-markdown" class="toc-link">HTML in Markdown</a></li><li class="toc-item toc-level-2"><a href="#code-and-syntax-highlighting" class="toc-link">Code and Syntax Highlighting</a></li><li class="toc-item toc-level-2"><a href="#tables" class="toc-link">Tables</a></li><li class="toc-item toc-level-2"><a href="#blockquotes" class="toc-link">Blockquotes</a></li><li class="toc-item toc-level-2"><a href="#typography-principles" class="toc-link">Typography Principles</a></li><li class="toc-item toc-level-2"><a href="#horizontal-rule" class="toc-link">Horizontal Rule</a></li><li class="toc-item toc-level-2"><a href="#line-breaks" class="toc-link">Line Breaks</a></li><li class="toc-item toc-level-2"><a href="#automatic-links" class="toc-link">Automatic Links</a></li><li class="toc-item toc-level-2"><a href="#best-practices" class="toc-link">Best Practices</a></li></ul></nav></div>
     </aside>
         </div>
 
@@ -723,21 +781,29 @@ Contact us: &lt;hello@bydefault.studio&gt;
         <span class="page-nav-title">Setup</span>
       </span>
     </a></div></nav>
+        </main>
 
+        <!-- Feedback block and footer. Filled per page, not once for the whole
+             template: a `tool` page brings its own layout and does not always
+             want either, so the page type decides (see PAGE_TYPES). Both sit
+             outside main — <footer> only maps to contentinfo when it is not
+             inside it — and inside the Barba container, because brand spaces
+             carry their own footer text and it has to swap with the page. -->
         
 
-        <!-- Footer -->
-        <footer class="docs-footer">
-            <div class="docs-footer-inner padding-global">
-                <p class="docs-footer-text">© 2025 By Default</p>
+        <footer class="footer">
+            <div class="footer-inner">
+                <div class="footer-bottom" data-layout="center">
+                    <p class="text-size-small text-secondary">© 2025 By Default</p>
+                </div>
             </div>
         </footer>
 
         <!-- Per-page scripts (inside the page container so they re-execute on transition) -->
         
-    </div>
-    </div>
-    </main>
+    </div><!-- /[data-barba="container"] -->
+    </div><!-- /[data-barba="wrapper"] -->
+    </div><!-- /.docs-main-area -->
     </div><!-- /.docs-layout #site-nav -->
 
     <!-- Syntax highlighting (source set in docs.config.js) -->
@@ -752,9 +818,15 @@ Contact us: &lt;hello@bydefault.studio&gt;
             var tocObserver = null;
             var tocScrollHandler = null;
 
-            window.bdInitHighlight = function initHighlight() {
+            // Scoped to the arriving container, because under Barba's sync
+            // transitions the leaving container is still in the document when
+            // afterEnter fires — highlighting from `document` reprocesses the
+            // old page's blocks. The :not() guard makes it idempotent whatever
+            // the scope: hljs stamps data-highlighted and warns on a re-run.
+            window.bdInitHighlight = function initHighlight(scope) {
                 if (!window.hljs) return;
-                document.querySelectorAll('pre code').forEach(function(block) {
+                var root = scope || document;
+                root.querySelectorAll('pre code:not([data-highlighted])').forEach(function(block) {
                     hljs.highlightElement(block);
                 });
             };
@@ -824,6 +896,31 @@ Contact us: &lt;hello@bydefault.studio&gt;
                 };
                 window.addEventListener('scroll', tocScrollHandler);
             };
+
+            // Close the narrow-state TOC dropdown after a jump — a
+            // disclosure left open above the target heading pushes it out
+            // of view. One document-level listener, attached once; it
+            // survives Barba container swaps. Closing hides the clicked
+            // link, which would silently drop keyboard focus to <body>, so
+            // focus is handed to the target heading (skip-link pattern);
+            // preventScroll leaves the scrolling to the default fragment
+            // navigation so scroll-margin-top still positions the landing.
+            document.addEventListener('click', function(event) {
+                // Modified clicks open a new tab — the current page's
+                // dropdown and focus must stay untouched.
+                if (event.defaultPrevented || event.button !== 0 ||
+                    event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                var link = event.target.closest('.docs-toc-dropdown .toc-link');
+                if (!link) return;
+                var details = link.closest('details');
+                if (details) details.removeAttribute('open');
+                var id = decodeURIComponent(link.hash.slice(1));
+                var target = id && document.getElementById(id);
+                if (target) {
+                    target.setAttribute('tabindex', '-1');
+                    target.focus({ preventScroll: true });
+                }
+            });
 
             function init() {
                 window.bdInitHighlight();

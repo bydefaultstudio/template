@@ -46,6 +46,8 @@ assets/
   images/               → General images and Open Graph images
 templates/              → Page and component boilerplate
 docs/                   → Documentation (markdown guides + optional generated site)
+vendor/
+  design-system-react/  → React adapters — synced, gitignored, bundler input only
 ```
 
 `node_modules/` and `package-lock.json` are gitignored. The lockfile is deliberately not committed in the template so new projects resolve the newest compatible design system at first install; commit your own lockfile once the project is under way — it pins the build, and some hosts detect the package manager from it.
@@ -59,6 +61,7 @@ The single most important distinction in this tree. Everything `bd-sync` writes 
 - `assets/js/design-system/`
 - `assets/icons/icons.svg`, `assets/icons/cursors.svg`
 - `DESIGN.md`
+- `vendor/design-system-react/` (only on releases that ship React adapters)
 
 Editing any of these appears to work and is destroyed by the next install, with no warning. Shared code changes upstream in the design-system repo, then arrives here via a version bump. Everything else in the tree is yours to author.
 
