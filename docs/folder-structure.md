@@ -66,7 +66,7 @@ Editing any of these appears to work and is destroyed by the next install, with 
 
 ## Local ports
 
-Each project pins one fixed local address — this one is `http://localhost:2300/`, set in `.vscode/settings.json`. Any other dev server the project runs must pin the same number, or it silently drifts onto a neighbouring project's port. Bands and rules are in `CLAUDE.md` §15.
+Each project pins one fixed local address — this one is `http://localhost:2300/`, set in `.vscode/settings.json` and in the `serve` script. Any other dev server the project runs must pin the same number, or it silently drifts onto a neighbouring project's port. `/bd:localhost` launches it; the studio-wide registry lives in the `bd` plugin. See `CLAUDE.md` §15.
 
 ## Session continuity
 

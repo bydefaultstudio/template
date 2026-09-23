@@ -10,7 +10,7 @@ This project includes:
 - A **brand theme** (`assets/css/theme.css`) for per-project visual identity (fonts, colours, logo)
 - Clear **layout and spacing rules** for consistent page structure
 - Documented **best practices** for CSS, JavaScript, and HTML
-- A **session handover** system so work resumes cleanly across sessions — `/kickoff` and `/handover`, provided by the By Default Claude Code plugin
+- A **session handover** system so work resumes cleanly across sessions — `/bd:kickoff` and `/bd:handover`, provided by the By Default Claude Code plugin
 - **Optional modules**. Parts a project may not need, like the docs site, are removed during onboarding. This way, every project starts clean.
 
 ## Getting Started
@@ -40,7 +40,7 @@ It does more than fetch dependencies. The postinstall step runs `npx bd-sync`, w
 
 ### With Claude Code (recommended)
 
-Install the By Default plugin first if this machine does not have it — once per machine, in the terminal app, not the VS Code panel. It provides `/kickoff`, `/handover` and the shared review agents that `CLAUDE.md` relies on, and a session hook will remind you if it is missing:
+Install the By Default plugin first if this machine does not have it — once per machine, in the terminal app, not the VS Code panel. It provides `/bd:kickoff`, `/bd:handover` and the shared review agents that `CLAUDE.md` relies on, and a session hook will remind you if it is missing:
 
 ```
 /plugin marketplace add bydefaultstudio/agents
@@ -64,7 +64,7 @@ You can also just say "Set up this project". A SessionStart hook will notice if 
 1. Run `npm install` (see [what it does](#what-npm-install-does-here) above)
 2. Review `PROJECT_BRIEF.md` for project goals and requirements
 3. Decide if the project needs the generated docs site. If not, remove it by following the removal map in `CLAUDE.md` §12 (see [Optional modules](#optional-modules) below).
-4. Allocate a local port and pin it in `.vscode/settings.json` (see [Local development](#local-development))
+4. Allocate a local port with `/bd:localhost allocate` and pin it (see [Local development](#local-development))
 5. Follow the [Setup guide](docs/site/setup.html) to customise brand colours, fonts, and logo
 6. Explore the [Documentation](docs/site/index.html) for template and project guides
 7. Browse the canonical design system docs at [bydefault.design](https://bydefault.design/website/what-is-a-design-system.html)
@@ -152,7 +152,7 @@ Every project uses a fixed local address. For this project, it is:
 
 **http://localhost:2300/**
 
-The port is set in `.vscode/settings.json` for Live Server. If you use another dev server, set the port there too. If you do not pin the port, it may change to the next free number and could conflict with another project. The full band allocation and rules are in `CLAUDE.md` §15.
+`npm run serve` serves the repo root there, and VS Code Live Server is pinned to the same number in `.vscode/settings.json` — run one at a time. With the `bd` plugin installed, `/bd:localhost` finds the address, starts the server and opens it. If you add another dev server, pin the port there too; an unpinned server does not error on a taken port, it silently starts on the next one up. The studio-wide allocation and rules live in the plugin's port registry; see `CLAUDE.md` §15.
 
 ## Session handovers
 
@@ -162,7 +162,7 @@ Work state lives in three files, split by tense:
 - `handovers/HANDOVER.md` (where the work stands right now, rewritten each session)
 - `PROJECT_PROGRESS.md` (what has shipped, appended and dated with newest first)
 
-Run `/kickoff` at the start of a session and `/handover` at the end. Both come from the By Default plugin (`bd` 0.5.0+), installed once per machine — see Getting Started. `CLAUDE.md` §14 has the detail.
+Run `/bd:kickoff` at the start of a session and `/bd:handover` at the end. Both come from the By Default plugin (`bd` 0.5.0+), installed once per machine — see Getting Started. `CLAUDE.md` §14 has the detail.
 
 ## Deployment
 

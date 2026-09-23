@@ -21,7 +21,7 @@ Claude: keep this updated as you complete work. Write the date as `YYYY-MM-DD`.
 - [ ] Choose optional modules — keep or remove the docs site (see `CLAUDE.md` §12)
 - [ ] Fill in `PROJECT_BRIEF.md`
 - [ ] Propagate the project name across the template (see `CLAUDE.md` §12)
-- [ ] Allocate a local port and pin it (see `CLAUDE.md` §15)
+- [ ] Allocate a local port with `/bd:localhost allocate` and pin it (see `CLAUDE.md` §15)
 - [ ] Apply brand tokens in `assets/css/theme.css`
 - [ ] Replace logo (`assets/images/logo.svg`) and favicons (`assets/icons/`)
 - [ ] Regenerate the docs site (`npm run docs:build`) — docs site module only

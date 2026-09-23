@@ -134,7 +134,7 @@
 <h2 id="local-development">Local Development</h2>
 <p>Every project has one fixed local address. This one is:</p>
 <p><strong><a href="http://localhost:2300/" target="_blank" rel="noopener noreferrer">http://localhost:2300/</a></strong></p>
-<p>Pinned in <code>.vscode/settings.json</code> for Live Server:</p>
+<p>Pinned in two places: <code>.vscode/settings.json</code> for Live Server, and the <code>serve</code> script in <code>package.json</code> (<code>npx serve . -l 2300</code>). Run one at a time.</p>
 
       <div class="code-block-wrapper">
         <button class="button copy-btn is-icon-only" data-size="xsmall" data-clipboard-target="#code-0" data-tooltip="Copy" type="button" aria-label="Copy code"><span class="copy-btn-default"><div class="svg-icn"><svg data-icon="copy" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M8 14C8 15.1046 8.89543 16 10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H10C8.89543 4 8 4.89543 8 6V14ZM6 18V2H22V18H6ZM2 22V6H4V20H18V22H2Z" fill="currentColor"/></svg></div></span><span class="copy-btn-copied"><div class="svg-icn"><svg data-icon="check" aria-hidden="true" width="100%" height="100%" viewBox="0 0 24 24" fill="none"><path d="M9.54998 18L3.84998 12.3L5.27498 10.875L8.13576 13.7358C8.91681 14.5168 10.1831 14.5168 10.9642 13.7358L18.725 5.97501L20.15 7.40001L9.54998 18Z" fill="currentColor"/></svg></div></span></button>
@@ -145,7 +145,8 @@
 </code></pre>
       </div>
     
-<p>If you create a project from this template, change this number — otherwise every project shares 2300. Take the next free hundred in the 3xxx products band; the full allocation table and the rules for other dev servers are in <code>CLAUDE.md</code> §15.</p>
+<p>With the <code>bd</code> plugin installed, <code>/bd:localhost</code> reads the address from <code>CLAUDE.md</code>, starts the server and opens it.</p>
+<p>If you create a project from this template, change this number — otherwise every project shares 2300. <code>/bd:localhost allocate</code> proposes the next free hundred in the 3xxx products band from the studio-wide registry, which lives in the plugin; the rules are in <code>CLAUDE.md</code> §15.</p>
 <p>The reason this matters: an unpinned server does not error on a taken port. It silently starts on the next one up, so you get a working page that belongs to a different project.</p>
 <hr>
 <h2 id="brand-colors">Brand Colors</h2>

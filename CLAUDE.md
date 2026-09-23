@@ -21,7 +21,7 @@ Before generating or modifying code, treat the following as authoritative:
 
 **Start of every session — read these first:**
 
-1. `handovers/HANDOVER.md` — where the last session left off, what is half-finished, known traps. Plus any `handovers/HANDOVER-<topic>.md`. This is the fastest path back into context; read it before anything else, or run `/kickoff`, which reads it and verifies it against git (see §14)
+1. `handovers/HANDOVER.md` — where the last session left off, what is half-finished, known traps. Plus any `handovers/HANDOVER-<topic>.md`. This is the fastest path back into context; read it before anything else, or run `/bd:kickoff`, which reads it and verifies it against git (see §14)
 2. `PROJECT_PROGRESS.md` — what has already shipped
 3. `ROADMAP.md` — direction not yet started
 
@@ -364,25 +364,29 @@ After gathering answers:
    - `docs/docs.config.js` → update `footerText` and `indexDescription` *(docs site module only)*
    - `PROJECT_BRIEF.md` → add project name at the top
 3. Update `assets/css/theme.css` with any known brand tokens — uncomment and edit the primitive overrides (fonts, `--text-accent`, colours)
-4. **Allocate a local port** (see §15). The template ships pinned to `2300`, its own
-   allocation — leaving it there would put every project created from this template
-   on the same port, which is the exact collision the strategy exists to prevent.
-   Ask the user for the number, take the next free hundred in the **3xxx products
-   band** if they have no preference, then replace `2300` **everywhere it is
-   written down** — `grep -rn 2300` and fix every hit. At the time of writing:
-   - `.vscode/settings.json` → `liveServer.settings.port` (the only one that
-     actually binds the port; the rest are documentation that goes stale silently)
-   - `CLAUDE.md` → §15 heading line, and the allocation table
+4. **Allocate a local port** with `/bd:localhost allocate`. The template ships
+   pinned to `2300`, its own allocation — leaving it there would put every
+   project created from this template on the same port, which is the exact
+   collision the strategy exists to prevent. The skill proposes the next free
+   hundred in the **3xxx products band** from the studio-wide registry (it
+   ships in the `bd` plugin), asks the user to confirm, and records the row.
+   Then replace `2300` **everywhere it is written down** — `grep -rn 2300`
+   and fix every hit. At the time of writing:
+   - `.vscode/settings.json` → `liveServer.settings.port`
+   - `package.json` → the `serve` script (`npx serve . -l <port>`)
+   - `CLAUDE.md` → the §15 sentence
    - `README.md` → Local development
    - `docs/setup.md` → Local Development (two places: prose and the JSON sample)
    - `docs/folder-structure.md` → Local ports
-   - any other server the project runs (§15 rule 3)
+   - any other server the project runs (§15)
 
-   Then rebuild the docs (`npm run docs:build`) so the generated pages match
-   *(docs site module only)*, and tell the user the project's address:
-   `http://localhost:<port>/`
+   The pin and the `serve` script are the only two that bind the port; the
+   rest are documentation that goes stale silently. Then rebuild the docs
+   (`npm run docs:build`) so the generated pages match *(docs site module
+   only)*, and tell the user the project's address, `http://localhost:<port>/`,
+   and that `/bd:localhost` launches it.
 5. Replace the starter contents of `ROADMAP.md` with something real for this
-   project, then run `/handover` so `handovers/HANDOVER.md` records where
+   project, then run `/bd:handover` so `handovers/HANDOVER.md` records where
    onboarding left things
 6. Run `npm run docs:build` so the docs site picks up the new `docs.config.js` values *(docs site module only)*
 7. Point the user at the remaining Quick Checklist items in `docs/setup.md` (logo, favicons, fonts) for when those assets are available
@@ -510,9 +514,9 @@ Provided by the By Default plugin (`bd`), installed once per machine — see §1
 for the install. Nothing in this repo defines them, so they are always the
 current release:
 
-- `/kickoff` — open a session: read the handover, verify it against git, check
+- `/bd:kickoff` — open a session: read the handover, verify it against git, check
   assumptions against source, plan (see §14)
-- `/handover` — close a session: update progress and roadmap, rewrite the
+- `/bd:handover` — close a session: update progress and roadmap, rewrite the
   handover, end with a paste-ready prompt for the next session (see §14)
 
 The same plugin carries the `bd-*` review agents (Barba, GSAP, Splide,
@@ -559,7 +563,7 @@ keeping permanently moves to `PROJECT_PROGRESS.md` before the rewrite.
 
 ### The plugin
 
-The session workflow — `/kickoff`, `/handover`, and the hooks that prompt them
+The session workflow — `/bd:kickoff`, `/bd:handover`, and the hooks that prompt them
 — ships in the By Default plugin, not in this repo. It is installed **once per
 machine**, in the terminal app (not the VS Code panel):
 
@@ -578,7 +582,7 @@ way the design system is. Update with `/plugin update bd`.
 
 ### Start of every session
 
-Run `/kickoff`. It reads `handovers/HANDOVER.md` first, plus any
+Run `/bd:kickoff`. It reads `handovers/HANDOVER.md` first, plus any
 `handovers/HANDOVER-<topic>.md`, then `PROJECT_PROGRESS.md` for history and
 `ROADMAP.md` for direction — and then **verifies the handover against git**
 before planning, because a handover is a claim written before the last commits
@@ -622,7 +626,7 @@ three hours ago has already been compacted away.
 
 ### End of every session
 
-Run `/handover`. It:
+Run `/bd:handover`. It:
 
 1. moves newly-shipped work into `PROJECT_PROGRESS.md` (dated, newest first)
 2. prunes `ROADMAP.md` — deletes what shipped, adds what the session surfaced
@@ -650,41 +654,28 @@ date (`HANDOVER-nav-rebuild.md`, not `HANDOVER-july.md`), and note the split in
 
 ## 15. Local Port Strategy
 
-Every project has one fixed local address, written as: `http://localhost:3100/`
+Every project has one fixed local address, and states it in one sentence:
 
-**This project runs on `http://localhost:2300/`** — replace this line and the
-allocation below when creating a project from the template (§12 step 4).
+**This project runs on `http://localhost:2300/`** — replace this number when
+creating a project from the template (§12 step 4).
 
-Thousands digit = category. Projects allocated in hundreds within the band.
+That sentence is what `/bd:localhost` reads to launch the server, so keep the
+wording; the number above is the template's own allocation. The port is pinned
+in `.vscode/settings.json` (Live Server) and in the `serve` script
+(`npm run serve` → `npx serve . -l <port>`); run one at a time. Any other
+server the project adds later — `wrangler dev --port`, `next dev -p`,
+`netlify.toml` `[dev] port` — must pin the same number, or it silently drifts
+onto a neighbouring project's port.
 
-| Band | Category | Allocated |
-| --- | --- | --- |
-| **2xxx** | Foundation & owned sites | 2000 Design System · 2100 Studio · 2200 erlenmasson · 2300 Template · 2400 erlen-writing — next free 2500 |
-| **3xxx** | Products | 3100 Folder Structure · 3200 Quiz — next free 3300 |
-| **4xxx** | Tools & utilities | 4000 svg-cleaner · 4100 CPM Calculator — next free 4200 |
+The studio-wide registry — bands, allocations, next free numbers, and the
+allocation rules — lives in the `bd` plugin, at
+`skills/localhost/references/port-registry.md`, and is the only copy. This
+file does not repeat the table: a copied table freezes on the day it is made,
+and a stale copy is how two products came to share a port. Allocate with
+`/bd:localhost allocate`, which reads the registry and writes the row back.
 
-Projects created from this template are **products**: take the next free hundred
-in the 3xxx band unless the owner says otherwise.
-
-**Rules:**
-
-1. Never assign 3000 — Next.js claims it by default, so products start at 3100.
-2. Bands 5, 7, 8, 9 are off-limits: Vite (5173), Live Server (5500/5501),
-   macOS AirPlay Receiver (5000, 7000), wrangler dev (8787), netlify dev (8888),
-   Python (8000), generic (8080).
-3. Pin the port at every server the project runs, or the number is decorative:
-   - Live Server → `.vscode/settings.json` → `"liveServer.settings.port"`
-   - `npx serve` → `npx serve . -l <port>`
-   - `netlify dev` → `netlify.toml` `[dev] port` (or `--port <port>`)
-   - `wrangler dev` → `wrangler dev --port <port>`
-   - `next dev` → `next dev -p <port>`
-4. Write the URL as `http://localhost:<port>/` — localhost over 127.0.0.1, with
-   the trailing slash. (The `--bind 127.0.0.1` flag on a python server stays as an
-   address, not a URL.)
-5. Record every new allocation in the table above (master copy lives in the
-   Design System repo's `CLAUDE.md`) and in that project's own `CLAUDE.md`.
-
-**Why:** seven repos previously shared 5501, so opening two at once silently
-bumped the second to 5502 — which then collided with the Design System. Note the
-failure mode: nothing errors. The server reports success on a port you did not
-choose, and you only discover the collision when the wrong project loads.
+**Why one fixed port:** seven repos once shared 5501, so opening two at once
+silently bumped the second to 5502 — which then collided with the Design
+System. Note the failure mode: nothing errors. The server reports success on a
+port you did not choose, and you only discover the collision when the wrong
+project loads.

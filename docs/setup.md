@@ -28,7 +28,7 @@ Every project has one fixed local address. This one is:
 
 **http://localhost:2300/**
 
-Pinned in `.vscode/settings.json` for Live Server:
+Pinned in two places: `.vscode/settings.json` for Live Server, and the `serve` script in `package.json` (`npx serve . -l 2300`). Run one at a time.
 
 ```json
 {
@@ -37,7 +37,9 @@ Pinned in `.vscode/settings.json` for Live Server:
 }
 ```
 
-If you create a project from this template, change this number — otherwise every project shares 2300. Take the next free hundred in the 3xxx products band; the full allocation table and the rules for other dev servers are in `CLAUDE.md` §15.
+With the `bd` plugin installed, `/bd:localhost` reads the address from `CLAUDE.md`, starts the server and opens it.
+
+If you create a project from this template, change this number — otherwise every project shares 2300. `/bd:localhost allocate` proposes the next free hundred in the 3xxx products band from the studio-wide registry, which lives in the plugin; the rules are in `CLAUDE.md` §15.
 
 The reason this matters: an unpinned server does not error on a taken port. It silently starts on the next one up, so you get a working page that belongs to a different project.
 

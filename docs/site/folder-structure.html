@@ -178,7 +178,7 @@ vendor/
 </ul>
 <p>Editing any of these appears to work and is destroyed by the next install, with no warning. Shared code changes upstream in the design-system repo, then arrives here via a version bump. Everything else in the tree is yours to author.</p>
 <h2 id="local-ports">Local ports</h2>
-<p>Each project pins one fixed local address — this one is <code>http://localhost:2300/</code>, set in <code>.vscode/settings.json</code>. Any other dev server the project runs must pin the same number, or it silently drifts onto a neighbouring project&#39;s port. Bands and rules are in <code>CLAUDE.md</code> §15.</p>
+<p>Each project pins one fixed local address — this one is <code>http://localhost:2300/</code>, set in <code>.vscode/settings.json</code> and in the <code>serve</code> script. Any other dev server the project runs must pin the same number, or it silently drifts onto a neighbouring project&#39;s port. <code>/bd:localhost</code> launches it; the studio-wide registry lives in the <code>bd</code> plugin. See <code>CLAUDE.md</code> §15.</p>
 <h2 id="session-continuity">Session continuity</h2>
 <p><code>ROADMAP.md</code> (future) → <code>handovers/HANDOVER.md</code> (present) → <code>PROJECT_PROGRESS.md</code> (past). Split by tense so none of them becomes a dumping ground; the handover is rewritten each session while progress is appended. <code>/kickoff</code> opens a session and <code>/handover</code> closes it — both from the By Default plugin, not this repo. See <code>CLAUDE.md</code> §14.</p>
 <h2 id="assetscss">assets/css/</h2>

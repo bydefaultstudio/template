@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "postinstall": "npx bd-sync",
+    "serve": "npx serve . -l 2300",
     "docs:build": "node node_modules/@bydefaultstudio/design-system/dist/docs-kit/generate-docs.js",
     "docs:watch": "node node_modules/@bydefaultstudio/design-system/dist/docs-kit/watch-docs.js"
   },
