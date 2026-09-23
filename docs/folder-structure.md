@@ -26,8 +26,7 @@ package.json            → npm manifest: design system dependency + bd-sync pos
 handovers/
   HANDOVER.md           → Where the work stands right now (rewritten each session)
 .claude/
-  settings.json         → Session hooks (handover prompts)
-  commands/handover.md  → The /handover command: format and rules
+  settings.json         → Session hooks: onboarding check, plugin check
 .vscode/
   settings.json         → Live Server port pin (see Local ports below)
 .github/
@@ -71,7 +70,7 @@ Each project pins one fixed local address — this one is `http://localhost:2300
 
 ## Session continuity
 
-`ROADMAP.md` (future) → `handovers/HANDOVER.md` (present) → `PROJECT_PROGRESS.md` (past). Split by tense so none of them becomes a dumping ground; the handover is rewritten each session while progress is appended. See `CLAUDE.md` §14.
+`ROADMAP.md` (future) → `handovers/HANDOVER.md` (present) → `PROJECT_PROGRESS.md` (past). Split by tense so none of them becomes a dumping ground; the handover is rewritten each session while progress is appended. `/kickoff` opens a session and `/handover` closes it — both from the By Default plugin, not this repo. See `CLAUDE.md` §14.
 
 ## assets/css/
 

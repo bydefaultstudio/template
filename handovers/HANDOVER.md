@@ -6,8 +6,8 @@ This is the template's starter handover. No project work has happened yet.
 
 The first session's job is onboarding: fill in `PROJECT_BRIEF.md`, propagate the
 project name, allocate a local port, and apply brand tokens. `CLAUDE.md` §12 has
-the full sequence. Replace this file's contents once real work begins — it is
-rewritten each session, not appended to.
+the full sequence. This file is rewritten each session by `/handover`, never
+appended to — the first real `/handover` replaces all of this.
 
 ## What shipped this session
 
@@ -37,3 +37,23 @@ Nothing yet.
   on the next `npm install`.
 - A host that skips `npm install` publishes the site completely unstyled while
   reporting a successful build. See `docs/setup.md` → Deployment.
+- `/kickoff` and `/handover` come from the By Default plugin, installed once per
+  machine. If neither is in the skill list, the plugin is missing — `CLAUDE.md`
+  §14 has the two install commands.
+
+## Next session — paste this
+
+```text
+Set up this project. Run the onboarding in CLAUDE.md §12.
+
+This is a fresh clone of the By Default template: PROJECT_BRIEF.md still has
+placeholders, the design system has not been synced, and no port is allocated.
+Onboarding comes before any other work.
+
+Run npm install first if assets/css/design-system.css is missing. Then
+interview me in batches, fill the brief, choose the optional modules, propagate
+the project name, allocate a port, and finish by running /handover so the next
+session starts from a real handover, not this starter.
+
+Working rules: commit only the files you touched, ask before pushing.
+```

@@ -10,7 +10,7 @@ This project includes:
 - A **brand theme** (`assets/css/theme.css`) for per-project visual identity (fonts, colours, logo)
 - Clear **layout and spacing rules** for consistent page structure
 - Documented **best practices** for CSS, JavaScript, and HTML
-- A **session handover** system so work resumes cleanly across sessions
+- A **session handover** system so work resumes cleanly across sessions — `/kickoff` and `/handover`, provided by the By Default Claude Code plugin
 - **Optional modules**. Parts a project may not need, like the docs site, are removed during onboarding. This way, every project starts clean.
 
 ## Getting Started
@@ -40,7 +40,14 @@ It does more than fetch dependencies. The postinstall step runs `npx bd-sync`, w
 
 ### With Claude Code (recommended)
 
-Open the project folder in Claude Code and paste:
+Install the By Default plugin first if this machine does not have it — once per machine, in the terminal app, not the VS Code panel. It provides `/kickoff`, `/handover` and the shared review agents that `CLAUDE.md` relies on, and a session hook will remind you if it is missing:
+
+```
+/plugin marketplace add bydefaultstudio/agents
+/plugin install bd@bydefault
+```
+
+Then open the project folder in Claude Code and paste:
 
 > Set up this project. Run the onboarding in CLAUDE.md §12.
 
@@ -79,7 +86,7 @@ The shape of the repo: everything marked *synced* is written into place by `npm 
 <!-- structure:start -->
 ```text
 template/
-├── .claude/                   # Claude Code hooks and slash commands
+├── .claude/                   # Claude Code hooks (onboarding + plugin check)
 ├── .github/
 │   └── dependabot.yml         # weekly design system version checks
 ├── .vscode/
@@ -155,7 +162,7 @@ Work state lives in three files, split by tense:
 - `handovers/HANDOVER.md` (where the work stands right now, rewritten each session)
 - `PROJECT_PROGRESS.md` (what has shipped, appended and dated with newest first)
 
-Read the handover at the start of a session; run `/handover` at the end. See `CLAUDE.md` §14.
+Run `/kickoff` at the start of a session and `/handover` at the end. Both come from the By Default plugin (`bd` 0.5.0+), installed once per machine — see Getting Started. `CLAUDE.md` §14 has the detail.
 
 ## Deployment
 

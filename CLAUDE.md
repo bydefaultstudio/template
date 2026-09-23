@@ -21,7 +21,7 @@ Before generating or modifying code, treat the following as authoritative:
 
 **Start of every session — read these first:**
 
-1. `handovers/HANDOVER.md` — where the last session left off, what is half-finished, known traps. Plus any `handovers/HANDOVER-<topic>.md`. This is the fastest path back into context; read it before anything else (see §14)
+1. `handovers/HANDOVER.md` — where the last session left off, what is half-finished, known traps. Plus any `handovers/HANDOVER-<topic>.md`. This is the fastest path back into context; read it before anything else, or run `/kickoff`, which reads it and verifies it against git (see §14)
 2. `PROJECT_PROGRESS.md` — what has already shipped
 3. `ROADMAP.md` — direction not yet started
 
@@ -381,8 +381,9 @@ After gathering answers:
    Then rebuild the docs (`npm run docs:build`) so the generated pages match
    *(docs site module only)*, and tell the user the project's address:
    `http://localhost:<port>/`
-5. Replace the starter contents of `handovers/HANDOVER.md` and `ROADMAP.md` with
-   something real for this project
+5. Replace the starter contents of `ROADMAP.md` with something real for this
+   project, then run `/handover` so `handovers/HANDOVER.md` records where
+   onboarding left things
 6. Run `npm run docs:build` so the docs site picks up the new `docs.config.js` values *(docs site module only)*
 7. Point the user at the remaining Quick Checklist items in `docs/setup.md` (logo, favicons, fonts) for when those assets are available
 
@@ -505,8 +506,17 @@ Key project memory: design system rules, token conventions, layout hierarchy.
 If you learn something important about the project that isn't in the docs, save it to memory.
 
 ### Available Skills (Slash Commands)
-- `/commit` — stage and commit with a well-formatted message
-- `/simplify` — review changed code for quality and simplify if needed
+Provided by the By Default plugin (`bd`), installed once per machine — see §14
+for the install. Nothing in this repo defines them, so they are always the
+current release:
+
+- `/kickoff` — open a session: read the handover, verify it against git, check
+  assumptions against source, plan (see §14)
+- `/handover` — close a session: update progress and roadmap, rewrite the
+  handover, end with a paste-ready prompt for the next session (see §14)
+
+The same plugin carries the `bd-*` review agents (Barba, GSAP, Splide,
+accessibility, design system, code challenger). Delegate to them by name.
 
 ### MCP Integrations
 The following MCP tools are available for this project:
@@ -547,15 +557,35 @@ The handover is a baton, not a log. It is replaced wholesale every session — i
 it were appended to, it would just become a second progress file. Anything worth
 keeping permanently moves to `PROJECT_PROGRESS.md` before the rewrite.
 
+### The plugin
+
+The session workflow — `/kickoff`, `/handover`, and the hooks that prompt them
+— ships in the By Default plugin, not in this repo. It is installed **once per
+machine**, in the terminal app (not the VS Code panel):
+
+```
+/plugin marketplace add bydefaultstudio/agents
+/plugin install bd@bydefault
+```
+
+Then start a fresh session. This template assumes `bd` **0.5.0 or later**. A
+SessionStart hook in `.claude/settings.json` checks for the plugin and says so
+if it is missing or too old; it cannot install it, since `/plugin` is
+interactive. Like the onboarding hook, it is self-silencing.
+
+The plugin is one version per machine, so it cannot be pinned per project the
+way the design system is. Update with `/plugin update bd`.
+
 ### Start of every session
 
-Read `handovers/HANDOVER.md` first, plus any `handovers/HANDOVER-<topic>.md`.
-It is the fastest way to rebuild context: what is half-finished, what is
-blocked, and which traps were already discovered. Then `PROJECT_PROGRESS.md`
-for history and `ROADMAP.md` for direction.
+Run `/kickoff`. It reads `handovers/HANDOVER.md` first, plus any
+`handovers/HANDOVER-<topic>.md`, then `PROJECT_PROGRESS.md` for history and
+`ROADMAP.md` for direction — and then **verifies the handover against git**
+before planning, because a handover is a claim written before the last commits
+landed, and git is the fact.
 
-A SessionStart hook (`.claude/settings.json`) prints this reminder automatically
-when handovers exist.
+A SessionStart hook from the plugin prints this reminder automatically when
+handovers exist.
 
 ### On every commit
 
@@ -595,15 +625,16 @@ three hours ago has already been compacted away.
 Run `/handover`. It:
 
 1. moves newly-shipped work into `PROJECT_PROGRESS.md` (dated, newest first)
-2. moves new un-started ideas into `ROADMAP.md`
+2. prunes `ROADMAP.md` — deletes what shipped, adds what the session surfaced
 3. rewrites `handovers/HANDOVER.md` with what is live
+4. ends it with a fenced, paste-ready prompt that starts the next session cold
 
 Do this whenever work pauses — not only at a tidy stopping point. A session that
 ends mid-task is exactly the one where the handover pays for itself. The format
-and rules live in `.claude/commands/handover.md`.
+and rules live in the plugin's `skills/handover/SKILL.md`.
 
 Also write one **immediately after context compaction**, without being asked. A
-second SessionStart hook fires on compaction to prompt this: detail from earlier
+second SessionStart hook, also from the plugin, fires on compaction to prompt this: detail from earlier
 in the session is already summarized at that point and degrades further with each
 subsequent compaction, so capture it to disk while it is still recoverable.
 

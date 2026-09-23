@@ -176,7 +176,8 @@ This pairs with Dependabot (`.github/dependabot.yml`): when a new design system 
 - [ ] Replace logo in `assets/images/logo.svg`
 - [ ] Replace favicons in `assets/icons/`
 - [ ] Fill in `PROJECT_BRIEF.md`
-- [ ] Replace the starter `handovers/HANDOVER.md` and `ROADMAP.md`
+- [ ] Install the By Default plugin if this machine lacks it (`CLAUDE.md` §14)
+- [ ] Replace the starter `ROADMAP.md`, then run `/handover` to replace the starter handover
 - [ ] Review and customize documentation
 
 ---
