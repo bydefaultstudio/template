@@ -568,13 +568,13 @@ The session workflow — `/bd:kickoff`, `/bd:handover`, and the hooks that promp
 machine**, in the terminal app (not the VS Code panel):
 
 ```
-/plugin marketplace add bydefaultstudio/agents
+/plugin marketplace add bydefaultstudio/bd-plugin
 /plugin install bd@bydefault
 ```
 
 Then start a fresh session. This template assumes `bd` **0.5.0 or later**. A
 SessionStart hook in `.claude/settings.json` checks for the plugin and says so
-if it is missing or too old; it cannot install it, since `/plugin` is
+if it is missing, too old, or still installed from the old `agents` repo name; it cannot install it, since `/plugin` is
 interactive. Like the onboarding hook, it is self-silencing.
 
 The plugin is one version per machine, so it cannot be pinned per project the

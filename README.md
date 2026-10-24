@@ -43,7 +43,7 @@ It does more than fetch dependencies. The postinstall step runs `npx bd-sync`, w
 Install the By Default plugin first if this machine does not have it — once per machine, in the terminal app, not the VS Code panel. It provides `/bd:kickoff`, `/bd:handover` and the shared review agents that `CLAUDE.md` relies on, and a session hook will remind you if it is missing:
 
 ```
-/plugin marketplace add bydefaultstudio/agents
+/plugin marketplace add bydefaultstudio/bd-plugin
 /plugin install bd@bydefault
 ```
 
