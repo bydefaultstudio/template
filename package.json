@@ -1,0 +1,11 @@
+{
+  "name": "project-template",
+  "private": true,
+  "scripts": {
+    "postinstall": "npx bd-sync",
+    "serve": "npx serve . -l 2700"
+  },
+  "dependencies": {
+    "@bydefaultstudio/design-system": "github:bydefaultstudio/design-system-dist#semver:^7.3.0"
+  }
+}
