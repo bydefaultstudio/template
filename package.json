@@ -6,6 +6,6 @@
     "serve": "npx serve . -l 2700"
   },
   "dependencies": {
-    "@bydefaultstudio/design-system": "github:bydefaultstudio/design-system-dist#semver:^7.3.0"
+    "@bydefaultstudio/design-system": "github:bydefaultstudio/design-system-dist#semver:^7.0.0"
   }
 }
