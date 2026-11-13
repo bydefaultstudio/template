@@ -1,3 +1,10 @@
+<p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/images/readme-header_dark.svg">
+  <img alt="template" src="assets/images/readme-header_light.svg" height="48">
+</picture>
+</p>
+
 # [Your Project Name]
 
 A starter for static websites built on the By Default design system: tokens, utility classes, components and JS modules, with a clear layout architecture and rules that Claude Code follows.
