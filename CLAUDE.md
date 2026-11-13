@@ -338,6 +338,7 @@ After gathering answers:
 1. Write answers into `PROJECT_BRIEF.md`, replacing all bracketed placeholders
 2. **Propagate the project name** across the template:
    - `README.md` → replace `[Your Project Name]` in the heading
+   - `README.md` → delete the `<picture>` block above the heading, and `assets/images/readme-header_light.svg` and `_dark.svg`: they are the template's own wordmark, not the project's
    - `index.html` → update `<title>` and eyebrow text
    - `templates/page-template.html` → replace `Site Name` in title, OG `og:site_name`, and `yoursite.com` placeholder URLs
    - `PROJECT_BRIEF.md` → add project name at the top
